@@ -10,6 +10,11 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import favicon96 from "../assets/favicon/favicon-96x96.png?url";
+import faviconSvg from "../assets/favicon/favicon.svg?url";
+import faviconIco from "../assets/favicon/favicon.ico?url";
+import appleTouchIcon from "../assets/favicon/apple-touch-icon.png?url";
+import siteManifest from "../assets/favicon/site.webmanifest?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -72,7 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: favicon96, sizes: "96x96" },
+      { rel: "icon", type: "image/svg+xml", href: faviconSvg },
+      { rel: "shortcut icon", href: faviconIco },
+      { rel: "apple-touch-icon", sizes: "180x180", href: appleTouchIcon },
+      { rel: "manifest", href: siteManifest },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://api.fontshare.com" },
