@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useParams } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { getProductById } from "@/lib/products";
 
@@ -14,7 +13,7 @@ export const Route = createFileRoute("/product/$id")({
 });
 
 function ProductDetailPage() {
-  const params = useParams();
+  const params = Route.useParams();
   const product = useMemo(() => getProductById(params.id), [params.id]);
 
   if (!product) {

@@ -16,6 +16,8 @@ import faviconIco from "../assets/favicon/favicon.ico?url";
 import appleTouchIcon from "../assets/favicon/apple-touch-icon.png?url";
 import siteManifest from "../assets/favicon/site.webmanifest?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Nav } from "../components/Nav";
+import { Footer } from "../components/Footer";
 
 function NotFoundComponent() {
   return (
@@ -62,7 +64,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
+  {
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -119,7 +122,9 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      <Nav />
       <Outlet />
+      <Footer />
     </QueryClientProvider>
   );
 }

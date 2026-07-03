@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
 
-import heroBottle from "@/assets/hero-bottle.jpg";
+import heroBottle from "@/assets/Images/hyero bg.png";
 import ingredients from "@/assets/ingredients.jpg";
 import aboutImg from "@/assets/about.jpg";
 import collection1 from "@/assets/collection-1.jpg";
@@ -104,8 +104,6 @@ function HomePage() {
         }}
       />
 
-      <Nav />
-
       <Hero onHover={setHover} />
       <Marquee />
       <ShowcaseSection onHover={setHover} />
@@ -116,182 +114,7 @@ function HomePage() {
       <Testimonials />
       <AboutSection />
       <CTASection onHover={setHover} />
-      <Footer />
     </div>
-  );
-}
-
-/* ------------------------------- Nav ------------------------------- */
-
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 40);
-    on();
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
-  }, []);
-
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
-
-  const navLinks = [
-    { label: "Shop", href: "/shop" },
-    { label: "Ingredients", href: "#ingredients" },
-    { label: "Ritual", href: "#ritual" },
-    { label: "Collections", href: "#journal" },
-    { label: "About", href: "/about" },
-  ];
-
-  return (
-    <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
-          scrolled
-            ? "backdrop-blur-xl bg-white/80 border-b border-black/5 shadow-sm"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 py-4 md:px-12 md:py-5">
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-2.5 z-10">
-            <img src={aroviaLogo} alt="" className="h-8 w-8" style={{ filter: "brightness(0)" }} />
-            <span className="text-lg font-medium tracking-[-0.02em]">
-              Arovia<span className="text-[#2C5D2E]"> Essentials</span>
-            </span>
-          </a>
-
-          {/* Desktop Nav */}
-          <nav className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="relative text-[13px] font-medium uppercase tracking-[0.12em] text-black/50 transition-colors duration-300 hover:text-[#2C5D2E] after:absolute after:bottom-[-4px] after:left-0 after:h-[1.5px] after:w-0 after:bg-[#2C5D2E] after:transition-all after:duration-500 hover:after:w-full"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Desktop Actions */}
-          <div className="hidden items-center gap-5 lg:flex">
-            <button className="text-[13px] font-medium uppercase tracking-[0.12em] text-black/50 transition-colors hover:text-[#2C5D2E]" aria-label="Search">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-              </svg>
-            </button>
-            <button className="relative text-[13px] font-medium uppercase tracking-[0.12em] text-black/50 transition-colors hover:text-[#2C5D2E]" aria-label="Shopping bag">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-              </svg>
-              <span className="absolute -right-2 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#2C5D2E] text-[9px] font-bold text-white">0</span>
-            </button>
-          </div>
-
-          {/* Mobile Hamburger */}
-          <button
-            className="relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              className="block h-[1.5px] w-6 bg-current"
-              animate={mobileOpen ? { rotate: 45, y: 4.5 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-            <motion.span
-              className="block h-[1.5px] w-6 bg-current"
-              animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.span
-              className="block h-[1.5px] w-6 bg-current"
-              animate={mobileOpen ? { rotate: -45, y: -4.5 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </button>
-        </div>
-      </header>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
-            onClick={() => setMobileOpen(false)}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Mobile Menu Panel */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-y-0 right-0 z-40 flex w-[85%] max-w-sm flex-col bg-white shadow-2xl lg:hidden"
-          >
-            <div className="flex-1 overflow-y-auto px-8 pt-24 pb-8">
-              {/* Nav Links */}
-              <nav className="space-y-1">
-                {navLinks.map((link, i) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.06 }}
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-between border-b border-black/5 py-4 text-lg font-medium tracking-[-0.01em] text-black/80 transition-colors active:text-[#2C5D2E]"
-                  >
-                    {link.label}
-                    <svg className="h-4 w-4 text-black/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                    </svg>
-                  </motion.a>
-                ))}
-              </nav>
-
-              {/* Mobile Actions */}
-              <div className="mt-10 space-y-4">
-                <a href="#" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#2C5D2E] px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.1em] text-white">
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                  </svg>
-                  Shopping Bag (0)
-                </a>
-                <button className="flex w-full items-center justify-center gap-2 rounded-full border border-black/10 px-6 py-3.5 text-sm font-medium uppercase tracking-[0.1em] text-black/60">
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                  </svg>
-                  Search
-                </button>
-              </div>
-
-              {/* Mobile Footer */}
-              <div className="mt-12 border-t border-black/5 pt-6">
-                <div className="flex items-center gap-2">
-                  <img src={aroviaLogo} alt="" className="h-6 w-6 opacity-30" style={{ filter: "brightness(0)" }} />
-                  <span className="text-xs text-black/30">Dubai · Bangalore</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
   );
 }
 
@@ -305,7 +128,7 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
   return (
     <section
       ref={ref}
-      className="relative min-h-[88vh] overflow-hidden pb-20 md:min-h-screen md:pb-28"
+      className="relative min-h-[88vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
     >
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img
@@ -320,40 +143,22 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
 
       <div className="absolute inset-0 bg-black/20 md:bg-black/10" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 pt-24 md:px-12 md:pt-32">
-        <div className="max-w-[92vw] sm:max-w-[80vw] md:max-w-3xl">
-          <Reveal delay={0.2}>
-            <p className="eyebrow mb-4 md:mb-6">Signature Collection — N°01</p>
-          </Reveal>
-          <h1 className="font-display text-[14vw] leading-[0.95] tracking-[-0.04em] sm:text-[12vw] md:text-[8vw]">
-            <AnimatedWords text="Nature," />
-            <br />
-            <AnimatedWords text="distilled" delay={0.6} className="italic text-[#2C5D2E]/95" />
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 pb-20 md:px-16 md:pb-28 pt-24">
+        <div className="max-w-[92vw] sm:max-w-[80vw] md:max-w-3xl text-left">
+          <h1 className="font-display text-[12vw] leading-[1.02] tracking-[-0.02em] sm:text-[11vw] sm:tracking-[-0.03em] md:text-[8vw] md:leading-[0.95] md:tracking-[-0.04em] text-white">
+            <AnimatedWords text="Nature," className="block" />
+            <AnimatedWords text="distilled" delay={0.25} className="block italic text-white/90" />
           </h1>
-          <Reveal delay={0.9} className="mt-8 max-w-xl">
-            <p className="text-sm leading-7 text-muted-foreground md:text-base">
-              A luminous first impression for a premium ritual brand — centered
-              on a single image, a refined headline and a calm, elegant mood.
-            </p>
-          </Reveal>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <Reveal delay={1.1}>
+          <div className="mt-8 flex flex-col gap-4 sm:mt-12">
+            <Reveal delay={0.5}>
               <a
                 href="/shop"
                 onMouseEnter={() => onHover(true)}
                 onMouseLeave={() => onHover(false)}
-                className="btn-luxe w-full sm:w-auto"
+                className="w-fit rounded-full border border-white bg-transparent px-8 py-3.5 text-center text-sm font-medium uppercase tracking-[0.15em] text-white shadow-sm transition-all duration-300 hover:bg-white hover:text-[#2C5D2E]"
               >
                 Discover the Ritual
-                <span aria-hidden>→</span>
-              </a>
-            </Reveal>
-            <Reveal delay={1.3}>
-              <a
-                href="/shop"
-                className="w-full sm:w-auto rounded-full border border-[#2C5D2E] px-6 py-3 text-center text-sm font-medium uppercase tracking-[0.15em] text-[#2C5D2E] transition hover:bg-[#2C5D2E] hover:text-white"
-              >
-                View the Collection
+                <span className="ml-2 font-sans" aria-hidden>→</span>
               </a>
             </Reveal>
           </div>
@@ -364,7 +169,7 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, delay: 2.2 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block"
       >
         <div className="flex flex-col items-center gap-2">
           <span className="eyebrow">Scroll</span>
@@ -924,7 +729,7 @@ function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
         </Reveal>
         <Reveal delay={0.3} className="mt-14">
           <a
-            href="#"
+            href="/shop"
             onMouseEnter={() => onHover(true)}
             onMouseLeave={() => onHover(false)}
             className="btn-luxe-inverse"
@@ -992,9 +797,18 @@ function Footer() {
           <div className="md:col-span-2">
             <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Shop</p>
             <ul className="space-y-3.5 text-sm">
-              {["All Products", "Serums", "Facial Oils", "Cleansers", "Balms", "Gift Sets", "New Arrivals", "Best Sellers"].map((li) => (
-                <li key={li}>
-                  <a href="#" className="text-white/55 transition-colors hover:text-[#CFF57C]">{li}</a>
+              {[
+                { label: "All Products", href: "/shop" },
+                { label: "Serums", href: "/shop" },
+                { label: "Facial Oils", href: "/shop" },
+                { label: "Cleansers", href: "/shop" },
+                { label: "Balms", href: "/shop" },
+                { label: "Gift Sets", href: "/shop" },
+                { label: "New Arrivals", href: "/shop" },
+                { label: "Best Sellers", href: "/shop" },
+              ].map((li) => (
+                <li key={li.label}>
+                  <a href={li.href} className="text-white/55 transition-colors hover:text-[#CFF57C]">{li.label}</a>
                 </li>
               ))}
             </ul>
@@ -1003,9 +817,17 @@ function Footer() {
           <div className="md:col-span-2">
             <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Company</p>
             <ul className="space-y-3.5 text-sm">
-              {["About Us", "Our Story", "Ingredients", "Sustainability", "Press & Media", "Careers", "Blog / Journal"].map((li) => (
-                <li key={li}>
-                  <a href="#" className="text-white/55 transition-colors hover:text-[#CFF57C]">{li}</a>
+              {[
+                { label: "About Us", href: "/about" },
+                { label: "Our Story", href: "/about" },
+                { label: "Ingredients", href: "/ingredients" },
+                { label: "Sustainability", href: "/sustainability" },
+                { label: "Press & Media", href: "/press" },
+                { label: "Careers", href: "/careers" },
+                { label: "Blog / Journal", href: "/blog" },
+              ].map((li) => (
+                <li key={li.label}>
+                  <a href={li.href} className="text-white/55 transition-colors hover:text-[#CFF57C]">{li.label}</a>
                 </li>
               ))}
             </ul>
@@ -1014,9 +836,17 @@ function Footer() {
           <div className="md:col-span-2">
             <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Support</p>
             <ul className="space-y-3.5 text-sm">
-              {["Contact Us", "Shipping Info", "Returns & Exchanges", "Order Tracking", "FAQ", "Ritual Guide", "Size Guide"].map((li) => (
-                <li key={li}>
-                  <a href="#" className="text-white/55 transition-colors hover:text-[#CFF57C]">{li}</a>
+              {[
+                { label: "Contact Us", href: "/contact" },
+                { label: "Shipping Info", href: "/shipping" },
+                { label: "Returns & Exchanges", href: "/returns" },
+                { label: "Order Tracking", href: "/order-tracking" },
+                { label: "FAQ", href: "/faq" },
+                { label: "Ritual Guide", href: "/ritual-guide" },
+                { label: "Size Guide", href: "/size-guide" },
+              ].map((li) => (
+                <li key={li.label}>
+                  <a href={li.href} className="text-white/55 transition-colors hover:text-[#CFF57C]">{li.label}</a>
                 </li>
               ))}
             </ul>
@@ -1025,9 +855,14 @@ function Footer() {
           <div className="md:col-span-2">
             <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Legal</p>
             <ul className="space-y-3.5 text-sm">
-              {["Privacy Policy", "Terms of Service", "Cookie Policy", "Refund Policy"].map((li) => (
-                <li key={li}>
-                  <a href="#" className="text-white/55 transition-colors hover:text-[#CFF57C]">{li}</a>
+              {[
+                { label: "Privacy Policy", href: "/privacy" },
+                { label: "Terms of Service", href: "/terms" },
+                { label: "Cookie Policy", href: "/cookies" },
+                { label: "Refund Policy", href: "/refund" },
+              ].map((li) => (
+                <li key={li.label}>
+                  <a href={li.href} className="text-white/55 transition-colors hover:text-[#CFF57C]">{li.label}</a>
                 </li>
               ))}
             </ul>
