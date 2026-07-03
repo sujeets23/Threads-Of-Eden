@@ -336,7 +336,7 @@ function OrderTrackingPage() {
                       ))}
                     </div>
 
-                    <div className="border-t border-black/5 pt-4 space-y-3 text-xs text-muted-foreground">
+                    <div className="border-t border-black/5 pt-4 space-y-4 text-xs text-muted-foreground">
                       <div className="flex justify-between items-start gap-4">
                         <span className="flex items-center gap-1">
                           <MapPin className="h-3.5 w-3.5 text-[#2C5D2E]" /> Delivery Address:
@@ -344,6 +344,19 @@ function OrderTrackingPage() {
                         <span className="text-right text-black font-medium max-w-[240px] leading-relaxed">
                           {order.address}
                         </span>
+                      </div>
+
+                      <div className="border-t border-black/5 pt-3 flex justify-between items-center gap-4">
+                        <span>Payment Status:</span>
+                        {(order as any).paymentVerified ? (
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#2C5D2E]/10 px-3 py-1 text-[11px] font-semibold text-[#2C5D2E] border border-[#2C5D2E]/15">
+                            🛡️ Verified Payment (Z+) via Razorpay
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-yellow-50 px-3 py-1 text-[11px] font-semibold text-yellow-800 border border-yellow-100">
+                            Awaiting COD Authentication
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>

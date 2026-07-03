@@ -164,6 +164,26 @@ function OrderConfirmationPage() {
                   </p>
                 </div>
               </div>
+
+              {order.paymentVerified ? (
+                <div className="rounded-xl border border-[#2C5D2E]/15 bg-[#2C5D2E]/5 p-4 text-xs text-muted-foreground mt-4 space-y-1">
+                  <p className="font-semibold text-[#2C5D2E] uppercase tracking-wider text-[9px] flex items-center gap-1">
+                    🛡️ Secure Verified Payment (Z+)
+                  </p>
+                  <p className="text-black font-medium">{order.paymentMethod}</p>
+                  <p className="text-[10px]">
+                    Transaction Ref: <span className="font-mono text-black/75">{order.razorpayPaymentId}</span>
+                  </p>
+                </div>
+              ) : (
+                <div className="rounded-xl border border-black/5 bg-[#f7f7f5] p-4 text-xs text-muted-foreground mt-4 space-y-1">
+                  <p className="font-semibold text-black uppercase tracking-wider text-[9px]">
+                    Payment Method
+                  </p>
+                  <p className="text-black font-medium">{order.paymentMethod || "Cash on Delivery"}</p>
+                  <p className="text-[10px]">Awaiting signature verification on delivery.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
