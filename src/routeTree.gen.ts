@@ -21,10 +21,12 @@ import { Route as RefundRouteImport } from './routes/refund'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PressRouteImport } from './routes/press'
 import { Route as OrderTrackingRouteImport } from './routes/order-tracking'
+import { Route as OrderConfirmationRouteImport } from './routes/order-confirmation'
 import { Route as IngredientsRouteImport } from './routes/ingredients'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
@@ -91,6 +93,11 @@ const OrderTrackingRoute = OrderTrackingRouteImport.update({
   path: '/order-tracking',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrderConfirmationRoute = OrderConfirmationRouteImport.update({
+  id: '/order-confirmation',
+  path: '/order-confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IngredientsRoute = IngredientsRouteImport.update({
   id: '/ingredients',
   path: '/ingredients',
@@ -109,6 +116,11 @@ const CookiesRoute = CookiesRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -142,10 +154,12 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/ingredients': typeof IngredientsRoute
+  '/order-confirmation': typeof OrderConfirmationRoute
   '/order-tracking': typeof OrderTrackingRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
@@ -165,10 +179,12 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/ingredients': typeof IngredientsRoute
+  '/order-confirmation': typeof OrderConfirmationRoute
   '/order-tracking': typeof OrderTrackingRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
@@ -189,10 +205,12 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/ingredients': typeof IngredientsRoute
+  '/order-confirmation': typeof OrderConfirmationRoute
   '/order-tracking': typeof OrderTrackingRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
@@ -214,10 +232,12 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/careers'
+    | '/checkout'
     | '/contact'
     | '/cookies'
     | '/faq'
     | '/ingredients'
+    | '/order-confirmation'
     | '/order-tracking'
     | '/press'
     | '/privacy'
@@ -237,10 +257,12 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/careers'
+    | '/checkout'
     | '/contact'
     | '/cookies'
     | '/faq'
     | '/ingredients'
+    | '/order-confirmation'
     | '/order-tracking'
     | '/press'
     | '/privacy'
@@ -260,10 +282,12 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/careers'
+    | '/checkout'
     | '/contact'
     | '/cookies'
     | '/faq'
     | '/ingredients'
+    | '/order-confirmation'
     | '/order-tracking'
     | '/press'
     | '/privacy'
@@ -284,10 +308,12 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BlogRoute: typeof BlogRoute
   CareersRoute: typeof CareersRoute
+  CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
   FaqRoute: typeof FaqRoute
   IngredientsRoute: typeof IngredientsRoute
+  OrderConfirmationRoute: typeof OrderConfirmationRoute
   OrderTrackingRoute: typeof OrderTrackingRoute
   PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -389,6 +415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrderTrackingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/order-confirmation': {
+      id: '/order-confirmation'
+      path: '/order-confirmation'
+      fullPath: '/order-confirmation'
+      preLoaderRoute: typeof OrderConfirmationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ingredients': {
       id: '/ingredients'
       path: '/ingredients'
@@ -415,6 +448,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -460,10 +500,12 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BlogRoute: BlogRoute,
   CareersRoute: CareersRoute,
+  CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
   FaqRoute: FaqRoute,
   IngredientsRoute: IngredientsRoute,
+  OrderConfirmationRoute: OrderConfirmationRoute,
   OrderTrackingRoute: OrderTrackingRoute,
   PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,

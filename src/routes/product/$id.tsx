@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { getProductById } from "@/lib/products";
+import { useCart } from "@/context/CartContext";
 
 export const Route = createFileRoute("/product/$id")({
   head: ({ params }) => ({
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/product/$id")({
 function ProductDetailPage() {
   const params = Route.useParams();
   const product = useMemo(() => getProductById(params.id), [params.id]);
+  const { addToCart } = useCart();
 
   if (!product) {
     return (
@@ -52,7 +54,7 @@ function ProductDetailPage() {
             <div className="space-y-6 rounded-[1.5rem] border border-black/10 bg-white p-8 shadow-sm">
               <div className="flex items-center justify-between gap-4">
                 <span className="text-3xl font-semibold">{product.price}</span>
-                <button className="btn-luxe">Add to bag</button>
+                <button onClick={() => addToCart(product)} className="btn-luxe">Add to bag</button>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 {product.details.map((detail) => (

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
+import { useCart } from "@/context/CartContext";
 
 import heroBottle from "@/assets/Images/hyero bg.png";
 import ingredients from "@/assets/ingredients.jpg";
@@ -258,6 +259,7 @@ function ProductCard({ product, index, onHover }: { product: typeof PRODUCTS[num
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const { addToCart } = useCart();
 
   return (
     <Reveal delay={index * 0.08}>
@@ -267,7 +269,10 @@ function ProductCard({ product, index, onHover }: { product: typeof PRODUCTS[num
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
       >
-        <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-secondary md:aspect-[4/5] md:rounded-none">
+        <div 
+          onClick={() => addToCart(product)}
+          className="relative aspect-[3/4] overflow-hidden rounded-lg bg-secondary md:aspect-[4/5] md:rounded-none"
+        >
           <motion.img
             src={product.img}
             alt={product.name}
@@ -283,7 +288,11 @@ function ProductCard({ product, index, onHover }: { product: typeof PRODUCTS[num
             <span aria-hidden>→</span>
           </div>
           {/* Mobile quick-add */}
-          <button className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C5D2E] text-white shadow-lg md:hidden" aria-label="Add to bag">
+          <button 
+            onClick={(e) => { e.stopPropagation(); addToCart(product); }}
+            className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C5D2E] text-white shadow-lg md:hidden" 
+            aria-label="Add to bag"
+          >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>

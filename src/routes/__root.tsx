@@ -18,6 +18,8 @@ import siteManifest from "../assets/favicon/site.webmanifest?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
+import { CartProvider } from "../context/CartContext";
+import { CartDrawer } from "../components/CartDrawer";
 
 function NotFoundComponent() {
   return (
@@ -122,9 +124,12 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <Nav />
-      <Outlet />
-      <Footer />
+      <CartProvider>
+        <Nav />
+        <Outlet />
+        <Footer />
+        <CartDrawer />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
