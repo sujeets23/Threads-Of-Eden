@@ -4,8 +4,8 @@ import { useState } from "react";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Us — Arovia Essentials" },
-      { name: "description", content: "Get in touch with Arovia Essentials. Reach our offices in Dubai and Bangalore for enquiries, partnerships, and support." },
+      { title: "Contact Us — Threads of Eden" },
+      { name: "description", content: "Get in touch with Threads of Eden. Reach our offices in Dubai and Bangalore for enquiries, partnerships, and support." },
     ],
   }),
   component: ContactPage,
@@ -16,14 +16,14 @@ const OFFICES = [
     city: "Dubai",
     country: "United Arab Emirates",
     address: "Business Bay, Dubai\nUnited Arab Emirates",
-    email: "dubai@aroviaessentials.com",
+    email: "dubai@threadandroots.com",
     phone: "+971 4 XXX XXXX",
   },
   {
     city: "Bangalore",
     country: "India",
     address: "Karnataka, India",
-    email: "india@aroviaessentials.com",
+    email: "india@threadandroots.com",
     phone: "+91 80 XXXX XXXX",
   },
 ];
@@ -120,7 +120,7 @@ function ContactPage() {
               <div className="mt-8 rounded-[1.7rem] border border-black/10 bg-secondary p-8">
                 <h3 className="font-display text-xl">General Enquiries</h3>
                 <p className="mt-3 text-sm text-muted-foreground">For partnerships, wholesale, and media enquiries</p>
-                <a href="mailto:hello@aroviaessentials.com" className="mt-3 block text-sm text-[#2C5D2E]">hello@aroviaessentials.com</a>
+                <a href="mailto:hello@threadandroots.com" className="mt-3 block text-sm text-[#2C5D2E]">hello@threadandroots.com</a>
               </div>
 
               <div className="mt-8 rounded-[1.7rem] border border-black/10 bg-[#2C5D2E] p-8 text-white">

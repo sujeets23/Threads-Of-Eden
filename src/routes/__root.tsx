@@ -20,6 +20,7 @@ import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { CartProvider } from "../context/CartContext";
 import { CartDrawer } from "../components/CartDrawer";
+import { StoreProvider, useStore } from "../context/StoreContext";
 
 function NotFoundComponent() {
   return (
@@ -72,11 +73,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Arovia Essentials — Nature Distilled, Luxury Refined" },
-      { name: "description", content: "Arovia Essentials crafts botanical skincare from rare, cold-pressed ingredients. Editorial rituals for the modern connoisseur." },
-      { name: "author", content: "Arovia Essentials" },
-      { property: "og:title", content: "Arovia Essentials — Nature Distilled, Luxury Refined" },
-      { property: "og:description", content: "Botanical skincare crafted from rare, cold-pressed ingredients." },
+      { title: "Threads of Eden — Woven with purpose. Inspired by grace." },
+      { name: "description", content: "Threads of Eden crafts elevated essentials, graceful silhouettes, and demi-luxury everyday pieces designed with purpose and intention." },
+      { name: "author", content: "Threads of Eden" },
+      { property: "og:title", content: "Threads of Eden — Woven with purpose. Inspired by grace." },
+      { property: "og:description", content: "Luxury t-shirts and polos crafted from Peruvian piqué and 280 GSM heavyweight cotton." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -124,12 +125,41 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <Nav />
-        <Outlet />
-        <Footer />
-        <CartDrawer />
-      </CartProvider>
+      <StoreProvider>
+        <AppLayout />
+      </StoreProvider>
     </QueryClientProvider>
+  );
+}
+
+function AppLayout() {
+  const { settings } = useStore();
+
+  return (
+    <CartProvider>
+      {/* Announcement Bar */}
+      {settings.announcement?.enabled && (
+        <div className="relative z-50 bg-[#1a2e1b] py-2 px-4 text-center text-[11px] font-medium tracking-[0.14em] uppercase text-[#CFF57C] border-b border-[#2C5D2E]/30">
+          <div className="flex items-center justify-center gap-2">
+            <span>{settings.announcement.text}</span>
+          </div>
+        </div>
+      )}
+
+      <Nav />
+      <Outlet />
+      <Footer />
+      <CartDrawer />
+
+      {/* Floating Admin Quick Access Badge */}
+      <a
+        href="/admin"
+        title="Open Store Admin Panel"
+        className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 rounded-full border border-[#2C5D2E] bg-white/95 px-4 py-2.5 text-xs font-semibold tracking-wider text-[#2C5D2E] shadow-xl backdrop-blur transition hover:bg-[#2C5D2E] hover:text-white"
+      >
+        <span className="flex h-2 w-2 rounded-full bg-[#2C5D2E] animate-pulse" />
+        Admin Panel
+      </a>
+    </CartProvider>
   );
 }

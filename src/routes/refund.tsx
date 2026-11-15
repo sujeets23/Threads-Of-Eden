@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/refund")({
   head: () => ({
     meta: [
-      { title: "Refund Policy — Arovia Essentials" },
-      { name: "description", content: "Arovia Essentials refund policy. Learn about eligibility, timelines, and how to request a refund." },
+      { title: "Refund Policy — Threads of Eden" },
+      { name: "description", content: "Threads of Eden refund policy. Learn about eligibility, timelines, and how to request a refund." },
     ],
   }),
   component: RefundPage,
@@ -55,7 +55,7 @@ function RefundPage() {
           <div>
             <h2 className="font-display text-3xl">How to Request a Refund</h2>
             <p className="mt-4 text-sm leading-8 text-muted-foreground">
-              Email returns@aroviaessentials.com with your order number, the item(s) you'd like to return, and the reason. Our team will respond within 24 hours with a prepaid return label.
+              Email returns@threadandroots.com with your order number, the item(s) you'd like to return, and the reason. Our team will respond within 24 hours with a prepaid return label.
             </p>
           </div>
           <div className="rounded-[1.7rem] border border-black/10 bg-[#2C5D2E] p-8 text-center text-white">

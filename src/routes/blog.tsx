@@ -3,8 +3,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Journal — Arovia Essentials" },
-      { name: "description", content: "Explore botanical wisdom, skincare rituals, and behind-the-scenes stories from Arovia Essentials." },
+      { title: "Journal — Threads of Eden Apparel Archive" },
+      {
+        name: "description",
+        content:
+          "Essays on textile history, 280 GSM heavyweight cotton, circular knitting, and architectural menswear design.",
+      },
     ],
   }),
   component: BlogPage,
@@ -12,75 +16,102 @@ export const Route = createFileRoute("/blog")({
 
 const POSTS = [
   {
-    title: "The Art of Cold-Pressing: Why Temperature Matters",
-    excerpt: "Discover how our cold-press extraction preserves the living enzymes and delicate molecules that heat-based methods destroy.",
-    category: "Ingredients",
-    date: "June 2026",
+    title: "Understanding GSM: Why 280 GSM is the Golden Ratio for Tees",
+    excerpt:
+      "A technical breakdown of fabric weight, yarn twist, and why dense interlock weaves eliminate the cling of cheap fast-fashion cotton.",
+    category: "Textile Science",
+    date: "October 2026",
     readTime: "5 min read",
   },
   {
-    title: "Building a Morning Ritual That Transforms",
-    excerpt: "A step-by-step guide to layering your botanical products for maximum absorption and luminosity.",
-    category: "Rituals",
-    date: "May 2026",
+    title: "The Anatomy of a Crisp Polo Collar: Fused Stands vs. Knitted Rib",
+    excerpt:
+      "Why most polo collars curl into 'bacon collar' after two washes, and how our tailored interlined collar stand prevents distortion.",
+    category: "Craftsmanship",
+    date: "September 2026",
     readTime: "4 min read",
   },
   {
-    title: "From Farm to Bottle: Visiting Our Moringa Partners",
-    excerpt: "A journey to Tamil Nadu, where our moringa is hand-harvested at dawn by third-generation farming families.",
-    category: "Origin Stories",
-    date: "April 2026",
-    readTime: "7 min read",
-  },
-  {
-    title: "Understanding Your Skin Barrier",
-    excerpt: "The science behind a healthy skin barrier and how botanical oils support its natural defence mechanisms.",
-    category: "Science",
-    date: "March 2026",
+    title: "Peruvian Pima vs. California Supima®: A Comparative Study",
+    excerpt:
+      "An in-depth look at extra-long staple cotton varieties and how soil composition in Piura Valley creates unparalleled silkiness.",
+    category: "Fibers",
+    date: "August 2026",
     readTime: "6 min read",
   },
   {
-    title: "Sustainable Packaging: Our Glass Refill Program",
-    excerpt: "How our refillable vessel program reduces waste by 73% compared to single-use packaging.",
-    category: "Sustainability",
-    date: "February 2026",
-    readTime: "3 min read",
+    title: "The Return of the Waffle Henley: Heritage Workwear Reimagined",
+    excerpt:
+      "How mid-century military thermal underwear evolved into one of the most versatile layering pieces in modern menswear.",
+    category: "Silhouettes",
+    date: "July 2026",
+    readTime: "4 min read",
   },
   {
-    title: "The Damask Rose Harvest in Grasse",
-    excerpt: "Each May, 10,000 petals are hand-picked at dawn in the perfume capital of the world for our rose formulations.",
-    category: "Origin Stories",
-    date: "January 2026",
+    title: "From Shell to Button: Australian Mother-of-Pearl Craft",
+    excerpt:
+      "A visit to Broome, where sustainable ocean shell harvesting provides the iridescent buttons hand-stitched onto our piqué polos.",
+    date: "June 2026",
+    category: "Hardware",
     readTime: "5 min read",
+  },
+  {
+    title: "Zero-Twist Ring-Spun Yarns and Longevity",
+    excerpt:
+      "Exploring how gentle fiber alignment during spinning yields garments that soften rather than degrade over decades of wear.",
+    category: "Production",
+    date: "May 2026",
+    readTime: "3 min read",
   },
 ];
 
 function BlogPage() {
   return (
-    <main className="bg-background text-foreground">
-      <section className="bg-secondary py-20 md:py-32">
+    <main className="bg-background text-foreground min-h-screen">
+      <section className="bg-secondary py-20 md:py-32 border-b border-black/5">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">← Back to Home</Link>
-          <p className="eyebrow mb-4">The Journal</p>
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">
+            ← Back to Home
+          </Link>
+          <p className="eyebrow mb-4 text-[#2C5D2E]">The Journal</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">
-            Stories, rituals &<br /><span className="italic text-[#2C5D2E]">botanical wisdom.</span>
+            Essays in Form &<br />
+            <span className="italic text-[#2C5D2E]">heavyweight cotton.</span>
           </h1>
+          <p className="mt-8 max-w-2xl text-base leading-8 text-muted-foreground">
+            Reflections from our atelier on textile engineering, tailoring proportion, and the
+            art of building a permanent wardrobe.
+          </p>
         </div>
       </section>
+
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {POSTS.map((post) => (
-              <article key={post.title} className="group rounded-[1.7rem] border border-black/10 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-[#2C5D2E]/10 px-3 py-1 text-xs font-medium text-[#2C5D2E]">{post.category}</span>
-                  <span className="text-xs text-muted-foreground">{post.readTime}</span>
+              <article
+                key={post.title}
+                className="group flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span className="font-semibold uppercase tracking-wider text-[#2C5D2E]">
+                      {post.category}
+                    </span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h2 className="mt-4 font-display text-2xl leading-snug group-hover:text-[#2C5D2E] transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="mt-3 text-xs md:text-sm leading-relaxed text-muted-foreground">
+                    {post.excerpt}
+                  </p>
                 </div>
-                <h2 className="mt-6 font-display text-2xl leading-tight group-hover:text-[#2C5D2E] transition-colors">{post.title}</h2>
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">{post.excerpt}</p>
-                <div className="mt-6 flex items-center justify-between border-t border-black/5 pt-4">
-                  <span className="text-xs text-muted-foreground">{post.date}</span>
-                  <span className="eyebrow text-[#2C5D2E] opacity-0 transition-opacity group-hover:opacity-100">Read →</span>
+                <div className="mt-8 pt-4 border-t border-black/5 flex items-center justify-between text-xs">
+                  <span className="text-black/50">{post.date}</span>
+                  <Link to="/shop" className="font-semibold text-[#2C5D2E] hover:underline">
+                    Read Essay →
+                  </Link>
                 </div>
               </article>
             ))}

@@ -13,8 +13,8 @@ export const Route = createFileRoute("/order-tracking")({
   validateSearch: (search) => searchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Track Your Order — Arovia Essentials" },
-      { name: "description", content: "Track your luxury botanical shipment in real-time. Experience nature distilled." },
+      { title: "Track Your Order — Threads of Eden" },
+      { name: "description", content: "Track your luxury apparel shipment in real-time." },
     ],
   }),
   component: OrderTrackingPage,
@@ -47,25 +47,25 @@ const statusSteps: { status: OrderStatus; label: string; desc: string; icon: any
   {
     status: "Placed",
     label: "Order Placed",
-    desc: "Your order has been logged into the Arovia ledger.",
+    desc: "Your order has been logged into the Threads of Eden atelier register.",
     icon: Clock,
   },
   {
     status: "Processing",
-    label: "Preparing Botanicals",
-    desc: "Our specialists are preparing, bottling, and wrapping your formulas.",
+    label: "Inspecting & Packaging",
+    desc: "Our team is inspecting, folding, and packaging your garments in organic cotton wash bags.",
     icon: Package,
   },
   {
     status: "Shipped",
     label: "Dispatched",
-    desc: "Your parcel is in transit via premium courier courier.",
+    desc: "Your parcel is in transit via premium express courier.",
     icon: Truck,
   },
   {
     status: "Delivered",
     label: "Arrived",
-    desc: "Formulations successfully delivered to your vanity.",
+    desc: "Garments successfully delivered to your wardrobe.",
     icon: Home,
   },
 ];
@@ -366,7 +366,7 @@ function OrderTrackingPage() {
                   <ShoppingBag className="h-10 w-10 text-black/20" />
                   <h3 className="font-display text-2xl mt-4">Awaiting Consignment Search</h3>
                   <p className="mt-2 text-xs text-muted-foreground max-w-[280px]">
-                    Enter your Order ID and contact email address on the left side panel to track your botanical shipment.
+                    Enter your Order ID and contact email address on the left side panel to track your apparel shipment.
                   </p>
                 </div>
               )}

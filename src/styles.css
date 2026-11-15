@@ -46,41 +46,34 @@
 :root {
   --radius: 0.25rem;
 
-  /* Brand palette — Arovia Essentials */
-  --cream: #ffffff;
-  /* pure white */
-  --beige: #f7f7f5;
-  /* warm off-white */
-  --sage: #8fbf8a;
-  /* light sage */
-  --forest: #2C5D2E;
-  /* primary green */
-  --charcoal: #1a2e1b;
-  /* deep forest dark */
-  --gold: #CFF57C;
-  /* lime accent */
-  --gold-soft: #CFF57C;
-  /* lime accent soft */
+  /* Brand palette — Threads of Eden */
+  --cream: #f5efe8;
+  --beige: #eadfc9;
+  --sage: #7f8b72;
+  --forest: #47352f;
+  --charcoal: #221b18;
+  --gold: #c39a5b;
+  --gold-soft: #e5cfac;
 
-  --background: #ffffff;
-  --foreground: #1a1a1a;
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #2C5D2E;
-  --primary-foreground: #ffffff;
-  --secondary: #f5f7f2;
-  --secondary-foreground: #1a1a1a;
-  --muted: #f5f7f2;
-  --muted-foreground: #5a6a5b;
-  --accent: #CFF57C;
-  --accent-foreground: #1a2e1b;
+  --background: #f7f2eb;
+  --foreground: #2a201d;
+  --card: #fffaf5;
+  --card-foreground: #2a201d;
+  --popover: #fffaf5;
+  --popover-foreground: #2a201d;
+  --primary: #47352f;
+  --primary-foreground: #fff7f1;
+  --secondary: #efe0d0;
+  --secondary-foreground: #2a201d;
+  --muted: #f3eadf;
+  --muted-foreground: #625247;
+  --accent: #c39a5b;
+  --accent-foreground: #2a201d;
   --destructive: oklch(0.55 0.19 27);
   --destructive-foreground: #ffffff;
-  --border: #e2e8e3;
-  --input: #e2e8e3;
-  --ring: #2C5D2E;
+  --border: #dcc9b8;
+  --input: #eae0d5;
+  --ring: #432f26;
 }
 
 .dark {

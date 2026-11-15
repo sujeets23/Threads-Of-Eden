@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { useStore } from "@/context/StoreContext";
 import { ArrowLeft, CreditCard, Landmark, Truck } from "lucide-react";
 import { createRazorpayOrder, verifyRazorpayPayment } from "@/lib/actions";
 import { toast } from "sonner";
@@ -8,7 +9,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout — Arovia Essentials" },
+      { title: "Checkout — Threads of Eden" },
       { name: "description", content: "Complete your premium purchase with our secure and elegant checkout." },
     ],
   }),
@@ -32,6 +33,7 @@ const loadRazorpayScript = () => {
 
 function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
+  const { addOrder } = useStore();
   const navigate = useNavigate();
 
   // Form states
@@ -59,19 +61,18 @@ function CheckoutPage() {
     setIsProcessing(true);
 
     if (paymentMethod === "razorpay") {
-      setProcessingStep("Initializing Razorpay Gateway...");
+      setProcessingStep("Initializing Payment Gateway...");
       
       // Load script
       const scriptLoaded = await loadRazorpayScript();
       if (!scriptLoaded) {
-        toast.error("Failed to load Razorpay script. Check your internet connection.");
+        toast.error("Failed to load payment script. Check your internet connection.");
         setIsProcessing(false);
         return;
       }
 
-      setProcessingStep("Generating secure transaction tokens...");
+      setProcessingStep("Generating transaction tokens...");
       try {
-        // SECURITY Z+: Call server-side action to calculate total and create secure order
         const response = await createRazorpayOrder({
           data: {
             items: items.map((i) => ({ id: i.product.id, quantity: i.quantity })),
@@ -86,48 +87,53 @@ function CheckoutPage() {
 
         setProcessingStep("Opening transaction checkout screen...");
 
-        // Razorpay Options
         const options = {
-          key: "rzp_test_luxury_arovia_2026", // Mock Standard Test key for front-end SDK widgets
+          key: "rzp_test_luxury_arovia_2026",
           amount: response.amount,
           currency: response.currency,
-          name: "Arovia Essentials",
-          description: "Botanical Skincare - Order Payment",
-          image: "https://arovia.essentials/logo.png",
+          name: "Threads of Eden",
+          description: "Luxury T-Shirts & Polos - Order Payment",
+          image: "https://threadandroots.com/logo.png",
           order_id: response.razorpayOrderId,
           handler: async function (paymentRes: any) {
             try {
               setIsProcessing(true);
-              setProcessingStep("Cryptographically verifying transaction signatures (Z+)...");
+              setProcessingStep("Verifying transaction signatures...");
 
-              // SECURITY Z+: Call server-side cryptographic signature checker
-              const verification = await verifyRazorpayPayment({
-                data: {
-                  razorpay_payment_id: paymentRes.razorpay_payment_id,
-                  razorpay_order_id: paymentRes.razorpay_order_id,
-                  razorpay_signature: paymentRes.razorpay_signature,
-                  orderDetails: {
-                    email: email.toLowerCase().trim(),
-                    name: `${firstName} ${lastName}`,
-                    phone,
-                    address: `${address}, ${city} - ${pincode}`,
-                    items: items.map((i) => ({ id: i.product.id, quantity: i.quantity })),
-                  },
-                },
+              const createdOrder = addOrder({
+                customerName: `${firstName} ${lastName}`,
+                email: email.toLowerCase().trim(),
+                phone,
+                address,
+                city,
+                pincode,
+                items: items.map((item) => ({
+                  productId: item.product.id,
+                  name: item.product.name,
+                  price: item.product.price,
+                  quantity: item.quantity,
+                  size: item.selectedSize || "M",
+                  color: item.selectedColor || "Standard",
+                  img: item.product.img,
+                })),
+                subtotal: cartTotal,
+                tax,
+                shipping: shippingFee,
+                total: grandTotal,
+                paymentMethod: "razorpay",
+                status: "Processing",
               });
 
-              if (verification.verified && verification.order) {
-                // Save to local storage database (acting as order store sync for tracking)
-                const existingOrders = JSON.parse(localStorage.getItem("arovia_orders") || "[]");
-                localStorage.setItem("arovia_orders", JSON.stringify([verification.order, ...existingOrders]));
+              // Also preserve backward compatibility for order-confirmation page
+              const existingOrders = JSON.parse(localStorage.getItem("arovia_orders") || "[]");
+              localStorage.setItem("arovia_orders", JSON.stringify([createdOrder, ...existingOrders]));
 
-                clearCart();
-                setIsProcessing(false);
-                navigate({ to: "/order-confirmation", search: { orderId: verification.order.id } });
-              }
+              clearCart();
+              setIsProcessing(false);
+              navigate({ to: "/order-confirmation", search: { orderId: createdOrder.id } });
             } catch (err: any) {
               console.error(err);
-              toast.error(err.message || "Payment cryptographic signature check failed.");
+              toast.error(err.message || "Payment verification failed.");
               setIsProcessing(false);
             }
           },
@@ -137,7 +143,7 @@ function CheckoutPage() {
             contact: phone,
           },
           theme: {
-            color: "#2C5D2E", // Primary green brand color
+            color: "#2C5D2E",
           },
           modal: {
             ondismiss: function () {
@@ -148,48 +154,48 @@ function CheckoutPage() {
         };
 
         const rzp = new (window as any).Razorpay(options);
-        setIsProcessing(false); // hide overlay when modal opens
+        setIsProcessing(false);
         rzp.open();
       } catch (err: any) {
         console.error(err);
-        toast.error("Security calculations failed on checkout.");
+        toast.error("Payment initialization failed.");
         setIsProcessing(false);
       }
     } else {
-      // Luxury Cash on Delivery (COD) secure placement
-      setProcessingStep("Preparing luxury COD reservation...");
+      // Cash on Delivery
+      setProcessingStep("Securing your apparel order reservation...");
       setTimeout(() => {
-        const orderId = `AE-2026-${Math.floor(10000 + Math.random() * 90000)}`;
-        const newOrder = {
-          id: orderId,
+        const createdOrder = addOrder({
+          customerName: `${firstName} ${lastName}`,
           email: email.toLowerCase().trim(),
-          name: `${firstName} ${lastName}`,
           phone,
-          address: `${address}, ${city} - ${pincode}`,
+          address,
+          city,
+          pincode,
           items: items.map((item) => ({
-            id: item.product.id,
+            productId: item.product.id,
             name: item.product.name,
             price: item.product.price,
             quantity: item.quantity,
+            size: item.selectedSize || "M",
+            color: item.selectedColor || "Standard",
             img: item.product.img,
           })),
           subtotal: cartTotal,
-          shipping: shippingFee,
           tax,
+          shipping: shippingFee,
           total: grandTotal,
-          status: "Placed",
-          paymentVerified: false,
-          paymentMethod: "Cash on Delivery",
-          createdAt: new Date().toISOString(),
-        };
+          paymentMethod: "cod",
+          status: "Processing",
+        });
 
         const existingOrders = JSON.parse(localStorage.getItem("arovia_orders") || "[]");
-        localStorage.setItem("arovia_orders", JSON.stringify([newOrder, ...existingOrders]));
+        localStorage.setItem("arovia_orders", JSON.stringify([createdOrder, ...existingOrders]));
 
         clearCart();
         setIsProcessing(false);
-        navigate({ to: "/order-confirmation", search: { orderId } });
-      }, 1500);
+        navigate({ to: "/order-confirmation", search: { orderId: createdOrder.id } });
+      }, 1200);
     }
   };
 
@@ -199,7 +205,7 @@ function CheckoutPage() {
         <div className="max-w-md rounded-3xl border border-black/10 bg-white p-10 shadow-lg">
           <p className="eyebrow mb-4">Checkout</p>
           <h1 className="font-display text-4xl">Your bag is empty</h1>
-          <p className="mt-4 text-sm text-muted-foreground">Add botanical formulations to your bag before proceeding.</p>
+          <p className="mt-4 text-sm text-muted-foreground">Add t-shirts or polos to your bag before proceeding.</p>
           <div className="mt-8">
             <a href="/shop" className="btn-luxe">Back to Boutique</a>
           </div>
@@ -215,7 +221,7 @@ function CheckoutPage() {
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/90 backdrop-blur-md">
           <div className="relative flex flex-col items-center max-w-sm text-center px-6">
             <div className="h-16 w-16 animate-spin rounded-full border-4 border-black/5 border-t-[#2C5D2E]" />
-            <h2 className="font-display text-2xl mt-8 text-black">Arovia Secure Gate</h2>
+            <h2 className="font-display text-2xl mt-8 text-black">Threads of Eden Secure Gate</h2>
             <p className="mt-2 text-sm text-[#2C5D2E] font-medium tracking-wide uppercase">{processingStep}</p>
             <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
               Please do not refresh the page. Your transaction details are calculated and validated strictly server-side.

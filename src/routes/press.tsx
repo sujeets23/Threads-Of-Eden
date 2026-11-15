@@ -3,19 +3,19 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/press")({
   head: () => ({
     meta: [
-      { title: "Press & Media — Arovia Essentials" },
-      { name: "description", content: "Press kit, media enquiries, and featured coverage for Arovia Essentials." },
+      { title: "Press & Media — Threads of Eden" },
+      { name: "description", content: "Press kit, media enquiries, and featured coverage for Threads of Eden." },
     ],
   }),
   component: PressPage,
 });
 
 const PRESS_MENTIONS = [
-  { outlet: "Vogue Beauty", quote: "A rare thing — skincare that behaves like ritual, not routine.", date: "June 2026" },
-  { outlet: "Harper's Bazaar", quote: "Arovia does not shout. It simply, patiently, transforms.", date: "May 2026" },
-  { outlet: "Elle India", quote: "The botanical luxury brand setting a new standard for conscious beauty.", date: "April 2026" },
-  { outlet: "GQ India", quote: "Finally, a skincare line that speaks to minimalists who demand maximum results.", date: "March 2026" },
-  { outlet: "Condé Nast Traveller", quote: "From Kyoto to Grasse — the global sourcing story behind India's finest skincare.", date: "February 2026" },
+  { outlet: "GQ Style", quote: "The collar holds its crisp shape after 30 washes. Easily the best polo cut in menswear today.", date: "June 2026" },
+  { outlet: "Monocle", quote: "Threads of Eden does not shout. It simply, patiently, perfects the everyday heavyweight silhouette.", date: "May 2026" },
+  { outlet: "Esquire Select", quote: "Extraordinary Peruvian piqué and zero branding — quiet luxury executed to perfection.", date: "April 2026" },
+  { outlet: "Vogue Men", quote: "Finally, an essential t-shirt line built with architectural weight and tailored permanence.", date: "March 2026" },
+  { outlet: "Financial Times", quote: "From California Supima to Milanese knitwear — the craftsmanship story behind Threads of Eden.", date: "February 2026" },
 ];
 
 function PressPage() {
@@ -32,7 +32,7 @@ function PressPage() {
             For press enquiries, interview requests, and media kits, contact our communications team.
           </p>
           <div className="mt-8">
-            <a href="mailto:press@aroviaessentials.com" className="btn-luxe">Media Enquiries →</a>
+            <a href="mailto:press@threadandroots.com" className="btn-luxe">Media Enquiries →</a>
           </div>
         </div>
       </section>
@@ -62,7 +62,7 @@ function PressPage() {
           <h2 className="font-display text-4xl md:text-5xl">Need brand assets?</h2>
           <p className="mt-4 text-sm text-white/70">Download our press kit with logos, product images, and brand guidelines.</p>
           <div className="mt-10">
-            <a href="mailto:press@aroviaessentials.com" className="btn-luxe-inverse">Request Press Kit →</a>
+            <a href="mailto:press@threadandroots.com" className="btn-luxe-inverse">Request Press Kit →</a>
           </div>
         </div>
       </section>

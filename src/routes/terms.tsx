@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms of Service — Arovia Essentials" },
-      { name: "description", content: "Terms and conditions governing the use of Arovia Essentials website and purchases." },
+      { title: "Terms of Service — Threads of Eden" },
+      { name: "description", content: "Terms and conditions governing the use of Threads of Eden website and purchases." },
     ],
   }),
   component: TermsPage,
@@ -12,14 +12,14 @@ export const Route = createFileRoute("/terms")({
 
 function TermsPage() {
   const sections = [
-    { title: "Acceptance of Terms", content: "By accessing or using the Arovia Essentials website and purchasing our products, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services." },
+    { title: "Acceptance of Terms", content: "By accessing or using the Threads of Eden website and purchasing our products, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services." },
     { title: "Products & Pricing", content: "All product descriptions and pricing are accurate at the time of publishing. We reserve the right to modify prices without prior notice. Prices are displayed in Indian Rupees (₹) unless otherwise stated." },
     { title: "Orders & Payment", content: "All orders are subject to availability. We reserve the right to refuse any order. Payment must be completed at the time of purchase through our secure payment gateway." },
-    { title: "Intellectual Property", content: "All content on this website, including text, images, logos, and designs, is the property of Arovia Essentials and protected by intellectual property laws. Unauthorized use is prohibited." },
+    { title: "Intellectual Property", content: "All content on this website, including text, images, logos, and designs, is the property of Threads of Eden and protected by intellectual property laws. Unauthorized use is prohibited." },
     { title: "User Accounts", content: "You are responsible for maintaining the confidentiality of your account credentials. You agree to notify us immediately of any unauthorized use." },
-    { title: "Limitation of Liability", content: "Arovia Essentials shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or website." },
+    { title: "Limitation of Liability", content: "Threads of Eden shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or website." },
     { title: "Governing Law", content: "These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Bangalore, Karnataka." },
-    { title: "Contact", content: "For questions about these terms, contact us at legal@aroviaessentials.com." },
+    { title: "Contact", content: "For questions about these terms, contact us at legal@threadandroots.com." },
   ];
 
   return (

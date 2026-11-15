@@ -1,13 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
-import aboutImg from "@/assets/about.jpg";
-import ingredientsImg from "@/assets/ingredients.jpg";
-import featuredImg from "@/assets/featured.jpg";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Arovia Essentials" },
-      { name: "description", content: "Learn about the botanical philosophy, craftsmanship, and pure ingredients behind Arovia Essentials." },
+      { title: "About Our Atelier — Threads of Eden" },
+      {
+        name: "description",
+        content:
+          "Discover the architectural garment philosophy and enduring cotton craftsmanship behind Threads of Eden.",
+      },
     ],
   }),
   component: AboutPage,
@@ -15,102 +16,99 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   return (
-    <main className="bg-background text-foreground">
+    <main className="bg-background text-foreground min-h-screen">
       {/* Editorial Hero Header */}
-      <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden bg-secondary">
-        <img 
-          src={aboutImg} 
-          alt="Arovia Essentials Botanical Studio" 
-          className="h-full w-full object-cover brightness-[0.9]"
+      <section className="relative h-[55vh] min-h-[420px] w-full overflow-hidden bg-secondary">
+        <img
+          src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1600&auto=format&fit=crop&q=85"
+          alt="Threads of Eden Garment Workshop & Tailoring Patterns"
+          className="h-full w-full object-cover brightness-[0.85]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
         <div className="absolute bottom-12 left-6 right-6 mx-auto max-w-[1400px] md:px-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/80">Our Story</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#CFF57C]">
+            Our Story & Craft
+          </p>
           <h1 className="font-display text-4xl leading-tight text-white md:text-6xl mt-2">
-            Nature, distilled to <br />
-            <span className="italic">absolute purity.</span>
+            Form, elevated to <br />
+            <span className="italic">quiet permanence.</span>
           </h1>
         </div>
       </section>
 
-      {/* Philosophy & Craftsmanship Section */}
+      {/* Philosophy Section */}
       <section className="mx-auto max-w-[1400px] px-6 py-20 md:px-12 md:py-28">
         <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          
-          {/* Left Column: Brand Statement & Cards */}
-          <div className="space-y-12">
-            <div className="space-y-6">
-              <p className="eyebrow">The Philosophy</p>
-              <h2 className="font-display text-4xl leading-[1.05] md:text-5xl">
-                Honoring the skin <br />and the earth.
-              </h2>
-              <p className="text-base leading-8 text-muted-foreground max-w-xl">
-                Arovia Essentials was born from a commitment to clean, high-performance skincare. We believe that true luxury lies in simplicity, creating restorative rituals that eliminate synthetic fillers and prioritize 100% active botanical ingredients.
-              </p>
-            </div>
-
-            <div className="grid gap-6 sm:grid-cols-2">
-              <FeatureCard 
-                title="Botanical Purity" 
-                description="Cold-pressed oils, steam-distilled essential oils, and organic plant extracts selected for maximum nutrient density." 
-              />
-              <FeatureCard 
-                title="Ethical Sourcing" 
-                description="Formulations hand-crafted in limited, fresh batches using certified cruelty-free and sustainably harvested ingredients." 
-              />
+          <div className="space-y-6">
+            <p className="eyebrow text-[#2C5D2E]">The Atelier Manifesto</p>
+            <h2 className="font-display text-4xl leading-[1.05] md:text-5xl">
+              Rejecting the flimsy.<br />
+              Honoring the cloth.
+            </h2>
+            <p className="text-base leading-8 text-muted-foreground">
+              Threads of Eden was founded with a single objective: to rescue the foundational
+              wardrobe piece — the polo and the everyday t-shirt — from the cycles of planned
+              obsolescence and synthetic blending.
+            </p>
+            <p className="text-base leading-8 text-muted-foreground">
+              We engineer garments with architectural weight. By employing dense 280 GSM weaves,
+              double-mercerized Egyptian piqué, and pre-shrunk organic yarns, our garments hang
+              with clean authority and outlast standard basics season after season.
+            </p>
+            <div className="pt-4">
+              <Link to="/shop" className="btn-luxe">
+                Explore The Wardrobe
+              </Link>
             </div>
           </div>
 
-          {/* Right Column: Narrative & Image Gallery */}
-          <div className="space-y-12">
-            {/* Detailed Narrative Card */}
-            <div className="rounded-[2.5rem] border border-black/10 bg-white p-8 md:p-12 shadow-[0_30px_80px_rgba(0,0,0,0.04)] space-y-6">
-              <p className="eyebrow">Modern Alchemy</p>
-              <h3 className="font-display text-3xl md:text-4xl">Quiet luxury crafted in fresh batches.</h3>
-              <p className="text-base leading-8 text-muted-foreground">
-                We combine ancient apothecary wisdom with modern green chemistry. Every serum, lotion, and oil is crafted to nourish the skin barrier while offering a premium sensory experience through pure therapeutic essential oils. Our containers are made of UV-protective glass to naturally preserve the active botanicals.
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="rounded-2xl border border-black/10 bg-white p-7 shadow-sm space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E]">
+                Pillar 01
+              </span>
+              <h3 className="font-display text-2xl font-medium">Extra-Long Staple Cotton</h3>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Only the longest 1% of harvested fibers make our yarns, ensuring exceptional
+                tear strength and velvety smoothness without synthetic finishes.
               </p>
             </div>
 
-            {/* Gallery concept */}
-            <div className="grid gap-8 sm:grid-cols-2">
-              <div className="rounded-[2rem] border border-black/10 bg-white p-4 shadow-sm">
-                <div className="aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-secondary">
-                  <img 
-                    src={ingredientsImg} 
-                    alt="Raw botanical ingredients" 
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                </div>
-                <h4 className="mt-4 text-sm font-semibold uppercase tracking-wider text-[#2C5D2E] px-2">Pure Extracts</h4>
-                <p className="mt-1 text-xs text-muted-foreground px-2">Fresh, organic petals and herbs ready for distillation.</p>
-              </div>
+            <div className="rounded-2xl border border-black/10 bg-white p-7 shadow-sm space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E]">
+                Pillar 02
+              </span>
+              <h3 className="font-display text-2xl font-medium">Engineered Collars</h3>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Our polo collars are built with tailored collar stands and interlining so they
+                never roll, crease, or lose their crisp silhouette after laundering.
+              </p>
+            </div>
 
-              <div className="rounded-[2rem] border border-black/10 bg-white p-4 shadow-sm">
-                <div className="aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-secondary">
-                  <img 
-                    src={featuredImg} 
-                    alt="Arovia botanical bottles" 
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                </div>
-                <h4 className="mt-4 text-sm font-semibold uppercase tracking-wider text-[#2C5D2E] px-2">Atelier Craft</h4>
-                <p className="mt-1 text-xs text-muted-foreground px-2">Thoughtfully packaged in amber glass apothecary jars.</p>
-              </div>
+            <div className="rounded-2xl border border-black/10 bg-white p-7 shadow-sm space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E]">
+                Pillar 03
+              </span>
+              <h3 className="font-display text-2xl font-medium">Ocean Shell Hardware</h3>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Authentic Australian mother-of-pearl shell buttons, laser-etched and cross-stitched
+                with reinforced buttonholes that will not pull free.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-black/10 bg-white p-7 shadow-sm space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E]">
+                Pillar 04
+              </span>
+              <h3 className="font-display text-2xl font-medium">Circular Responsibility</h3>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Zero micro-plastics, non-toxic organic botanical dyes, and 100% recyclable
+                uncoated paper and cotton drawstring packaging.
+              </p>
             </div>
           </div>
-
         </div>
       </section>
     </main>
-  );
-}
-
-function FeatureCard({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="rounded-[1.7rem] border border-black/10 bg-white p-8 shadow-sm space-y-4">
-      <h3 className="font-display text-xl md:text-2xl">{title}</h3>
-      <p className="text-xs leading-6 text-muted-foreground">{description}</p>
-    </div>
   );
 }

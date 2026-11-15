@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Arovia Essentials" },
-      { name: "description", content: "Arovia Essentials privacy policy. How we collect, use, and protect your personal information." },
+      { title: "Privacy Policy — Threads of Eden" },
+      { name: "description", content: "Threads of Eden privacy policy. How we collect, use, and protect your personal information." },
     ],
   }),
   component: PrivacyPage,
@@ -17,7 +17,7 @@ function PrivacyPage() {
     { title: "Data Protection", content: "We use industry-standard SSL encryption to protect your data. Payment information is processed securely through PCI-DSS compliant payment processors. We never store your full credit card details." },
     { title: "Cookies", content: "We use essential cookies for site functionality and analytics cookies to understand how visitors interact with our website. You can manage cookie preferences through your browser settings." },
     { title: "Third-Party Sharing", content: "We do not sell your personal information. We share data only with trusted service providers who assist in order fulfillment, payment processing, and website analytics." },
-    { title: "Your Rights", content: "You have the right to access, correct, or delete your personal data. You can unsubscribe from marketing emails at any time. Contact privacy@aroviaessentials.com for data-related requests." },
+    { title: "Your Rights", content: "You have the right to access, correct, or delete your personal data. You can unsubscribe from marketing emails at any time. Contact privacy@threadandroots.com for data-related requests." },
     { title: "Data Retention", content: "We retain your data for as long as necessary to provide our services and comply with legal obligations. Order records are kept for 7 years for tax and accounting purposes." },
     { title: "Updates to This Policy", content: "We may update this privacy policy periodically. Significant changes will be communicated via email. Last updated: July 2026." },
   ];

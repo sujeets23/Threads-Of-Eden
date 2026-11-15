@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/sustainability")({
   head: () => ({
     meta: [
-      { title: "Sustainability — Arovia Essentials" },
-      { name: "description", content: "Learn about Arovia Essentials' commitment to sustainable sourcing, circular design, and carbon-conscious operations." },
+      { title: "Sustainability — Threads of Eden" },
+      { name: "description", content: "Learn about Threads of Eden' commitment to organic cotton, circular design, and carbon-conscious operations." },
     ],
   }),
   component: SustainabilityPage,

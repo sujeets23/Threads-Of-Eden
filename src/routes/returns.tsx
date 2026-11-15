@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/returns")({
   head: () => ({
     meta: [
-      { title: "Returns & Exchanges — Arovia Essentials" },
+      { title: "Returns & Exchanges — Threads of Eden" },
       { name: "description", content: "Our returns and exchanges policy. Hassle-free returns within 30 days." },
     ],
   }),
@@ -12,14 +12,14 @@ export const Route = createFileRoute("/returns")({
 
 function ReturnsPage() {
   const policies = [
-    { title: "30-Day Returns", desc: "Return any unopened product within 30 days of delivery for a full refund." },
+    { title: "30-Day Returns", desc: "Return any unworn garment within 30 days of delivery for a full refund." },
     { title: "Free Return Shipping", desc: "We cover return shipping costs for all domestic orders within India." },
-    { title: "Exchange Program", desc: "Not the right product? Exchange it for something that suits your ritual better." },
+    { title: "Size Exchange Program", desc: "Need a different size? Exchange it easily for a tailored fit." },
     { title: "Damaged Items", desc: "Contact us within 48 hours with photos. We'll send a replacement immediately." },
   ];
 
   const steps = [
-    "Contact our support team at returns@aroviaessentials.com",
+    "Contact our support team at returns@threadandroots.com",
     "Receive your prepaid return label via email within 24 hours",
     "Pack the product in its original packaging and ship it back",
     "Refund processed within 5–7 business days of receiving the return",

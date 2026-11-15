@@ -13,8 +13,8 @@ export const Route = createFileRoute("/order-confirmation")({
   validateSearch: (search) => searchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Order Confirmed — Arovia Essentials" },
-      { name: "description", content: "Thank you for your purchase. Your luxury botanical order has been confirmed." },
+      { title: "Order Confirmed — Threads of Eden" },
+      { name: "description", content: "Thank you for your purchase. Your luxury garment order has been confirmed." },
     ],
   }),
   component: OrderConfirmationPage,

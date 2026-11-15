@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/shipping")({
   head: () => ({
     meta: [
-      { title: "Shipping Info — Arovia Essentials" },
-      { name: "description", content: "Shipping information and delivery details for Arovia Essentials orders." },
+      { title: "Shipping Info — Threads of Eden" },
+      { name: "description", content: "Shipping information and delivery details for Threads of Eden orders." },
     ],
   }),
   component: ShippingPage,

@@ -4,28 +4,28 @@ import { useState } from "react";
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — Arovia Essentials" },
-      { name: "description", content: "Frequently asked questions about Arovia Essentials products, shipping, returns, and more." },
+      { title: "FAQ — Threads of Eden" },
+      { name: "description", content: "Frequently asked questions about Threads of Eden t-shirts, polos, sizing, shipping, and returns." },
     ],
   }),
   component: FAQPage,
 });
 
 const FAQS = [
-  { category: "Products", items: [
-    { q: "Are your products suitable for sensitive skin?", a: "Yes, all Arovia Essentials products are dermatologically tested and formulated without harsh chemicals. However, we always recommend a patch test before first use." },
-    { q: "Are your products vegan and cruelty-free?", a: "Absolutely. Every product is 100% vegan and never tested on animals. We are proudly cruelty-free certified." },
-    { q: "What is the shelf life of your products?", a: "Our products have a shelf life of 12–18 months from opening. Each product displays a Period After Opening (PAO) symbol." },
-    { q: "Do you use any artificial fragrances?", a: "Never. All scents come from natural essential oils and botanical extracts." },
+  { category: "Apparel & Fit", items: [
+    { q: "How do your t-shirts and polos fit?", a: "Our polos and Supima crewnecks follow a tailored true-to-size European cut. Our heavyweight 280 GSM oversized tees are designed with relaxed, dropped shoulders. Consult our Size & Fit Guide for exact chest and length measurements." },
+    { q: "Will my cotton t-shirt shrink after washing?", a: "No. All Threads of Eden cotton is pre-washed and heat-set during production to ensure zero shrinkage when following our cold wash and hang dry instructions." },
+    { q: "What does 280 GSM mean?", a: "GSM stands for Grams per Square Meter. Standard t-shirts are 140–160 GSM. At 280 GSM, our heavyweight fabric delivers an architectural drape, opaque coverage, and exceptional durability." },
+    { q: "Are your buttons real mother of pearl?", a: "Yes. All Threads of Eden polos feature authentic Australian ocean shell buttons, laser-engraved and cross-stitched for enduring resilience." },
   ]},
   { category: "Orders & Shipping", items: [
-    { q: "How long does shipping take?", a: "Standard shipping within India takes 5–7 business days. Express options are available for 2–3 day delivery." },
-    { q: "Do you ship internationally?", a: "Yes, we ship to over 30 countries. International delivery takes 7–14 business days." },
-    { q: "Is shipping free?", a: "Domestic orders above ₹1,499 qualify for free standard shipping. All other orders incur a flat ₹249 shipping fee." },
+    { q: "How long does shipping take?", a: "Standard express delivery within India takes 3–5 business days. International shipping arrives in 6–10 business days." },
+    { q: "Do you ship internationally?", a: "Yes, we ship to over 30 countries with full end-to-end tracking." },
+    { q: "Is shipping free?", a: "All orders above ₹1,999 qualify for complimentary express shipping." },
   ]},
-  { category: "Returns & Refunds", items: [
-    { q: "What is your return policy?", a: "We accept returns of unopened products within 30 days of delivery. Please visit our Returns page for details." },
-    { q: "How do I initiate a return?", a: "Email returns@aroviaessentials.com with your order number and reason for return. We'll send a prepaid return label." },
+  { category: "Returns & Exchanges", items: [
+    { q: "What is your exchange policy?", a: "We offer complimentary 14-day size exchanges on all unworn garments with original tags intact." },
+    { q: "How do I initiate a return or exchange?", a: "Email returns@threadandroots.com with your Order ID and size exchange request. Our team will arrange a prompt reverse pickup." },
   ]},
 ];
 

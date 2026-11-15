@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
-      { title: "Careers — Arovia Essentials" },
-      { name: "description", content: "Join the Arovia Essentials team. Explore open positions in Dubai and Bangalore." },
+      { title: "Careers — Threads of Eden" },
+      { name: "description", content: "Join the Threads of Eden team. Explore open positions in textile design, operations, and brand." },
     ],
   }),
   component: CareersPage,
@@ -43,7 +43,7 @@ function CareersPage() {
 
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <p className="eyebrow mb-6">Why Arovia</p>
+          <p className="eyebrow mb-6">Why Threads of Eden</p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {VALUES.map((v) => (
               <div key={v.title} className="rounded-[1.7rem] border border-black/10 bg-white p-8 shadow-sm">
@@ -73,12 +73,12 @@ function CareersPage() {
                     <span className="text-xs text-[#CFF57C]">{p.dept}</span>
                   </div>
                 </div>
-                <a href="mailto:careers@aroviaessentials.com" className="btn-luxe-inverse text-center">Apply →</a>
+                <a href="mailto:careers@threadandroots.com" className="btn-luxe-inverse text-center">Apply →</a>
               </div>
             ))}
           </div>
           <div className="mt-12 border-t border-white/10 pt-8">
-            <p className="text-sm text-white/50">Don't see a role that fits? Send your résumé to <a href="mailto:careers@aroviaessentials.com" className="text-[#CFF57C]">careers@aroviaessentials.com</a></p>
+            <p className="text-sm text-white/50">Don't see a role that fits? Send your résumé to <a href="mailto:careers@threadandroots.com" className="text-[#CFF57C]">careers@threadandroots.com</a></p>
           </div>
         </div>
       </section>

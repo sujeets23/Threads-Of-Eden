@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/cookies")({
   head: () => ({
     meta: [
-      { title: "Cookie Policy — Arovia Essentials" },
-      { name: "description", content: "How Arovia Essentials uses cookies to improve your browsing experience." },
+      { title: "Cookie Policy — Threads of Eden" },
+      { name: "description", content: "How Threads of Eden uses cookies to improve your browsing experience." },
     ],
   }),
   component: CookiePage,
@@ -31,7 +31,7 @@ function CookiePage() {
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-[900px] px-6 md:px-12">
           <p className="text-base leading-8 text-muted-foreground">
-            Arovia Essentials uses cookies and similar technologies to provide, protect, and improve our website. This policy explains what cookies are, how we use them, and your choices.
+            Threads of Eden uses cookies and similar technologies to provide, protect, and improve our website. This policy explains what cookies are, how we use them, and your choices.
           </p>
           <div className="mt-16 space-y-6">
             {cookies.map((c) => (
@@ -45,7 +45,7 @@ function CookiePage() {
           <div className="mt-12 border-t border-black/10 pt-8">
             <h3 className="font-display text-xl">Managing Your Cookies</h3>
             <p className="mt-4 text-sm leading-7 text-muted-foreground">
-              You can control and manage cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of our website. For questions, contact privacy@aroviaessentials.com.
+              You can control and manage cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of our website. For questions, contact privacy@threadandroots.com.
             </p>
           </div>
         </div>

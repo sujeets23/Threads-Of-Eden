@@ -1,27 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import Lenis from "lenis";
 import { useCart } from "@/context/CartContext";
-
-import heroBottle from "@/assets/Images/hyero bg.png";
-import ingredients from "@/assets/ingredients.jpg";
-import aboutImg from "@/assets/about.jpg";
-import collection1 from "@/assets/collection-1.jpg";
-import collection2 from "@/assets/collection-2.jpg";
-import collection3 from "@/assets/collection-3.jpg";
-import featuredImg from "@/assets/featured.jpg";
-import aroviaLogoText from "@/assets/Images/arovia logo with text.png";
-import aroviaLogo from "@/assets/Images/arovia logo.png";
-import { PRODUCTS as SHOP_PRODUCTS } from "@/lib/products";
+import { useStore } from "@/context/StoreContext";
+import { Product } from "@/lib/store";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Arovia Essentials — Nature Distilled, Luxury Refined" },
-      { name: "description", content: "Botanical skincare crafted from rare, cold-pressed ingredients. Discover editorial rituals for the modern connoisseur." },
-      { property: "og:title", content: "Arovia Essentials" },
-      { property: "og:description", content: "Nature distilled. Luxury refined." },
+      { title: "Threads of Eden — Woven with purpose. Inspired by grace." },
+      {
+        name: "description",
+        content:
+          "Precision-knit Peruvian piqué and 280 GSM heavyweight cotton. Discover architectural t-shirts and luxury polos crafted for the modern connoisseur.",
+      },
+      { property: "og:title", content: "Threads of Eden — Woven with purpose. Inspired by grace." },
+      {
+        property: "og:description",
+        content: "Precision-knit Peruvian piqué and 280 GSM heavyweight cotton.",
+      },
     ],
   }),
   component: HomePage,
@@ -43,7 +41,10 @@ function useLenis() {
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); lenis.destroy(); };
+    return () => {
+      cancelAnimationFrame(raf);
+      lenis.destroy();
+    };
   }, []);
 }
 
@@ -53,19 +54,25 @@ function useCursor() {
   const sx = useSpring(x, { stiffness: 220, damping: 30, mass: 0.6 });
   const sy = useSpring(y, { stiffness: 220, damping: 30, mass: 0.6 });
   useEffect(() => {
-    const move = (e: MouseEvent) => { x.set(e.clientX); y.set(e.clientY); };
+    const move = (e: MouseEvent) => {
+      x.set(e.clientX);
+      y.set(e.clientY);
+    };
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
   }, [x, y]);
   return { sx, sy };
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] } },
-};
-
-function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
   return (
     <motion.div
       className={className}
@@ -96,8 +103,12 @@ function HomePage() {
         aria-hidden
         className="pointer-events-none fixed z-[100] hidden md:block"
         style={{
-          x: sx, y: sy, translateX: "-50%", translateY: "-50%",
-          width: hover ? 60 : 14, height: hover ? 60 : 14,
+          x: sx,
+          y: sy,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: hover ? 60 : 14,
+          height: hover ? 60 : 14,
           transition: "width 500ms cubic-bezier(.16,1,.3,1), height 500ms cubic-bezier(.16,1,.3,1)",
           background: "radial-gradient(circle, rgba(0,0,0,0.15), transparent 70%)",
           borderRadius: 999,
@@ -108,7 +119,7 @@ function HomePage() {
       <Hero onHover={setHover} />
       <Marquee />
       <ShowcaseSection onHover={setHover} />
-      <IngredientStory />
+      <FabricStory />
       <WhySection />
       <Collections onHover={setHover} />
       <FeaturedProduct onHover={setHover} />
@@ -122,6 +133,8 @@ function HomePage() {
 /* ------------------------------- Hero ------------------------------- */
 
 function Hero({ onHover }: { onHover: (v: boolean) => void }) {
+  const { settings } = useStore();
+  const hero = settings.hero;
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 80]);
@@ -133,33 +146,57 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
     >
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img
-          src={heroBottle}
-          alt="Arovia radiance serum on marble with botanical shadows"
-          width={1600}
-          height={1920}
+          src={hero.imageUrl || "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"}
+          alt="Threads of Eden luxury cotton t-shirt and polo textiles"
+          width={1800}
+          height={1200}
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 hero-overlay" />
+        <div className="absolute inset-0 hero-overlay bg-black/40" />
       </motion.div>
-
-      <div className="absolute inset-0 bg-black/20 md:bg-black/10" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 pb-20 md:px-16 md:pb-28 pt-24">
         <div className="max-w-[92vw] sm:max-w-[80vw] md:max-w-3xl text-left">
+          {hero.eyebrow && (
+            <p className="eyebrow mb-4 text-[#CFF57C] tracking-[0.3em] font-medium">
+              {hero.eyebrow}
+            </p>
+          )}
+
           <h1 className="font-display text-[12vw] leading-[1.02] tracking-[-0.02em] sm:text-[11vw] sm:tracking-[-0.03em] md:text-[8vw] md:leading-[0.95] md:tracking-[-0.04em] text-white">
-            <AnimatedWords text="Nature," className="block" />
-            <AnimatedWords text="distilled" delay={0.25} className="block italic text-white/90" />
+            <AnimatedWords text={hero.titleLine1 || "Cotton,"} className="block" />
+            <AnimatedWords
+              text={hero.titleLine2 || "elevated"}
+              delay={0.25}
+              className="block italic text-white/90"
+            />
           </h1>
-          <div className="mt-8 flex flex-col gap-4 sm:mt-12">
+
+          {hero.subtitle && (
+            <p className="mt-6 max-w-xl text-sm sm:text-base text-white/80 leading-relaxed font-light">
+              {hero.subtitle}
+            </p>
+          )}
+
+          <div className="mt-8 flex flex-wrap gap-4 sm:mt-12 items-center">
             <Reveal delay={0.5}>
               <a
-                href="/shop"
+                href={hero.ctaLink || "/shop"}
                 onMouseEnter={() => onHover(true)}
                 onMouseLeave={() => onHover(false)}
                 className="w-fit rounded-full border border-white bg-transparent px-8 py-3.5 text-center text-sm font-medium uppercase tracking-[0.15em] text-white shadow-sm transition-all duration-300 hover:bg-white hover:text-[#2C5D2E]"
               >
-                Discover the Ritual
+                {hero.ctaText || "Discover the Collection"}
                 <span className="ml-2 font-sans" aria-hidden>→</span>
+              </a>
+            </Reveal>
+
+            <Reveal delay={0.6}>
+              <a
+                href="/admin"
+                className="w-fit rounded-full border border-[#CFF57C]/40 bg-black/20 px-6 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#CFF57C] backdrop-blur transition hover:bg-[#CFF57C] hover:text-[#1a2e1b]"
+              >
+                Admin Console
               </a>
             </Reveal>
           </div>
@@ -173,9 +210,9 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
         className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block"
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="eyebrow">Scroll</span>
+          <span className="eyebrow text-white/60">Scroll</span>
           <motion.div
-            className="h-8 w-px bg-foreground/40"
+            className="h-8 w-px bg-white/40"
             animate={{ scaleY: [0.3, 1, 0.3], originY: 0 }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -203,14 +240,27 @@ function AnimatedWords({ text, delay = 0, className = "" }: { text: string; dela
 /* ------------------------------- Marquee ------------------------------- */
 
 function Marquee() {
-  const items = ["Cold-pressed", "Vegan formulated", "Cruelty free", "Small batch", "Recyclable glass", "Kyoto — Grasse — Provence"];
+  const { settings } = useStore();
+  const items =
+    settings.marqueeItems && settings.marqueeItems.length > 0
+      ? settings.marqueeItems
+      : [
+          "280 GSM Heavyweight",
+          "100% Long-Staple Supima®",
+          "Mercerized Piqué Knit",
+          "Mother of Pearl Buttons",
+          "Pre-Shrunk Organic Cotton",
+          "Double-Needle Construction",
+          "Milan — Kyoto — Mumbai",
+        ];
+
   return (
     <section className="border-y border-border/60 bg-[#fafafa] py-6 overflow-hidden">
       <div className="mx-auto flex whitespace-nowrap animate-marquee">
         {[...items, ...items, ...items].map((it, i) => (
-          <span key={i} className="mx-6 eyebrow flex items-center gap-6 md:mx-10 md:gap-10">
+          <span key={i} className="mx-6 eyebrow flex items-center gap-6 md:mx-10 md:gap-10 text-black/80">
             {it}
-            <span className="inline-block h-1 w-1 rounded-full bg-black/30" />
+            <span className="inline-block h-1 w-1 rounded-full bg-[#2C5D2E]" />
           </span>
         ))}
       </div>
@@ -220,34 +270,56 @@ function Marquee() {
 
 /* ------------------------------- Showcase ------------------------------- */
 
-const PRODUCTS = SHOP_PRODUCTS;
-
 function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
+  const { products, categories } = useStore();
+  const [selectedCat, setSelectedCat] = useState("All");
+
+  const filtered = selectedCat === "All" ? products : products.filter((p) => p.category === selectedCat);
+
   return (
-    <section id="shop" className="relative py-20 md:py-48">
+    <section id="shop" className="relative py-20 md:py-36">
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
-        <div className="mb-10 flex items-end justify-between md:mb-24">
+        <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <Reveal>
-            <p className="eyebrow mb-4 md:mb-6">Skincare Collection</p>
+            <p className="eyebrow mb-4 md:mb-6 text-[#2C5D2E]">The Apparel Suite</p>
             <h2 className="font-display text-3xl leading-[1.05] md:text-7xl">
-              Premium<br /><span className="italic text-[#2C5D2E]/80">botanicals.</span>
+              Precision Cut.<br />
+              <span className="italic text-[#2C5D2E]/80">Heavyweight Form.</span>
             </h2>
           </Reveal>
-          <Reveal className="hidden md:block">
-            <a href="/shop" className="eyebrow hover:text-[#2C5D2E] transition-colors">View all products →</a>
-          </Reveal>
+
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap gap-2">
+            {categories.slice(0, 6).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCat(cat)}
+                className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
+                  selectedCat === cat
+                    ? "bg-[#2C5D2E] text-white shadow-sm"
+                    : "border border-black/10 bg-white text-black/70 hover:border-[#2C5D2E]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-x-8 md:gap-y-20">
-          {PRODUCTS.map((p, i) => (
-            <ProductCard key={p.name} product={p} index={i} onHover={onHover} />
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16">
+          {filtered.map((p, i) => (
+            <ProductCard key={p.id} product={p} index={i} onHover={onHover} />
           ))}
         </div>
 
-        {/* Mobile "View All" */}
-        <div className="mt-8 text-center md:hidden">
-          <a href="/shop" className="inline-flex items-center gap-2 rounded-full bg-[#2C5D2E] px-8 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white">
-            View All Products
+        {/* Action Link to Full Shop */}
+        <div className="mt-16 text-center">
+          <a
+            href="/shop"
+            className="inline-flex items-center gap-3 rounded-full border border-[#2C5D2E] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#2C5D2E] transition hover:bg-[#2C5D2E] hover:text-white"
+          >
+            Explore All Styles ({products.length})
+            <span aria-hidden>→</span>
           </a>
         </div>
       </div>
@@ -255,23 +327,31 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
   );
 }
 
-function ProductCard({ product, index, onHover }: { product: typeof PRODUCTS[number]; index: number; onHover: (v: boolean) => void }) {
+function ProductCard({
+  product,
+  index,
+  onHover,
+}: {
+  product: Product;
+  index: number;
+  onHover: (v: boolean) => void;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
   const { addToCart } = useCart();
 
   return (
-    <Reveal delay={index * 0.08}>
+    <Reveal delay={index * 0.05}>
       <div
         ref={ref}
         className="group cursor-pointer"
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
       >
-        <div 
+        <div
           onClick={() => addToCart(product)}
-          className="relative aspect-[3/4] overflow-hidden rounded-lg bg-secondary md:aspect-[4/5] md:rounded-none"
+          className="relative aspect-[3/4] overflow-hidden rounded-xl bg-secondary md:aspect-[4/5] border border-black/5"
         >
           <motion.img
             src={product.img}
@@ -280,17 +360,29 @@ function ProductCard({ product, index, onHover }: { product: typeof PRODUCTS[num
             height={1000}
             loading="lazy"
             style={{ y }}
-            className="h-[110%] w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
+            className="h-[110%] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
           />
-          {/* Desktop hover overlay */}
-          <div className="absolute inset-x-0 bottom-0 hidden translate-y-full items-center justify-between bg-[#2C5D2E]/95 px-6 py-4 text-white transition-transform duration-700 ease-out group-hover:translate-y-0 md:flex">
-            <span className="text-xs font-medium uppercase tracking-[0.15em]">Add to bag</span>
+
+          {/* Badge */}
+          {product.badge && (
+            <div className="absolute top-3 left-3 z-10 rounded-full bg-[#1a2e1b]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#CFF57C] backdrop-blur">
+              {product.badge}
+            </div>
+          )}
+
+          {/* Desktop quick-add overlay */}
+          <div className="absolute inset-x-0 bottom-0 hidden translate-y-full items-center justify-between bg-[#2C5D2E]/95 px-6 py-4 text-white transition-transform duration-500 ease-out group-hover:translate-y-0 md:flex">
+            <span className="text-xs font-medium uppercase tracking-[0.15em]">Quick Add to Bag</span>
             <span aria-hidden>→</span>
           </div>
-          {/* Mobile quick-add */}
-          <button 
-            onClick={(e) => { e.stopPropagation(); addToCart(product); }}
-            className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C5D2E] text-white shadow-lg md:hidden" 
+
+          {/* Mobile quick-add button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              addToCart(product);
+            }}
+            className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C5D2E] text-white shadow-lg md:hidden"
             aria-label="Add to bag"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -298,18 +390,39 @@ function ProductCard({ product, index, onHover }: { product: typeof PRODUCTS[num
             </svg>
           </button>
         </div>
-        <div className="mt-3 md:mt-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#2C5D2E] md:text-xs">{product.category}</p>
-          <h3 className="mt-1 text-sm font-medium leading-snug md:text-xl md:font-light">{product.name}</h3>
-          <p className="mt-0.5 hidden text-sm text-muted-foreground md:block">{product.note}</p>
-          <p className="mt-1 text-sm font-semibold md:mt-2 md:text-lg md:font-light">{product.price}</p>
-          <div className="mt-4">
+
+        <div className="mt-3 md:mt-5">
+          <div className="flex items-center justify-between">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#2C5D2E]">
+              {product.category}
+            </p>
+            {product.sizes && product.sizes.length > 0 && (
+              <span className="text-[10px] text-muted-foreground uppercase">
+                {product.sizes.join(" · ")}
+              </span>
+            )}
+          </div>
+
+          <h3 className="mt-1 text-sm font-medium leading-snug md:text-lg line-clamp-1">
+            {product.name}
+          </h3>
+
+          <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">{product.note}</p>
+
+          <div className="mt-2 flex items-center justify-between">
+            <div className="flex items-baseline gap-2">
+              <span className="text-sm font-semibold md:text-base">{product.price}</span>
+              {product.originalPrice && (
+                <span className="text-xs text-muted-foreground line-through">
+                  {product.originalPrice}
+                </span>
+              )}
+            </div>
             <a
               href={`/product/${product.id}`}
-              className="inline-flex items-center gap-2 rounded-full border border-[#2C5D2E] px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-[#2C5D2E] transition hover:bg-[#2C5D2E] hover:text-white"
+              className="text-xs font-semibold text-[#2C5D2E] hover:underline"
             >
-              View details
-              <span aria-hidden>→</span>
+              Details →
             </a>
           </div>
         </div>
@@ -318,79 +431,96 @@ function ProductCard({ product, index, onHover }: { product: typeof PRODUCTS[num
   );
 }
 
-/* ------------------------------- Ingredient Story ------------------------------- */
+/* ------------------------------- Fabric & Craftsmanship Story ------------------------------- */
 
-function IngredientStory() {
+function FabricStory() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
-  const ingredientsList = [
-    { name: "Aloe Vera", latin: "Aloe barbadensis", note: "Hydrating cell renewal" },
-    { name: "Moringa", latin: "Moringa oleifera", note: "Antioxidant clarity" },
-    { name: "Turmeric", latin: "Curcuma longa", note: "Illuminating warmth" },
-    { name: "Damask Rose", latin: "Rosa damascena", note: "Elemental softness" },
-    { name: "Essential Oils", latin: "Cold-pressed", note: "Aromatic ritual" },
+  const fabricList = [
+    { name: "Peruvian Pima Cotton", spec: "Gossypium barbadense", note: "Extra-long staple silky touch" },
+    { name: "Mercerized Piqué Knit", spec: "Double singed", note: "Resilient non-curling collar" },
+    { name: "280 GSM Heavyweight Terry", spec: "Zero-twist yarn", note: "Architectural structured drape" },
+    { name: "Long-Staple Supima®", spec: "Top 1% harvest", note: "Deep non-fade organic dyes" },
+    { name: "Mother of Pearl Shell", spec: "Australian ocean shell", note: "Natural hand-carved luster" },
   ];
 
-  // parallax bottle
-  const imgY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
 
   return (
-    <section id="ingredients" ref={ref} className="relative overflow-hidden bg-secondary py-20 md:py-48">
-      {/* Floating botanicals */}
+    <section id="craftsmanship" ref={ref} className="relative overflow-hidden bg-secondary py-20 md:py-40">
+      {/* Soft color blurs */}
       <motion.div
         aria-hidden
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -200]) }}
-        className="absolute -left-20 top-20 h-60 w-60 rounded-full bg-sage/30 blur-3xl"
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -150]) }}
+        className="absolute -left-20 top-20 h-60 w-60 rounded-full bg-sage/20 blur-3xl"
       />
       <motion.div
         aria-hidden
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 200]) }}
-        className="absolute -right-10 bottom-10 h-80 w-80 rounded-full bg-gold/20 blur-3xl"
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 150]) }}
+        className="absolute -right-10 bottom-10 h-80 w-80 rounded-full bg-[#CFF57C]/20 blur-3xl"
       />
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-10 px-4 md:grid-cols-12 md:gap-16 md:px-12">
         <div className="md:col-span-5">
           <Reveal>
-            <p className="eyebrow mb-6">Origin — The Living Formula</p>
+            <p className="eyebrow mb-6 text-[#2C5D2E]">Craftsmanship & Fiber</p>
             <h2 className="font-display text-3xl leading-[1.05] md:text-6xl">
-              Every drop, a<br />
-              <span className="italic text-[#2C5D2E]">quiet biography</span><br />
-              of the earth.
+              Every thread, an<br />
+              <span className="italic text-[#2C5D2E]">exact study</span><br />
+              in proportion.
             </h2>
           </Reveal>
-          <Reveal delay={0.2} className="mt-10">
-            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-              Sourced from single-origin harvests and cold-pressed within
-              seventy-two hours, our ingredients arrive at your skin as they
-              left the field — alive, intact, unrepeatable.
+          <Reveal delay={0.2} className="mt-8">
+            <p className="max-w-md text-sm md:text-base leading-relaxed text-muted-foreground">
+              We reject synthetic blends, polyester fillers, and flimsy fast-fashion knits.
+              Our cotton is sourced from certified organic single-origin farms, combed twice to
+              remove short fibers, and woven on vintage circular looms for an uncompromising hand feel.
             </p>
           </Reveal>
 
-          <div className="mt-14 space-y-0">
-            {ingredientsList.map((ing, i) => (
-              <IngredientRow key={ing.name} ing={ing} index={i} />
+          <div className="mt-12 space-y-0">
+            {fabricList.map((fab, i) => (
+              <motion.div
+                key={fab.name}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 1, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="grid grid-cols-3 items-baseline gap-2 border-t border-border/60 py-4 md:grid-cols-12 md:gap-4 md:py-5"
+              >
+                <span className="col-span-1 text-[10px] text-muted-foreground md:font-mono md:text-xs">0{i + 1}</span>
+                <span className="col-span-1 text-base font-medium md:col-span-5 md:font-display md:text-xl">
+                  {fab.name}
+                </span>
+                <span className="col-span-3 hidden text-xs italic text-muted-foreground md:block">
+                  {fab.spec}
+                </span>
+                <span className="col-span-1 text-xs text-muted-foreground md:col-span-3">
+                  {fab.note}
+                </span>
+              </motion.div>
             ))}
           </div>
         </div>
 
         <div className="relative md:col-span-7">
           <motion.div style={{ y: imgY }} className="relative">
-            <div className="relative aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
               <img
-                src={ingredients}
-                alt="Aloe vera, moringa, rose petals and turmeric on cream linen"
-                width={1600}
-                height={1200}
+                src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=1200&auto=format&fit=crop&q=85"
+                alt="Fine knitted cotton polo textiles on studio worktable"
+                width={1200}
+                height={1500}
                 loading="lazy"
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-8 -left-8 hidden bg-white p-8 shadow-2xl md:block">
-              <p className="eyebrow mb-2">Traceability</p>
-              <p className="font-display text-3xl">100%</p>
+            <div className="absolute -bottom-8 -left-8 hidden bg-white p-8 shadow-2xl md:block rounded-xl border border-black/5">
+              <p className="eyebrow mb-2 text-[#2C5D2E]">Zero Shrinkage</p>
+              <p className="font-display text-3xl font-light">280 GSM</p>
               <p className="mt-1 max-w-[200px] text-xs text-muted-foreground">
-                Every ingredient traceable to a single farm, harvest and season.
+                Pre-washed & heat-set to ensure your t-shirt stays true to size forever.
               </p>
             </div>
           </motion.div>
@@ -400,42 +530,41 @@ function IngredientStory() {
   );
 }
 
-function IngredientRow({ ing, index }: { ing: { name: string; latin: string; note: string }; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 1, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="grid grid-cols-3 items-baseline gap-2 border-t border-border/60 py-4 md:grid-cols-12 md:gap-4 md:py-6"
-    >
-      <span className="col-span-1 text-[10px] text-muted-foreground md:font-mono md:text-xs">0{index + 1}</span>
-      <span className="col-span-1 text-base font-medium md:col-span-4 md:font-display md:text-2xl">{ing.name}</span>
-      <span className="col-span-4 hidden text-sm italic text-muted-foreground md:block">{ing.latin}</span>
-      <span className="col-span-1 text-xs text-muted-foreground md:col-span-3">{ing.note}</span>
-    </motion.div>
-  );
-}
-
-/* ------------------------------- Why Arovia ------------------------------- */
+/* ------------------------------- Why Section ------------------------------- */
 
 const WHY = [
-  { n: "01", t: "Slow Craft", d: "Formulated over months, not weeks. Each batch matures before it meets your skin." },
-  { n: "02", t: "Rare Botanicals", d: "Wild-harvested and single-origin ingredients selected for their integrity." },
-  { n: "03", t: "Quiet Efficacy", d: "Clinically studied actives, delivered without noise or unnecessary claim." },
-  { n: "04", t: "Circular Design", d: "Refillable vessels, recycled glass, carbon-conscious shipping." },
+  {
+    n: "01",
+    t: "Architectural Drape",
+    d: "Our 280 GSM cotton and dense piqué knits hang with structured posture, avoiding flimsy cling.",
+  },
+  {
+    n: "02",
+    t: "Mercerized Luster",
+    d: "A dual-gas singeing process removes micro-fuzz, creating an ultra-soft silky hand that resists wash fade.",
+  },
+  {
+    n: "03",
+    t: "Stay-Flat Rib Collar",
+    d: "Double-needle reinforced collar bands and cotton-elastane ribbing engineered never to bacon or roll.",
+  },
+  {
+    n: "04",
+    t: "Ethical Organics",
+    d: "GOTS-certified 100% organic cotton dyed with low-impact botanical and mineral dyes.",
+  },
 ];
 
 function WhySection() {
   return (
-    <section id="ritual" className="py-20 md:py-48">
+    <section className="py-20 md:py-40">
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
-        <div className="mb-20 max-w-3xl">
+        <div className="mb-16 max-w-3xl">
           <Reveal>
-            <p className="eyebrow mb-6">Why Arovia</p>
-            <h2 className="font-display text-5xl leading-[1] md:text-7xl">
+            <p className="eyebrow mb-6 text-[#2C5D2E]">Design Philosophy</p>
+            <h2 className="font-display text-4xl leading-[1] md:text-7xl">
               Four principles.<br />
-              <span className="italic text-[#2C5D2E]">One quiet philosophy.</span>
+              <span className="italic text-[#2C5D2E]">One standard of form.</span>
             </h2>
           </Reveal>
         </div>
@@ -444,7 +573,9 @@ function WhySection() {
             <Reveal key={w.n} delay={i * 0.1}>
               <div className="group">
                 <p className="font-mono text-xs text-muted-foreground">— {w.n}</p>
-                <h3 className="mt-4 font-display text-xl transition-transform duration-700 group-hover:-translate-y-1 md:mt-6 md:text-3xl">{w.t}</h3>
+                <h3 className="mt-4 font-display text-xl transition-transform duration-700 group-hover:-translate-y-1 md:mt-6 md:text-3xl">
+                  {w.t}
+                </h3>
                 <div className="my-6 h-px w-12 bg-[#2C5D2E]/60 transition-all duration-700 group-hover:w-24" />
                 <p className="text-sm leading-relaxed text-muted-foreground">{w.d}</p>
               </div>
@@ -460,24 +591,43 @@ function WhySection() {
 
 function Collections({ onHover }: { onHover: (v: boolean) => void }) {
   const items = [
-    { img: collection1, title: "The Sage Chapter", tag: "Restorative", size: "large" },
-    { img: collection2, title: "Dew Study", tag: "Hydration", size: "small" },
-    { img: collection3, title: "Golden Silk", tag: "Illumination", size: "medium" },
+    {
+      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=1200&auto=format&fit=crop&q=85",
+      title: "The Polo Suite",
+      tag: "Mercerized Piqué",
+      href: "/shop",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=1200&auto=format&fit=crop&q=85",
+      title: "Heavyweight Oversized",
+      tag: "280 GSM Drop Shoulder",
+      href: "/shop",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1200&auto=format&fit=crop&q=85",
+      title: "Textured & Henleys",
+      tag: "Waffle Knit & Linen",
+      href: "/shop",
+    },
   ];
+
   return (
-    <section id="journal" className="bg-[#1a2e1b] py-32 text-white md:py-48">
+    <section className="bg-[#1a2e1b] py-28 text-white md:py-44">
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
-        <div className="mb-20 flex items-end justify-between">
+        <div className="mb-16 flex items-end justify-between">
           <Reveal>
-            <p className="eyebrow" style={{ color: "#CFF57C" }}>Chapters</p>
-            <h2 className="mt-6 font-display text-5xl leading-[1] md:text-7xl">
-              Editorial<br /><span className="italic text-[#CFF57C]">collections.</span>
+            <p className="eyebrow" style={{ color: "#CFF57C" }}>
+              Silhouettes
+            </p>
+            <h2 className="mt-4 font-display text-4xl leading-[1] md:text-7xl">
+              Editorial<br />
+              <span className="italic text-[#CFF57C]">wardrobe.</span>
             </h2>
           </Reveal>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-x-8 md:gap-y-16">
           <EditorialCard item={items[0]} className="md:col-span-7 md:aspect-[4/5]" onHover={onHover} />
-          <EditorialCard item={items[1]} className="md:col-span-5 md:mt-32 md:aspect-[3/4]" onHover={onHover} />
+          <EditorialCard item={items[1]} className="md:col-span-5 md:mt-24 md:aspect-[3/4]" onHover={onHover} />
           <EditorialCard item={items[2]} className="md:col-span-12 md:aspect-[16/8]" onHover={onHover} />
         </div>
       </div>
@@ -485,30 +635,39 @@ function Collections({ onHover }: { onHover: (v: boolean) => void }) {
   );
 }
 
-function EditorialCard({ item, className = "", onHover }: { item: { img: string; title: string; tag: string }; className?: string; onHover: (v: boolean) => void }) {
+function EditorialCard({
+  item,
+  className = "",
+  onHover,
+}: {
+  item: { img: string; title: string; tag: string; href: string };
+  className?: string;
+  onHover: (v: boolean) => void;
+}) {
   return (
     <Reveal className={className}>
-      <div
+      <a
+        href={item.href}
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
-        className="group relative h-full w-full cursor-pointer overflow-hidden"
+        className="group relative block h-full w-full overflow-hidden rounded-2xl"
       >
         <img
           src={item.img}
           alt={item.title}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a2e1b]/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a2e1b]/80 via-black/20 to-transparent" />
         <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
           <p className="eyebrow mb-3 text-[#CFF57C]">{item.tag}</p>
           <h3 className="font-display text-3xl md:text-5xl">{item.title}</h3>
           <div className="mt-6 flex translate-y-4 items-center gap-3 opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
-            <span className="eyebrow text-white">Read chapter</span>
+            <span className="eyebrow text-white">Explore range</span>
             <span aria-hidden>→</span>
           </div>
         </div>
-      </div>
+      </a>
     </Reveal>
   );
 }
@@ -516,81 +675,72 @@ function EditorialCard({ item, className = "", onHover }: { item: { img: string;
 /* ------------------------------- Featured Product ------------------------------- */
 
 function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const rotate = useTransform(scrollYProgress, [0, 1], [-25, 25]);
-  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
-
-  // Interactive rotate on drag
-  const dragX = useMotionValue(0);
-  const dragRot = useTransform(dragX, [-200, 200], [-30, 30]);
+  const { products } = useStore();
+  const featured = products.find((p) => p.isFeatured) || products[0];
+  const { addToCart } = useCart();
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-white py-20 md:py-48">
+    <section className="relative overflow-hidden bg-white py-20 md:py-40">
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-center gap-10 px-4 md:grid-cols-2 md:gap-16 md:px-12">
         <div className="relative order-2 md:order-1">
           <Reveal>
-            <p className="eyebrow mb-6">Featured — N°01</p>
-            <h2 className="font-display text-3xl leading-[1.05] md:text-7xl">
-              Radiance,<br /><span className="italic text-[#2C5D2E]">refracted.</span>
+            <p className="eyebrow mb-6 text-[#2C5D2E]">Iconic Signature Piece</p>
+            <h2 className="font-display text-3xl leading-[1.05] md:text-6xl">
+              {featured.name}
             </h2>
           </Reveal>
-          <Reveal delay={0.15} className="mt-10 max-w-md">
+
+          <Reveal delay={0.15} className="mt-6 max-w-md">
             <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-              A cold-infused elixir of moringa, sea buckthorn and rare Bulgarian
-              rose. Twenty-eight days of maturation. One weightless dropper of
-              luminous, self-renewing skin.
+              {featured.description}
             </p>
           </Reveal>
-          <Reveal delay={0.3} className="mt-12">
-            <div className="flex items-center gap-8">
-              <p className="font-display text-2xl md:text-3xl">₹3,499</p>
-              <a
-                href="#"
+
+          <Reveal delay={0.3} className="mt-10">
+            <div className="flex items-center gap-6">
+              <p className="font-display text-3xl font-light">{featured.price}</p>
+              <button
+                onClick={() => addToCart(featured)}
                 onMouseEnter={() => onHover(true)}
                 onMouseLeave={() => onHover(false)}
                 className="btn-luxe"
               >
-                Acquire
+                Add to Bag
+              </button>
+              <a
+                href={`/product/${featured.id}`}
+                className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E] hover:underline"
+              >
+                Full Details →
               </a>
             </div>
           </Reveal>
-          <Reveal delay={0.45} className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-8 md:mt-16 md:gap-8 md:pt-10">
-            {[["30ml", "Volume"], ["28d", "Maturation"], ["12", "Botanicals"]].map(([v, l]) => (
-              <div key={l as string}>
-                <p className="font-display text-2xl">{v}</p>
-                <p className="eyebrow mt-2">{l}</p>
+
+          <Reveal
+            delay={0.45}
+            className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-8 md:mt-14 md:gap-8 md:pt-10"
+          >
+            {[
+              ["240 GSM", "Weight"],
+              ["100%", "Organic Supima"],
+              ["Shell", "Mother of Pearl"],
+            ].map(([v, l]) => (
+              <div key={l}>
+                <p className="font-display text-2xl font-light">{v}</p>
+                <p className="eyebrow mt-1 text-muted-foreground">{l}</p>
               </div>
             ))}
           </Reveal>
         </div>
 
         <div className="relative order-1 md:order-2">
-          <motion.div
-            aria-hidden
-            style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
-            className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-black/5 blur-3xl"
-          />
-          <motion.div
-            drag="x"
-            dragConstraints={{ left: -200, right: 200 }}
-            dragElastic={0.2}
-            style={{ x: dragX, rotate: dragRot, y }}
-            onMouseEnter={() => onHover(true)}
-            onMouseLeave={() => onHover(false)}
-            className="relative mx-auto aspect-[7/8] max-w-md cursor-grab overflow-hidden active:cursor-grabbing"
-          >
-            <motion.img
-              src={featuredImg}
-              alt="Golden radiance serum with soft golden particles"
-              width={1400}
-              height={1600}
-              loading="lazy"
-              style={{ rotate }}
-              className="h-full w-full object-cover"
+          <div className="relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-2xl shadow-2xl border border-black/5">
+            <img
+              src={featured.img}
+              alt={featured.name}
+              className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
             />
-          </motion.div>
-          <p className="mt-6 text-center eyebrow">Drag to rotate ↔</p>
+          </div>
         </div>
       </div>
     </section>
@@ -600,26 +750,35 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
 /* ------------------------------- Testimonials ------------------------------- */
 
 const QUOTES = [
-  { q: "A rare thing — skincare that behaves like ritual, not routine.", a: "Vogue Beauty" },
-  { q: "The most quietly powerful serum I have used in a decade.", a: "Camille R., Paris" },
-  { q: "Arovia does not shout. It simply, patiently, transforms.", a: "Harper's Bazaar" },
+  {
+    q: "The collar holds its crisp shape after 30 washes. Easily the best polo cut in menswear today.",
+    a: "GQ Style Report",
+  },
+  {
+    q: "Substantial 280 GSM weight that hangs cleanly without cling. The oversized drape is flawless.",
+    a: "Monocle Apparel Review",
+  },
+  {
+    q: "Threads of Eden has distilled what a luxury t-shirt should be: zero logos, extraordinary Peruvian cotton.",
+    a: "Esquire Select",
+  },
 ];
 
 function Testimonials() {
   return (
-    <section className="relative bg-secondary py-32 md:py-48">
+    <section className="relative bg-secondary py-28 md:py-40">
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         <Reveal>
-          <p className="eyebrow mb-6">Words on Arovia</p>
+          <p className="eyebrow mb-6 text-[#2C5D2E]">Critical Reception</p>
         </Reveal>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
           {QUOTES.map((q, i) => (
             <Reveal key={q.a} delay={i * 0.15}>
-              <div className="relative h-full rounded-lg border border-black/10 bg-white p-6 shadow-sm backdrop-blur-xl transition-all duration-700 hover:-translate-y-2 hover:shadow-md md:rounded-sm md:p-10">
-                <p className="font-display text-lg leading-snug md:text-3xl">"{q.q}"</p>
-                <div className="mt-10 flex items-center gap-4">
-                  <span className="h-px w-8 bg-forest" />
-                  <p className="eyebrow">{q.a}</p>
+              <div className="relative h-full rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-all duration-700 hover:-translate-y-2 hover:shadow-md md:p-10">
+                <p className="font-display text-lg leading-snug md:text-2xl">"{q.q}"</p>
+                <div className="mt-8 flex items-center gap-4">
+                  <span className="h-px w-8 bg-[#2C5D2E]" />
+                  <p className="eyebrow text-muted-foreground">{q.a}</p>
                 </div>
               </div>
             </Reveal>
@@ -633,49 +792,44 @@ function Testimonials() {
 /* ------------------------------- About ------------------------------- */
 
 function AboutSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
   return (
-    <section id="boutique" ref={ref} className="py-32 md:py-48">
+    <section id="atelier" className="py-28 md:py-40">
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-16 px-6 md:grid-cols-12 md:px-12">
         <div className="relative md:col-span-6">
-          <div className="relative aspect-[4/5] overflow-hidden">
-            <motion.img
-              src={aboutImg}
-              alt="Hands cradling a golden oil bottle and sage sprig"
-              width={1400}
-              height={1750}
-              loading="lazy"
-              style={{ y: imgY, scale: 1.15 }}
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&auto=format&fit=crop&q=85"
+              alt="Atelier workshop with fine cotton garment patterns"
               className="h-full w-full object-cover"
             />
           </div>
         </div>
         <div className="flex flex-col justify-center md:col-span-6 md:pl-8">
           <Reveal>
-            <p className="eyebrow mb-6">The House of Arovia</p>
+            <p className="eyebrow mb-6 text-[#2C5D2E]">The House of Threads of Eden</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="font-display text-5xl leading-[1] md:text-6xl">
+            <h2 className="font-display text-4xl leading-[1] md:text-6xl">
               Founded on the belief<br />
-              that <span className="italic text-forest">restraint</span><br />
-              is the highest luxury.
+              that <span className="italic text-[#2C5D2E]">everyday essentials</span><br />
+              deserve bespoke tailoring.
             </h2>
           </Reveal>
-          <Reveal delay={0.25} className="mt-10 max-w-md space-y-6 text-base leading-relaxed text-muted-foreground">
+          <Reveal delay={0.25} className="mt-8 max-w-md space-y-5 text-sm md:text-base leading-relaxed text-muted-foreground">
             <p>
-              From a small atelier between Kyoto and Grasse, Arovia composes
-              skincare the way a perfumer composes a fragrance — with patience,
-              intention, and an unwavering respect for the ingredient.
+              We began with a simple question: why should a tailored polo or daily crewneck
+              degrade after a few seasons? Threads of Eden combines Old World garment tailoring with
+              uncompromising heavyweight Peruvian and Egyptian cotton.
             </p>
             <p>
-              We release two collections a year. We refuse anything less than
-              essential. What remains is offered here, quietly.
+              Each seam is double-needle blind stitched, each collar is fused with lightweight
+              interlining, and every button is natural carved shell.
             </p>
           </Reveal>
-          <Reveal delay={0.4} className="mt-12">
-            <a href="/about" className="btn-luxe text-foreground">Our story</a>
+          <Reveal delay={0.4} className="mt-10">
+            <a href="/about" className="btn-luxe text-foreground">
+              Read Our Story
+            </a>
           </Reveal>
         </div>
       </div>
@@ -686,317 +840,36 @@ function AboutSection() {
 /* ------------------------------- CTA ------------------------------- */
 
 function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const bottleY = useTransform(scrollYProgress, [0, 1], ["60%", "-20%"]);
-  const bottleScale = useTransform(scrollYProgress, [0, 1], [0.7, 1.1]);
-
   return (
-    <section ref={ref} className="relative overflow-hidden bg-[#2C5D2E] text-white">
-      {/* Rising bottle */}
-      <motion.img
-        aria-hidden
-        src={heroBottle}
-        alt=""
-        style={{ y: bottleY, scale: bottleScale }}
-        className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-[120vh] w-auto opacity-25 mix-blend-luminosity"
-      />
-      {/* Gold particles */}
-      {Array.from({ length: 24 }).map((_, i) => (
-        <motion.span
-          key={i}
-          className="absolute rounded-full bg-white/30"
-          style={{
-            width: 2 + (i % 4),
-            height: 2 + (i % 4),
-            left: `${(i * 37) % 100}%`,
-            top: `${(i * 53) % 100}%`,
-            opacity: 0.6,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.7, 0.2],
-          }}
-          transition={{
-            duration: 6 + (i % 5),
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.2,
-          }}
-        />
-      ))}
-
-      <div className="relative mx-auto max-w-[1600px] px-4 py-28 text-center md:px-12 md:py-56">
+    <section className="relative overflow-hidden bg-[#2C5D2E] text-white py-24 md:py-36">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 text-center">
         <Reveal>
-          <p className="eyebrow mb-8 text-[#CFF57C]">Begin the ritual</p>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <h2 className="mx-auto max-w-4xl font-display text-4xl leading-[1.05] md:text-8xl">
-            Slow beauty,<br />
-            <span className="italic text-[#CFF57C]">quietly obtained.</span>
+          <p className="eyebrow mb-4 text-[#CFF57C] tracking-[0.3em]">Built to Endure</p>
+          <h2 className="font-display text-4xl leading-tight md:text-7xl">
+            Upgrade your daily wardrobe.<br />
+            <span className="italic text-[#CFF57C]">Experience architectural cotton.</span>
           </h2>
-        </Reveal>
-        <Reveal delay={0.3} className="mt-14">
-          <a
-            href="/shop"
-            onMouseEnter={() => onHover(true)}
-            onMouseLeave={() => onHover(false)}
-            className="btn-luxe-inverse"
-          >
-            Enter the Boutique
-            <span aria-hidden>→</span>
-          </a>
+          <p className="mx-auto mt-6 max-w-xl text-sm md:text-base text-white/80 leading-relaxed font-light">
+            Complimentary shipping on orders over ₹1,999. Includes reusable organic cotton wash bag.
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <a
+              href="/shop"
+              onMouseEnter={() => onHover(true)}
+              onMouseLeave={() => onHover(false)}
+              className="btn-luxe-inverse"
+            >
+              Shop The Entire Collection
+            </a>
+            <a
+              href="/admin"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/20 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur hover:bg-white hover:text-[#2C5D2E] transition"
+            >
+              Admin Dashboard
+            </a>
+          </div>
         </Reveal>
       </div>
     </section>
-  );
-}
-
-/* ------------------------------- Footer ------------------------------- */
-
-function Footer() {
-  return (
-    <footer className="bg-[#1a2e1b] text-white">
-      {/* Newsletter Banner */}
-      <div className="border-b border-white/10 bg-[#2C5D2E]">
-        <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-8 px-6 py-16 md:flex-row md:justify-between md:px-12">
-          <div className="text-center md:text-left">
-            <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#CFF57C]">Stay Connected</p>
-            <p className="mt-3 text-2xl font-light tracking-[-0.02em]">Be the first to discover new arrivals & rituals</p>
-          </div>
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="flex w-full max-w-md items-center gap-0 overflow-hidden rounded-full border border-white/20"
-          >
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              className="flex-1 bg-transparent px-6 py-3.5 text-sm placeholder:text-white/40 focus:outline-none"
-            />
-            <button className="bg-[#CFF57C] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#1a2e1b] transition-opacity hover:opacity-90">
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-
-      {/* Main Footer Content */}
-      <div className="mx-auto max-w-[1600px] px-6 py-20 md:px-12">
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
-          {/* Brand Column */}
-          <div className="md:col-span-4">
-            <img
-              src={aroviaLogoText}
-              alt="Arovia Essentials"
-              className="h-10 w-auto"
-            />
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/50">
-              Arovia Essentials is a premium botanical skincare brand crafting
-              nature-inspired formulations. Founded with a passion for purity and
-              sustainability, we blend rare botanicals into rituals that honour
-              both your skin and the earth.
-            </p>
-            <div className="mt-8 flex items-center gap-2">
-              <img src={aroviaLogo} alt="Arovia" className="h-8 w-8 opacity-60" />
-              <span className="text-xs text-white/30">Crafted with intention since 2024</span>
-            </div>
-          </div>
-
-          {/* Navigation Columns */}
-          <div className="md:col-span-2">
-            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Shop</p>
-            <ul className="space-y-3.5 text-sm">
-              {[
-                { label: "All Products", href: "/shop" },
-                { label: "Serums", href: "/shop" },
-                { label: "Facial Oils", href: "/shop" },
-                { label: "Cleansers", href: "/shop" },
-                { label: "Balms", href: "/shop" },
-                { label: "Gift Sets", href: "/shop" },
-                { label: "New Arrivals", href: "/shop" },
-                { label: "Best Sellers", href: "/shop" },
-              ].map((li) => (
-                <li key={li.label}>
-                  <a href={li.href} className="text-white/55 transition-colors hover:text-[#CFF57C]">{li.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="md:col-span-2">
-            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Company</p>
-            <ul className="space-y-3.5 text-sm">
-              {[
-                { label: "About Us", href: "/about" },
-                { label: "Our Story", href: "/about" },
-                { label: "Ingredients", href: "/ingredients" },
-                { label: "Sustainability", href: "/sustainability" },
-                { label: "Press & Media", href: "/press" },
-                { label: "Careers", href: "/careers" },
-                { label: "Blog / Journal", href: "/blog" },
-              ].map((li) => (
-                <li key={li.label}>
-                  <a href={li.href} className="text-white/55 transition-colors hover:text-[#CFF57C]">{li.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="md:col-span-2">
-            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Support</p>
-            <ul className="space-y-3.5 text-sm">
-              {[
-                { label: "Contact Us", href: "/contact" },
-                { label: "Shipping Info", href: "/shipping" },
-                { label: "Returns & Exchanges", href: "/returns" },
-                { label: "Order Tracking", href: "/order-tracking" },
-                { label: "FAQ", href: "/faq" },
-                { label: "Ritual Guide", href: "/ritual-guide" },
-                { label: "Size Guide", href: "/size-guide" },
-              ].map((li) => (
-                <li key={li.label}>
-                  <a href={li.href} className="text-white/55 transition-colors hover:text-[#CFF57C]">{li.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="md:col-span-2">
-            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Legal</p>
-            <ul className="space-y-3.5 text-sm">
-              {[
-                { label: "Privacy Policy", href: "/privacy" },
-                { label: "Terms of Service", href: "/terms" },
-                { label: "Cookie Policy", href: "/cookies" },
-                { label: "Refund Policy", href: "/refund" },
-              ].map((li) => (
-                <li key={li.label}>
-                  <a href={li.href} className="text-white/55 transition-colors hover:text-[#CFF57C]">{li.label}</a>
-                </li>
-              ))}
-            </ul>
-
-            <p className="mb-6 mt-10 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Follow Us</p>
-            <div className="flex items-center gap-4">
-              {/* Instagram */}
-              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/50 transition-all hover:border-[#CFF57C] hover:text-[#CFF57C]" aria-label="Instagram">
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C16.67.014 16.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-              </a>
-              {/* Facebook */}
-              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/50 transition-all hover:border-[#CFF57C] hover:text-[#CFF57C]" aria-label="Facebook">
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              </a>
-              {/* X / Twitter */}
-              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/50 transition-all hover:border-[#CFF57C] hover:text-[#CFF57C]" aria-label="Twitter">
-                <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </a>
-              {/* LinkedIn */}
-              <a href="#" className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/50 transition-all hover:border-[#CFF57C] hover:text-[#CFF57C]" aria-label="LinkedIn">
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Office Locations */}
-        <div className="mt-20 border-t border-white/10 pt-14">
-          <p className="mb-10 text-xs font-semibold uppercase tracking-[0.25em] text-[#CFF57C]">Our Offices</p>
-          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Dubai Office */}
-            <div className="flex items-start gap-5">
-              <div className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#2C5D2E]">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#CFF57C]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-white">Dubai, United Arab Emirates</p>
-                <p className="mt-2 text-xs leading-relaxed text-white/40">
-                  Business Bay, Dubai<br />
-                  United Arab Emirates
-                </p>
-                <a href="mailto:dubai@aroviaessentials.com" className="mt-3 inline-block text-xs text-[#CFF57C]/70 transition-colors hover:text-[#CFF57C]">
-                  dubai@aroviaessentials.com
-                </a>
-              </div>
-            </div>
-            {/* Bangalore Office */}
-            <div className="flex items-start gap-5">
-              <div className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#2C5D2E]">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#CFF57C]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-white">Bangalore, India</p>
-                <p className="mt-2 text-xs leading-relaxed text-white/40">
-                  Karnataka, India
-                </p>
-                <a href="mailto:india@aroviaessentials.com" className="mt-3 inline-block text-xs text-[#CFF57C]/70 transition-colors hover:text-[#CFF57C]">
-                  india@aroviaessentials.com
-                </a>
-              </div>
-            </div>
-            {/* General Contact */}
-            <div className="flex items-start gap-5">
-              <div className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#2C5D2E]">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#CFF57C]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-white">General Enquiries</p>
-                <p className="mt-2 text-xs leading-relaxed text-white/40">
-                  For partnerships, wholesale,<br />
-                  and media enquiries
-                </p>
-                <a href="mailto:hello@aroviaessentials.com" className="mt-3 inline-block text-xs text-[#CFF57C]/70 transition-colors hover:text-[#CFF57C]">
-                  hello@aroviaessentials.com
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Trust Badges & Payment */}
-        <div className="mt-16 border-t border-white/10 pt-12">
-          <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-              {["🌿 100% Vegan", "🐰 Cruelty Free", "♻️ Sustainable Packaging", "🧪 Dermatologically Tested", "🌍 Carbon Neutral Shipping"].map((badge) => (
-                <span key={badge} className="text-xs text-white/40">{badge}</span>
-              ))}
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-white/30">We accept</span>
-              {["Visa", "Mastercard", "Amex", "PayPal", "Apple Pay"].map((pm) => (
-                <span key={pm} className="rounded border border-white/10 bg-white/5 px-2 py-1 text-[10px] font-medium text-white/40">{pm}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 md:flex-row">
-          <div className="flex items-center gap-3">
-            <img src={aroviaLogo} alt="Arovia" className="h-5 w-5 opacity-40" />
-            <p className="text-xs tracking-wide text-white/30">© 2026 Arovia Essentials — All rights reserved</p>
-          </div>
-          <p className="text-xs tracking-wide text-white/25">Dubai, UAE · Bangalore, India</p>
-        </div>
-
-        {/* Oversized wordmark */}
-        <motion.p
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 0.04, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-16 select-none text-center text-[16vw] font-extralight leading-none tracking-[-0.06em] text-[#CFF57C]"
-        >
-          Arovia
-        </motion.p>
-      </div>
-    </footer>
   );
 }

@@ -98,7 +98,7 @@ export const verifyRazorpayPayment = createServerFn({ method: "POST" })
     // HMAC SHA256 checks:
     // signature = hmac_sha256(razorpay_order_id + "|" + razorpay_payment_id, key_secret)
     const secret = process.env.RAZORPAY_KEY_SECRET || "mock_secret_key";
-    
+
     const hmac = crypto.createHmac("sha256", secret);
     hmac.update(`${razorpay_order_id}|${razorpay_payment_id}`);
     const generatedSignature = hmac.digest("hex");
