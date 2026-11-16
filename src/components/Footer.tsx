@@ -11,9 +11,9 @@ export function Footer() {
       <div className="border-b border-[#4c3129]/10 bg-[#4c3129] text-[#f5efe8]">
         <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-8 px-6 py-14 md:flex-row md:justify-between md:px-12">
           <div className="text-center md:text-left">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d9c08c]">Stay In Form</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d9c08c]">Join the Adventure</p>
             <p className="mt-2 text-2xl font-light tracking-[-0.02em] text-[#f5efe8]">
-              Be the first to access limited batch heavyweight drops & knit releases
+              Be the first to hear about new styles and festive drops
             </p>
           </div>
 
@@ -40,23 +40,22 @@ export function Footer() {
               <img src={logo} alt="Threads of Eden logo" className="h-16 w-auto object-contain" />
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#3b2d29]/70 font-light">
-              Woven with purpose and shaped by grace — premium essentials for a slower, more considered rhythm.
+              Playful, comfortable t-shirts made for little ones and all their everyday adventures.
             </p>
             <div className="mt-6 flex items-center gap-3">
-              <span className="text-xs text-[#3b2d29]/60">Crafted with intention · Milan — Bangalore — Dubai</span>
+              <span className="text-xs text-[#3b2d29]/60">Made for everyday adventures · Threads of Eden</span>
             </div>
           </div>
 
           <div className="md:col-span-2">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[#8d9b7a]">The Wardrobe</p>
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[#c39a5b]">The Collection</p>
             <ul className="space-y-3 text-sm">
               {[
-                { label: "All T-Shirts & Polos", href: "/shop" },
-                { label: "Mercerized Polos", href: "/shop" },
-                { label: "280 GSM Oversized", href: "/shop" },
-                { label: "Supima Crewnecks", href: "/shop" },
-                { label: "Textured Henleys", href: "/shop" },
-                { label: "French Linen Knits", href: "/shop" },
+                { label: "All Kids' T-Shirts", href: "/shop" },
+                { label: "Oversized T-Shirts", href: "/shop" },
+                { label: "Polo T-Shirts", href: "/shop" },
+                { label: "Round Neck T-Shirts", href: "/shop" },
+                { label: "Christmas Edition", href: "/shop" },
               ].map((li) => (
                 <li key={li.label}>
                   <a href={li.href} className="text-[#3b2d29]/75 transition-colors hover:text-[#4c3129]">
@@ -68,7 +67,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[#8d9b7a]">Atelier</p>
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[#c39a5b]">About Us</p>
             <ul className="space-y-3 text-sm">
               {[
                 { label: "Our Story", href: "/about" },
@@ -87,7 +86,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[#8d9b7a]">Management</p>
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[#c39a5b]">Management</p>
             <ul className="space-y-3 text-sm">
               <li>
                 <a
@@ -114,7 +113,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[#8d9b7a]">Legal</p>
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[#c39a5b]">Legal</p>
             <ul className="space-y-3 text-sm">
               {[
                 { label: "Privacy Policy", href: "/privacy" },
@@ -132,7 +131,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 border-t border-[#4c3129]/10 pt-12">
-          <p className="mb-8 text-xs font-semibold uppercase tracking-[0.25em] text-[#8d9b7a]">Offices & Atelier</p>
+          <p className="mb-8 text-xs font-semibold uppercase tracking-[0.25em] text-[#c39a5b]">Get in Touch</p>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <p className="text-sm font-medium text-[#3b2d29]">Bangalore Atelier</p>
@@ -157,11 +156,11 @@ export function Footer() {
             <div>
               <p className="text-sm font-medium text-[#3b2d29]">Standards</p>
               <div className="mt-1.5 flex flex-wrap gap-2 text-xs text-[#3b2d29]/70">
-                <span>🌱 100% GOTS Organic Cotton</span>
+                <span>Soft-feel everyday styles</span>
                 <span>·</span>
-                <span>✂️ Double-Needle Seams</span>
+                <span>Kids' sizes from 2-3Y to 12-13Y</span>
                 <span>·</span>
-                <span>🐚 Natural Shell Buttons</span>
+                <span>Festive Christmas tees</span>
               </div>
             </div>
           </div>

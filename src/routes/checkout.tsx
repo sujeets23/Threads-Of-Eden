@@ -143,7 +143,7 @@ function CheckoutPage() {
             contact: phone,
           },
           theme: {
-            color: "#2C5D2E",
+            color: "#47352F",
           },
           modal: {
             ondismiss: function () {
@@ -205,7 +205,7 @@ function CheckoutPage() {
         <div className="max-w-md rounded-3xl border border-black/10 bg-white p-10 shadow-lg">
           <p className="eyebrow mb-4">Checkout</p>
           <h1 className="font-display text-4xl">Your bag is empty</h1>
-          <p className="mt-4 text-sm text-muted-foreground">Add t-shirts or polos to your bag before proceeding.</p>
+          <p className="mt-4 text-sm text-muted-foreground">Add a kids' t-shirt to your bag before proceeding.</p>
           <div className="mt-8">
             <a href="/shop" className="btn-luxe">Back to Boutique</a>
           </div>
@@ -220,9 +220,9 @@ function CheckoutPage() {
       {isProcessing && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/90 backdrop-blur-md">
           <div className="relative flex flex-col items-center max-w-sm text-center px-6">
-            <div className="h-16 w-16 animate-spin rounded-full border-4 border-black/5 border-t-[#2C5D2E]" />
+            <div className="h-16 w-16 animate-spin rounded-full border-4 border-black/5 border-t-[#47352F]" />
             <h2 className="font-display text-2xl mt-8 text-black">Threads of Eden Secure Gate</h2>
-            <p className="mt-2 text-sm text-[#2C5D2E] font-medium tracking-wide uppercase">{processingStep}</p>
+            <p className="mt-2 text-sm text-[#47352F] font-medium tracking-wide uppercase">{processingStep}</p>
             <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
               Please do not refresh the page. Your transaction details are calculated and validated strictly server-side.
             </p>
@@ -233,13 +233,13 @@ function CheckoutPage() {
       <section className="mx-auto max-w-[1400px] px-6 py-20 md:px-12 md:py-28">
         <button
           onClick={() => window.history.back()}
-          className="mb-8 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#2C5D2E] transition-colors hover:text-black"
+          className="mb-8 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#47352F] transition-colors hover:text-black"
         >
           <ArrowLeft className="h-4 w-4" /> Back to Bag
         </button>
 
         <h1 className="font-display text-4xl leading-tight tracking-tight md:text-5xl mb-12">
-          Secure <span className="italic text-[#2C5D2E]">Checkout.</span>
+          Secure <span className="italic text-[#47352F]">Checkout.</span>
         </h1>
 
         <form onSubmit={handleSubmit} className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
@@ -247,7 +247,7 @@ function CheckoutPage() {
           <div className="space-y-10">
             {/* Shipping Info */}
             <div className="space-y-6 rounded-[2rem] border border-black/10 bg-white p-8 shadow-sm">
-              <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#2C5D2E] border-b border-black/5 pb-4 flex items-center gap-2">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#47352F] border-b border-black/5 pb-4 flex items-center gap-2">
                 <Truck className="h-4 w-4" /> 01. Shipping & Contact details
               </h2>
 
@@ -260,7 +260,7 @@ function CheckoutPage() {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     placeholder="E.g. Elena"
-                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                   />
                 </div>
                 <div>
@@ -271,7 +271,7 @@ function CheckoutPage() {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     placeholder="E.g. Rostova"
-                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                   />
                 </div>
               </div>
@@ -285,7 +285,7 @@ function CheckoutPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="E.g. name@domain.com"
-                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                   />
                 </div>
                 <div>
@@ -296,7 +296,7 @@ function CheckoutPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="E.g. +91 98765 43210"
-                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                   />
                 </div>
               </div>
@@ -309,7 +309,7 @@ function CheckoutPage() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Street address, apartment, suite"
-                  className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                  className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                 />
               </div>
 
@@ -322,7 +322,7 @@ function CheckoutPage() {
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="E.g. Mumbai"
-                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                   />
                 </div>
                 <div>
@@ -333,7 +333,7 @@ function CheckoutPage() {
                     value={pincode}
                     onChange={(e) => setPincode(e.target.value)}
                     placeholder="E.g. 400001"
-                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                    className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                   />
                 </div>
               </div>
@@ -341,7 +341,7 @@ function CheckoutPage() {
 
             {/* Payment Info */}
             <div className="space-y-6 rounded-[2rem] border border-black/10 bg-white p-8 shadow-sm">
-              <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#2C5D2E] border-b border-black/5 pb-4 flex items-center gap-2">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#47352F] border-b border-black/5 pb-4 flex items-center gap-2">
                 <CreditCard className="h-4 w-4" /> 02. Payment Method
               </h2>
 
@@ -352,7 +352,7 @@ function CheckoutPage() {
                   onClick={() => setPaymentMethod("razorpay")}
                   className={`flex flex-col items-center gap-3.5 rounded-2xl border p-5 text-center transition-all ${
                     paymentMethod === "razorpay"
-                      ? "border-[#2C5D2E] bg-[#2C5D2E]/5 text-[#2C5D2E] font-medium"
+                      ? "border-[#47352F] bg-[#47352F]/5 text-[#47352F] font-medium"
                       : "border-black/5 bg-[#f7f7f5] text-black/50 hover:border-black/10"
                   }`}
                 >
@@ -367,7 +367,7 @@ function CheckoutPage() {
                   onClick={() => setPaymentMethod("cod")}
                   className={`flex flex-col items-center gap-3.5 rounded-2xl border p-5 text-center transition-all ${
                     paymentMethod === "cod"
-                      ? "border-[#2C5D2E] bg-[#2C5D2E]/5 text-[#2C5D2E] font-medium"
+                      ? "border-[#47352F] bg-[#47352F]/5 text-[#47352F] font-medium"
                       : "border-black/5 bg-[#f7f7f5] text-black/50 hover:border-black/10"
                   }`}
                 >
@@ -380,8 +380,8 @@ function CheckoutPage() {
               </div>
 
               {paymentMethod === "razorpay" && (
-                <div className="rounded-xl border border-[#2C5D2E]/10 bg-[#2C5D2E]/5 p-5 text-xs text-muted-foreground space-y-2">
-                  <p className="font-semibold text-[#2C5D2E] flex items-center gap-1.5">
+                <div className="rounded-xl border border-[#47352F]/10 bg-[#47352F]/5 p-5 text-xs text-muted-foreground space-y-2">
+                  <p className="font-semibold text-[#47352F] flex items-center gap-1.5">
                     🛡️ End-to-End Cryptographic Encryption (Z+):
                   </p>
                   <p>
@@ -404,7 +404,7 @@ function CheckoutPage() {
           {/* Order Summary & Actions */}
           <div className="space-y-6">
             <div className="rounded-[2.5rem] border border-black/10 bg-[#f7f7f5] p-8 shadow-sm space-y-6">
-              <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#2C5D2E] border-b border-black/5 pb-4">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#47352F] border-b border-black/5 pb-4">
                 Order Summary
               </h2>
 
@@ -416,7 +416,7 @@ function CheckoutPage() {
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
                         <h4 className="text-xs font-medium text-black line-clamp-1">{item.product.name}</h4>
-                        <p className="text-[9px] uppercase tracking-wide text-[#2C5D2E] mt-0.5">{item.product.category}</p>
+                        <p className="text-[9px] uppercase tracking-wide text-[#47352F] mt-0.5">{item.product.category}</p>
                       </div>
                       <div className="flex justify-between items-center text-xs">
                         <span className="text-muted-foreground">Qty: {item.quantity}</span>
@@ -440,19 +440,19 @@ function CheckoutPage() {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Premium Shipping</span>
                   <span className="font-medium">
-                    {shippingFee === 0 ? <span className="text-[#2C5D2E] uppercase font-semibold text-xs tracking-wider">Free</span> : `₹${shippingFee}`}
+                    {shippingFee === 0 ? <span className="text-[#47352F] uppercase font-semibold text-xs tracking-wider">Free</span> : `₹${shippingFee}`}
                   </span>
                 </div>
                 <div className="border-t border-black/5 pt-4 flex justify-between items-end">
                   <span className="text-xs font-semibold uppercase tracking-[0.15em]">Total Amount</span>
-                  <span className="text-2xl font-semibold text-[#2C5D2E]">₹{grandTotal.toLocaleString()}</span>
+                  <span className="text-2xl font-semibold text-[#47352F]">₹{grandTotal.toLocaleString()}</span>
                 </div>
               </div>
 
               {/* Action Button */}
               <button
                 type="submit"
-                className="w-full rounded-full bg-[#2C5D2E] py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-[#2C5D2E]/10 transition hover:bg-[#1a3d1b] mt-4"
+                className="w-full rounded-full bg-[#47352F] py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-[#47352F]/10 transition hover:bg-[#39291F] mt-4"
               >
                 {paymentMethod === "razorpay" ? "Secure Razorpay Payment" : "Place Luxury COD Order"}
               </button>

@@ -37,7 +37,7 @@ export function CartDrawer() {
             {/* Header */}
             <div className="flex items-center justify-between border-b border-black/5 px-6 py-5">
               <div className="flex items-center gap-2.5">
-                <ShoppingBag className="h-5 w-5 text-[#2C5D2E]" />
+                <ShoppingBag className="h-5 w-5 text-[#47352F]" />
                 <span className="text-sm font-semibold uppercase tracking-[0.15em] text-black">
                   Shopping Bag ({cartCount})
                 </span>
@@ -61,7 +61,7 @@ export function CartDrawer() {
                   <div>
                     <h3 className="font-display text-2xl">Your bag is empty</h3>
                     <p className="mt-2 text-xs text-muted-foreground max-w-[240px] mx-auto">
-                      Explore our 280 GSM heavyweight cotton tees and mercerized piqué polos to begin your wardrobe.
+                      Explore oversized, polo, round neck, and festive Christmas t-shirts for kids.
                     </p>
                   </div>
                   <button
@@ -69,7 +69,7 @@ export function CartDrawer() {
                       setCartOpen(false);
                       router.navigate({ to: "/shop" });
                     }}
-                    className="rounded-full border border-[#2C5D2E] px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#2C5D2E] transition hover:bg-[#2C5D2E] hover:text-white"
+                    className="rounded-full border border-[#47352F] px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#47352F] transition hover:bg-[#47352F] hover:text-white"
                   >
                     Explore Collection
                   </button>
@@ -178,11 +178,11 @@ export function CartDrawer() {
                   </span>
                 </div>
                 <p className="text-[10px] text-muted-foreground leading-normal">
-                  Complimentary express shipping & luxury garment packaging applied at checkout.
+                  Complimentary express shipping applied at checkout.
                 </p>
                 <button
                   onClick={handleCheckout}
-                  className="w-full rounded-full bg-[#2C5D2E] py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-[#2C5D2E]/10 transition hover:bg-[#1a3d1b]"
+                  className="w-full rounded-full bg-[#47352F] py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-[#47352F]/10 transition hover:bg-[#39291F]"
                 >
                   Proceed to Checkout
                 </button>

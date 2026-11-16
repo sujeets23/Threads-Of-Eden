@@ -159,12 +159,12 @@ function OrderTrackingPage() {
       {/* Hero section */}
       <section className="bg-secondary py-16 md:py-24">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-6 inline-flex items-center gap-2 text-[#2C5D2E] hover:text-black transition-colors">
+          <Link to="/" className="eyebrow mb-6 inline-flex items-center gap-2 text-[#47352F] hover:text-black transition-colors">
             ← Back to Home
           </Link>
           <p className="eyebrow mb-3">Ritual Tracker</p>
           <h1 className="font-display text-4xl leading-[1.02] md:text-6xl">
-            Track your <span className="italic text-[#2C5D2E]">consignment.</span>
+            Track your <span className="italic text-[#47352F]">consignment.</span>
           </h1>
         </div>
       </section>
@@ -175,7 +175,7 @@ function OrderTrackingPage() {
             {/* Input Form Column */}
             <div>
               <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm">
-                <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#2C5D2E] border-b border-black/5 pb-4 mb-6">
+                <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#47352F] border-b border-black/5 pb-4 mb-6">
                   Consignment details
                 </h2>
                 
@@ -188,7 +188,7 @@ function OrderTrackingPage() {
                       onChange={(e) => setOrderIdInput(e.target.value)}
                       placeholder="e.g. AE-2026-XXXXX"
                       required
-                      className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                      className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                     />
                   </div>
                   <div>
@@ -199,10 +199,10 @@ function OrderTrackingPage() {
                       onChange={(e) => setEmailInput(e.target.value)}
                       placeholder="Checkout email address"
                       required
-                      className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#2C5D2E]"
+                      className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-3 text-sm outline-none transition-colors focus:border-[#47352F]"
                     />
                   </div>
-                  <button type="submit" className="w-full rounded-full bg-[#2C5D2E] py-3.5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-[#2C5D2E]/10 transition hover:bg-[#1a3d1b]">
+                  <button type="submit" className="w-full rounded-full bg-[#47352F] py-3.5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-[#47352F]/10 transition hover:bg-[#39291F]">
                     Search Consignment
                   </button>
                 </form>
@@ -227,7 +227,7 @@ function OrderTrackingPage() {
                 <div className="space-y-8">
                   {/* Real-time notice */}
                   {computedStatus !== "Delivered" && (
-                    <div className="rounded-2xl border border-[#2C5D2E]/25 bg-[#2C5D2E]/5 p-5 text-xs text-[#2C5D2E]/90 flex items-start gap-3">
+                    <div className="rounded-2xl border border-[#47352F]/25 bg-[#47352F]/5 p-5 text-xs text-[#47352F]/90 flex items-start gap-3">
                       <Clock className="h-4.5 w-4.5 shrink-0 mt-0.5 animate-pulse" />
                       <div>
                         <p className="font-semibold uppercase tracking-wider text-[9px]">Live Demonstration Mode</p>
@@ -243,7 +243,7 @@ function OrderTrackingPage() {
                   <div className="rounded-[2rem] border border-black/10 bg-white p-8 md:p-10 shadow-sm space-y-10">
                     <div className="flex justify-between items-center">
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#2C5D2E]">Consignment Status</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#47352F]">Consignment Status</p>
                         <h3 className="font-display text-3xl mt-1 text-black">
                           {computedStatus === "Placed" && "Confirmed"}
                           {computedStatus === "Processing" && "Botanicals Preparing"}
@@ -261,7 +261,7 @@ function OrderTrackingPage() {
                       {/* Vertical connector line */}
                       <div className="absolute left-[15px] top-3 bottom-3 w-0.5 bg-black/5">
                         <motion.div
-                          className="w-full bg-[#2C5D2E] origin-top"
+                          className="w-full bg-[#47352F] origin-top"
                           initial={{ scaleY: 0 }}
                           animate={{ scaleY: currentStepIndex / 3 }}
                           transition={{ duration: 1, ease: "easeOut" }}
@@ -279,11 +279,11 @@ function OrderTrackingPage() {
                             {/* Step Node */}
                             <div className="absolute -left-[27px] flex h-[28px] w-[28px] items-center justify-center rounded-full z-10 transition-all duration-500">
                               {isDone ? (
-                                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#2C5D2E] text-white">
+                                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#47352F] text-white">
                                   <Check className="h-4.5 w-4.5" />
                                 </div>
                               ) : isActive ? (
-                                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#2C5D2E]/10 border-2 border-[#2C5D2E] text-[#2C5D2E] animate-pulse">
+                                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#47352F]/10 border-2 border-[#47352F] text-[#47352F] animate-pulse">
                                   <StepIcon className="h-3.5 w-3.5" />
                                 </div>
                               ) : (
@@ -298,7 +298,7 @@ function OrderTrackingPage() {
                               <h4
                                 className={`text-sm font-semibold uppercase tracking-wider ${
                                   isActive
-                                    ? "text-[#2C5D2E]"
+                                    ? "text-[#47352F]"
                                     : isDone
                                     ? "text-black"
                                     : "text-black/30"
@@ -318,7 +318,7 @@ function OrderTrackingPage() {
 
                   {/* Consignment items list */}
                   <div className="rounded-[2rem] border border-black/10 bg-white p-8 shadow-sm space-y-6">
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#2C5D2E] border-b border-black/5 pb-4">
+                    <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#47352F] border-b border-black/5 pb-4">
                       Consignment Items
                     </h3>
                     <div className="space-y-4">
@@ -339,7 +339,7 @@ function OrderTrackingPage() {
                     <div className="border-t border-black/5 pt-4 space-y-4 text-xs text-muted-foreground">
                       <div className="flex justify-between items-start gap-4">
                         <span className="flex items-center gap-1">
-                          <MapPin className="h-3.5 w-3.5 text-[#2C5D2E]" /> Delivery Address:
+                          <MapPin className="h-3.5 w-3.5 text-[#47352F]" /> Delivery Address:
                         </span>
                         <span className="text-right text-black font-medium max-w-[240px] leading-relaxed">
                           {order.address}
@@ -349,7 +349,7 @@ function OrderTrackingPage() {
                       <div className="border-t border-black/5 pt-3 flex justify-between items-center gap-4">
                         <span>Payment Status:</span>
                         {(order as any).paymentVerified ? (
-                          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#2C5D2E]/10 px-3 py-1 text-[11px] font-semibold text-[#2C5D2E] border border-[#2C5D2E]/15">
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#47352F]/10 px-3 py-1 text-[11px] font-semibold text-[#47352F] border border-[#47352F]/15">
                             🛡️ Verified Payment (Z+) via Razorpay
                           </span>
                         ) : (

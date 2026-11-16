@@ -164,7 +164,7 @@ export function Nav() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.06 }}
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-between border-b border-black/5 py-4 text-base font-medium tracking-tight text-black/80 transition-colors active:text-[#2C5D2E]"
+                    className="flex items-center justify-between border-b border-black/5 py-4 text-base font-medium tracking-tight text-black/80 transition-colors active:text-[#47352F]"
                   >
                     {link.label}
                     <svg
@@ -185,13 +185,13 @@ export function Nav() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.35 }}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-between border-b border-black/5 py-4 text-base font-semibold text-[#2C5D2E]"
+                  className="flex items-center justify-between border-b border-black/5 py-4 text-base font-semibold text-[#47352F]"
                 >
                   <span className="flex items-center gap-2">
                     <Settings className="h-4 w-4" />
                     Admin Panel
                   </span>
-                  <span className="rounded-full bg-[#2C5D2E]/10 px-2 py-0.5 text-[10px] font-bold text-[#2C5D2E]">
+                  <span className="rounded-full bg-[#47352F]/10 px-2 py-0.5 text-[10px] font-bold text-[#47352F]">
                     MANAGER
                   </span>
                 </motion.a>
@@ -204,7 +204,7 @@ export function Nav() {
                     setMobileOpen(false);
                     setCartOpen(true);
                   }}
-                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[#2C5D2E] px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-white"
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[#47352F] px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-white"
                 >
                   <ShoppingBag className="h-4 w-4" />
                   Shopping Bag ({cartCount})
@@ -214,7 +214,7 @@ export function Nav() {
               {/* Mobile Footer */}
               <div className="mt-12 border-t border-black/5 pt-6">
                 <div className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#2C5D2E] text-white font-serif text-[10px] font-bold">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#47352F] text-white font-serif text-[10px] font-bold">
                     T&R
                   </span>
                   <span className="text-xs text-black/60 font-medium">Threads of Eden · Woven with purpose</span>

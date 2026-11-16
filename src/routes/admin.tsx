@@ -38,7 +38,7 @@ export const Route = createFileRoute("/admin")({
 // Preset photos for quick selection when adding/editing t-shirts
 const PRESET_IMAGES = [
   {
-    label: "Forest Green Polo",
+    label: "Kids' Polo Tee",
     url: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=1000&auto=format&fit=crop&q=85",
   },
   {
@@ -46,15 +46,15 @@ const PRESET_IMAGES = [
     url: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=1000&auto=format&fit=crop&q=85",
   },
   {
-    label: "Black Supima Tee",
+    label: "Kids' Round Neck Tee",
     url: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1000&auto=format&fit=crop&q=85",
   },
   {
-    label: "Waffle Knit Henley",
+    label: "Kids' Christmas Tee",
     url: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1000&auto=format&fit=crop&q=85",
   },
   {
-    label: "Sage Knit Polo",
+    label: "Striped Kids' Polo",
     url: "https://images.unsplash.com/photo-1625910513413-7e5c545f949c?w=1000&auto=format&fit=crop&q=85",
   },
   {
@@ -117,8 +117,8 @@ function AdminPage() {
     <div className="min-h-screen bg-[#f7f7f5] text-[#1a1a1a]">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-6 right-6 z-50 flex items-center gap-3 rounded-xl bg-[#2C5D2E] px-5 py-3.5 text-sm font-medium text-white shadow-2xl animate-in fade-in slide-in-from-top-4">
-          <Check className="h-4 w-4 text-[#CFF57C]" />
+        <div className="fixed top-6 right-6 z-50 flex items-center gap-3 rounded-xl bg-[#47352F] px-5 py-3.5 text-sm font-medium text-white shadow-2xl animate-in fade-in slide-in-from-top-4">
+          <Check className="h-4 w-4 text-[#E5CFAC]" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -127,13 +127,13 @@ function AdminPage() {
       <header className="sticky top-0 z-30 border-b border-black/10 bg-white/95 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4 md:px-12">
           <div className="flex items-center gap-4">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#2C5D2E] text-white font-serif font-bold text-sm tracking-tighter shadow-xs">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#47352F] text-white font-serif font-bold text-sm tracking-tighter shadow-xs">
               T&R
             </span>
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="font-display text-xl font-medium tracking-tight">Admin Console</h1>
-                <span className="rounded-full bg-[#2C5D2E]/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#2C5D2E]">
+                <span className="rounded-full bg-[#47352F]/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#47352F]">
                   Live Store Manager
                 </span>
               </div>
@@ -147,7 +147,7 @@ function AdminPage() {
                 if (window.confirm("Reset all store data, products, settings and orders back to initial presets?")) {
                   resetDefaults();
                   setFormSettings(settings);
-                  showToast("Store reset to default T-Shirt catalog successfully!");
+                  showToast("Store reset to the default kidswear catalog successfully!");
                 }
               }}
               className="inline-flex items-center gap-1.5 rounded-full border border-black/15 bg-white px-3.5 py-2 text-xs font-medium text-black/70 hover:bg-black/5 transition"
@@ -160,7 +160,7 @@ function AdminPage() {
             <Link
               to="/"
               target="_blank"
-              className="inline-flex items-center gap-1.5 rounded-full bg-[#2C5D2E] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white shadow-sm hover:bg-[#1a3d1b] transition"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#47352F] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white shadow-sm hover:bg-[#39291F] transition"
             >
               <span>View Storefront</span>
               <ExternalLink className="h-3.5 w-3.5" />
@@ -186,7 +186,7 @@ function AdminPage() {
                   onClick={() => setActiveTab(tab.id as AdminTab)}
                   className={`flex items-center gap-2 border-b-2 py-3.5 px-4 text-xs font-semibold uppercase tracking-wider transition whitespace-nowrap ${
                     isActive
-                      ? "border-[#2C5D2E] text-[#2C5D2E] bg-white font-bold"
+                      ? "border-[#47352F] text-[#47352F] bg-white font-bold"
                       : "border-transparent text-black/60 hover:text-black hover:bg-black/5"
                   }`}
                 >
@@ -316,14 +316,14 @@ function OverviewTab({
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">Total T-Shirts</span>
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2C5D2E]/10 text-[#2C5D2E]">
+            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">Total Kids' T-Shirts</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#47352F]/10 text-[#47352F]">
               <Package className="h-5 w-5" />
             </div>
           </div>
           <p className="mt-4 font-display text-4xl">{products.length}</p>
           <p className="mt-2 text-xs text-muted-foreground">
-            <span className="font-semibold text-[#2C5D2E]">{inStockCount} active</span> · {outOfStockCount} out of stock
+            <span className="font-semibold text-[#47352F]">{inStockCount} active</span> · {outOfStockCount} out of stock
           </p>
         </div>
 
@@ -335,7 +335,7 @@ function OverviewTab({
             </div>
           </div>
           <p className="mt-4 font-display text-4xl">{categories.length - 1}</p>
-          <p className="mt-2 text-xs text-muted-foreground">Polo, Oversized, Crewneck, Henley, etc.</p>
+          <p className="mt-2 text-xs text-muted-foreground">Oversized, polo, round neck, and Christmas edition t-shirts.</p>
         </div>
 
         <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
@@ -354,7 +354,7 @@ function OverviewTab({
         <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-black/50">Total Sales</span>
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2C5D2E]/10 text-[#2C5D2E]">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#47352F]/10 text-[#47352F]">
               <TrendingUp className="h-5 w-5" />
             </div>
           </div>
@@ -370,52 +370,52 @@ function OverviewTab({
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <button
               onClick={() => onNavigate("products")}
-              className="flex items-start gap-4 rounded-xl border border-black/10 p-4 text-left hover:border-[#2C5D2E] hover:bg-[#2C5D2E]/5 transition group"
+              className="flex items-start gap-4 rounded-xl border border-black/10 p-4 text-left hover:border-[#47352F] hover:bg-[#47352F]/5 transition group"
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#2C5D2E] text-white">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#47352F] text-white">
                 <Plus className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-black group-hover:text-[#2C5D2E]">Add or Edit Products</h3>
-                <p className="mt-1 text-xs text-muted-foreground">Create Polos, Oversized tees, or adjust pricing & stock.</p>
+                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">Add or Edit Products</h3>
+                <p className="mt-1 text-xs text-muted-foreground">Create kids' t-shirts, update prices, and manage stock.</p>
               </div>
             </button>
 
             <button
               onClick={() => onNavigate("settings")}
-              className="flex items-start gap-4 rounded-xl border border-black/10 p-4 text-left hover:border-[#2C5D2E] hover:bg-[#2C5D2E]/5 transition group"
+              className="flex items-start gap-4 rounded-xl border border-black/10 p-4 text-left hover:border-[#47352F] hover:bg-[#47352F]/5 transition group"
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1a2e1b] text-[#CFF57C]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#221b18] text-[#E5CFAC]">
                 <Settings className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-black group-hover:text-[#2C5D2E]">Customize Store & Hero</h3>
+                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">Customize Store & Hero</h3>
                 <p className="mt-1 text-xs text-muted-foreground">Change headline, banner image, marquee badges, and text.</p>
               </div>
             </button>
 
             <button
               onClick={() => onNavigate("orders")}
-              className="flex items-start gap-4 rounded-xl border border-black/10 p-4 text-left hover:border-[#2C5D2E] hover:bg-[#2C5D2E]/5 transition group"
+              className="flex items-start gap-4 rounded-xl border border-black/10 p-4 text-left hover:border-[#47352F] hover:bg-[#47352F]/5 transition group"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-600 text-white">
                 <Truck className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-black group-hover:text-[#2C5D2E]">Manage Customer Orders</h3>
+                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">Manage Customer Orders</h3>
                 <p className="mt-1 text-xs text-muted-foreground">Track shipments, verify payments, and change order status.</p>
               </div>
             </button>
 
             <button
               onClick={() => onNavigate("categories")}
-              className="flex items-start gap-4 rounded-xl border border-black/10 p-4 text-left hover:border-[#2C5D2E] hover:bg-[#2C5D2E]/5 transition group"
+              className="flex items-start gap-4 rounded-xl border border-black/10 p-4 text-left hover:border-[#47352F] hover:bg-[#47352F]/5 transition group"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-700 text-white">
                 <Tag className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-black group-hover:text-[#2C5D2E]">Category Taxonomies</h3>
+                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">Category Taxonomies</h3>
                 <p className="mt-1 text-xs text-muted-foreground">Organize your apparel lines into Polos, Knits, Basics, etc.</p>
               </div>
             </button>
@@ -428,7 +428,7 @@ function OverviewTab({
             <h2 className="font-display text-lg">Recent Orders</h2>
             <button
               onClick={() => onNavigate("orders")}
-              className="text-xs font-semibold text-[#2C5D2E] hover:underline"
+              className="text-xs font-semibold text-[#47352F] hover:underline"
             >
               View all →
             </button>
@@ -440,7 +440,7 @@ function OverviewTab({
                   <span className="font-mono text-xs font-bold text-black">{order.id}</span>
                   <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
                     order.status === "Delivered"
-                      ? "bg-emerald-100 text-emerald-800"
+                      ? "bg-amber-100 text-amber-800"
                       : order.status === "Shipped"
                       ? "bg-blue-100 text-blue-800"
                       : "bg-amber-100 text-amber-800"
@@ -499,12 +499,12 @@ function ProductsTab({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-display text-2xl">Products Inventory</h2>
-          <p className="text-xs text-muted-foreground">Manage your t-shirt and polo styles, pricing, and stock status</p>
+          <p className="text-xs text-muted-foreground">Manage kids' t-shirt styles, pricing, sizes, and stock.</p>
         </div>
 
         <button
           onClick={onAddNew}
-          className="inline-flex items-center gap-2 rounded-full bg-[#2C5D2E] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-md hover:bg-[#1a3d1b] transition"
+          className="inline-flex items-center gap-2 rounded-full bg-[#47352F] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-md hover:bg-[#39291F] transition"
         >
           <Plus className="h-4 w-4" />
           <span>Add New T-Shirt</span>
@@ -520,7 +520,7 @@ function ProductsTab({
             placeholder="Search products by title, fabric, category..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] pl-10 pr-4 py-2 text-xs focus:border-[#2C5D2E] focus:outline-none"
+            className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] pl-10 pr-4 py-2 text-xs focus:border-[#47352F] focus:outline-none"
           />
         </div>
 
@@ -532,7 +532,7 @@ function ProductsTab({
               onClick={() => setSelectedCategory(cat)}
               className={`rounded-full px-3 py-1.5 text-xs font-medium transition shrink-0 ${
                 selectedCategory === cat
-                  ? "bg-[#2C5D2E] text-white"
+                  ? "bg-[#47352F] text-white"
                   : "bg-black/5 text-black/70 hover:bg-black/10"
               }`}
             >
@@ -579,7 +579,7 @@ function ProductsTab({
                           <div className="flex items-center gap-2">
                             <span className="font-medium text-black">{prod.name}</span>
                             {prod.badge && (
-                              <span className="rounded-md bg-[#2C5D2E]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#2C5D2E]">
+                              <span className="rounded-md bg-[#47352F]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#47352F]">
                                 {prod.badge}
                               </span>
                             )}
@@ -631,12 +631,12 @@ function ProductsTab({
                         onClick={() => onToggleStock(prod.id)}
                         className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold transition ${
                           prod.inStock
-                            ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
+                            ? "bg-amber-100 text-amber-800 hover:bg-amber-200"
                             : "bg-red-100 text-red-800 hover:bg-red-200"
                         }`}
                         title="Click to toggle in-stock / out-of-stock"
                       >
-                        <span className={`h-1.5 w-1.5 rounded-full ${prod.inStock ? "bg-emerald-600" : "bg-red-600"}`} />
+                        <span className={`h-1.5 w-1.5 rounded-full ${prod.inStock ? "bg-amber-600" : "bg-red-600"}`} />
                         {prod.inStock ? "In Stock" : "Sold Out"}
                       </button>
                     </td>
@@ -645,7 +645,8 @@ function ProductsTab({
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <Link
-                          to={`/product/${prod.id}`}
+                          to="/product/$id"
+                          params={{ id: prod.id }}
                           target="_blank"
                           className="rounded-lg p-2 text-black/50 hover:bg-black/5 hover:text-black transition"
                           title="Preview on live site"
@@ -654,7 +655,7 @@ function ProductsTab({
                         </Link>
                         <button
                           onClick={() => onEdit(prod)}
-                          className="rounded-lg p-2 text-[#2C5D2E] hover:bg-[#2C5D2E]/10 transition"
+                          className="rounded-lg p-2 text-[#47352F] hover:bg-[#47352F]/10 transition"
                           title="Edit Product"
                         >
                           <Edit3 className="h-4 w-4" />
@@ -706,7 +707,7 @@ function CategoriesTab({
       <div>
         <h2 className="font-display text-2xl">Product Categories</h2>
         <p className="text-xs text-muted-foreground">
-          Define apparel lines and navigation groupings (Polo, Oversized, Crewneck, etc.)
+          Define kidswear lines and storefront groupings.
         </p>
       </div>
 
@@ -717,11 +718,11 @@ function CategoriesTab({
           placeholder="New category name (e.g. Vintage Wash, Knitwear)..."
           value={newCat}
           onChange={(e) => setNewCat(e.target.value)}
-          className="flex-1 rounded-xl border border-black/10 bg-white px-4 py-3 text-sm focus:border-[#2C5D2E] focus:outline-none"
+          className="flex-1 rounded-xl border border-black/10 bg-white px-4 py-3 text-sm focus:border-[#47352F] focus:outline-none"
         />
         <button
           type="submit"
-          className="rounded-xl bg-[#2C5D2E] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-sm hover:bg-[#1a3d1b] transition"
+          className="rounded-xl bg-[#47352F] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-sm hover:bg-[#39291F] transition"
         >
           Add Category
         </button>
@@ -742,7 +743,7 @@ function CategoriesTab({
                 className="flex items-center justify-between rounded-xl border border-black/5 bg-[#fafafa] px-5 py-3.5"
               >
                 <div className="flex items-center gap-3">
-                  <Tag className="h-4 w-4 text-[#2C5D2E]" />
+                  <Tag className="h-4 w-4 text-[#47352F]" />
                   <span className="font-medium text-black">{cat}</span>
                   <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs text-black/50">
                     {count} product{count === 1 ? "" : "s"}
@@ -805,7 +806,7 @@ function OrdersTab({
             placeholder="Search by Order ID, customer name, email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] pl-10 pr-4 py-2 text-xs focus:border-[#2C5D2E] focus:outline-none"
+            className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] pl-10 pr-4 py-2 text-xs focus:border-[#47352F] focus:outline-none"
           />
         </div>
 
@@ -816,7 +817,7 @@ function OrdersTab({
               onClick={() => setFilterStatus(st)}
               className={`rounded-full px-3 py-1 text-xs font-medium transition ${
                 filterStatus === st
-                  ? "bg-[#2C5D2E] text-white"
+                  ? "bg-[#47352F] text-white"
                   : "bg-black/5 text-black/70 hover:bg-black/10"
               }`}
             >
@@ -845,7 +846,7 @@ function OrdersTab({
                     <span
                       className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
                         order.status === "Delivered"
-                          ? "bg-emerald-100 text-emerald-800"
+                          ? "bg-amber-100 text-amber-800"
                           : order.status === "Shipped"
                           ? "bg-blue-100 text-blue-800"
                           : order.status === "Processing"
@@ -875,7 +876,7 @@ function OrdersTab({
                   <select
                     value={order.status}
                     onChange={(e) => onUpdateStatus(order.id, e.target.value as Order["status"])}
-                    className="rounded-lg border border-black/15 bg-[#f7f7f5] px-3 py-1.5 text-xs font-semibold text-black focus:border-[#2C5D2E] focus:outline-none"
+                    className="rounded-lg border border-black/15 bg-[#f7f7f5] px-3 py-1.5 text-xs font-semibold text-black focus:border-[#47352F] focus:outline-none"
                   >
                     <option value="Pending">Pending</option>
                     <option value="Processing">Processing</option>
@@ -986,7 +987,7 @@ function SettingsTab({
               type="text"
               value={formSettings.brandName}
               onChange={(e) => setFormSettings({ ...formSettings, brandName: e.target.value })}
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
           <div>
@@ -995,7 +996,7 @@ function SettingsTab({
               type="text"
               value={formSettings.brandTagline}
               onChange={(e) => setFormSettings({ ...formSettings, brandTagline: e.target.value })}
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
         </div>
@@ -1017,7 +1018,7 @@ function SettingsTab({
                   hero: { ...formSettings.hero, titleLine1: e.target.value },
                 })
               }
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
           <div>
@@ -1031,7 +1032,7 @@ function SettingsTab({
                   hero: { ...formSettings.hero, titleLine2: e.target.value },
                 })
               }
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
         </div>
@@ -1047,7 +1048,7 @@ function SettingsTab({
                 hero: { ...formSettings.hero, eyebrow: e.target.value },
               })
             }
-            className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+            className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
           />
         </div>
 
@@ -1062,7 +1063,7 @@ function SettingsTab({
                 hero: { ...formSettings.hero, subtitle: e.target.value },
               })
             }
-            className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+            className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
           />
         </div>
 
@@ -1078,7 +1079,7 @@ function SettingsTab({
                   hero: { ...formSettings.hero, ctaText: e.target.value },
                 })
               }
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
           <div>
@@ -1092,7 +1093,7 @@ function SettingsTab({
                   hero: { ...formSettings.hero, ctaLink: e.target.value },
                 })
               }
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
         </div>
@@ -1109,7 +1110,7 @@ function SettingsTab({
                 hero: { ...formSettings.hero, imageUrl: e.target.value },
               })
             }
-            className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+            className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
           />
           {formSettings.hero.imageUrl && (
             <div className="mt-3 relative h-40 w-full rounded-xl overflow-hidden border border-black/10 bg-secondary">
@@ -1140,7 +1141,7 @@ function SettingsTab({
                   announcement: { ...formSettings.announcement, enabled: e.target.checked },
                 })
               }
-              className="h-4 w-4 rounded accent-[#2C5D2E]"
+              className="h-4 w-4 rounded accent-[#47352F]"
             />
             <span>Enable Bar</span>
           </label>
@@ -1155,7 +1156,7 @@ function SettingsTab({
               announcement: { ...formSettings.announcement, text: e.target.value },
             })
           }
-          className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+          className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
         />
       </div>
 
@@ -1168,7 +1169,7 @@ function SettingsTab({
           {formSettings.marqueeItems.map((item, index) => (
             <span
               key={index}
-              className="inline-flex items-center gap-2 rounded-full border border-[#2C5D2E]/20 bg-[#2C5D2E]/5 px-3 py-1.5 text-xs font-semibold text-[#2C5D2E]"
+              className="inline-flex items-center gap-2 rounded-full border border-[#47352F]/20 bg-[#47352F]/5 px-3 py-1.5 text-xs font-semibold text-[#47352F]"
             >
               <span>{item}</span>
               <button
@@ -1185,15 +1186,15 @@ function SettingsTab({
         <div className="flex gap-2 pt-2">
           <input
             type="text"
-            placeholder="New ticker text (e.g. 240 GSM Mercerized Piqué)..."
+            placeholder="New ticker text (e.g. Made for little movers)..."
             value={newMarqueeItem}
             onChange={(e) => setNewMarqueeItem(e.target.value)}
-            className="flex-1 rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2 text-xs focus:border-[#2C5D2E] focus:outline-none"
+            className="flex-1 rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2 text-xs focus:border-[#47352F] focus:outline-none"
           />
           <button
             type="button"
             onClick={addMarquee}
-            className="rounded-xl bg-[#2C5D2E] px-4 py-2 text-xs font-semibold uppercase text-white hover:bg-[#1a3d1b]"
+            className="rounded-xl bg-[#47352F] px-4 py-2 text-xs font-semibold uppercase text-white hover:bg-[#39291F]"
           >
             Add
           </button>
@@ -1215,7 +1216,7 @@ function SettingsTab({
                   contact: { ...formSettings.contact, email: e.target.value },
                 })
               }
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
           <div>
@@ -1229,7 +1230,7 @@ function SettingsTab({
                   contact: { ...formSettings.contact, phone: e.target.value },
                 })
               }
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
         </div>
@@ -1244,7 +1245,7 @@ function SettingsTab({
                 contact: { ...formSettings.contact, address: e.target.value },
               })
             }
-            className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+            className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
           />
         </div>
       </div>
@@ -1253,9 +1254,9 @@ function SettingsTab({
       <div className="sticky bottom-6 z-20 flex justify-end">
         <button
           type="submit"
-          className="inline-flex items-center gap-2 rounded-full bg-[#2C5D2E] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white shadow-xl hover:bg-[#1a3d1b] transition"
+          className="inline-flex items-center gap-2 rounded-full bg-[#47352F] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white shadow-xl hover:bg-[#39291F] transition"
         >
-          <Check className="h-4 w-4 text-[#CFF57C]" />
+          <Check className="h-4 w-4 text-[#E5CFAC]" />
           <span>Save All Storefront Changes</span>
         </button>
       </div>
@@ -1276,17 +1277,17 @@ function ProductModal({
   initialProduct: Product | null;
   categories: string[];
   onClose: () => void;
-  onSave: (product: any) => void;
+  onSave: (product: Omit<Product, "id">) => void;
 }) {
   const [name, setName] = useState(initialProduct?.name || "");
-  const [category, setCategory] = useState(initialProduct?.category || categories[0] || "Polo");
-  const [price, setPrice] = useState(initialProduct?.price || "₹1,999");
-  const [originalPrice, setOriginalPrice] = useState(initialProduct?.originalPrice || "₹2,799");
-  const [note, setNote] = useState(initialProduct?.note || "240 GSM Mercerized Piqué · Mother of Pearl Buttons");
+  const [category, setCategory] = useState(initialProduct?.category || categories[0] || "Oversized T-Shirts");
+  const [price, setPrice] = useState(initialProduct?.price || "₹799");
+  const [originalPrice, setOriginalPrice] = useState(initialProduct?.originalPrice || "₹1,099");
+  const [note, setNote] = useState(initialProduct?.note || "Soft cotton jersey · Comfortable everyday fit");
   const [badge, setBadge] = useState(initialProduct?.badge || "");
   const [description, setDescription] = useState(
     initialProduct?.description ||
-      "Engineered from luxury long-staple cotton with a tailored silhouette and resilient structured collar."
+      "A comfortable kids' t-shirt made for everyday adventures."
   );
   const [img, setImg] = useState(initialProduct?.img || PRESET_IMAGES[0].url);
   const [stockCount, setStockCount] = useState<number>(initialProduct?.stockCount ?? 25);
@@ -1294,15 +1295,15 @@ function ProductModal({
   const [isFeatured, setIsFeatured] = useState<boolean>(initialProduct?.isFeatured ?? false);
 
   // Sizes selection
-  const standardSizes = ["XS", "S", "M", "L", "XL", "XXL"];
-  const [sizes, setSizes] = useState<string[]>(initialProduct?.sizes || ["S", "M", "L", "XL"]);
+  const standardSizes = ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"];
+  const [sizes, setSizes] = useState<string[]>(initialProduct?.sizes || standardSizes);
 
   // Bullet details
   const [details, setDetails] = useState<string[]>(
     initialProduct?.details || [
-      "240 GSM double-mercerized organic cotton",
-      "Reinforced collar stand designed never to curl",
-      "Pre-shrunk to retain tailored fit after wash",
+      "Soft cotton jersey",
+      "Comfortable fit for everyday movement",
+      "Machine washable",
     ]
   );
   const [newDetail, setNewDetail] = useState("");
@@ -1341,10 +1342,10 @@ function ProductModal({
       stockCount: Number(stockCount),
       inStock,
       isFeatured,
-      sizes: sizes.length > 0 ? sizes : ["S", "M", "L", "XL"],
+      sizes: sizes.length > 0 ? sizes : standardSizes,
       details,
       colors: initialProduct?.colors || [
-        { name: "Forest Green", hex: "#2C5D2E" },
+        { name: "Ocean Blue", hex: "#3A668C" },
         { name: "Chalk White", hex: "#FFFFFF" },
       ],
     });
@@ -1379,8 +1380,8 @@ function ProductModal({
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. The Signature Piqué Polo"
-                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+                placeholder="e.g. Play-All-Day Oversized T-Shirt"
+                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
               />
             </div>
 
@@ -1389,7 +1390,7 @@ function ProductModal({
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
               >
                 {categories.map((c) => (
                   <option key={c} value={c}>
@@ -1409,7 +1410,7 @@ function ProductModal({
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="₹1,999"
-                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
               />
             </div>
             <div>
@@ -1419,7 +1420,7 @@ function ProductModal({
                 value={originalPrice}
                 onChange={(e) => setOriginalPrice(e.target.value)}
                 placeholder="₹2,799"
-                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
               />
             </div>
             <div>
@@ -1429,7 +1430,7 @@ function ProductModal({
                 value={badge}
                 onChange={(e) => setBadge(e.target.value)}
                 placeholder="e.g. Bestseller, New"
-                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+                className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
               />
             </div>
           </div>
@@ -1440,8 +1441,8 @@ function ProductModal({
               type="text"
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              placeholder="e.g. 240 GSM Mercerized Piqué · Mother of Pearl Buttons"
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              placeholder="e.g. Soft cotton jersey · Comfortable everyday fit"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
 
@@ -1451,7 +1452,7 @@ function ProductModal({
               rows={3}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#2C5D2E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
             />
           </div>
 
@@ -1464,7 +1465,7 @@ function ProductModal({
                 required
                 value={img}
                 onChange={(e) => setImg(e.target.value)}
-                className="flex-1 rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2 text-xs focus:border-[#2C5D2E] focus:outline-none"
+                className="flex-1 rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2 text-xs focus:border-[#47352F] focus:outline-none"
               />
             </div>
 
@@ -1479,8 +1480,8 @@ function ProductModal({
                     onClick={() => setImg(preset.url)}
                     className={`rounded-lg border px-2.5 py-1 text-[11px] font-medium transition ${
                       img === preset.url
-                        ? "border-[#2C5D2E] bg-[#2C5D2E] text-white"
-                        : "border-black/10 bg-white text-black/70 hover:border-[#2C5D2E]"
+                        ? "border-[#47352F] bg-[#47352F] text-white"
+                        : "border-black/10 bg-white text-black/70 hover:border-[#47352F]"
                     }`}
                   >
                     {preset.label}
@@ -1513,7 +1514,7 @@ function ProductModal({
                     onClick={() => toggleSize(sz)}
                     className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
                       isSelected
-                        ? "border-[#2C5D2E] bg-[#2C5D2E] text-white"
+                        ? "border-[#47352F] bg-[#47352F] text-white"
                         : "border-black/10 bg-white text-black/70 hover:border-black/30"
                     }`}
                   >
@@ -1575,7 +1576,7 @@ function ProductModal({
                 id="inStockCheck"
                 checked={inStock}
                 onChange={(e) => setInStock(e.target.checked)}
-                className="h-4 w-4 rounded accent-[#2C5D2E]"
+                className="h-4 w-4 rounded accent-[#47352F]"
               />
               <label htmlFor="inStockCheck" className="text-xs font-semibold cursor-pointer">
                 In Stock & Available
@@ -1588,7 +1589,7 @@ function ProductModal({
                 id="isFeaturedCheck"
                 checked={isFeatured}
                 onChange={(e) => setIsFeatured(e.target.checked)}
-                className="h-4 w-4 rounded accent-[#2C5D2E]"
+                className="h-4 w-4 rounded accent-[#47352F]"
               />
               <label htmlFor="isFeaturedCheck" className="text-xs font-semibold cursor-pointer">
                 Feature on Homepage
@@ -1607,7 +1608,7 @@ function ProductModal({
             </button>
             <button
               type="submit"
-              className="rounded-full bg-[#2C5D2E] px-7 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md hover:bg-[#1a3d1b] transition"
+              className="rounded-full bg-[#47352F] px-7 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md hover:bg-[#39291F] transition"
             >
               Save Product
             </button>

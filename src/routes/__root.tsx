@@ -39,7 +39,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -73,11 +73,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Threads of Eden — Woven with purpose. Inspired by grace." },
-      { name: "description", content: "Threads of Eden crafts elevated essentials, graceful silhouettes, and demi-luxury everyday pieces designed with purpose and intention." },
+      { title: "Threads of Eden — Kids' T-Shirts for Little Adventures" },
+      { name: "description", content: "Shop kids' oversized t-shirts, polo t-shirts, round neck tees, and festive Christmas edition styles." },
       { name: "author", content: "Threads of Eden" },
-      { property: "og:title", content: "Threads of Eden — Woven with purpose. Inspired by grace." },
-      { property: "og:description", content: "Luxury t-shirts and polos crafted from Peruvian piqué and 280 GSM heavyweight cotton." },
+      { property: "og:title", content: "Threads of Eden — Kids' T-Shirts for Little Adventures" },
+      { property: "og:description", content: "Playful oversized, polo, round neck, and Christmas edition t-shirts for kids." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -139,7 +139,7 @@ function AppLayout() {
     <CartProvider>
       {/* Announcement Bar */}
       {settings.announcement?.enabled && (
-        <div className="relative z-50 bg-[#1a2e1b] py-2 px-4 text-center text-[11px] font-medium tracking-[0.14em] uppercase text-[#CFF57C] border-b border-[#2C5D2E]/30">
+        <div className="relative z-50 bg-[#221b18] py-2 px-4 text-center text-[11px] font-medium tracking-[0.14em] uppercase text-[#E5CFAC] border-b border-[#47352F]/30">
           <div className="flex items-center justify-center gap-2">
             <span>{settings.announcement.text}</span>
           </div>
@@ -155,9 +155,9 @@ function AppLayout() {
       <a
         href="/admin"
         title="Open Store Admin Panel"
-        className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 rounded-full border border-[#2C5D2E] bg-white/95 px-4 py-2.5 text-xs font-semibold tracking-wider text-[#2C5D2E] shadow-xl backdrop-blur transition hover:bg-[#2C5D2E] hover:text-white"
+        className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 rounded-full border border-[#47352F] bg-white/95 px-4 py-2.5 text-xs font-semibold tracking-wider text-[#47352F] shadow-xl backdrop-blur transition hover:bg-[#47352F] hover:text-white"
       >
-        <span className="flex h-2 w-2 rounded-full bg-[#2C5D2E] animate-pulse" />
+        <span className="flex h-2 w-2 rounded-full bg-[#47352F] animate-pulse" />
         Admin Panel
       </a>
     </CartProvider>

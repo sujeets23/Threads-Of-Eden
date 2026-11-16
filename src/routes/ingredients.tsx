@@ -71,13 +71,13 @@ function IngredientsPage() {
       {/* Editorial Hero */}
       <section className="bg-secondary py-20 md:py-32 border-b border-black/5">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#47352F]">
             ← Back to Home
           </Link>
-          <p className="eyebrow mb-4 text-[#2C5D2E]">Single-Origin Materials</p>
+          <p className="eyebrow mb-4 text-[#47352F]">Single-Origin Materials</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">
             The Living Fiber —<br />
-            <span className="italic text-[#2C5D2E]">pure, traceable cotton.</span>
+            <span className="italic text-[#47352F]">pure, traceable cotton.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-8 text-muted-foreground">
             A garment can only ever be as noble as the fiber from which it is spun.
@@ -98,7 +98,7 @@ function IngredientsPage() {
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-3xl">{fab.icon}</span>
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2C5D2E]">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#47352F]">
                       {fab.origin}
                     </span>
                   </div>
@@ -112,7 +112,7 @@ function IngredientsPage() {
 
                 <div className="mt-8 pt-4 border-t border-black/5 flex items-center justify-between text-xs">
                   <span className="text-muted-foreground font-mono">100% Traceable</span>
-                  <Link to="/shop" className="font-semibold text-[#2C5D2E] hover:underline">
+                  <Link to="/shop" className="font-semibold text-[#47352F] hover:underline">
                     View Styles →
                   </Link>
                 </div>
@@ -121,9 +121,9 @@ function IngredientsPage() {
           </div>
 
           {/* Sourcing Pledge */}
-          <div className="mt-20 rounded-2xl bg-[#1a2e1b] p-8 md:p-14 text-white">
+          <div className="mt-20 rounded-2xl bg-[#221b18] p-8 md:p-14 text-white">
             <div className="max-w-2xl">
-              <p className="eyebrow text-[#CFF57C] mb-4">Our Fiber Pledge</p>
+              <p className="eyebrow text-[#E5CFAC] mb-4">Our Fiber Pledge</p>
               <h3 className="font-display text-3xl md:text-5xl">Zero Synthetic Compromise.</h3>
               <p className="mt-6 text-sm md:text-base leading-relaxed text-white/70">
                 You will never find virgin polyester, acrylic, or microplastics in our core t-shirts and polos.

@@ -65,7 +65,7 @@ function OrderConfirmationPage() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", damping: 15 }}
-            className="flex h-20 w-20 items-center justify-center rounded-full bg-[#2C5D2E]/10 text-[#2C5D2E]"
+            className="flex h-20 w-20 items-center justify-center rounded-full bg-[#47352F]/10 text-[#47352F]"
           >
             <CheckCircle2 className="h-10 w-10" />
           </motion.div>
@@ -74,11 +74,11 @@ function OrderConfirmationPage() {
             <p className="eyebrow mb-2">Thank you for your purchase</p>
             <h1 className="font-display text-4xl leading-tight md:text-5xl">
               Your ritual is being <br />
-              <span className="italic text-[#2C5D2E]">prepared.</span>
+              <span className="italic text-[#47352F]">prepared.</span>
             </h1>
           </div>
 
-          <div className="w-full max-w-md rounded-2xl border border-[#2C5D2E]/15 bg-[#f5f7f2] p-5 flex items-center justify-between gap-4">
+          <div className="w-full max-w-md rounded-2xl border border-[#47352F]/15 bg-[#f5f7f2] p-5 flex items-center justify-between gap-4">
             <div className="text-left">
               <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Order ID</p>
               <p className="text-base font-semibold text-black mt-1 font-mono">{orderId}</p>
@@ -96,7 +96,7 @@ function OrderConfirmationPage() {
         <div className="mt-14 grid gap-8 md:grid-cols-2">
           {/* Summary */}
           <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm space-y-6">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#2C5D2E] border-b border-black/5 pb-4 flex items-center gap-2">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#47352F] border-b border-black/5 pb-4 flex items-center gap-2">
               <Package className="h-4 w-4" /> Order Summary
             </h2>
             
@@ -132,14 +132,14 @@ function OrderConfirmationPage() {
               </div>
               <div className="border-t border-black/5 pt-3 flex justify-between items-end text-sm font-semibold">
                 <span className="text-black uppercase tracking-wider">Total Paid</span>
-                <span className="text-lg text-[#2C5D2E]">₹{order.total.toLocaleString()}</span>
+                <span className="text-lg text-[#47352F]">₹{order.total.toLocaleString()}</span>
               </div>
             </div>
           </div>
 
           {/* Details */}
           <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm space-y-6">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#2C5D2E] border-b border-black/5 pb-4 flex items-center gap-2">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#47352F] border-b border-black/5 pb-4 flex items-center gap-2">
               <MapPin className="h-4 w-4" /> Shipping & Delivery
             </h2>
 
@@ -156,7 +156,7 @@ function OrderConfirmationPage() {
               </div>
 
               <div className="flex items-start gap-3 rounded-xl bg-[#f7f7f5] p-4 text-xs text-muted-foreground mt-4">
-                <Calendar className="h-4 w-4 text-[#2C5D2E] shrink-0 mt-0.5" />
+                <Calendar className="h-4 w-4 text-[#47352F] shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-black uppercase tracking-wider text-[9px]">Estimated Delivery</p>
                   <p className="mt-1">
@@ -166,8 +166,8 @@ function OrderConfirmationPage() {
               </div>
 
               {order.paymentVerified ? (
-                <div className="rounded-xl border border-[#2C5D2E]/15 bg-[#2C5D2E]/5 p-4 text-xs text-muted-foreground mt-4 space-y-1">
-                  <p className="font-semibold text-[#2C5D2E] uppercase tracking-wider text-[9px] flex items-center gap-1">
+                <div className="rounded-xl border border-[#47352F]/15 bg-[#47352F]/5 p-4 text-xs text-muted-foreground mt-4 space-y-1">
+                  <p className="font-semibold text-[#47352F] uppercase tracking-wider text-[9px] flex items-center gap-1">
                     🛡️ Secure Verified Payment (Z+)
                   </p>
                   <p className="text-black font-medium">{order.paymentMethod}</p>
@@ -193,11 +193,11 @@ function OrderConfirmationPage() {
           <Link
             to="/order-tracking"
             search={{ orderId: order.id, email: order.email }}
-            className="rounded-full bg-[#2C5D2E] px-10 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-[#2C5D2E]/10 transition hover:bg-[#1a3d1b]"
+            className="rounded-full bg-[#47352F] px-10 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-[#47352F]/10 transition hover:bg-[#39291F]"
           >
             Track Order Progress →
           </Link>
-          <Link to="/" className="text-xs font-semibold uppercase tracking-[0.15em] text-black/50 hover:text-[#2C5D2E] transition-colors">
+          <Link to="/" className="text-xs font-semibold uppercase tracking-[0.15em] text-black/50 hover:text-[#47352F] transition-colors">
             Return to Boutique
           </Link>
         </div>

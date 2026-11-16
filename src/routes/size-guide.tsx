@@ -9,7 +9,7 @@ export const Route = createFileRoute("/size-guide")({
       {
         name: "description",
         content:
-          "Detailed measurement specifications and fit recommendations for Threads of Eden luxury t-shirts and polos.",
+          "Kids' t-shirt size guide with age ranges and garment measurements.",
       },
     ],
   }),
@@ -17,11 +17,12 @@ export const Route = createFileRoute("/size-guide")({
 });
 
 const SIZE_TABLE = [
-  { size: "S", chestIn: '36–38"', chestCm: "91–96 cm", lengthIn: '28.0"', shoulderIn: '18.0"', sleeveIn: '8.5"' },
-  { size: "M", chestIn: '39–41"', chestCm: "99–104 cm", lengthIn: '29.0"', shoulderIn: '19.0"', sleeveIn: '9.0"' },
-  { size: "L", chestIn: '42–44"', chestCm: "107–112 cm", lengthIn: '30.0"', shoulderIn: '20.0"', sleeveIn: '9.5"' },
-  { size: "XL", chestIn: '45–47"', chestCm: "114–119 cm", lengthIn: '31.0"', shoulderIn: '21.0"', sleeveIn: '10.0"' },
-  { size: "XXL", chestIn: '48–50"', chestCm: "122–127 cm", lengthIn: '32.0"', shoulderIn: '22.0"', sleeveIn: '10.5"' },
+  { size: "2-3Y", heightIn: '36–39"', heightCm: "92–98 cm", chestIn: '20.5–21.3"', chestCm: "52–54 cm", lengthIn: '15.4"', lengthCm: "39 cm" },
+  { size: "4-5Y", heightIn: '41–43"', heightCm: "104–110 cm", chestIn: '22–22.8"', chestCm: "56–58 cm", lengthIn: '16.9"', lengthCm: "43 cm" },
+  { size: "6-7Y", heightIn: '46–48"', heightCm: "116–122 cm", chestIn: '23.6–24.4"', chestCm: "60–62 cm", lengthIn: '18.5"', lengthCm: "47 cm" },
+  { size: "8-9Y", heightIn: '50–53"', heightCm: "128–134 cm", chestIn: '26–26.8"', chestCm: "66–68 cm", lengthIn: '20.1"', lengthCm: "51 cm" },
+  { size: "10-11Y", heightIn: '55–57"', heightCm: "140–146 cm", chestIn: '28.3–29.1"', chestCm: "72–74 cm", lengthIn: '21.7"', lengthCm: "55 cm" },
+  { size: "12-13Y", heightIn: '59–62"', heightCm: "150–158 cm", chestIn: '30.7–31.5"', chestCm: "78–80 cm", lengthIn: '23.2"', lengthCm: "59 cm" },
 ];
 
 function SizeGuidePage() {
@@ -32,17 +33,17 @@ function SizeGuidePage() {
       {/* Header */}
       <section className="bg-secondary py-20 md:py-32 border-b border-black/5">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#47352F]">
             ← Back to Home
           </Link>
-          <p className="eyebrow mb-4 text-[#2C5D2E]">Architectural Fit</p>
+          <p className="eyebrow mb-4 text-[#47352F]">Kids' Size Guide</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">
-            Size & Fit<br />
-            <span className="italic text-[#2C5D2E]">specifications.</span>
+            Find their<br />
+            <span className="italic text-[#47352F]">right fit.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">
-            Our garments are tailored with pre-shrunk organic yarns to ensure the silhouette
-            you purchase remains exact wash after wash.
+            Use your child's height and chest measurement as a guide. Kids grow at different
+            rates, so sizing may vary; size up for a little extra room.
           </p>
         </div>
       </section>
@@ -53,15 +54,15 @@ function SizeGuidePage() {
           {/* Controls */}
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Ruler className="h-5 w-5 text-[#2C5D2E]" />
-              <h2 className="font-display text-2xl">Body & Garment Dimensions</h2>
+              <Ruler className="h-5 w-5 text-[#47352F]" />
+              <h2 className="font-display text-2xl">Approximate Measurements</h2>
             </div>
 
             <div className="inline-flex rounded-full border border-black/10 bg-white p-1">
               <button
                 onClick={() => setUnit("in")}
                 className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
-                  unit === "in" ? "bg-[#2C5D2E] text-white" : "text-black/60 hover:text-black"
+                  unit === "in" ? "bg-[#47352F] text-white" : "text-black/60 hover:text-black"
                 }`}
               >
                 Inches
@@ -69,7 +70,7 @@ function SizeGuidePage() {
               <button
                 onClick={() => setUnit("cm")}
                 className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
-                  unit === "cm" ? "bg-[#2C5D2E] text-white" : "text-black/60 hover:text-black"
+                  unit === "cm" ? "bg-[#47352F] text-white" : "text-black/60 hover:text-black"
                 }`}
               >
                 Centimeters
@@ -84,10 +85,9 @@ function SizeGuidePage() {
                 <thead className="border-b border-black/10 bg-[#fafafa] text-xs font-semibold uppercase tracking-wider text-black/60">
                   <tr>
                     <th className="px-6 py-4">Size</th>
-                    <th className="px-6 py-4">Chest To Fit</th>
-                    <th className="px-6 py-4">Garment Body Length</th>
-                    <th className="px-6 py-4">Shoulder Width</th>
-                    <th className="px-6 py-4">Sleeve Length</th>
+                    <th className="px-6 py-4">Suggested Height</th>
+                    <th className="px-6 py-4">Chest</th>
+                    <th className="px-6 py-4">T-Shirt Length</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-black/5">
@@ -95,11 +95,14 @@ function SizeGuidePage() {
                     <tr key={row.size} className="hover:bg-black/[0.015] transition">
                       <td className="px-6 py-5 font-bold text-black text-base">{row.size}</td>
                       <td className="px-6 py-5 font-medium text-black">
+                        {unit === "in" ? row.heightIn : row.heightCm}
+                      </td>
+                      <td className="px-6 py-5 font-medium text-black">
                         {unit === "in" ? row.chestIn : row.chestCm}
                       </td>
-                      <td className="px-6 py-5 text-muted-foreground">{row.lengthIn}</td>
-                      <td className="px-6 py-5 text-muted-foreground">{row.shoulderIn}</td>
-                      <td className="px-6 py-5 text-muted-foreground">{row.sleeveIn}</td>
+                      <td className="px-6 py-5 text-muted-foreground">
+                        {unit === "in" ? row.lengthIn : row.lengthCm}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -110,29 +113,29 @@ function SizeGuidePage() {
           {/* Fit Profiles */}
           <div className="mt-16 grid gap-8 md:grid-cols-3">
             <div className="rounded-2xl border border-black/10 bg-white p-7 shadow-sm space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E]">Fit 01</p>
-              <h3 className="font-display text-2xl">The Piqué Polo (Regular)</h3>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#47352F]">Style 01</p>
+              <h3 className="font-display text-2xl">Polo T-Shirts</h3>
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Tailored through the shoulders with a gentle taper down to the hip.
-                Features side seam vents for ease of movement. Take your true size.
+                A classic collar and comfortable everyday fit. Check the chart and compare
+                measurements with a t-shirt that fits your child well.
               </p>
             </div>
 
             <div className="rounded-2xl border border-black/10 bg-white p-7 shadow-sm space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E]">Fit 02</p>
-              <h3 className="font-display text-2xl">Heavyweight (Oversized)</h3>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#47352F]">Style 02</p>
+              <h3 className="font-display text-2xl">Oversized T-Shirts</h3>
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Cut intentionally relaxed with a dropped shoulder and square torso drape.
-                For the designed slouchy silhouette, order your standard size.
+                These tees have a roomier shape by design. Choose their usual age size for
+                an oversized look, or size up for extra room.
               </p>
             </div>
 
             <div className="rounded-2xl border border-black/10 bg-white p-7 shadow-sm space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E]">Fit 03</p>
-              <h3 className="font-display text-2xl">Supima Crewneck (Classic)</h3>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#47352F]">Style 03</p>
+              <h3 className="font-display text-2xl">Round Neck & Christmas Tees</h3>
               <p className="text-xs leading-relaxed text-muted-foreground">
-                A clean straight drape that falls parallel to the torso. Can be worn as an
-                outer garment or layered underneath tailored jackets.
+                Our classic and festive tees follow the age-based size chart. Allow a little
+                growing room when choosing between sizes.
               </p>
             </div>
           </div>

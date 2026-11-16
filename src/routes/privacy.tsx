@@ -26,7 +26,7 @@ function PrivacyPage() {
     <main className="bg-background text-foreground">
       <section className="bg-secondary py-20 md:py-32">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">← Back to Home</Link>
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#47352F]">← Back to Home</Link>
           <p className="eyebrow mb-4">Legal</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">Privacy Policy</h1>
           <p className="mt-6 text-sm text-muted-foreground">Last updated: July 2026</p>

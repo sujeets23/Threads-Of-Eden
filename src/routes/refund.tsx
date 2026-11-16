@@ -15,7 +15,7 @@ function RefundPage() {
     <main className="bg-background text-foreground">
       <section className="bg-secondary py-20 md:py-32">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">← Back to Home</Link>
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#47352F]">← Back to Home</Link>
           <p className="eyebrow mb-4">Policy</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">Refund Policy</h1>
           <p className="mt-6 text-sm text-muted-foreground">Last updated: July 2026</p>
@@ -39,7 +39,7 @@ function RefundPage() {
               ].map((s) => (
                 <div key={s.step} className="rounded-[1.7rem] border border-black/10 bg-white p-6 text-center shadow-sm">
                   <p className="font-display text-lg">{s.step}</p>
-                  <p className="mt-2 text-sm text-[#2C5D2E]">{s.time}</p>
+                  <p className="mt-2 text-sm text-[#47352F]">{s.time}</p>
                 </div>
               ))}
             </div>
@@ -58,7 +58,7 @@ function RefundPage() {
               Email returns@threadandroots.com with your order number, the item(s) you'd like to return, and the reason. Our team will respond within 24 hours with a prepaid return label.
             </p>
           </div>
-          <div className="rounded-[1.7rem] border border-black/10 bg-[#2C5D2E] p-8 text-center text-white">
+          <div className="rounded-[1.7rem] border border-black/10 bg-[#47352F] p-8 text-center text-white">
             <h3 className="font-display text-2xl">Need help?</h3>
             <p className="mt-2 text-sm text-white/70">Our support team is ready to assist.</p>
             <div className="mt-6">

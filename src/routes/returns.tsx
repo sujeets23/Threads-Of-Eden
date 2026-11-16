@@ -29,10 +29,10 @@ function ReturnsPage() {
     <main className="bg-background text-foreground">
       <section className="bg-secondary py-20 md:py-32">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">← Back to Home</Link>
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#47352F]">← Back to Home</Link>
           <p className="eyebrow mb-4">Returns</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">
-            Returns &<br /><span className="italic text-[#2C5D2E]">exchanges.</span>
+            Returns &<br /><span className="italic text-[#47352F]">exchanges.</span>
           </h1>
         </div>
       </section>
@@ -51,7 +51,7 @@ function ReturnsPage() {
             <div className="space-y-0">
               {steps.map((s, i) => (
                 <div key={i} className="flex gap-6 border-t border-black/10 py-6">
-                  <span className="font-display text-2xl text-[#2C5D2E]">0{i + 1}</span>
+                  <span className="font-display text-2xl text-[#47352F]">0{i + 1}</span>
                   <p className="text-base text-muted-foreground">{s}</p>
                 </div>
               ))}

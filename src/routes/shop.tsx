@@ -8,11 +8,11 @@ import { Search, SlidersHorizontal, ShoppingBag } from "lucide-react";
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Boutique — Threads of Eden Luxury T-Shirts & Polos" },
+      { title: "Kids' T-Shirts — Threads of Eden" },
       {
         name: "description",
         content:
-          "Explore luxury piqué polos, 280 GSM heavyweight oversized tees, and Supima cotton crewnecks.",
+          "Shop kids' oversized t-shirts, polo t-shirts, round neck tees, and Christmas edition styles.",
       },
     ],
   }),
@@ -57,23 +57,23 @@ function ShopPage() {
       {/* Header Banner */}
       <section className="bg-secondary border-b border-black/5 pt-28 pb-16 md:pt-36 md:pb-24">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <p className="eyebrow mb-4 text-[#2C5D2E]">The Apparel Archive</p>
+          <p className="eyebrow mb-4 text-[#47352F]">The Kidswear Collection</p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <h1 className="font-display text-4xl leading-[1.02] md:text-6xl">
-                Luxury T-Shirts & Polos,<br />
-                <span className="italic text-[#2C5D2E]">engineered to endure.</span>
+                T-Shirts for Little Ones,<br />
+                <span className="italic text-[#47352F]">made for everyday fun.</span>
               </h1>
               <p className="mt-4 max-w-xl text-sm md:text-base text-muted-foreground">
-                Peruvian piqué knits, 280 GSM heavyweight interlock, and California Supima®.
-                Discover modern silhouettes with architectural drape.
+                Shop playful kids' oversized, polo, round neck, and Christmas edition t-shirts.
+                Find comfortable everyday styles in sizes for growing kids.
               </p>
             </div>
 
             <div className="flex items-center gap-3">
               <Link
                 to="/admin"
-                className="rounded-full border border-[#2C5D2E] bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#2C5D2E] hover:bg-[#2C5D2E] hover:text-white transition shadow-sm"
+                className="rounded-full border border-[#47352F] bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#47352F] hover:bg-[#47352F] hover:text-white transition shadow-sm"
               >
                 Manage in Admin
               </Link>
@@ -94,8 +94,8 @@ function ShopPage() {
                 onClick={() => setSelectedCategory(item)}
                 className={`rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition ${
                   selectedCategory === item
-                    ? "bg-[#2C5D2E] text-white shadow-sm"
-                    : "border border-black/10 bg-white text-foreground hover:border-[#2C5D2E]"
+                    ? "bg-[#47352F] text-white shadow-sm"
+                    : "border border-black/10 bg-white text-foreground hover:border-[#47352F]"
                 }`}
               >
                 {item}
@@ -112,14 +112,19 @@ function ShopPage() {
                 placeholder="Search styles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-48 sm:w-60 rounded-full border border-black/10 bg-white pl-9 pr-4 py-2 text-xs focus:border-[#2C5D2E] focus:outline-none"
+                className="w-48 sm:w-60 rounded-full border border-black/10 bg-white pl-9 pr-4 py-2 text-xs focus:border-[#47352F] focus:outline-none"
               />
             </div>
 
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold text-black/70 focus:border-[#2C5D2E] focus:outline-none"
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "featured" || value === "price-asc" || value === "price-desc") {
+                  setSortBy(value);
+                }
+              }}
+              className="rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold text-black/70 focus:border-[#47352F] focus:outline-none"
             >
               <option value="featured">Featured First</option>
               <option value="price-asc">Price: Low to High</option>
@@ -139,7 +144,7 @@ function ShopPage() {
                 setSelectedCategory("All");
                 setSearchQuery("");
               }}
-              className="mt-6 rounded-full bg-[#2C5D2E] px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white"
+              className="mt-6 rounded-full bg-[#47352F] px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white"
             >
               Reset Filters
             </button>
@@ -169,7 +174,7 @@ function ProductCard({ product }: { product: Product }) {
         />
 
         {product.badge && (
-          <div className="absolute top-4 left-4 rounded-full bg-[#1a2e1b]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#CFF57C] backdrop-blur">
+          <div className="absolute top-4 left-4 rounded-full bg-[#221b18]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#E5CFAC] backdrop-blur">
             {product.badge}
           </div>
         )}
@@ -186,7 +191,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="p-7 flex flex-col flex-1 justify-between">
         <div>
           <div className="flex items-center justify-between">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#2C5D2E]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#47352F]">
               {product.category}
             </p>
             {product.sizes && (
@@ -214,15 +219,16 @@ function ProductCard({ product }: { product: Product }) {
             <button
               onClick={() => addToCart(product)}
               disabled={!product.inStock}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2C5D2E] text-white hover:bg-[#1a3d1b] transition disabled:opacity-40"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#47352F] text-white hover:bg-[#39291F] transition disabled:opacity-40"
               title="Add to bag"
             >
               <ShoppingBag className="h-4 w-4" />
             </button>
 
             <Link
-              to={`/product/${product.id}`}
-              className="rounded-full border border-[#2C5D2E] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#2C5D2E] transition hover:bg-[#2C5D2E] hover:text-white"
+              to="/product/$id"
+              params={{ id: product.id }}
+              className="rounded-full border border-[#47352F] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#47352F] transition hover:bg-[#47352F] hover:text-white"
             >
               Details
             </Link>

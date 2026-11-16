@@ -23,10 +23,10 @@ function PressPage() {
     <main className="bg-background text-foreground">
       <section className="bg-secondary py-20 md:py-32">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">← Back to Home</Link>
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#47352F]">← Back to Home</Link>
           <p className="eyebrow mb-4">Media</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">
-            Press &<br /><span className="italic text-[#2C5D2E]">media.</span>
+            Press &<br /><span className="italic text-[#47352F]">media.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-8 text-muted-foreground">
             For press enquiries, interview requests, and media kits, contact our communications team.
@@ -45,7 +45,7 @@ function PressPage() {
               <div key={p.outlet} className="group border-t border-black/10 py-10 transition-colors hover:bg-secondary/50">
                 <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                   <div className="flex-1">
-                    <p className="eyebrow text-[#2C5D2E]">{p.outlet}</p>
+                    <p className="eyebrow text-[#47352F]">{p.outlet}</p>
                     <p className="mt-3 font-display text-2xl leading-snug md:text-3xl">"{p.quote}"</p>
                   </div>
                   <span className="text-xs text-muted-foreground">{p.date}</span>
@@ -56,9 +56,9 @@ function PressPage() {
         </div>
       </section>
 
-      <section className="bg-[#2C5D2E] py-20 text-center text-white md:py-28">
+      <section className="bg-[#47352F] py-20 text-center text-white md:py-28">
         <div className="mx-auto max-w-2xl px-6">
-          <p className="eyebrow mb-6 text-[#CFF57C]">Press Kit</p>
+          <p className="eyebrow mb-6 text-[#E5CFAC]">Press Kit</p>
           <h2 className="font-display text-4xl md:text-5xl">Need brand assets?</h2>
           <p className="mt-4 text-sm text-white/70">Download our press kit with logos, product images, and brand guidelines.</p>
           <div className="mt-10">

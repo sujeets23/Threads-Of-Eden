@@ -83,36 +83,35 @@ export interface Order {
 
 export const INITIAL_CATEGORIES = [
   "All",
-  "Polo",
-  "Oversized",
-  "Crewneck",
-  "Henley",
-  "Textured & Knit",
+  "Oversized T-Shirts",
+  "Polo T-Shirts",
+  "Round Neck T-Shirts",
+  "Christmas Edition T-Shirts",
 ];
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
     id: "signature-mercerized-polo",
-    name: "The Signature Piqué Polo",
-    category: "Polo",
-    price: "₹2,199",
-    originalPrice: "₹2,899",
-    note: "240 GSM Mercerized Piqué · Mother of Pearl Buttons",
+    name: "Everyday Kids Polo T-Shirt",
+    category: "Polo T-Shirts",
+    price: "₹899",
+    originalPrice: "₹1,199",
+    note: "Soft cotton piqué · Easy everyday fit",
     description:
-      "Engineered from double-mercerized Egyptian cotton, offering a lustrous finish that resists fading and pilling. Features a structured rib collar that stays crisp throughout the day.",
+      "A comfortable kids polo made for school days, family outings, and everything in between. Finished with a classic collar and an easy-to-wear fit.",
     img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=1000&auto=format&fit=crop&q=85",
     details: [
-      "240 GSM double-mercerized 100% Egyptian cotton",
-      "Authentic Australian mother-of-pearl engraved buttons",
-      "Reinforced collar stand designed never to curl",
-      "Side vents with herringbone grosgrain taping",
-      "Pre-shrunk to retain tailored fit after every wash",
+      "Soft, breathable cotton piqué",
+      "Classic polo collar with a neat button placket",
+      "Comfortable fit for everyday movement",
+      "Easy-care fabric for busy family routines",
+      "Available in kids' age-based sizes",
     ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
     colors: [
-      { name: "Forest Green", hex: "#2C5D2E" },
-      { name: "Chalk White", hex: "#F7F7F5" },
-      { name: "Deep Obsidian", hex: "#1A2E1B" },
+      { name: "Ocean Blue", hex: "#3A668C" },
+      { name: "Bright White", hex: "#F7F7F5" },
+      { name: "Cherry Red", hex: "#A94442" },
     ],
     inStock: true,
     stockCount: 42,
@@ -121,26 +120,26 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "heavyweight-oversized-tee",
-    name: "280 GSM Heavyweight Oversized Tee",
-    category: "Oversized",
-    price: "₹1,699",
-    originalPrice: "₹2,299",
-    note: "280 GSM Combed Ring-Spun Cotton · Drop Shoulder",
+    name: "Play-All-Day Oversized T-Shirt",
+    category: "Oversized T-Shirts",
+    price: "₹799",
+    originalPrice: "₹1,099",
+    note: "Roomy relaxed fit · Soft cotton jersey",
     description:
-      "A modern architectural silhouette tailored with dropped shoulders and a dense 280 GSM drape. Built for effortless daily wear with a substantial hand feel that holds its structure.",
+      "A roomy, relaxed tee with dropped shoulders and plenty of space to play. Soft cotton jersey keeps this easygoing favorite comfortable from morning to bedtime.",
     img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=1000&auto=format&fit=crop&q=85",
     details: [
-      "280 GSM heavyweight organic ring-spun cotton",
-      "Relaxed drop-shoulder cut with boxy torso profile",
-      "1.2-inch tight crew ribbing with twin-needle collar",
-      "Garment dyed with low-impact non-toxic dyes",
-      "Zero-twist yarn for ultra-smooth skin feel",
+      "Relaxed oversized shape with dropped shoulders",
+      "Soft cotton jersey for all-day comfort",
+      "Easy-to-wear round neckline",
+      "Room to move, run, and play",
+      "Machine washable",
     ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
     colors: [
-      { name: "Chalk White", hex: "#FFFFFF" },
-      { name: "Mineral Sage", hex: "#8FBF8A" },
-      { name: "Raw Umber", hex: "#D4C5B9" },
+      { name: "Sunshine Yellow", hex: "#E5BC4F" },
+      { name: "Ocean Blue", hex: "#3A668C" },
+      { name: "Soft Sand", hex: "#D4C5B9" },
     ],
     inStock: true,
     stockCount: 65,
@@ -149,25 +148,25 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "supima-luxury-crewneck",
-    name: "Long-Staple Supima® Crewneck",
-    category: "Crewneck",
-    price: "₹1,399",
-    originalPrice: "₹1,899",
-    note: "100% California Supima® · 200 GSM Featherweight Luxe",
+    name: "Classic Round Neck T-Shirt",
+    category: "Round Neck T-Shirts",
+    price: "₹699",
+    originalPrice: "₹899",
+    note: "Everyday cotton tee · Classic regular fit",
     description:
-      "Crafted exclusively from the top 1% of world cotton harvests. Extra-long staple fibers yield unmatched silkiness, vibrant color retention, and resilience wash after wash.",
+      "A simple, soft round neck tee that pairs with just about anything. An everyday staple designed to feel comfortable through school, play, and weekends.",
     img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1000&auto=format&fit=crop&q=85",
     details: [
-      "Certified 100% American Supima® cotton",
-      "Silken micro-gauge knit with velvety peach finish",
-      "Tailored classic fit with seamless side construction",
-      "Blind-stitched sleeve cuffs and bottom hem",
-      "Machine wash cold, air dry recommended",
+      "Soft cotton jersey",
+      "Classic round neckline",
+      "Comfortable regular fit",
+      "Easy to layer under jackets and sweaters",
+      "Machine washable",
     ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
     colors: [
-      { name: "Deep Obsidian", hex: "#1A1A1A" },
-      { name: "Forest Green", hex: "#2C5D2E" },
+      { name: "Berry Pink", hex: "#C85E78" },
+      { name: "Bright White", hex: "#FFFFFF" },
       { name: "Warm Stone", hex: "#EBE7DF" },
     ],
     inStock: true,
@@ -177,26 +176,26 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "minimalist-waffle-henley",
-    name: "The Textured Waffle Henley",
-    category: "Henley",
-    price: "₹1,999",
-    originalPrice: "₹2,699",
-    note: "260 GSM Honeycomb Waffle · Matte Urea Buttons",
+    name: "Merry & Bright Christmas T-Shirt",
+    category: "Christmas Edition T-Shirts",
+    price: "₹899",
+    originalPrice: "₹1,199",
+    note: "Festive graphic tee · Limited holiday edition",
     description:
-      "A refined classic inspired by heritage workwear. The breathable thermal waffle texture delivers natural temperature regulation and rich tactile dimension.",
+      "Bring a little extra cheer to the holidays with this playful Christmas edition tee. Made for festive photos, family gatherings, and all the excitement of the season.",
     img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1000&auto=format&fit=crop&q=85",
     details: [
-      "260 GSM textured breathable waffle weave",
-      "Three-button placket with durable matte urea buttons",
-      "Reinforced ribbed collar and ribbed cuff details",
-      "Pre-washed for instantaneous vintage drape",
-      "Ideal as standalone piece or textured layering foundation",
+      "Cheerful holiday-inspired graphic",
+      "Soft cotton jersey",
+      "Comfortable fit for festive celebrations",
+      "Easy-to-style round neckline",
+      "Machine washable",
     ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
     colors: [
-      { name: "Warm Oat", hex: "#D6C7B2" },
-      { name: "Deep Charcoal", hex: "#2B2D2F" },
-      { name: "Olive Sage", hex: "#606C5D" },
+      { name: "Christmas Red", hex: "#A94442" },
+      { name: "Snow White", hex: "#F7F7F5" },
+      { name: "Midnight Blue", hex: "#1C2A39" },
     ],
     inStock: true,
     stockCount: 24,
@@ -205,53 +204,53 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "knit-fine-gauge-polo",
-    name: "Fine-Gauge Milanese Knit Polo",
-    category: "Polo",
-    price: "₹2,499",
-    originalPrice: "₹3,499",
-    note: "14-Gauge Cotton-Silk Blend · Clean Open Collar",
+    name: "Little Explorer Striped Polo",
+    category: "Polo T-Shirts",
+    price: "₹999",
+    originalPrice: "₹1,299",
+    note: "Playful stripes · Soft piqué cotton",
     description:
-      "An elevated resort-ready polo knitted on 14-gauge Italian machinery. Features a retro open spread collar with seamless shoulder transition for an understated quiet-luxury appeal.",
+      "A cheerful striped polo that brings a little color to everyday outfits. The classic collar and comfortable cotton feel make it an easy pick for outings and celebrations.",
     img: "https://images.unsplash.com/photo-1625910513413-7e5c545f949c?w=1000&auto=format&fit=crop&q=85",
     details: [
-      "85% combed long-staple cotton, 15% Mulberry silk",
-      "14-gauge fine-gauge flatbed knit construction",
-      "Open Johnny collar with structured knitted placket",
-      "Ribbed waist hem and sleeve trims",
-      "Dry clean or delicate hand wash cold",
+      "Soft cotton piqué",
+      "Classic polo collar and button placket",
+      "Colorful all-over stripes",
+      "Comfortable fit for active days",
+      "Machine washable",
     ],
-    sizes: ["S", "M", "L", "XL"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
     colors: [
-      { name: "Sage Mist", hex: "#8FBF8A" },
+      { name: "Berry Stripe", hex: "#C85E78" },
       { name: "Chalk Ivory", hex: "#F4F3EE" },
-      { name: "Forest Moss", hex: "#2C5D2E" },
+      { name: "Ocean Stripe", hex: "#3A668C" },
     ],
     inStock: true,
     stockCount: 19,
     isFeatured: true,
-    badge: "Luxury Knit",
+    badge: "Popular Pick",
   },
   {
     id: "raw-cut-boxy-tee",
-    name: "Raw Hem Architectural Boxy Tee",
-    category: "Oversized",
-    price: "₹1,599",
-    originalPrice: "₹2,199",
-    note: "300 GSM Ultra-Heavy Cotton · Clean Raw Hem",
+    name: "Weekend Adventure Oversized Tee",
+    category: "Oversized T-Shirts",
+    price: "₹849",
+    originalPrice: "₹1,099",
+    note: "Easy oversized shape · Everyday comfort",
     description:
-      "Crafted from ultra-dense 300 GSM Japanese organic cotton. Features an architectural square boxy cut, reinforced double-needle collar, and raw overcast hem detailing.",
+      "An easy oversized tee for little adventurers. The roomy shape and soft feel make it a comfortable choice for playdates, trips, and relaxed weekends.",
     img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=1000&auto=format&fit=crop&q=85",
     details: [
-      "300 GSM ultra-heavyweight combed cotton",
-      "Contemporary square boxy cut with wide sleeves",
-      "Reinforced neckline that prevents stretching over time",
-      "Clean edge overcast bottom stitch",
-      "Pre-shrunk organic fabric",
+      "Roomy oversized fit with relaxed sleeves",
+      "Soft cotton jersey",
+      "Comfortable round neckline",
+      "Designed for easy movement",
+      "Machine washable",
     ],
-    sizes: ["S", "M", "L", "XL"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
     colors: [
-      { name: "Washed Obsidian", hex: "#22252A" },
-      { name: "Raw Cotton", hex: "#EDE8DC" },
+      { name: "Playful Blue", hex: "#3A668C" },
+      { name: "Natural Cotton", hex: "#EDE8DC" },
     ],
     inStock: true,
     stockCount: 31,
@@ -260,87 +259,87 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "riviera-striped-polo",
-    name: "The Riviera Striped Piqué Polo",
-    category: "Polo",
-    price: "₹2,299",
-    originalPrice: "₹2,999",
-    note: "Classic Nautical Stripe · 220 GSM Piqué Cotton",
+    name: "Santa's Favorite Christmas Tee",
+    category: "Christmas Edition T-Shirts",
+    price: "₹899",
+    originalPrice: "₹1,199",
+    note: "Festive print · Made for holiday fun",
     description:
-      "Inspired by mid-century French Riviera summers. Classic horizontal micro-stripes knitted with yarn-dyed organic cotton to guarantee permanent color brightness.",
+      "A fun holiday tee for little ones who love the magic of Christmas. Pair it with jeans or leggings for a ready-to-celebrate outfit.",
     img: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=1000&auto=format&fit=crop&q=85",
     details: [
-      "220 GSM breathable organic cotton piqué",
-      "Yarn-dyed micro stripes that never bleed or fade",
-      "Contrasting solid ribbed collar and sleeve bands",
-      "Laser-etched mother of pearl buttons",
-      "Regular European tailored fit",
+      "Festive Christmas-inspired print",
+      "Soft cotton jersey",
+      "Easy-to-wear round neckline",
+      "Comfortable for parties and family photos",
+      "Machine washable",
     ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
     colors: [
-      { name: "Navy & Cream", hex: "#1C2A39" },
-      { name: "Forest & Chalk", hex: "#2C5D2E" },
+      { name: "Holiday Red", hex: "#A94442" },
+      { name: "Snow White", hex: "#F7F7F5" },
     ],
     inStock: true,
     stockCount: 22,
     isFeatured: false,
-    badge: "Heritage",
+    badge: "Festive Favorite",
   },
   {
     id: "french-linen-cotton-tee",
-    name: "French Flax Linen & Cotton Tee",
-    category: "Textured & Knit",
-    price: "₹1,799",
-    originalPrice: "₹2,399",
-    note: "55% Normandy Linen, 45% Cotton · 180 GSM Airy Slub",
+    name: "Color Pop Round Neck T-Shirt",
+    category: "Round Neck T-Shirts",
+    price: "₹749",
+    originalPrice: "₹999",
+    note: "Bright everyday color · Soft cotton feel",
     description:
-      "Combining the crisp airiness of Normandy flax with the cloud-like softness of organic cotton. Naturally breathable and antibacterial for hot weather comfort.",
+      "A bright, easy round neck tee that adds a pop of color to everyday outfits. Comfortable enough for school days and fun enough for the weekend.",
     img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=1000&auto=format&fit=crop&q=85",
     details: [
-      "55% French linen, 45% ring-spun organic cotton",
-      "Unique slub yarn texture with organic grain aesthetic",
-      "Naturally moisture-wicking and quick-drying",
-      "Relaxed chest with slightly tapered waist",
-      "Softens significantly with every wash cycle",
+      "Soft cotton jersey",
+      "Classic round neckline",
+      "Easy regular fit",
+      "Pairs with shorts, jeans, and layers",
+      "Machine washable",
     ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
     colors: [
-      { name: "Natural Flax", hex: "#DCD5C6" },
-      { name: "Pale Sage", hex: "#A8BBA2" },
+      { name: "Sunshine Yellow", hex: "#E5BC4F" },
+      { name: "Berry Pink", hex: "#C85E78" },
       { name: "Pure White", hex: "#FFFFFF" },
     ],
     inStock: true,
     stockCount: 15,
     isFeatured: false,
-    badge: "Summer Essential",
+    badge: "Color Pop",
   },
 ];
 
 export const INITIAL_SETTINGS: StoreSettings = {
   brandName: "Threads of Eden",
-  brandTagline: "Woven with purpose. Inspired by grace.",
+  brandTagline: "Little styles. Big adventures.",
   hero: {
-    titleLine1: "Cotton,",
-    titleLine2: "elevated",
+    titleLine1: "Made for",
+    titleLine2: "little movers",
     subtitle:
-      "Precision-knit Peruvian piqué and 280 GSM heavyweight cotton. Designed with architectural proportion, uncompromising comfort, and timeless ease.",
-    eyebrow: "Autumn / Winter 2026 Collection",
-    ctaText: "Discover the Collection",
+      "Soft, playful t-shirts for everyday adventures. Find oversized, polo, round neck, and festive Christmas styles made for kids.",
+    eyebrow: "Comfort made for kids",
+    ctaText: "Shop Kids' T-Shirts",
     ctaLink: "/shop",
     imageUrl:
       "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85",
   },
   announcement: {
     enabled: true,
-    text: "Complimentary Express Delivery on orders over ₹1,999 · Hand-finished luxury cotton packaging included",
+    text: "Kids' T-Shirts for Everyday Adventures · Shop oversized, polo, round neck & holiday styles",
   },
   marqueeItems: [
-    "280 GSM Heavyweight",
-    "100% Long-Staple Supima®",
-    "Mercerized Piqué Knit",
-    "Mother of Pearl Buttons",
-    "Pre-Shrunk Organic Cotton",
-    "Double-Needle Construction",
-    "Milan — Kyoto — Mumbai",
+    "Soft cotton comfort",
+    "Made for little movers",
+    "Easy everyday styles",
+    "Kids sizes 2-13Y",
+    "Oversized, polos & round necks",
+    "Festive Christmas tees",
+    "Playful colors and prints",
   ],
   contact: {
     email: "concierge@threadandroots.com",
@@ -361,27 +360,27 @@ export const INITIAL_ORDERS: Order[] = [
     items: [
       {
         productId: "signature-mercerized-polo",
-        name: "The Signature Piqué Polo",
-        price: "₹2,199",
+        name: "Everyday Kids Polo T-Shirt",
+        price: "₹899",
         quantity: 2,
-        size: "L",
-        color: "Forest Green",
+        size: "8-9Y",
+        color: "Ocean Blue",
         img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400&auto=format&fit=crop&q=80",
       },
       {
         productId: "heavyweight-oversized-tee",
-        name: "280 GSM Heavyweight Oversized Tee",
-        price: "₹1,699",
+        name: "Play-All-Day Oversized T-Shirt",
+        price: "₹799",
         quantity: 1,
-        size: "XL",
+        size: "6-7Y",
         color: "Chalk White",
         img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400&auto=format&fit=crop&q=80",
       },
     ],
-    subtotal: 6097,
-    tax: 1097,
+    subtotal: 2597,
+    tax: 467,
     shipping: 0,
-    total: 7194,
+    total: 3064,
     paymentMethod: "razorpay",
     status: "Processing",
     createdAt: "2026-11-13T10:45:00.000Z",
@@ -397,18 +396,18 @@ export const INITIAL_ORDERS: Order[] = [
     items: [
       {
         productId: "knit-fine-gauge-polo",
-        name: "Fine-Gauge Milanese Knit Polo",
-        price: "₹2,499",
+        name: "Little Explorer Striped Polo",
+        price: "₹999",
         quantity: 1,
-        size: "M",
-        color: "Sage Mist",
+        size: "10-11Y",
+        color: "Berry Stripe",
         img: "https://images.unsplash.com/photo-1625910513413-7e5c545f949c?w=400&auto=format&fit=crop&q=80",
       },
     ],
-    subtotal: 2499,
-    tax: 450,
+    subtotal: 999,
+    tax: 180,
     shipping: 0,
-    total: 2949,
+    total: 1179,
     paymentMethod: "razorpay",
     status: "Shipped",
     createdAt: "2026-11-12T16:20:00.000Z",
@@ -424,27 +423,27 @@ export const INITIAL_ORDERS: Order[] = [
     items: [
       {
         productId: "supima-luxury-crewneck",
-        name: "Long-Staple Supima® Crewneck",
-        price: "₹1,399",
+        name: "Classic Round Neck T-Shirt",
+        price: "₹699",
         quantity: 2,
-        size: "M",
-        color: "Deep Obsidian",
+        size: "4-5Y",
+        color: "Berry Pink",
         img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400&auto=format&fit=crop&q=80",
       },
       {
         productId: "minimalist-waffle-henley",
-        name: "The Textured Waffle Henley",
-        price: "₹1,999",
+        name: "Merry & Bright Christmas T-Shirt",
+        price: "₹899",
         quantity: 1,
-        size: "M",
-        color: "Warm Oat",
+        size: "4-5Y",
+        color: "Christmas Red",
         img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&auto=format&fit=crop&q=80",
       },
     ],
-    subtotal: 4797,
-    tax: 863,
+    subtotal: 2297,
+    tax: 413,
     shipping: 0,
-    total: 5660,
+    total: 2710,
     paymentMethod: "cod",
     status: "Delivered",
     createdAt: "2026-11-10T11:15:00.000Z",
@@ -464,7 +463,29 @@ export function getStoredProducts(): Product[] {
     const raw = localStorage.getItem(PRODUCTS_KEY) || localStorage.getItem("arovia_apparel_products_v2");
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        const legacyCategories = new Set(["Polo", "Oversized", "Crewneck", "Henley", "Textured & Knit"]);
+        const hasLegacyCatalog = parsed.some((product) => legacyCategories.has(product.category));
+        if (!hasLegacyCatalog) return parsed;
+
+        const initialById = new Map(INITIAL_PRODUCTS.map((product) => [product.id, product]));
+        const migrated = parsed.map((product) => {
+          const initial = initialById.get(product.id);
+          if (!initial) return product;
+          return {
+            ...initial,
+            price: product.price ?? initial.price,
+            originalPrice: product.originalPrice ?? initial.originalPrice,
+            img: product.img ?? initial.img,
+            inStock: product.inStock ?? initial.inStock,
+            stockCount: product.stockCount ?? initial.stockCount,
+          };
+        });
+        const storedIds = new Set(parsed.map((product) => product.id));
+        migrated.push(...INITIAL_PRODUCTS.filter((product) => !storedIds.has(product.id)));
+        saveStoredProducts(migrated);
+        return migrated;
+      }
     }
   } catch (e) {
     console.error("Error reading stored products:", e);
@@ -488,7 +509,19 @@ export function getStoredCategories(): string[] {
     const raw = localStorage.getItem(CATEGORIES_KEY) || localStorage.getItem("arovia_apparel_categories_v2");
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        const legacyCategories = new Set(["Polo", "Oversized", "Crewneck", "Henley", "Textured & Knit"]);
+        if (!parsed.some((category) => legacyCategories.has(category))) return parsed;
+        const customCategories = parsed.filter(
+          (category) =>
+            category !== "All" &&
+            !legacyCategories.has(category) &&
+            !INITIAL_CATEGORIES.includes(category)
+        );
+        const migrated = [...INITIAL_CATEGORIES, ...customCategories];
+        saveStoredCategories(migrated);
+        return migrated;
+      }
     }
   } catch (e) {
     console.error("Error reading stored categories:", e);
@@ -519,6 +552,23 @@ export function getStoredSettings(): StoreSettings {
             parsed.contact.email = "concierge@threadandroots.com";
           }
           saveStoredSettings(parsed);
+        }
+        if (
+          parsed.hero?.titleLine1 === "Cotton," ||
+          parsed.hero?.subtitle?.includes("Peruvian") ||
+          parsed.marqueeItems?.some((item: string) => item.includes("Supima"))
+        ) {
+          const migrated = {
+            ...INITIAL_SETTINGS,
+            brandName: parsed.brandName,
+            contact: parsed.contact || INITIAL_SETTINGS.contact,
+            announcement: {
+              ...INITIAL_SETTINGS.announcement,
+              enabled: parsed.announcement?.enabled ?? INITIAL_SETTINGS.announcement.enabled,
+            },
+          };
+          saveStoredSettings(migrated);
+          return migrated;
         }
         return parsed;
       }

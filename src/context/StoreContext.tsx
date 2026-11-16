@@ -85,8 +85,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       ...newProdData,
       id: slug,
       details: newProdData.details || [],
-      sizes: newProdData.sizes || ["S", "M", "L", "XL"],
-      colors: newProdData.colors || [{ name: "Standard", hex: "#2C5D2E" }],
+      sizes: newProdData.sizes || ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
+      colors: newProdData.colors || [{ name: "Standard", hex: "#47352F" }],
       inStock: newProdData.inStock ?? true,
       stockCount: newProdData.stockCount ?? 20,
     };

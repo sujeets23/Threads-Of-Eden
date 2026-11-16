@@ -70,13 +70,13 @@ function BlogPage() {
     <main className="bg-background text-foreground min-h-screen">
       <section className="bg-secondary py-20 md:py-32 border-b border-black/5">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#47352F]">
             ← Back to Home
           </Link>
-          <p className="eyebrow mb-4 text-[#2C5D2E]">The Journal</p>
+          <p className="eyebrow mb-4 text-[#47352F]">The Journal</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">
             Essays in Form &<br />
-            <span className="italic text-[#2C5D2E]">heavyweight cotton.</span>
+            <span className="italic text-[#47352F]">heavyweight cotton.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-8 text-muted-foreground">
             Reflections from our atelier on textile engineering, tailoring proportion, and the
@@ -95,12 +95,12 @@ function BlogPage() {
               >
                 <div>
                   <div className="flex items-center justify-between text-xs text-muted-foreground">
-                    <span className="font-semibold uppercase tracking-wider text-[#2C5D2E]">
+                    <span className="font-semibold uppercase tracking-wider text-[#47352F]">
                       {post.category}
                     </span>
                     <span>{post.readTime}</span>
                   </div>
-                  <h2 className="mt-4 font-display text-2xl leading-snug group-hover:text-[#2C5D2E] transition-colors">
+                  <h2 className="mt-4 font-display text-2xl leading-snug group-hover:text-[#47352F] transition-colors">
                     {post.title}
                   </h2>
                   <p className="mt-3 text-xs md:text-sm leading-relaxed text-muted-foreground">
@@ -109,7 +109,7 @@ function BlogPage() {
                 </div>
                 <div className="mt-8 pt-4 border-t border-black/5 flex items-center justify-between text-xs">
                   <span className="text-black/50">{post.date}</span>
-                  <Link to="/shop" className="font-semibold text-[#2C5D2E] hover:underline">
+                  <Link to="/shop" className="font-semibold text-[#47352F] hover:underline">
                     Read Essay →
                   </Link>
                 </div>

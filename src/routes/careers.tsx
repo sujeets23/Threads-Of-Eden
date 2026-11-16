@@ -30,10 +30,10 @@ function CareersPage() {
     <main className="bg-background text-foreground">
       <section className="bg-secondary py-20 md:py-32">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#2C5D2E]">← Back to Home</Link>
+          <Link to="/" className="eyebrow mb-8 inline-flex items-center gap-2 text-[#47352F]">← Back to Home</Link>
           <p className="eyebrow mb-4">Join Us</p>
           <h1 className="font-display text-5xl leading-[1.02] md:text-7xl">
-            Build the future of<br /><span className="italic text-[#2C5D2E]">botanical beauty.</span>
+            Build the future of<br /><span className="italic text-[#47352F]">botanical beauty.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-8 text-muted-foreground">
             We're looking for passionate individuals who believe beauty can be both luxurious and responsible.
@@ -56,9 +56,9 @@ function CareersPage() {
         </div>
       </section>
 
-      <section className="bg-[#1a2e1b] py-20 text-white md:py-28">
+      <section className="bg-[#221b18] py-20 text-white md:py-28">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <p className="eyebrow mb-4" style={{ color: "#CFF57C" }}>Open Positions</p>
+          <p className="eyebrow mb-4" style={{ color: "#E5CFAC" }}>Open Positions</p>
           <h2 className="font-display text-4xl md:text-5xl">Current opportunities.</h2>
           <div className="mt-16 space-y-0">
             {POSITIONS.map((p) => (
@@ -70,7 +70,7 @@ function CareersPage() {
                     <span className="text-xs text-white/50">•</span>
                     <span className="text-xs text-white/50">{p.type}</span>
                     <span className="text-xs text-white/50">•</span>
-                    <span className="text-xs text-[#CFF57C]">{p.dept}</span>
+                    <span className="text-xs text-[#E5CFAC]">{p.dept}</span>
                   </div>
                 </div>
                 <a href="mailto:careers@threadandroots.com" className="btn-luxe-inverse text-center">Apply →</a>
@@ -78,7 +78,7 @@ function CareersPage() {
             ))}
           </div>
           <div className="mt-12 border-t border-white/10 pt-8">
-            <p className="text-sm text-white/50">Don't see a role that fits? Send your résumé to <a href="mailto:careers@threadandroots.com" className="text-[#CFF57C]">careers@threadandroots.com</a></p>
+            <p className="text-sm text-white/50">Don't see a role that fits? Send your résumé to <a href="mailto:careers@threadandroots.com" className="text-[#E5CFAC]">careers@threadandroots.com</a></p>
           </div>
         </div>
       </section>

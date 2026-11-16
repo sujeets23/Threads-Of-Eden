@@ -13,12 +13,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Precision-knit Peruvian piqué and 280 GSM heavyweight cotton. Discover architectural t-shirts and luxury polos crafted for the modern connoisseur.",
+          "Explore kids' oversized t-shirts, polo t-shirts, round neck tees, and festive Christmas edition styles.",
       },
       { property: "og:title", content: "Threads of Eden — Woven with purpose. Inspired by grace." },
       {
         property: "og:description",
-        content: "Precision-knit Peruvian piqué and 280 GSM heavyweight cotton.",
+        content: "Comfortable kids' t-shirts for everyday adventures and festive moments.",
       },
     ],
   }),
@@ -147,7 +147,7 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img
           src={hero.imageUrl || "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"}
-          alt="Threads of Eden luxury cotton t-shirt and polo textiles"
+          alt="Threads of Eden kids' t-shirts for everyday adventures"
           width={1800}
           height={1200}
           className="h-full w-full object-cover"
@@ -158,15 +158,15 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 pb-20 md:px-16 md:pb-28 pt-24">
         <div className="max-w-[92vw] sm:max-w-[80vw] md:max-w-3xl text-left">
           {hero.eyebrow && (
-            <p className="eyebrow mb-4 text-[#CFF57C] tracking-[0.3em] font-medium">
+            <p className="eyebrow mb-4 text-[#E5CFAC] tracking-[0.3em] font-medium">
               {hero.eyebrow}
             </p>
           )}
 
           <h1 className="font-display text-[12vw] leading-[1.02] tracking-[-0.02em] sm:text-[11vw] sm:tracking-[-0.03em] md:text-[8vw] md:leading-[0.95] md:tracking-[-0.04em] text-white">
-            <AnimatedWords text={hero.titleLine1 || "Cotton,"} className="block" />
+            <AnimatedWords text={hero.titleLine1 || "Made for"} className="block" />
             <AnimatedWords
-              text={hero.titleLine2 || "elevated"}
+              text={hero.titleLine2 || "little movers"}
               delay={0.25}
               className="block italic text-white/90"
             />
@@ -184,7 +184,7 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
                 href={hero.ctaLink || "/shop"}
                 onMouseEnter={() => onHover(true)}
                 onMouseLeave={() => onHover(false)}
-                className="w-fit rounded-full border border-white bg-transparent px-8 py-3.5 text-center text-sm font-medium uppercase tracking-[0.15em] text-white shadow-sm transition-all duration-300 hover:bg-white hover:text-[#2C5D2E]"
+                className="w-fit rounded-full border border-white bg-transparent px-8 py-3.5 text-center text-sm font-medium uppercase tracking-[0.15em] text-white shadow-sm transition-all duration-300 hover:bg-white hover:text-[#47352F]"
               >
                 {hero.ctaText || "Discover the Collection"}
                 <span className="ml-2 font-sans" aria-hidden>→</span>
@@ -194,7 +194,7 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
             <Reveal delay={0.6}>
               <a
                 href="/admin"
-                className="w-fit rounded-full border border-[#CFF57C]/40 bg-black/20 px-6 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#CFF57C] backdrop-blur transition hover:bg-[#CFF57C] hover:text-[#1a2e1b]"
+                className="w-fit rounded-full border border-[#E5CFAC]/40 bg-black/20 px-6 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#E5CFAC] backdrop-blur transition hover:bg-[#E5CFAC] hover:text-[#221b18]"
               >
                 Admin Console
               </a>
@@ -245,13 +245,13 @@ function Marquee() {
     settings.marqueeItems && settings.marqueeItems.length > 0
       ? settings.marqueeItems
       : [
-          "280 GSM Heavyweight",
-          "100% Long-Staple Supima®",
-          "Mercerized Piqué Knit",
-          "Mother of Pearl Buttons",
-          "Pre-Shrunk Organic Cotton",
-          "Double-Needle Construction",
-          "Milan — Kyoto — Mumbai",
+      "Soft cotton comfort",
+      "Made for little movers",
+      "Easy everyday styles",
+      "Kids sizes 2-13Y",
+      "Oversized, polos & round necks",
+      "Festive Christmas tees",
+      "Playful colors and prints",
         ];
 
   return (
@@ -260,7 +260,7 @@ function Marquee() {
         {[...items, ...items, ...items].map((it, i) => (
           <span key={i} className="mx-6 eyebrow flex items-center gap-6 md:mx-10 md:gap-10 text-black/80">
             {it}
-            <span className="inline-block h-1 w-1 rounded-full bg-[#2C5D2E]" />
+            <span className="inline-block h-1 w-1 rounded-full bg-[#47352F]" />
           </span>
         ))}
       </div>
@@ -281,10 +281,10 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
         <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <Reveal>
-            <p className="eyebrow mb-4 md:mb-6 text-[#2C5D2E]">The Apparel Suite</p>
+            <p className="eyebrow mb-4 md:mb-6 text-[#47352F]">The Kidswear Collection</p>
             <h2 className="font-display text-3xl leading-[1.05] md:text-7xl">
-              Precision Cut.<br />
-              <span className="italic text-[#2C5D2E]/80">Heavyweight Form.</span>
+              Ready for play.<br />
+              <span className="italic text-[#47352F]/80">Made for every day.</span>
             </h2>
           </Reveal>
 
@@ -296,8 +296,8 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
                 onClick={() => setSelectedCat(cat)}
                 className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
                   selectedCat === cat
-                    ? "bg-[#2C5D2E] text-white shadow-sm"
-                    : "border border-black/10 bg-white text-black/70 hover:border-[#2C5D2E]"
+                    ? "bg-[#47352F] text-white shadow-sm"
+                    : "border border-black/10 bg-white text-black/70 hover:border-[#47352F]"
                 }`}
               >
                 {cat}
@@ -316,7 +316,7 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
         <div className="mt-16 text-center">
           <a
             href="/shop"
-            className="inline-flex items-center gap-3 rounded-full border border-[#2C5D2E] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#2C5D2E] transition hover:bg-[#2C5D2E] hover:text-white"
+            className="inline-flex items-center gap-3 rounded-full border border-[#47352F] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#47352F] transition hover:bg-[#47352F] hover:text-white"
           >
             Explore All Styles ({products.length})
             <span aria-hidden>→</span>
@@ -365,13 +365,13 @@ function ProductCard({
 
           {/* Badge */}
           {product.badge && (
-            <div className="absolute top-3 left-3 z-10 rounded-full bg-[#1a2e1b]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#CFF57C] backdrop-blur">
+            <div className="absolute top-3 left-3 z-10 rounded-full bg-[#221b18]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#E5CFAC] backdrop-blur">
               {product.badge}
             </div>
           )}
 
           {/* Desktop quick-add overlay */}
-          <div className="absolute inset-x-0 bottom-0 hidden translate-y-full items-center justify-between bg-[#2C5D2E]/95 px-6 py-4 text-white transition-transform duration-500 ease-out group-hover:translate-y-0 md:flex">
+          <div className="absolute inset-x-0 bottom-0 hidden translate-y-full items-center justify-between bg-[#47352F]/95 px-6 py-4 text-white transition-transform duration-500 ease-out group-hover:translate-y-0 md:flex">
             <span className="text-xs font-medium uppercase tracking-[0.15em]">Quick Add to Bag</span>
             <span aria-hidden>→</span>
           </div>
@@ -382,7 +382,7 @@ function ProductCard({
               e.stopPropagation();
               addToCart(product);
             }}
-            className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C5D2E] text-white shadow-lg md:hidden"
+            className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#47352F] text-white shadow-lg md:hidden"
             aria-label="Add to bag"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -393,7 +393,7 @@ function ProductCard({
 
         <div className="mt-3 md:mt-5">
           <div className="flex items-center justify-between">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#2C5D2E]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#47352F]">
               {product.category}
             </p>
             {product.sizes && product.sizes.length > 0 && (
@@ -420,7 +420,7 @@ function ProductCard({
             </div>
             <a
               href={`/product/${product.id}`}
-              className="text-xs font-semibold text-[#2C5D2E] hover:underline"
+              className="text-xs font-semibold text-[#47352F] hover:underline"
             >
               Details →
             </a>
@@ -438,11 +438,11 @@ function FabricStory() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
   const fabricList = [
-    { name: "Peruvian Pima Cotton", spec: "Gossypium barbadense", note: "Extra-long staple silky touch" },
-    { name: "Mercerized Piqué Knit", spec: "Double singed", note: "Resilient non-curling collar" },
-    { name: "280 GSM Heavyweight Terry", spec: "Zero-twist yarn", note: "Architectural structured drape" },
-    { name: "Long-Staple Supima®", spec: "Top 1% harvest", note: "Deep non-fade organic dyes" },
-    { name: "Mother of Pearl Shell", spec: "Australian ocean shell", note: "Natural hand-carved luster" },
+    { name: "Soft cotton jersey", spec: "Everyday favorite", note: "Comfortable against skin" },
+    { name: "Cotton piqué", spec: "Classic polo texture", note: "A neat look for outings" },
+    { name: "Easy-care fabric", spec: "Made for busy days", note: "Simple to wash and wear" },
+    { name: "Playful colors", spec: "Bright everyday styles", note: "Easy to mix and match" },
+    { name: "Kids-first fit", spec: "Sizes from 2-3Y to 12-13Y", note: "Room to move and play" },
   ];
 
   const imgY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
@@ -453,29 +453,28 @@ function FabricStory() {
       <motion.div
         aria-hidden
         style={{ y: useTransform(scrollYProgress, [0, 1], [0, -150]) }}
-        className="absolute -left-20 top-20 h-60 w-60 rounded-full bg-sage/20 blur-3xl"
+        className="absolute -left-20 top-20 h-60 w-60 rounded-full bg-gold/20 blur-3xl"
       />
       <motion.div
         aria-hidden
         style={{ y: useTransform(scrollYProgress, [0, 1], [0, 150]) }}
-        className="absolute -right-10 bottom-10 h-80 w-80 rounded-full bg-[#CFF57C]/20 blur-3xl"
+        className="absolute -right-10 bottom-10 h-80 w-80 rounded-full bg-[#E5CFAC]/20 blur-3xl"
       />
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-10 px-4 md:grid-cols-12 md:gap-16 md:px-12">
         <div className="md:col-span-5">
           <Reveal>
-            <p className="eyebrow mb-6 text-[#2C5D2E]">Craftsmanship & Fiber</p>
+            <p className="eyebrow mb-6 text-[#47352F]">Comfort for Every Adventure</p>
             <h2 className="font-display text-3xl leading-[1.05] md:text-6xl">
-              Every thread, an<br />
-              <span className="italic text-[#2C5D2E]">exact study</span><br />
-              in proportion.
+              Little clothes for<br />
+              <span className="italic text-[#47352F]">big adventures</span><br />
+              and growing days.
             </h2>
           </Reveal>
           <Reveal delay={0.2} className="mt-8">
             <p className="max-w-md text-sm md:text-base leading-relaxed text-muted-foreground">
-              We reject synthetic blends, polyester fillers, and flimsy fast-fashion knits.
-              Our cotton is sourced from certified organic single-origin farms, combed twice to
-              remove short fibers, and woven on vintage circular looms for an uncompromising hand feel.
+              Kids need clothes that keep up. Our collection brings together soft-feel t-shirts
+              and easy silhouettes for school, playdates, family outings, and festive moments.
             </p>
           </Reveal>
 
@@ -509,7 +508,7 @@ function FabricStory() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
               <img
                 src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=1200&auto=format&fit=crop&q=85"
-                alt="Fine knitted cotton polo textiles on studio worktable"
+                alt="Comfortable cotton t-shirts for kids"
                 width={1200}
                 height={1500}
                 loading="lazy"
@@ -517,10 +516,10 @@ function FabricStory() {
               />
             </div>
             <div className="absolute -bottom-8 -left-8 hidden bg-white p-8 shadow-2xl md:block rounded-xl border border-black/5">
-              <p className="eyebrow mb-2 text-[#2C5D2E]">Zero Shrinkage</p>
-              <p className="font-display text-3xl font-light">280 GSM</p>
+              <p className="eyebrow mb-2 text-[#47352F]">Made to Move</p>
+              <p className="font-display text-3xl font-light">Everyday Ease</p>
               <p className="mt-1 max-w-[200px] text-xs text-muted-foreground">
-                Pre-washed & heat-set to ensure your t-shirt stays true to size forever.
+                Comfortable styles for little ones on the go.
               </p>
             </div>
           </motion.div>
@@ -535,23 +534,23 @@ function FabricStory() {
 const WHY = [
   {
     n: "01",
-    t: "Architectural Drape",
-    d: "Our 280 GSM cotton and dense piqué knits hang with structured posture, avoiding flimsy cling.",
+    t: "Room to Move",
+    d: "Easy fits keep kids comfortable through school, play, and family outings.",
   },
   {
     n: "02",
-    t: "Mercerized Luster",
-    d: "A dual-gas singeing process removes micro-fuzz, creating an ultra-soft silky hand that resists wash fade.",
+    t: "Soft Feel",
+    d: "Comfortable everyday tees are made for busy days and repeat wear.",
   },
   {
     n: "03",
-    t: "Stay-Flat Rib Collar",
-    d: "Double-needle reinforced collar bands and cotton-elastane ribbing engineered never to bacon or roll.",
+    t: "Easy Everyday Styles",
+    d: "Pick from oversized tees, classic polos, round necks, and playful prints.",
   },
   {
     n: "04",
-    t: "Ethical Organics",
-    d: "GOTS-certified 100% organic cotton dyed with low-impact botanical and mineral dyes.",
+    t: "A Style for Every Moment",
+    d: "Find a favorite for school mornings, weekends, and Christmas celebrations.",
   },
 ];
 
@@ -561,10 +560,10 @@ function WhySection() {
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
         <div className="mb-16 max-w-3xl">
           <Reveal>
-            <p className="eyebrow mb-6 text-[#2C5D2E]">Design Philosophy</p>
+            <p className="eyebrow mb-6 text-[#47352F]">Design Philosophy</p>
             <h2 className="font-display text-4xl leading-[1] md:text-7xl">
               Four principles.<br />
-              <span className="italic text-[#2C5D2E]">One standard of form.</span>
+              <span className="italic text-[#47352F]">One standard of form.</span>
             </h2>
           </Reveal>
         </div>
@@ -576,7 +575,7 @@ function WhySection() {
                 <h3 className="mt-4 font-display text-xl transition-transform duration-700 group-hover:-translate-y-1 md:mt-6 md:text-3xl">
                   {w.t}
                 </h3>
-                <div className="my-6 h-px w-12 bg-[#2C5D2E]/60 transition-all duration-700 group-hover:w-24" />
+                <div className="my-6 h-px w-12 bg-[#47352F]/60 transition-all duration-700 group-hover:w-24" />
                 <p className="text-sm leading-relaxed text-muted-foreground">{w.d}</p>
               </div>
             </Reveal>
@@ -593,42 +592,48 @@ function Collections({ onHover }: { onHover: (v: boolean) => void }) {
   const items = [
     {
       img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=1200&auto=format&fit=crop&q=85",
-      title: "The Polo Suite",
-      tag: "Mercerized Piqué",
+      title: "Kids' Polo T-Shirts",
+      tag: "Classic collars, easy comfort",
       href: "/shop",
     },
     {
       img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=1200&auto=format&fit=crop&q=85",
-      title: "Heavyweight Oversized",
-      tag: "280 GSM Drop Shoulder",
+      title: "Oversized T-Shirts",
+      tag: "Room to move and play",
       href: "/shop",
     },
     {
       img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1200&auto=format&fit=crop&q=85",
-      title: "Textured & Henleys",
-      tag: "Waffle Knit & Linen",
+      title: "Round Neck T-Shirts",
+      tag: "Everyday comfort and color",
+      href: "/shop",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=1200&auto=format&fit=crop&q=85",
+      title: "Christmas Edition",
+      tag: "Festive tees for little ones",
       href: "/shop",
     },
   ];
 
   return (
-    <section className="bg-[#1a2e1b] py-28 text-white md:py-44">
+    <section className="bg-[#221b18] py-28 text-white md:py-44">
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         <div className="mb-16 flex items-end justify-between">
           <Reveal>
-            <p className="eyebrow" style={{ color: "#CFF57C" }}>
+            <p className="eyebrow" style={{ color: "#E5CFAC" }}>
               Silhouettes
             </p>
             <h2 className="mt-4 font-display text-4xl leading-[1] md:text-7xl">
               Editorial<br />
-              <span className="italic text-[#CFF57C]">wardrobe.</span>
+              <span className="italic text-[#E5CFAC]">wardrobe.</span>
             </h2>
           </Reveal>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-x-8 md:gap-y-16">
-          <EditorialCard item={items[0]} className="md:col-span-7 md:aspect-[4/5]" onHover={onHover} />
-          <EditorialCard item={items[1]} className="md:col-span-5 md:mt-24 md:aspect-[3/4]" onHover={onHover} />
-          <EditorialCard item={items[2]} className="md:col-span-12 md:aspect-[16/8]" onHover={onHover} />
+          {items.map((item) => (
+            <EditorialCard key={item.title} item={item} className="md:col-span-6 md:aspect-[4/5]" onHover={onHover} />
+          ))}
         </div>
       </div>
     </section>
@@ -658,9 +663,9 @@ function EditorialCard({
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a2e1b]/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#221b18]/80 via-black/20 to-transparent" />
         <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
-          <p className="eyebrow mb-3 text-[#CFF57C]">{item.tag}</p>
+          <p className="eyebrow mb-3 text-[#E5CFAC]">{item.tag}</p>
           <h3 className="font-display text-3xl md:text-5xl">{item.title}</h3>
           <div className="mt-6 flex translate-y-4 items-center gap-3 opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
             <span className="eyebrow text-white">Explore range</span>
@@ -684,7 +689,7 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-center gap-10 px-4 md:grid-cols-2 md:gap-16 md:px-12">
         <div className="relative order-2 md:order-1">
           <Reveal>
-            <p className="eyebrow mb-6 text-[#2C5D2E]">Iconic Signature Piece</p>
+            <p className="eyebrow mb-6 text-[#47352F]">Iconic Signature Piece</p>
             <h2 className="font-display text-3xl leading-[1.05] md:text-6xl">
               {featured.name}
             </h2>
@@ -709,7 +714,7 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
               </button>
               <a
                 href={`/product/${featured.id}`}
-                className="text-xs font-semibold uppercase tracking-wider text-[#2C5D2E] hover:underline"
+                className="text-xs font-semibold uppercase tracking-wider text-[#47352F] hover:underline"
               >
                 Full Details →
               </a>
@@ -721,9 +726,9 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
             className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-8 md:mt-14 md:gap-8 md:pt-10"
           >
             {[
-              ["240 GSM", "Weight"],
-              ["100%", "Organic Supima"],
-              ["Shell", "Mother of Pearl"],
+              ["2-13Y", "Kids' Sizes"],
+              ["4", "T-Shirt Styles"],
+              ["All day", "Play-ready Comfort"],
             ].map(([v, l]) => (
               <div key={l}>
                 <p className="font-display text-2xl font-light">{v}</p>
@@ -749,18 +754,22 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
 
 /* ------------------------------- Testimonials ------------------------------- */
 
-const QUOTES = [
+const STYLE_HIGHLIGHTS = [
   {
-    q: "The collar holds its crisp shape after 30 washes. Easily the best polo cut in menswear today.",
-    a: "GQ Style Report",
+    q: "Roomy silhouettes for playtime, weekends, and everything in between.",
+    a: "Oversized T-Shirts",
   },
   {
-    q: "Substantial 280 GSM weight that hangs cleanly without cling. The oversized drape is flawless.",
-    a: "Monocle Apparel Review",
+    q: "Classic collars bring an easy, polished touch to everyday outfits.",
+    a: "Polo T-Shirts",
   },
   {
-    q: "Threads of Eden has distilled what a luxury t-shirt should be: zero logos, extraordinary Peruvian cotton.",
-    a: "Esquire Select",
+    q: "A familiar round neck and playful colors make getting dressed simple.",
+    a: "Round Neck T-Shirts",
+  },
+  {
+    q: "Festive prints bring a little extra cheer to Christmas celebrations.",
+    a: "Christmas Edition",
   },
 ];
 
@@ -769,15 +778,15 @@ function Testimonials() {
     <section className="relative bg-secondary py-28 md:py-40">
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         <Reveal>
-          <p className="eyebrow mb-6 text-[#2C5D2E]">Critical Reception</p>
+          <p className="eyebrow mb-6 text-[#47352F]">Made for Every Moment</p>
         </Reveal>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-          {QUOTES.map((q, i) => (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+          {STYLE_HIGHLIGHTS.map((q, i) => (
             <Reveal key={q.a} delay={i * 0.15}>
               <div className="relative h-full rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-all duration-700 hover:-translate-y-2 hover:shadow-md md:p-10">
-                <p className="font-display text-lg leading-snug md:text-2xl">"{q.q}"</p>
+                <p className="font-display text-lg leading-snug md:text-2xl">{q.q}</p>
                 <div className="mt-8 flex items-center gap-4">
-                  <span className="h-px w-8 bg-[#2C5D2E]" />
+                  <span className="h-px w-8 bg-[#47352F]" />
                   <p className="eyebrow text-muted-foreground">{q.a}</p>
                 </div>
               </div>
@@ -799,31 +808,31 @@ function AboutSection() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
             <img
               src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&auto=format&fit=crop&q=85"
-              alt="Atelier workshop with fine cotton garment patterns"
+              alt="Threads of Eden kidswear for everyday adventures"
               className="h-full w-full object-cover"
             />
           </div>
         </div>
         <div className="flex flex-col justify-center md:col-span-6 md:pl-8">
           <Reveal>
-            <p className="eyebrow mb-6 text-[#2C5D2E]">The House of Threads of Eden</p>
+            <p className="eyebrow mb-6 text-[#47352F]">The House of Threads of Eden</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-display text-4xl leading-[1] md:text-6xl">
               Founded on the belief<br />
-              that <span className="italic text-[#2C5D2E]">everyday essentials</span><br />
+              that <span className="italic text-[#47352F]">everyday essentials</span><br />
               deserve bespoke tailoring.
             </h2>
           </Reveal>
           <Reveal delay={0.25} className="mt-8 max-w-md space-y-5 text-sm md:text-base leading-relaxed text-muted-foreground">
             <p>
-              We began with a simple question: why should a tailored polo or daily crewneck
-              degrade after a few seasons? Threads of Eden combines Old World garment tailoring with
-              uncompromising heavyweight Peruvian and Egyptian cotton.
+              We make everyday dressing easier with playful kids' t-shirts for school, weekends,
+              family outings, and the holidays. From relaxed oversized fits to classic polos,
+              there's a style for every little adventure.
             </p>
             <p>
-              Each seam is double-needle blind stitched, each collar is fused with lightweight
-              interlining, and every button is natural carved shell.
+              Choose a favorite from our oversized, polo, round neck, and Christmas edition
+              collections, with age-based sizes made for growing kids.
             </p>
           </Reveal>
           <Reveal delay={0.4} className="mt-10">
@@ -841,16 +850,16 @@ function AboutSection() {
 
 function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
   return (
-    <section className="relative overflow-hidden bg-[#2C5D2E] text-white py-24 md:py-36">
+    <section className="relative overflow-hidden bg-[#47352F] text-white py-24 md:py-36">
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 text-center">
         <Reveal>
-          <p className="eyebrow mb-4 text-[#CFF57C] tracking-[0.3em]">Built to Endure</p>
+          <p className="eyebrow mb-4 text-[#E5CFAC] tracking-[0.3em]">Made for Little Adventures</p>
           <h2 className="font-display text-4xl leading-tight md:text-7xl">
-            Upgrade your daily wardrobe.<br />
-            <span className="italic text-[#CFF57C]">Experience architectural cotton.</span>
+            Get dressed for fun.<br />
+            <span className="italic text-[#E5CFAC]">Find their new favorite tee.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-sm md:text-base text-white/80 leading-relaxed font-light">
-            Complimentary shipping on orders over ₹1,999. Includes reusable organic cotton wash bag.
+            Explore oversized, polo, round neck, and festive Christmas t-shirts for kids.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
@@ -859,11 +868,11 @@ function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
               onMouseLeave={() => onHover(false)}
               className="btn-luxe-inverse"
             >
-              Shop The Entire Collection
+              Shop Kids' T-Shirts
             </a>
             <a
               href="/admin"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/20 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur hover:bg-white hover:text-[#2C5D2E] transition"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/20 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur hover:bg-white hover:text-[#47352F] transition"
             >
               Admin Dashboard
             </a>
