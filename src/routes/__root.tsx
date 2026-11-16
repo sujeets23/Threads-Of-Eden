@@ -20,7 +20,7 @@ import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { CartProvider } from "../context/CartContext";
 import { CartDrawer } from "../components/CartDrawer";
-import { StoreProvider, useStore } from "../context/StoreContext";
+import { StoreProvider } from "../context/StoreContext";
 
 function NotFoundComponent() {
   return (
@@ -133,19 +133,8 @@ function RootComponent() {
 }
 
 function AppLayout() {
-  const { settings } = useStore();
-
   return (
     <CartProvider>
-      {/* Announcement Bar */}
-      {settings.announcement?.enabled && (
-        <div className="relative z-50 bg-[#221b18] py-2 px-4 text-center text-[11px] font-medium tracking-[0.14em] uppercase text-[#E5CFAC] border-b border-[#47352F]/30">
-          <div className="flex items-center justify-center gap-2">
-            <span>{settings.announcement.text}</span>
-          </div>
-        </div>
-      )}
-
       <Nav />
       <Outlet />
       <Footer />

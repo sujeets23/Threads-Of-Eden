@@ -130,42 +130,6 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 border-t border-[#4c3129]/10 pt-12">
-          <p className="mb-8 text-xs font-semibold uppercase tracking-[0.25em] text-[#c39a5b]">Get in Touch</p>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div>
-              <p className="text-sm font-medium text-[#3b2d29]">Bangalore Atelier</p>
-              <p className="mt-1.5 text-xs leading-relaxed text-[#3b2d29]/65">
-                {settings.contact.address || "124 Indiranagar 100ft Road, Bangalore, India"}
-              </p>
-              <a href={`mailto:${settings.contact.email}`} className="mt-2 inline-block text-xs text-[#4c3129] underline-offset-2 hover:underline">
-                {settings.contact.email}
-              </a>
-            </div>
-
-            <div>
-              <p className="text-sm font-medium text-[#3b2d29]">Client Concierge</p>
-              <p className="mt-1.5 text-xs leading-relaxed text-[#3b2d29]/65">
-                Mon – Sat: 10:00 AM – 7:00 PM IST
-              </p>
-              <a href={`tel:${settings.contact.phone}`} className="mt-2 inline-block text-xs text-[#4c3129] underline-offset-2 hover:underline">
-                {settings.contact.phone}
-              </a>
-            </div>
-
-            <div>
-              <p className="text-sm font-medium text-[#3b2d29]">Standards</p>
-              <div className="mt-1.5 flex flex-wrap gap-2 text-xs text-[#3b2d29]/70">
-                <span>Soft-feel everyday styles</span>
-                <span>·</span>
-                <span>Kids' sizes from 2-3Y to 12-13Y</span>
-                <span>·</span>
-                <span>Festive Christmas tees</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-[#4c3129]/10 pt-8 md:flex-row">
           <p className="text-xs tracking-wide text-[#3b2d29]/60">
             © 2026 {settings.brandName || "Threads of Eden"} — All rights reserved

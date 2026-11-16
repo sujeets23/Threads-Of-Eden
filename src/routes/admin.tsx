@@ -973,7 +973,7 @@ function SettingsTab({
       <div>
         <h2 className="font-display text-2xl">Store & Hero Customizer</h2>
         <p className="text-xs text-muted-foreground">
-          Modify hero headlines, background imagery, announcement bar, marquee badges, and store info
+          Modify hero headlines, background imagery, marquee badges, and store info
         </p>
       </div>
 
@@ -1127,42 +1127,9 @@ function SettingsTab({
         </div>
       </div>
 
-      {/* Announcement Bar */}
-      <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="font-display text-lg">3. Top Announcement Bar</h3>
-          <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold">
-            <input
-              type="checkbox"
-              checked={formSettings.announcement.enabled}
-              onChange={(e) =>
-                setFormSettings({
-                  ...formSettings,
-                  announcement: { ...formSettings.announcement, enabled: e.target.checked },
-                })
-              }
-              className="h-4 w-4 rounded accent-[#47352F]"
-            />
-            <span>Enable Bar</span>
-          </label>
-        </div>
-
-        <input
-          type="text"
-          value={formSettings.announcement.text}
-          onChange={(e) =>
-            setFormSettings({
-              ...formSettings,
-              announcement: { ...formSettings.announcement, text: e.target.value },
-            })
-          }
-          className="w-full rounded-xl border border-black/10 bg-[#f7f7f5] px-4 py-2.5 text-sm focus:border-[#47352F] focus:outline-none"
-        />
-      </div>
-
       {/* Marquee Ticker */}
       <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm space-y-4">
-        <h3 className="font-display text-lg">4. Marquee Running Ticker</h3>
+        <h3 className="font-display text-lg">3. Marquee Running Ticker</h3>
         <p className="text-xs text-muted-foreground">Short badges that loop infinitely across the storefront</p>
 
         <div className="flex flex-wrap gap-2">
@@ -1203,7 +1170,7 @@ function SettingsTab({
 
       {/* Contact Info */}
       <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm space-y-4">
-        <h3 className="font-display text-lg">5. Contact & Support Details</h3>
+        <h3 className="font-display text-lg">4. Contact & Support Details</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Support Email</label>
