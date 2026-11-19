@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import Lenis from "lenis";
 import { useCart } from "@/context/CartContext";
@@ -119,12 +119,8 @@ function HomePage() {
       <Hero onHover={setHover} />
       <Marquee />
       <ShowcaseSection onHover={setHover} />
-      <FabricStory />
-      <WhySection />
       <Collections onHover={setHover} />
       <FeaturedProduct onHover={setHover} />
-      <Testimonials />
-      <AboutSection />
       <CTASection onHover={setHover} />
     </div>
   );
@@ -146,7 +142,10 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
     >
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img
-          src={hero.imageUrl || "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"}
+          src={
+            hero.imageUrl ||
+            "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"
+          }
           alt="Threads of Eden kids' t-shirts for everyday adventures"
           width={1800}
           height={1200}
@@ -187,16 +186,9 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
                 className="w-fit rounded-full border border-white bg-transparent px-8 py-3.5 text-center text-sm font-medium uppercase tracking-[0.15em] text-white shadow-sm transition-all duration-300 hover:bg-white hover:text-[#47352F]"
               >
                 {hero.ctaText || "Discover the Collection"}
-                <span className="ml-2 font-sans" aria-hidden>→</span>
-              </a>
-            </Reveal>
-
-            <Reveal delay={0.6}>
-              <a
-                href="/admin"
-                className="w-fit rounded-full border border-[#E5CFAC]/40 bg-black/20 px-6 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#E5CFAC] backdrop-blur transition hover:bg-[#E5CFAC] hover:text-[#221b18]"
-              >
-                Admin Console
+                <span className="ml-2 font-sans" aria-hidden>
+                  →
+                </span>
               </a>
             </Reveal>
           </div>
@@ -222,7 +214,15 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
   );
 }
 
-function AnimatedWords({ text, delay = 0, className = "" }: { text: string; delay?: number; className?: string }) {
+function AnimatedWords({
+  text,
+  delay = 0,
+  className = "",
+}: {
+  text: string;
+  delay?: number;
+  className?: string;
+}) {
   return (
     <span className={`inline-block overflow-hidden align-bottom ${className}`}>
       <motion.span
@@ -245,20 +245,23 @@ function Marquee() {
     settings.marqueeItems && settings.marqueeItems.length > 0
       ? settings.marqueeItems
       : [
-      "Soft cotton comfort",
-      "Made for little movers",
-      "Easy everyday styles",
-      "Kids sizes 2-13Y",
-      "Oversized, polos & round necks",
-      "Festive Christmas tees",
-      "Playful colors and prints",
+          "7-Day Return Policy",
+          "Soft cotton comfort",
+          "Kids sizes 2-13Y",
+          "Oversized, polos & round necks",
+          "Hassle-free 7-day returns",
+          "Festive Christmas tees",
+          "Playful colors and prints",
         ];
 
   return (
-    <section className="border-y border-border/60 bg-[#fafafa] py-6 overflow-hidden">
+    <section className="border-y border-border/60 bg-[#f5efe8] py-6 overflow-hidden">
       <div className="mx-auto flex whitespace-nowrap animate-marquee">
         {[...items, ...items, ...items].map((it, i) => (
-          <span key={i} className="mx-6 eyebrow flex items-center gap-6 md:mx-10 md:gap-10 text-black/80">
+          <span
+            key={i}
+            className="mx-6 eyebrow flex items-center gap-6 md:mx-10 md:gap-10 text-black/80"
+          >
             {it}
             <span className="inline-block h-1 w-1 rounded-full bg-[#47352F]" />
           </span>
@@ -273,38 +276,265 @@ function Marquee() {
 function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
   const { products, categories } = useStore();
   const [selectedCat, setSelectedCat] = useState("All");
+  const [christmasDept, setChristmasDept] = useState<"All" | "Men" | "Women" | "Kids">("All");
+  const [christmasSub, setChristmasSub] = useState<string>("All");
 
-  const filtered = selectedCat === "All" ? products : products.filter((p) => p.category === selectedCat);
+  const isChristmas = selectedCat.toLowerCase().includes("christmas");
+
+  const handleCategorySelect = (cat: string) => {
+    setSelectedCat(cat);
+    if (!cat.toLowerCase().includes("christmas")) {
+      setChristmasDept("All");
+      setChristmasSub("All");
+    }
+  };
+
+  const filtered = useMemo(() => {
+    return products.filter((p) => {
+      const isProductChristmas = p.category.toLowerCase().includes("christmas");
+      let matchCat = false;
+      if (selectedCat === "All") {
+        matchCat = true;
+      } else if (isChristmas) {
+        matchCat = isProductChristmas;
+      } else {
+        matchCat = p.category === selectedCat;
+      }
+
+      if (!matchCat) return false;
+
+      if (isChristmas) {
+        if (christmasDept !== "All") {
+          if (!p.department || p.department.toLowerCase() !== christmasDept.toLowerCase()) {
+            return false;
+          }
+        }
+        if (christmasSub !== "All") {
+          if (!p.subCategory || p.subCategory.toLowerCase() !== christmasSub.toLowerCase()) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    });
+  }, [products, selectedCat, isChristmas, christmasDept, christmasSub]);
 
   return (
     <section id="shop" className="relative py-20 md:py-36">
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
         <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <Reveal>
-            <p className="eyebrow mb-4 md:mb-6 text-[#47352F]">The Kidswear Collection</p>
+            <p className="eyebrow mb-4 md:mb-6 text-[#47352F]">The Kidswear & Festive Collection</p>
             <h2 className="font-display text-3xl leading-[1.05] md:text-7xl">
-              Ready for play.<br />
-              <span className="italic text-[#47352F]/80">Made for every day.</span>
+              Ready for play.
+              <br />
+              <span className="italic text-[#47352F]/80">Made for every day & holiday.</span>
             </h2>
           </Reveal>
 
           {/* Category Filter Pills */}
           <div className="flex flex-wrap gap-2">
-            {categories.slice(0, 6).map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCat(cat)}
-                className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
-                  selectedCat === cat
-                    ? "bg-[#47352F] text-white shadow-sm"
-                    : "border border-black/10 bg-white text-black/70 hover:border-[#47352F]"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            {categories.slice(0, 6).map((cat) => {
+              const isXmas = cat.toLowerCase().includes("christmas");
+              return (
+                <button
+                  key={cat}
+                  onClick={() => handleCategorySelect(cat)}
+                  className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
+                    selectedCat === cat
+                      ? "bg-[#47352F] text-white shadow-sm"
+                      : "border border-black/10 bg-white text-black/70 hover:border-[#47352F]"
+                  }`}
+                >
+                  {isXmas ? `🎄 ${cat}` : cat}
+                </button>
+              );
+            })}
           </div>
         </div>
+
+        {/* Christmas Sub-Filter Bar if Christmas Category is Active */}
+        {isChristmas && (
+          <div className="mb-12 rounded-2xl border border-[#47352F]/15 bg-[#fbf7f0] p-5 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#47352F]/10 pb-3 mb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-sm">🎄</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#47352F]">
+                  Christmas Sub-Filters
+                </span>
+              </div>
+              {(christmasDept !== "All" || christmasSub !== "All") && (
+                <button
+                  onClick={() => {
+                    setChristmasDept("All");
+                    setChristmasSub("All");
+                  }}
+                  className="text-xs font-medium text-[#8A1822] hover:underline"
+                >
+                  Reset Sub-Filters
+                </button>
+              )}
+            </div>
+
+            {/* Department Level Tabs */}
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <span className="text-xs font-semibold text-black/60 mr-1">Department:</span>
+              {(["All", "Men", "Women", "Kids"] as const).map((dept) => (
+                <button
+                  key={dept}
+                  onClick={() => {
+                    setChristmasDept(dept);
+                    setChristmasSub("All");
+                  }}
+                  className={`rounded-full px-3.5 py-1 text-xs font-semibold transition ${
+                    christmasDept === dept
+                      ? "bg-[#8A1822] text-white shadow-xs"
+                      : "border border-black/10 bg-white text-black/80 hover:border-[#8A1822]"
+                  }`}
+                >
+                  {dept === "All" ? "All Festive" : dept}
+                </button>
+              ))}
+            </div>
+
+            {/* Subcategory Pills */}
+            <div className="rounded-xl bg-white/80 p-3 border border-black/5">
+              {christmasDept === "Men" && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-semibold text-[#47352F]">Men's:</span>
+                  <button
+                    onClick={() => setChristmasSub("All")}
+                    className={`rounded-full px-3 py-1 text-xs font-medium ${
+                      christmasSub === "All" ? "bg-[#47352F] text-white" : "bg-black/5 text-black/70"
+                    }`}
+                  >
+                    All Men's
+                  </button>
+                  {["Round Neck", "Polo", "Hoodies"].map((sub) => (
+                    <button
+                      key={sub}
+                      onClick={() => setChristmasSub(sub)}
+                      className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+                        christmasSub.toLowerCase() === sub.toLowerCase()
+                          ? "bg-[#47352F] text-white"
+                          : "bg-black/5 text-black/70 hover:bg-[#47352F]/10"
+                      }`}
+                    >
+                      {sub}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {christmasDept === "Women" && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-semibold text-[#47352F]">Women's:</span>
+                  <button
+                    onClick={() => setChristmasSub("All")}
+                    className={`rounded-full px-3 py-1 text-xs font-medium ${
+                      christmasSub === "All" ? "bg-[#47352F] text-white" : "bg-black/5 text-black/70"
+                    }`}
+                  >
+                    All Women's
+                  </button>
+                  {["Round Neck", "Polo", "Hoodies"].map((sub) => (
+                    <button
+                      key={sub}
+                      onClick={() => setChristmasSub(sub)}
+                      className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+                        christmasSub.toLowerCase() === sub.toLowerCase()
+                          ? "bg-[#47352F] text-white"
+                          : "bg-black/5 text-black/70 hover:bg-[#47352F]/10"
+                      }`}
+                    >
+                      {sub}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {christmasDept === "Kids" && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-semibold text-[#47352F]">Kids':</span>
+                  <button
+                    onClick={() => setChristmasSub("All")}
+                    className={`rounded-full px-3 py-1 text-xs font-medium ${
+                      christmasSub === "All" ? "bg-[#47352F] text-white" : "bg-black/5 text-black/70"
+                    }`}
+                  >
+                    All Kids'
+                  </button>
+                  {["Boys", "Girls"].map((sub) => (
+                    <button
+                      key={sub}
+                      onClick={() => setChristmasSub(sub)}
+                      className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+                        christmasSub.toLowerCase() === sub.toLowerCase()
+                          ? "bg-[#47352F] text-white"
+                          : "bg-black/5 text-black/70 hover:bg-[#47352F]/10"
+                      }`}
+                    >
+                      {sub}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {christmasDept === "All" && (
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-semibold text-[#47352F]">Men:</span>
+                    {["Round Neck", "Polo", "Hoodies"].map((sub) => (
+                      <button
+                        key={sub}
+                        onClick={() => {
+                          setChristmasDept("Men");
+                          setChristmasSub(sub);
+                        }}
+                        className="rounded-full bg-black/5 px-2.5 py-0.5 text-[11px] text-black/80 hover:bg-[#8A1822] hover:text-white transition"
+                      >
+                        {sub}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-semibold text-[#47352F]">Women:</span>
+                    {["Round Neck", "Polo", "Hoodies"].map((sub) => (
+                      <button
+                        key={sub}
+                        onClick={() => {
+                          setChristmasDept("Women");
+                          setChristmasSub(sub);
+                        }}
+                        className="rounded-full bg-black/5 px-2.5 py-0.5 text-[11px] text-black/80 hover:bg-[#8A1822] hover:text-white transition"
+                      >
+                        {sub}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-semibold text-[#47352F]">Kids:</span>
+                    {["Boys", "Girls"].map((sub) => (
+                      <button
+                        key={sub}
+                        onClick={() => {
+                          setChristmasDept("Kids");
+                          setChristmasSub(sub);
+                        }}
+                        className="rounded-full bg-black/5 px-2.5 py-0.5 text-[11px] text-black/80 hover:bg-[#8A1822] hover:text-white transition"
+                      >
+                        {sub}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16">
           {filtered.map((p, i) => (
@@ -318,8 +548,7 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
             href="/shop"
             className="inline-flex items-center gap-3 rounded-full border border-[#47352F] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#47352F] transition hover:bg-[#47352F] hover:text-white"
           >
-            Explore All Styles ({products.length})
-            <span aria-hidden>→</span>
+            Explore All Styles ({products.length})<span aria-hidden>→</span>
           </a>
         </div>
       </div>
@@ -349,9 +578,9 @@ function ProductCard({
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
       >
-        <div
-          onClick={() => addToCart(product)}
-          className="relative aspect-[3/4] overflow-hidden rounded-xl bg-secondary md:aspect-[4/5] border border-black/5"
+        <a
+          href={`/product/${product.id}`}
+          className="relative aspect-[3/4] overflow-hidden rounded-xl bg-secondary md:aspect-[4/5] border border-black/5 block"
         >
           <motion.img
             src={product.img}
@@ -371,30 +600,50 @@ function ProductCard({
           )}
 
           {/* Desktop quick-add overlay */}
-          <div className="absolute inset-x-0 bottom-0 hidden translate-y-full items-center justify-between bg-[#47352F]/95 px-6 py-4 text-white transition-transform duration-500 ease-out group-hover:translate-y-0 md:flex">
-            <span className="text-xs font-medium uppercase tracking-[0.15em]">Quick Add to Bag</span>
-            <span aria-hidden>→</span>
-          </div>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              addToCart(product);
+            }}
+            className="absolute inset-x-0 bottom-0 hidden translate-y-full items-center justify-between bg-[#47352F]/95 px-6 py-4 text-white transition-transform duration-500 ease-out group-hover:translate-y-0 md:flex hover:bg-[#34241f]"
+          >
+            <span className="text-xs font-medium uppercase tracking-[0.15em]">
+              Quick Add to Bag
+            </span>
+            <span aria-hidden>+</span>
+          </button>
 
           {/* Mobile quick-add button */}
           <button
+            type="button"
             onClick={(e) => {
+              e.preventDefault();
               e.stopPropagation();
               addToCart(product);
             }}
             className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#47352F] text-white shadow-lg md:hidden"
             aria-label="Add to bag"
           >
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </button>
-        </div>
+        </a>
 
         <div className="mt-3 md:mt-5">
           <div className="flex items-center justify-between">
             <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#47352F]">
-              {product.category}
+              {product.department && product.subCategory
+                ? `${product.department} · ${product.subCategory}`
+                : product.category}
             </p>
             {product.sizes && product.sizes.length > 0 && (
               <span className="text-[10px] text-muted-foreground uppercase">
@@ -403,9 +652,14 @@ function ProductCard({
             )}
           </div>
 
-          <h3 className="mt-1 text-sm font-medium leading-snug md:text-lg line-clamp-1">
-            {product.name}
-          </h3>
+          <a
+            href={`/product/${product.id}`}
+            className="hover:text-[#47352F] transition-colors block"
+          >
+            <h3 className="mt-1 text-sm font-medium leading-snug md:text-lg line-clamp-1">
+              {product.name}
+            </h3>
+          </a>
 
           <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">{product.note}</p>
 
@@ -428,161 +682,6 @@ function ProductCard({
         </div>
       </div>
     </Reveal>
-  );
-}
-
-/* ------------------------------- Fabric & Craftsmanship Story ------------------------------- */
-
-function FabricStory() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-
-  const fabricList = [
-    { name: "Soft cotton jersey", spec: "Everyday favorite", note: "Comfortable against skin" },
-    { name: "Cotton piqué", spec: "Classic polo texture", note: "A neat look for outings" },
-    { name: "Easy-care fabric", spec: "Made for busy days", note: "Simple to wash and wear" },
-    { name: "Playful colors", spec: "Bright everyday styles", note: "Easy to mix and match" },
-    { name: "Kids-first fit", spec: "Sizes from 2-3Y to 12-13Y", note: "Room to move and play" },
-  ];
-
-  const imgY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
-
-  return (
-    <section id="craftsmanship" ref={ref} className="relative overflow-hidden bg-secondary py-20 md:py-40">
-      {/* Soft color blurs */}
-      <motion.div
-        aria-hidden
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -150]) }}
-        className="absolute -left-20 top-20 h-60 w-60 rounded-full bg-gold/20 blur-3xl"
-      />
-      <motion.div
-        aria-hidden
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 150]) }}
-        className="absolute -right-10 bottom-10 h-80 w-80 rounded-full bg-[#E5CFAC]/20 blur-3xl"
-      />
-
-      <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-10 px-4 md:grid-cols-12 md:gap-16 md:px-12">
-        <div className="md:col-span-5">
-          <Reveal>
-            <p className="eyebrow mb-6 text-[#47352F]">Comfort for Every Adventure</p>
-            <h2 className="font-display text-3xl leading-[1.05] md:text-6xl">
-              Little clothes for<br />
-              <span className="italic text-[#47352F]">big adventures</span><br />
-              and growing days.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2} className="mt-8">
-            <p className="max-w-md text-sm md:text-base leading-relaxed text-muted-foreground">
-              Kids need clothes that keep up. Our collection brings together soft-feel t-shirts
-              and easy silhouettes for school, playdates, family outings, and festive moments.
-            </p>
-          </Reveal>
-
-          <div className="mt-12 space-y-0">
-            {fabricList.map((fab, i) => (
-              <motion.div
-                key={fab.name}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 1, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="grid grid-cols-3 items-baseline gap-2 border-t border-border/60 py-4 md:grid-cols-12 md:gap-4 md:py-5"
-              >
-                <span className="col-span-1 text-[10px] text-muted-foreground md:font-mono md:text-xs">0{i + 1}</span>
-                <span className="col-span-1 text-base font-medium md:col-span-5 md:font-display md:text-xl">
-                  {fab.name}
-                </span>
-                <span className="col-span-3 hidden text-xs italic text-muted-foreground md:block">
-                  {fab.spec}
-                </span>
-                <span className="col-span-1 text-xs text-muted-foreground md:col-span-3">
-                  {fab.note}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative md:col-span-7">
-          <motion.div style={{ y: imgY }} className="relative">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=1200&auto=format&fit=crop&q=85"
-                alt="Comfortable cotton t-shirts for kids"
-                width={1200}
-                height={1500}
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-8 -left-8 hidden bg-white p-8 shadow-2xl md:block rounded-xl border border-black/5">
-              <p className="eyebrow mb-2 text-[#47352F]">Made to Move</p>
-              <p className="font-display text-3xl font-light">Everyday Ease</p>
-              <p className="mt-1 max-w-[200px] text-xs text-muted-foreground">
-                Comfortable styles for little ones on the go.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------- Why Section ------------------------------- */
-
-const WHY = [
-  {
-    n: "01",
-    t: "Room to Move",
-    d: "Easy fits keep kids comfortable through school, play, and family outings.",
-  },
-  {
-    n: "02",
-    t: "Soft Feel",
-    d: "Comfortable everyday tees are made for busy days and repeat wear.",
-  },
-  {
-    n: "03",
-    t: "Easy Everyday Styles",
-    d: "Pick from oversized tees, classic polos, round necks, and playful prints.",
-  },
-  {
-    n: "04",
-    t: "A Style for Every Moment",
-    d: "Find a favorite for school mornings, weekends, and Christmas celebrations.",
-  },
-];
-
-function WhySection() {
-  return (
-    <section className="py-20 md:py-40">
-      <div className="mx-auto max-w-[1600px] px-4 md:px-12">
-        <div className="mb-16 max-w-3xl">
-          <Reveal>
-            <p className="eyebrow mb-6 text-[#47352F]">Design Philosophy</p>
-            <h2 className="font-display text-4xl leading-[1] md:text-7xl">
-              Four principles.<br />
-              <span className="italic text-[#47352F]">One standard of form.</span>
-            </h2>
-          </Reveal>
-        </div>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-4 md:gap-x-12 md:gap-y-16">
-          {WHY.map((w, i) => (
-            <Reveal key={w.n} delay={i * 0.1}>
-              <div className="group">
-                <p className="font-mono text-xs text-muted-foreground">— {w.n}</p>
-                <h3 className="mt-4 font-display text-xl transition-transform duration-700 group-hover:-translate-y-1 md:mt-6 md:text-3xl">
-                  {w.t}
-                </h3>
-                <div className="my-6 h-px w-12 bg-[#47352F]/60 transition-all duration-700 group-hover:w-24" />
-                <p className="text-sm leading-relaxed text-muted-foreground">{w.d}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -625,14 +724,20 @@ function Collections({ onHover }: { onHover: (v: boolean) => void }) {
               Silhouettes
             </p>
             <h2 className="mt-4 font-display text-4xl leading-[1] md:text-7xl">
-              Editorial<br />
+              Editorial
+              <br />
               <span className="italic text-[#E5CFAC]">wardrobe.</span>
             </h2>
           </Reveal>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-x-8 md:gap-y-16">
           {items.map((item) => (
-            <EditorialCard key={item.title} item={item} className="md:col-span-6 md:aspect-[4/5]" onHover={onHover} />
+            <EditorialCard
+              key={item.title}
+              item={item}
+              className="md:col-span-6 md:aspect-[4/5]"
+              onHover={onHover}
+            />
           ))}
         </div>
       </div>
@@ -685,14 +790,12 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
   const { addToCart } = useCart();
 
   return (
-    <section className="relative overflow-hidden bg-white py-20 md:py-40">
+    <section className="relative overflow-hidden bg-[#fbf7f0] py-20 md:py-40">
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-center gap-10 px-4 md:grid-cols-2 md:gap-16 md:px-12">
         <div className="relative order-2 md:order-1">
           <Reveal>
             <p className="eyebrow mb-6 text-[#47352F]">Iconic Signature Piece</p>
-            <h2 className="font-display text-3xl leading-[1.05] md:text-6xl">
-              {featured.name}
-            </h2>
+            <h2 className="font-display text-3xl leading-[1.05] md:text-6xl">{featured.name}</h2>
           </Reveal>
 
           <Reveal delay={0.15} className="mt-6 max-w-md">
@@ -739,107 +842,16 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
         </div>
 
         <div className="relative order-1 md:order-2">
-          <div className="relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-2xl shadow-2xl border border-black/5">
+          <a
+            href={`/product/${featured.id}`}
+            className="block relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-2xl shadow-2xl border border-black/5 group"
+          >
             <img
               src={featured.img}
               alt={featured.name}
-              className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------- Testimonials ------------------------------- */
-
-const STYLE_HIGHLIGHTS = [
-  {
-    q: "Roomy silhouettes for playtime, weekends, and everything in between.",
-    a: "Oversized T-Shirts",
-  },
-  {
-    q: "Classic collars bring an easy, polished touch to everyday outfits.",
-    a: "Polo T-Shirts",
-  },
-  {
-    q: "A familiar round neck and playful colors make getting dressed simple.",
-    a: "Round Neck T-Shirts",
-  },
-  {
-    q: "Festive prints bring a little extra cheer to Christmas celebrations.",
-    a: "Christmas Edition",
-  },
-];
-
-function Testimonials() {
-  return (
-    <section className="relative bg-secondary py-28 md:py-40">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
-        <Reveal>
-          <p className="eyebrow mb-6 text-[#47352F]">Made for Every Moment</p>
-        </Reveal>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {STYLE_HIGHLIGHTS.map((q, i) => (
-            <Reveal key={q.a} delay={i * 0.15}>
-              <div className="relative h-full rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-all duration-700 hover:-translate-y-2 hover:shadow-md md:p-10">
-                <p className="font-display text-lg leading-snug md:text-2xl">{q.q}</p>
-                <div className="mt-8 flex items-center gap-4">
-                  <span className="h-px w-8 bg-[#47352F]" />
-                  <p className="eyebrow text-muted-foreground">{q.a}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------- About ------------------------------- */
-
-function AboutSection() {
-  return (
-    <section id="atelier" className="py-28 md:py-40">
-      <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-16 px-6 md:grid-cols-12 md:px-12">
-        <div className="relative md:col-span-6">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
-            <img
-              src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&auto=format&fit=crop&q=85"
-              alt="Threads of Eden kidswear for everyday adventures"
-              className="h-full w-full object-cover"
-            />
-          </div>
-        </div>
-        <div className="flex flex-col justify-center md:col-span-6 md:pl-8">
-          <Reveal>
-            <p className="eyebrow mb-6 text-[#47352F]">The House of Threads of Eden</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="font-display text-4xl leading-[1] md:text-6xl">
-              Founded on the belief<br />
-              that <span className="italic text-[#47352F]">everyday essentials</span><br />
-              deserve bespoke tailoring.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.25} className="mt-8 max-w-md space-y-5 text-sm md:text-base leading-relaxed text-muted-foreground">
-            <p>
-              We make everyday dressing easier with playful kids' t-shirts for school, weekends,
-              family outings, and the holidays. From relaxed oversized fits to classic polos,
-              there's a style for every little adventure.
-            </p>
-            <p>
-              Choose a favorite from our oversized, polo, round neck, and Christmas edition
-              collections, with age-based sizes made for growing kids.
-            </p>
-          </Reveal>
-          <Reveal delay={0.4} className="mt-10">
-            <a href="/about" className="btn-luxe text-foreground">
-              Read Our Story
-            </a>
-          </Reveal>
+          </a>
         </div>
       </div>
     </section>
@@ -855,7 +867,8 @@ function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
         <Reveal>
           <p className="eyebrow mb-4 text-[#E5CFAC] tracking-[0.3em]">Made for Little Adventures</p>
           <h2 className="font-display text-4xl leading-tight md:text-7xl">
-            Get dressed for fun.<br />
+            Get dressed for fun.
+            <br />
             <span className="italic text-[#E5CFAC]">Find their new favorite tee.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-sm md:text-base text-white/80 leading-relaxed font-light">
@@ -869,12 +882,6 @@ function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
               className="btn-luxe-inverse"
             >
               Shop Kids' T-Shirts
-            </a>
-            <a
-              href="/admin"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/20 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur hover:bg-white hover:text-[#47352F] transition"
-            >
-              Admin Dashboard
             </a>
           </div>
         </Reveal>

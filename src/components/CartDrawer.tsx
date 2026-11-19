@@ -32,7 +32,7 @@ export function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 220 }}
-            className="fixed inset-y-0 right-0 z-[101] flex w-full max-w-md flex-col bg-white shadow-2xl border-l border-black/5"
+            className="fixed inset-y-0 right-0 z-[101] flex w-full max-w-md flex-col bg-[#fbf7f0] shadow-2xl border-l border-black/5"
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-black/5 px-6 py-5">
@@ -44,7 +44,7 @@ export function CartDrawer() {
               </div>
               <button
                 onClick={() => setCartOpen(false)}
-                className="rounded-full p-2 text-black/40 hover:bg-[#f7f7f5] hover:text-black transition-colors"
+                className="rounded-full p-2 text-black/40 hover:bg-[#f2ebe0] hover:text-black transition-colors"
                 aria-label="Close cart"
               >
                 <X className="h-5 w-5" />

@@ -20,7 +20,19 @@ interface CartContextType {
   cartTotal: number;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const DEFAULT_CART_CONTEXT: CartContextType = {
+  items: [],
+  cartOpen: false,
+  setCartOpen: () => {},
+  addToCart: () => {},
+  removeFromCart: () => {},
+  updateQuantity: () => {},
+  clearCart: () => {},
+  cartCount: 0,
+  cartTotal: 0,
+};
+
+const CartContext = createContext<CartContextType>(DEFAULT_CART_CONTEXT);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -29,7 +41,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Load from localStorage
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("thread_and_roots_cart") || localStorage.getItem("arovia_cart_v2");
+      const saved =
+        localStorage.getItem("thread_and_roots_cart") || localStorage.getItem("arovia_cart_v2");
       if (saved) {
         setItems(JSON.parse(saved));
       }
@@ -48,22 +61,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items]);
 
   const addToCart = (product: Product, size?: string, color?: string) => {
-    const defaultSize = size || (product.sizes && product.sizes.length > 0 ? product.sizes[0] : "M");
-    const defaultColor = color || (product.colors && product.colors.length > 0 ? product.colors[0].name : "Standard");
+    const defaultSize =
+      size || (product.sizes && product.sizes.length > 0 ? product.sizes[0] : "M");
+    const defaultColor =
+      color || (product.colors && product.colors.length > 0 ? product.colors[0].name : "Standard");
 
     setItems((prev) => {
       const existingIndex = prev.findIndex(
         (item) =>
           item.product.id === product.id &&
           item.selectedSize === defaultSize &&
-          item.selectedColor === defaultColor
+          item.selectedColor === defaultColor,
       );
 
       if (existingIndex > -1) {
         return prev.map((item, idx) =>
-          idx === existingIndex
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+          idx === existingIndex ? { ...item, quantity: item.quantity + 1 } : item,
         );
       }
       return [
@@ -87,17 +100,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             item.product.id === productId &&
             (!size || item.selectedSize === size) &&
             (!color || item.selectedColor === color)
-          )
-      )
+          ),
+      ),
     );
   };
 
-  const updateQuantity = (
-    productId: string,
-    quantity: number,
-    size?: string,
-    color?: string
-  ) => {
+  const updateQuantity = (productId: string, quantity: number, size?: string, color?: string) => {
     if (quantity <= 0) {
       removeFromCart(productId, size, color);
       return;
@@ -109,7 +117,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           (!size || item.selectedSize === size) &&
           (!color || item.selectedColor === color);
         return matches ? { ...item, quantity } : item;
-      })
+      }),
     );
   };
 
@@ -128,7 +136,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const cartTotal = items.reduce(
     (sum, item) => sum + parsePrice(item.product.price) * item.quantity,
-    0
+    0,
   );
 
   return (
@@ -152,8 +160,5 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
+  return context || DEFAULT_CART_CONTEXT;
 }

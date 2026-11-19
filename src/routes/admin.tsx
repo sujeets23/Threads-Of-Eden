@@ -84,6 +84,7 @@ function AdminPage() {
     deleteProduct,
     toggleStock,
     addCategory,
+    editCategory,
     deleteCategory,
     updateSettings,
     updateOrderStatus,
@@ -137,14 +138,20 @@ function AdminPage() {
                   Live Store Manager
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground">Modify products, pricing, stock, categories, orders & layout</p>
+              <p className="text-xs text-muted-foreground">
+                Modify products, pricing, stock, categories, orders & layout
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={() => {
-                if (window.confirm("Reset all store data, products, settings and orders back to initial presets?")) {
+                if (
+                  window.confirm(
+                    "Reset all store data, products, settings and orders back to initial presets?",
+                  )
+                ) {
                   resetDefaults();
                   setFormSettings(settings);
                   showToast("Store reset to the default kidswear catalog successfully!");
@@ -243,6 +250,10 @@ function AdminPage() {
               addCategory(cat);
               showToast(`Category "${cat}" added successfully.`);
             }}
+            onEditCategory={(oldName, newName) => {
+              editCategory(oldName, newName);
+              showToast(`Category renamed from "${oldName}" to "${newName}".`);
+            }}
             onDeleteCategory={(cat) => {
               if (window.confirm(`Delete category "${cat}"? Products under it will remain.`)) {
                 deleteCategory(cat);
@@ -316,44 +327,56 @@ function OverviewTab({
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">Total Kids' T-Shirts</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">
+              Total Kids' T-Shirts
+            </span>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#47352F]/10 text-[#47352F]">
               <Package className="h-5 w-5" />
             </div>
           </div>
           <p className="mt-4 font-display text-4xl">{products.length}</p>
           <p className="mt-2 text-xs text-muted-foreground">
-            <span className="font-semibold text-[#47352F]">{inStockCount} active</span> · {outOfStockCount} out of stock
+            <span className="font-semibold text-[#47352F]">{inStockCount} active</span> ·{" "}
+            {outOfStockCount} out of stock
           </p>
         </div>
 
         <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">Categories</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">
+              Categories
+            </span>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
               <Layers className="h-5 w-5" />
             </div>
           </div>
           <p className="mt-4 font-display text-4xl">{categories.length - 1}</p>
-          <p className="mt-2 text-xs text-muted-foreground">Oversized, polo, round neck, and Christmas edition t-shirts.</p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Oversized, polo, round neck, and Christmas edition t-shirts.
+          </p>
         </div>
 
         <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">Customer Orders</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">
+              Customer Orders
+            </span>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 text-amber-700">
               <ShoppingBag className="h-5 w-5" />
             </div>
           </div>
           <p className="mt-4 font-display text-4xl">{orders.length}</p>
           <p className="mt-2 text-xs text-muted-foreground">
-            {orders.filter((o) => o.status === "Processing" || o.status === "Pending").length} pending processing
+            {orders.filter((o) => o.status === "Processing" || o.status === "Pending").length}{" "}
+            pending processing
           </p>
         </div>
 
         <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">Total Sales</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-black/50">
+              Total Sales
+            </span>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#47352F]/10 text-[#47352F]">
               <TrendingUp className="h-5 w-5" />
             </div>
@@ -376,8 +399,12 @@ function OverviewTab({
                 <Plus className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">Add or Edit Products</h3>
-                <p className="mt-1 text-xs text-muted-foreground">Create kids' t-shirts, update prices, and manage stock.</p>
+                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">
+                  Add or Edit Products
+                </h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Create kids' t-shirts, update prices, and manage stock.
+                </p>
               </div>
             </button>
 
@@ -389,8 +416,12 @@ function OverviewTab({
                 <Settings className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">Customize Store & Hero</h3>
-                <p className="mt-1 text-xs text-muted-foreground">Change headline, banner image, marquee badges, and text.</p>
+                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">
+                  Customize Store & Hero
+                </h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Change headline, banner image, marquee badges, and text.
+                </p>
               </div>
             </button>
 
@@ -402,8 +433,12 @@ function OverviewTab({
                 <Truck className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">Manage Customer Orders</h3>
-                <p className="mt-1 text-xs text-muted-foreground">Track shipments, verify payments, and change order status.</p>
+                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">
+                  Manage Customer Orders
+                </h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Track shipments, verify payments, and change order status.
+                </p>
               </div>
             </button>
 
@@ -415,8 +450,12 @@ function OverviewTab({
                 <Tag className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">Category Taxonomies</h3>
-                <p className="mt-1 text-xs text-muted-foreground">Organize your apparel lines into Polos, Knits, Basics, etc.</p>
+                <h3 className="text-sm font-semibold text-black group-hover:text-[#47352F]">
+                  Category Taxonomies
+                </h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Organize your apparel lines into Polos, Knits, Basics, etc.
+                </p>
               </div>
             </button>
           </div>
@@ -438,13 +477,15 @@ function OverviewTab({
               <div key={order.id} className="rounded-xl border border-black/5 bg-[#fafafa] p-3">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs font-bold text-black">{order.id}</span>
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                    order.status === "Delivered"
-                      ? "bg-amber-100 text-amber-800"
-                      : order.status === "Shipped"
-                      ? "bg-blue-100 text-blue-800"
-                      : "bg-amber-100 text-amber-800"
-                  }`}>
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                      order.status === "Delivered"
+                        ? "bg-amber-100 text-amber-800"
+                        : order.status === "Shipped"
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-amber-100 text-amber-800"
+                    }`}
+                  >
                     {order.status}
                   </span>
                 </div>
@@ -499,7 +540,9 @@ function ProductsTab({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-display text-2xl">Products Inventory</h2>
-          <p className="text-xs text-muted-foreground">Manage kids' t-shirt styles, pricing, sizes, and stock.</p>
+          <p className="text-xs text-muted-foreground">
+            Manage kids' t-shirt styles, pricing, sizes, and stock.
+          </p>
         </div>
 
         <button
@@ -607,9 +650,7 @@ function ProductsTab({
                     </td>
 
                     {/* Stock Count */}
-                    <td className="px-4 py-4 text-xs font-medium">
-                      {prod.stockCount ?? 20} units
-                    </td>
+                    <td className="px-4 py-4 text-xs font-medium">{prod.stockCount ?? 20} units</td>
 
                     {/* Sizes */}
                     <td className="px-4 py-4">
@@ -636,7 +677,9 @@ function ProductsTab({
                         }`}
                         title="Click to toggle in-stock / out-of-stock"
                       >
-                        <span className={`h-1.5 w-1.5 rounded-full ${prod.inStock ? "bg-amber-600" : "bg-red-600"}`} />
+                        <span
+                          className={`h-1.5 w-1.5 rounded-full ${prod.inStock ? "bg-amber-600" : "bg-red-600"}`}
+                        />
                         {prod.inStock ? "In Stock" : "Sold Out"}
                       </button>
                     </td>
@@ -686,14 +729,18 @@ function CategoriesTab({
   categories,
   products,
   onAddCategory,
+  onEditCategory,
   onDeleteCategory,
 }: {
   categories: string[];
   products: Product[];
   onAddCategory: (category: string) => void;
+  onEditCategory: (oldName: string, newName: string) => void;
   onDeleteCategory: (category: string) => void;
 }) {
   const [newCat, setNewCat] = useState("");
+  const [editingCategory, setEditingCategory] = useState<string | null>(null);
+  const [editingName, setEditingName] = useState("");
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -702,12 +749,32 @@ function CategoriesTab({
     setNewCat("");
   };
 
+  const startEdit = (cat: string) => {
+    setEditingCategory(cat);
+    setEditingName(cat);
+  };
+
+  const cancelEdit = () => {
+    setEditingCategory(null);
+    setEditingName("");
+  };
+
+  const saveEdit = (oldName: string) => {
+    const trimmed = editingName.trim();
+    if (!trimmed || trimmed === oldName) {
+      cancelEdit();
+      return;
+    }
+    onEditCategory(oldName, trimmed);
+    cancelEdit();
+  };
+
   return (
     <div className="max-w-3xl space-y-8">
       <div>
         <h2 className="font-display text-2xl">Product Categories</h2>
         <p className="text-xs text-muted-foreground">
-          Define kidswear lines and storefront groupings.
+          Add, edit, or remove kidswear categories and storefront groupings.
         </p>
       </div>
 
@@ -715,16 +782,17 @@ function CategoriesTab({
       <form onSubmit={handleAdd} className="flex gap-3">
         <input
           type="text"
-          placeholder="New category name (e.g. Vintage Wash, Knitwear)..."
+          placeholder="New category name (e.g. Vintage Wash, Polos, Knitwear)..."
           value={newCat}
           onChange={(e) => setNewCat(e.target.value)}
           className="flex-1 rounded-xl border border-black/10 bg-white px-4 py-3 text-sm focus:border-[#47352F] focus:outline-none"
         />
         <button
           type="submit"
-          className="rounded-xl bg-[#47352F] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-sm hover:bg-[#39291F] transition"
+          className="rounded-xl bg-[#47352F] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-sm hover:bg-[#39291F] transition flex items-center gap-1.5"
         >
-          Add Category
+          <Plus className="h-4 w-4" />
+          <span>Add Category</span>
         </button>
       </form>
 
@@ -737,26 +805,74 @@ function CategoriesTab({
           .filter((c) => c !== "All")
           .map((cat) => {
             const count = products.filter((p) => p.category === cat).length;
+            const isEditing = editingCategory === cat;
+
             return (
               <div
                 key={cat}
-                className="flex items-center justify-between rounded-xl border border-black/5 bg-[#fafafa] px-5 py-3.5"
+                className="flex items-center justify-between rounded-xl border border-black/5 bg-[#fafafa] px-5 py-3.5 transition"
               >
-                <div className="flex items-center gap-3">
-                  <Tag className="h-4 w-4 text-[#47352F]" />
-                  <span className="font-medium text-black">{cat}</span>
-                  <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs text-black/50">
-                    {count} product{count === 1 ? "" : "s"}
-                  </span>
-                </div>
+                {isEditing ? (
+                  <div className="flex flex-1 items-center gap-2 mr-2">
+                    <Tag className="h-4 w-4 text-[#47352F] shrink-0" />
+                    <input
+                      type="text"
+                      autoFocus
+                      value={editingName}
+                      onChange={(e) => setEditingName(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") saveEdit(cat);
+                        if (e.key === "Escape") cancelEdit();
+                      }}
+                      className="flex-1 rounded-lg border border-[#47352F] bg-white px-3 py-1.5 text-sm font-medium text-black focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => saveEdit(cat)}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#47352F] text-white hover:bg-[#39291F]"
+                      title="Save category name"
+                    >
+                      <Check className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={cancelEdit}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg border border-black/10 bg-white text-black/60 hover:text-black"
+                      title="Cancel editing"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-3">
+                      <Tag className="h-4 w-4 text-[#47352F]" />
+                      <span className="font-medium text-black">{cat}</span>
+                      <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs text-black/50">
+                        {count} product{count === 1 ? "" : "s"}
+                      </span>
+                    </div>
 
-                <button
-                  onClick={() => onDeleteCategory(cat)}
-                  className="rounded-lg p-2 text-black/30 hover:bg-red-50 hover:text-red-600 transition"
-                  title="Delete category"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
+                    <div className="flex items-center gap-1">
+                      <button
+                        type="button"
+                        onClick={() => startEdit(cat)}
+                        className="rounded-lg p-2 text-black/40 hover:bg-black/5 hover:text-[#47352F] transition"
+                        title="Edit category name"
+                      >
+                        <Edit3 className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onDeleteCategory(cat)}
+                        className="rounded-lg p-2 text-black/30 hover:bg-red-50 hover:text-red-600 transition"
+                        title="Delete category"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             );
           })}
@@ -848,10 +964,10 @@ function OrdersTab({
                         order.status === "Delivered"
                           ? "bg-amber-100 text-amber-800"
                           : order.status === "Shipped"
-                          ? "bg-blue-100 text-blue-800"
-                          : order.status === "Processing"
-                          ? "bg-amber-100 text-amber-800"
-                          : "bg-gray-100 text-gray-800"
+                            ? "bg-blue-100 text-blue-800"
+                            : order.status === "Processing"
+                              ? "bg-amber-100 text-amber-800"
+                              : "bg-gray-100 text-gray-800"
                       }`}
                     >
                       {order.status}
@@ -867,7 +983,8 @@ function OrdersTab({
                     </span>
                   </div>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    Customer: <strong className="text-black">{order.customerName}</strong> ({order.email}) · {order.phone}
+                    Customer: <strong className="text-black">{order.customerName}</strong> (
+                    {order.email}) · {order.phone}
                   </p>
                 </div>
 
@@ -890,7 +1007,9 @@ function OrdersTab({
               {/* Order Items & Shipping Address */}
               <div className="grid gap-6 md:grid-cols-12">
                 <div className="md:col-span-8 space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-black/50">Items Purchased</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-black/50">
+                    Items Purchased
+                  </p>
                   <div className="divide-y divide-black/5">
                     {order.items.map((item, idx) => (
                       <div key={idx} className="flex items-center justify-between py-2 text-sm">
@@ -905,9 +1024,10 @@ function OrdersTab({
                           <div>
                             <span className="font-medium text-black">{item.name}</span>
                             <div className="text-xs text-muted-foreground">
-                              Size: <strong className="text-black">{item.size || "M"}</strong> · Color:{" "}
-                              <strong className="text-black">{item.color || "Standard"}</strong> · Qty:{" "}
-                              <strong className="text-black">{item.quantity}</strong>
+                              Size: <strong className="text-black">{item.size || "M"}</strong> ·
+                              Color:{" "}
+                              <strong className="text-black">{item.color || "Standard"}</strong> ·
+                              Qty: <strong className="text-black">{item.quantity}</strong>
                             </div>
                           </div>
                         </div>
@@ -918,16 +1038,21 @@ function OrdersTab({
                 </div>
 
                 <div className="md:col-span-4 rounded-xl bg-[#fafafa] p-4 text-xs space-y-2 border border-black/5">
-                  <p className="font-semibold uppercase tracking-wider text-black/60">Shipping Destination</p>
+                  <p className="font-semibold uppercase tracking-wider text-black/60">
+                    Shipping Destination
+                  </p>
                   <p className="text-black/80">{order.address}</p>
                   <p className="text-black/80">
                     {order.city}, PIN {order.pincode}
                   </p>
                   <div className="pt-2 border-t border-black/5">
                     <p className="text-black/60">
-                      Payment: <strong className="uppercase text-black">{order.paymentMethod}</strong>
+                      Payment:{" "}
+                      <strong className="uppercase text-black">{order.paymentMethod}</strong>
                     </p>
-                    <p className="text-sm font-bold text-black mt-1">Total: ₹{order.total.toLocaleString()}</p>
+                    <p className="text-sm font-bold text-black mt-1">
+                      Total: ₹{order.total.toLocaleString()}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -982,7 +1107,9 @@ function SettingsTab({
         <h3 className="font-display text-lg">1. Brand Identity</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Store Name</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Store Name
+            </label>
             <input
               type="text"
               value={formSettings.brandName}
@@ -991,7 +1118,9 @@ function SettingsTab({
             />
           </div>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Brand Tagline</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Brand Tagline
+            </label>
             <input
               type="text"
               value={formSettings.brandTagline}
@@ -1008,7 +1137,9 @@ function SettingsTab({
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Headline Line 1</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Headline Line 1
+            </label>
             <input
               type="text"
               value={formSettings.hero.titleLine1}
@@ -1022,7 +1153,9 @@ function SettingsTab({
             />
           </div>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Headline Line 2 (Italic)</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Headline Line 2 (Italic)
+            </label>
             <input
               type="text"
               value={formSettings.hero.titleLine2}
@@ -1038,7 +1171,9 @@ function SettingsTab({
         </div>
 
         <div>
-          <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Eyebrow / Sub-tag</label>
+          <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+            Eyebrow / Sub-tag
+          </label>
           <input
             type="text"
             value={formSettings.hero.eyebrow}
@@ -1053,7 +1188,9 @@ function SettingsTab({
         </div>
 
         <div>
-          <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Hero Narrative Subtitle</label>
+          <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+            Hero Narrative Subtitle
+          </label>
           <textarea
             rows={3}
             value={formSettings.hero.subtitle}
@@ -1069,7 +1206,9 @@ function SettingsTab({
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">CTA Button Text</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              CTA Button Text
+            </label>
             <input
               type="text"
               value={formSettings.hero.ctaText}
@@ -1083,7 +1222,9 @@ function SettingsTab({
             />
           </div>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">CTA Button Link</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              CTA Button Link
+            </label>
             <input
               type="text"
               value={formSettings.hero.ctaLink}
@@ -1100,7 +1241,9 @@ function SettingsTab({
 
         {/* Hero Banner Image */}
         <div>
-          <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Hero Background Image URL</label>
+          <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+            Hero Background Image URL
+          </label>
           <input
             type="text"
             value={formSettings.hero.imageUrl}
@@ -1120,7 +1263,9 @@ function SettingsTab({
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <span className="text-xs font-semibold uppercase tracking-widest text-white">Hero Preview</span>
+                <span className="text-xs font-semibold uppercase tracking-widest text-white">
+                  Hero Preview
+                </span>
               </div>
             </div>
           )}
@@ -1130,7 +1275,9 @@ function SettingsTab({
       {/* Marquee Ticker */}
       <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm space-y-4">
         <h3 className="font-display text-lg">3. Marquee Running Ticker</h3>
-        <p className="text-xs text-muted-foreground">Short badges that loop infinitely across the storefront</p>
+        <p className="text-xs text-muted-foreground">
+          Short badges that loop infinitely across the storefront
+        </p>
 
         <div className="flex flex-wrap gap-2">
           {formSettings.marqueeItems.map((item, index) => (
@@ -1173,7 +1320,9 @@ function SettingsTab({
         <h3 className="font-display text-lg">4. Contact & Support Details</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Support Email</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Support Email
+            </label>
             <input
               type="email"
               value={formSettings.contact.email}
@@ -1187,7 +1336,9 @@ function SettingsTab({
             />
           </div>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Phone</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Phone
+            </label>
             <input
               type="text"
               value={formSettings.contact.phone}
@@ -1202,7 +1353,9 @@ function SettingsTab({
           </div>
         </div>
         <div>
-          <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Offices / Studios</label>
+          <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+            Offices / Studios
+          </label>
           <input
             type="text"
             value={formSettings.contact.address}
@@ -1247,19 +1400,28 @@ function ProductModal({
   onSave: (product: Omit<Product, "id">) => void;
 }) {
   const [name, setName] = useState(initialProduct?.name || "");
-  const [category, setCategory] = useState(initialProduct?.category || categories[0] || "Oversized T-Shirts");
+  const [category, setCategory] = useState(
+    initialProduct?.category || categories[0] || "Oversized T-Shirts",
+  );
   const [price, setPrice] = useState(initialProduct?.price || "₹799");
   const [originalPrice, setOriginalPrice] = useState(initialProduct?.originalPrice || "₹1,099");
-  const [note, setNote] = useState(initialProduct?.note || "Soft cotton jersey · Comfortable everyday fit");
+  const [note, setNote] = useState(
+    initialProduct?.note || "Soft cotton jersey · Comfortable everyday fit",
+  );
   const [badge, setBadge] = useState(initialProduct?.badge || "");
   const [description, setDescription] = useState(
-    initialProduct?.description ||
-      "A comfortable kids' t-shirt made for everyday adventures."
+    initialProduct?.description || "A comfortable kids' t-shirt made for everyday adventures.",
   );
   const [img, setImg] = useState(initialProduct?.img || PRESET_IMAGES[0].url);
   const [stockCount, setStockCount] = useState<number>(initialProduct?.stockCount ?? 25);
   const [inStock, setInStock] = useState<boolean>(initialProduct?.inStock ?? true);
   const [isFeatured, setIsFeatured] = useState<boolean>(initialProduct?.isFeatured ?? false);
+  const [department, setDepartment] = useState<"Men" | "Women" | "Kids" | "Unisex">(
+    initialProduct?.department || "Kids",
+  );
+  const [subCategory, setSubCategory] = useState<string>(
+    initialProduct?.subCategory || "Round Neck",
+  );
 
   // Sizes selection
   const standardSizes = ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"];
@@ -1271,7 +1433,7 @@ function ProductModal({
       "Soft cotton jersey",
       "Comfortable fit for everyday movement",
       "Machine washable",
-    ]
+    ],
   );
   const [newDetail, setNewDetail] = useState("");
 
@@ -1301,7 +1463,11 @@ function ProductModal({
       name,
       category,
       price: price.startsWith("₹") ? price : `₹${price}`,
-      originalPrice: originalPrice ? (originalPrice.startsWith("₹") ? originalPrice : `₹${originalPrice}`) : undefined,
+      originalPrice: originalPrice
+        ? originalPrice.startsWith("₹")
+          ? originalPrice
+          : `₹${originalPrice}`
+        : undefined,
       note,
       badge: badge.trim() || undefined,
       description,
@@ -1315,6 +1481,12 @@ function ProductModal({
         { name: "Ocean Blue", hex: "#3A668C" },
         { name: "Chalk White", hex: "#FFFFFF" },
       ],
+      department: category.toLowerCase().includes("christmas")
+        ? department
+        : initialProduct?.department,
+      subCategory: category.toLowerCase().includes("christmas")
+        ? subCategory
+        : initialProduct?.subCategory,
     });
   };
 
@@ -1327,7 +1499,9 @@ function ProductModal({
             <h3 className="font-display text-xl font-medium">
               {initialProduct ? "Edit T-Shirt / Product" : "Add New T-Shirt / Product"}
             </h3>
-            <p className="text-xs text-muted-foreground">All changes are immediately reflected on the live website</p>
+            <p className="text-xs text-muted-foreground">
+              All changes are immediately reflected on the live website
+            </p>
           </div>
           <button
             onClick={onClose}
@@ -1341,7 +1515,9 @@ function ProductModal({
         <form onSubmit={handleSubmit} className="max-h-[80vh] overflow-y-auto p-6 space-y-6">
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Product Name *</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+                Product Name *
+              </label>
               <input
                 type="text"
                 required
@@ -1353,7 +1529,9 @@ function ProductModal({
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Category *</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+                Category *
+              </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -1368,9 +1546,76 @@ function ProductModal({
             </div>
           </div>
 
+          {/* Christmas Sub-Filter Fields */}
+          {category.toLowerCase().includes("christmas") && (
+            <div className="rounded-xl border border-[#8A1822]/20 bg-[#8A1822]/5 p-4 space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#8A1822] flex items-center gap-1.5">
+                <span>🎄</span> Christmas Sub-Filter Tagging
+              </span>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+                    Department *
+                  </label>
+                  <select
+                    value={department}
+                    onChange={(e) => {
+                      const newDept = e.target.value as "Men" | "Women" | "Kids";
+                      setDepartment(newDept);
+                      if (newDept === "Kids") {
+                        setSubCategory("Boys");
+                      } else {
+                        setSubCategory("Round Neck");
+                      }
+                    }}
+                    className="mt-1 w-full rounded-xl border border-black/10 bg-white px-4 py-2 text-sm focus:border-[#47352F] focus:outline-none"
+                  >
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                    <option value="Kids">Kids</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+                    Sub-Category *
+                  </label>
+                  <select
+                    value={subCategory}
+                    onChange={(e) => setSubCategory(e.target.value)}
+                    className="mt-1 w-full rounded-xl border border-black/10 bg-white px-4 py-2 text-sm focus:border-[#47352F] focus:outline-none"
+                  >
+                    {department === "Men" && (
+                      <>
+                        <option value="Round Neck">Round Neck</option>
+                        <option value="Polo">Polo</option>
+                        <option value="Hoodies">Hoodies</option>
+                      </>
+                    )}
+                    {department === "Women" && (
+                      <>
+                        <option value="Round Neck">Round Neck</option>
+                        <option value="Polo">Polo</option>
+                        <option value="Hoodies">Hoodies</option>
+                      </>
+                    )}
+                    {department === "Kids" && (
+                      <>
+                        <option value="Boys">Boys</option>
+                        <option value="Girls">Girls</option>
+                      </>
+                    )}
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="grid gap-4 sm:grid-cols-3">
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Price *</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+                Price *
+              </label>
               <input
                 type="text"
                 required
@@ -1381,7 +1626,9 @@ function ProductModal({
               />
             </div>
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Original MRP (Optional)</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+                Original MRP (Optional)
+              </label>
               <input
                 type="text"
                 value={originalPrice}
@@ -1391,7 +1638,9 @@ function ProductModal({
               />
             </div>
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Badge (Optional)</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+                Badge (Optional)
+              </label>
               <input
                 type="text"
                 value={badge}
@@ -1403,7 +1652,9 @@ function ProductModal({
           </div>
 
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Fabric / GSM Note</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Fabric / GSM Note
+            </label>
             <input
               type="text"
               value={note}
@@ -1414,7 +1665,9 @@ function ProductModal({
           </div>
 
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Description</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Description
+            </label>
             <textarea
               rows={3}
               value={description}
@@ -1425,7 +1678,9 @@ function ProductModal({
 
           {/* Image URL & Preset Picker */}
           <div className="space-y-3">
-            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Product Image URL</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+              Product Image URL
+            </label>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -1438,7 +1693,9 @@ function ProductModal({
 
             {/* Quick Presets */}
             <div>
-              <span className="text-[11px] font-medium text-black/50">Or pick a curated t-shirt photo preset:</span>
+              <span className="text-[11px] font-medium text-black/50">
+                Or pick a curated t-shirt photo preset:
+              </span>
               <div className="mt-2 flex flex-wrap gap-2">
                 {PRESET_IMAGES.map((preset) => (
                   <button
@@ -1460,7 +1717,11 @@ function ProductModal({
             {/* Image Preview */}
             {img && (
               <div className="mt-2 flex items-center gap-3 rounded-xl border border-black/5 bg-[#fafafa] p-2">
-                <img src={img} alt="Preview" className="h-16 w-14 rounded-lg object-cover border border-black/10" />
+                <img
+                  src={img}
+                  alt="Preview"
+                  className="h-16 w-14 rounded-lg object-cover border border-black/10"
+                />
                 <span className="text-xs text-muted-foreground">Image preview active</span>
               </div>
             )}
@@ -1499,9 +1760,16 @@ function ProductModal({
             </label>
             <div className="space-y-1.5 mb-2">
               {details.map((d, i) => (
-                <div key={i} className="flex items-center justify-between rounded-lg bg-[#f7f7f5] px-3 py-1.5 text-xs">
+                <div
+                  key={i}
+                  className="flex items-center justify-between rounded-lg bg-[#f7f7f5] px-3 py-1.5 text-xs"
+                >
                   <span>{d}</span>
-                  <button type="button" onClick={() => removeDetail(i)} className="text-black/40 hover:text-red-600">
+                  <button
+                    type="button"
+                    onClick={() => removeDetail(i)}
+                    className="text-black/40 hover:text-red-600"
+                  >
                     <X className="h-3.5 w-3.5" />
                   </button>
                 </div>
@@ -1528,7 +1796,9 @@ function ProductModal({
           {/* Stock & Featured Toggles */}
           <div className="grid gap-4 sm:grid-cols-3 pt-2 border-t border-black/5">
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">Stock Count</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-black/60">
+                Stock Count
+              </label>
               <input
                 type="number"
                 value={stockCount}

@@ -21,6 +21,8 @@ import { Footer } from "../components/Footer";
 import { CartProvider } from "../context/CartContext";
 import { CartDrawer } from "../components/CartDrawer";
 import { StoreProvider } from "../context/StoreContext";
+import { AuthProvider } from "../context/AuthContext";
+import { Toaster } from "sonner";
 
 function NotFoundComponent() {
   return (
@@ -32,7 +34,9 @@ function NotFoundComponent() {
           The page you seek does not exist. Return to the ritual.
         </p>
         <div className="mt-8">
-          <Link to="/" className="btn-luxe">Return home</Link>
+          <Link to="/" className="btn-luxe">
+            Return home
+          </Link>
         </div>
       </div>
     </div>
@@ -53,31 +57,47 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
         <p className="mt-3 text-sm text-muted-foreground">
           A quiet error interrupted the page. You may try again.
         </p>
+        {import.meta.env.DEV && Boolean(error) && (
+          <div className="mt-4 max-h-48 overflow-auto rounded-lg border border-red-200 bg-red-50 p-3 text-left text-xs font-mono text-red-700">
+            {error instanceof Error ? error.message : String(error)}
+          </div>
+        )}
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="btn-luxe"
           >
             Try again
           </button>
-          <a href="/" className="btn-luxe">Go home</a>
+          <a href="/" className="btn-luxe">
+            Go home
+          </a>
         </div>
       </div>
     </div>
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
-  {
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Threads of Eden — Kids' T-Shirts for Little Adventures" },
-      { name: "description", content: "Shop kids' oversized t-shirts, polo t-shirts, round neck tees, and festive Christmas edition styles." },
+      {
+        name: "description",
+        content:
+          "Shop kids' oversized t-shirts, polo t-shirts, round neck tees, and festive Christmas edition styles.",
+      },
       { name: "author", content: "Threads of Eden" },
       { property: "og:title", content: "Threads of Eden — Kids' T-Shirts for Little Adventures" },
-      { property: "og:description", content: "Playful oversized, polo, round neck, and Christmas edition t-shirts for kids." },
+      {
+        property: "og:description",
+        content: "Playful oversized, polo, round neck, and Christmas edition t-shirts for kids.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -126,7 +146,12 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <StoreProvider>
-        <AppLayout />
+        <AuthProvider>
+          <CartProvider>
+            <AppLayout />
+            <Toaster position="bottom-right" richColors />
+          </CartProvider>
+        </AuthProvider>
       </StoreProvider>
     </QueryClientProvider>
   );
@@ -134,21 +159,11 @@ function RootComponent() {
 
 function AppLayout() {
   return (
-    <CartProvider>
+    <>
       <Nav />
       <Outlet />
       <Footer />
       <CartDrawer />
-
-      {/* Floating Admin Quick Access Badge */}
-      <a
-        href="/admin"
-        title="Open Store Admin Panel"
-        className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 rounded-full border border-[#47352F] bg-white/95 px-4 py-2.5 text-xs font-semibold tracking-wider text-[#47352F] shadow-xl backdrop-blur transition hover:bg-[#47352F] hover:text-white"
-      >
-        <span className="flex h-2 w-2 rounded-full bg-[#47352F] animate-pulse" />
-        Admin Panel
-      </a>
-    </CartProvider>
+    </>
   );
 }

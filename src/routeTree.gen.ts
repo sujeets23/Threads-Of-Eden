@@ -19,6 +19,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as IngredientsRouteImport } from './routes/ingredients'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as OrderConfirmationRouteImport } from './routes/order-confirmation'
 import { Route as OrderTrackingRouteImport } from './routes/order-tracking'
 import { Route as PressRouteImport } from './routes/press'
@@ -28,6 +29,7 @@ import { Route as ReturnsRouteImport } from './routes/returns'
 import { Route as RitualGuideRouteImport } from './routes/ritual-guide'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SizeGuideRouteImport } from './routes/size-guide'
 import { Route as SustainabilityRouteImport } from './routes/sustainability'
@@ -84,6 +86,11 @@ const IngredientsRoute = IngredientsRouteImport.update({
   path: '/ingredients',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrderConfirmationRoute = OrderConfirmationRouteImport.update({
   id: '/order-confirmation',
   path: '/order-confirmation',
@@ -129,6 +136,11 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -166,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/ingredients': typeof IngredientsRoute
+  '/login': typeof LoginRoute
   '/order-confirmation': typeof OrderConfirmationRoute
   '/order-tracking': typeof OrderTrackingRoute
   '/press': typeof PressRoute
@@ -175,6 +188,7 @@ export interface FileRoutesByFullPath {
   '/ritual-guide': typeof RitualGuideRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/size-guide': typeof SizeGuideRoute
   '/sustainability': typeof SustainabilityRoute
@@ -192,6 +206,7 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/ingredients': typeof IngredientsRoute
+  '/login': typeof LoginRoute
   '/order-confirmation': typeof OrderConfirmationRoute
   '/order-tracking': typeof OrderTrackingRoute
   '/press': typeof PressRoute
@@ -201,6 +216,7 @@ export interface FileRoutesByTo {
   '/ritual-guide': typeof RitualGuideRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/size-guide': typeof SizeGuideRoute
   '/sustainability': typeof SustainabilityRoute
@@ -219,6 +235,7 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/ingredients': typeof IngredientsRoute
+  '/login': typeof LoginRoute
   '/order-confirmation': typeof OrderConfirmationRoute
   '/order-tracking': typeof OrderTrackingRoute
   '/press': typeof PressRoute
@@ -228,6 +245,7 @@ export interface FileRoutesById {
   '/ritual-guide': typeof RitualGuideRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/size-guide': typeof SizeGuideRoute
   '/sustainability': typeof SustainabilityRoute
@@ -247,6 +265,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/ingredients'
+    | '/login'
     | '/order-confirmation'
     | '/order-tracking'
     | '/press'
@@ -256,6 +275,7 @@ export interface FileRouteTypes {
     | '/ritual-guide'
     | '/shipping'
     | '/shop'
+    | '/signup'
     | '/sitemap.xml'
     | '/size-guide'
     | '/sustainability'
@@ -273,6 +293,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/ingredients'
+    | '/login'
     | '/order-confirmation'
     | '/order-tracking'
     | '/press'
@@ -282,6 +303,7 @@ export interface FileRouteTypes {
     | '/ritual-guide'
     | '/shipping'
     | '/shop'
+    | '/signup'
     | '/sitemap.xml'
     | '/size-guide'
     | '/sustainability'
@@ -299,6 +321,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/ingredients'
+    | '/login'
     | '/order-confirmation'
     | '/order-tracking'
     | '/press'
@@ -308,6 +331,7 @@ export interface FileRouteTypes {
     | '/ritual-guide'
     | '/shipping'
     | '/shop'
+    | '/signup'
     | '/sitemap.xml'
     | '/size-guide'
     | '/sustainability'
@@ -326,6 +350,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   FaqRoute: typeof FaqRoute
   IngredientsRoute: typeof IngredientsRoute
+  LoginRoute: typeof LoginRoute
   OrderConfirmationRoute: typeof OrderConfirmationRoute
   OrderTrackingRoute: typeof OrderTrackingRoute
   PressRoute: typeof PressRoute
@@ -335,6 +360,7 @@ export interface RootRouteChildren {
   RitualGuideRoute: typeof RitualGuideRoute
   ShippingRoute: typeof ShippingRoute
   ShopRoute: typeof ShopRoute
+  SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SizeGuideRoute: typeof SizeGuideRoute
   SustainabilityRoute: typeof SustainabilityRoute
@@ -414,6 +440,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IngredientsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/order-confirmation': {
       id: '/order-confirmation'
       path: '/order-confirmation'
@@ -477,6 +510,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -526,6 +566,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   FaqRoute: FaqRoute,
   IngredientsRoute: IngredientsRoute,
+  LoginRoute: LoginRoute,
   OrderConfirmationRoute: OrderConfirmationRoute,
   OrderTrackingRoute: OrderTrackingRoute,
   PressRoute: PressRoute,
@@ -535,6 +576,7 @@ const rootRouteChildren: RootRouteChildren = {
   RitualGuideRoute: RitualGuideRoute,
   ShippingRoute: ShippingRoute,
   ShopRoute: ShopRoute,
+  SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SizeGuideRoute: SizeGuideRoute,
   SustainabilityRoute: SustainabilityRoute,

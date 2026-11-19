@@ -34,6 +34,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  --color-white: #fbf7f0;
   --color-cream: var(--cream);
   --color-beige: var(--beige);
   --color-forest: var(--forest);
@@ -55,9 +56,9 @@
 
   --background: #f7f2eb;
   --foreground: #2a201d;
-  --card: #fffaf5;
+  --card: #fbf7f0;
   --card-foreground: #2a201d;
-  --popover: #fffaf5;
+  --popover: #fbf7f0;
   --popover-foreground: #2a201d;
   --primary: #47352f;
   --primary-foreground: #fff7f1;
@@ -68,7 +69,7 @@
   --accent: #c39a5b;
   --accent-foreground: #2a201d;
   --destructive: oklch(0.55 0.19 27);
-  --destructive-foreground: #ffffff;
+  --destructive-foreground: #fbf7f0;
   --border: #dcc9b8;
   --input: #eae0d5;
   --ring: #432f26;
@@ -110,8 +111,28 @@
 
   ::selection {
     background: #47352f;
-    color: #ffffff;
+    color: #fbf7f0;
   }
+}
+
+/* Warm Cream Theme Enforcement: replace cold harsh white with warm organic luxury cream */
+.bg-white,
+.bg-\[\#fafafa\],
+.bg-\[\#ffffff\],
+.bg-\[\#fff\] {
+  background-color: #fbf7f0 !important;
+}
+
+.bg-cream-soft {
+  background-color: #fbf7f0 !important;
+}
+
+.bg-cream-base {
+  background-color: #f7f2eb !important;
+}
+
+.bg-cream-warm {
+  background-color: #f5efe8 !important;
 }
 
 @utility eyebrow {

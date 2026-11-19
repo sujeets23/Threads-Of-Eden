@@ -28,6 +28,7 @@ interface StoreContextType {
   deleteProduct: (id: string) => void;
   toggleStock: (id: string) => void;
   addCategory: (category: string) => void;
+  editCategory: (oldName: string, newName: string) => void;
   deleteCategory: (category: string) => void;
   updateSettings: (updates: Partial<StoreSettings>) => void;
   addOrder: (order: Omit<Order, "id" | "createdAt">) => Order;
@@ -36,7 +37,38 @@ interface StoreContextType {
   getProduct: (id: string) => Product | undefined;
 }
 
-const StoreContext = createContext<StoreContextType | undefined>(undefined);
+export const DEFAULT_STORE_CONTEXT: StoreContextType = {
+  products: INITIAL_PRODUCTS,
+  categories: INITIAL_CATEGORIES,
+  settings: INITIAL_SETTINGS,
+  orders: INITIAL_ORDERS,
+  addProduct: (product) => ({
+    ...product,
+    id: product.id || "prod_" + Math.random().toString(36).slice(2, 8),
+    details: product.details || [],
+    sizes: product.sizes || ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
+    colors: product.colors || [],
+    inStock: product.inStock !== false,
+    stockCount: product.stockCount || 10,
+  }),
+  updateProduct: () => {},
+  deleteProduct: () => {},
+  toggleStock: () => {},
+  addCategory: () => {},
+  editCategory: () => {},
+  deleteCategory: () => {},
+  updateSettings: () => {},
+  addOrder: (order) => ({
+    ...order,
+    id: "ORD-" + Math.floor(10000 + Math.random() * 90000),
+    createdAt: new Date().toISOString(),
+  }),
+  updateOrderStatus: () => {},
+  resetDefaults: () => {},
+  getProduct: (id: string) => INITIAL_PRODUCTS.find((p) => p.id === id),
+};
+
+const StoreContext = createContext<StoreContextType>(DEFAULT_STORE_CONTEXT);
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
@@ -80,7 +112,14 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   }, [syncFromStorage]);
 
   const addProduct = (newProdData: Omit<Product, "id"> & { id?: string }): Product => {
-    const slug = newProdData.id || newProdData.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") + "-" + Math.random().toString(36).substring(2, 6);
+    const slug =
+      newProdData.id ||
+      newProdData.name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "") +
+        "-" +
+        Math.random().toString(36).substring(2, 6);
     const newProduct: Product = {
       ...newProdData,
       id: slug,
@@ -110,9 +149,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleStock = (id: string) => {
-    const updated = products.map((p) =>
-      p.id === id ? { ...p, inStock: !p.inStock } : p
-    );
+    const updated = products.map((p) => (p.id === id ? { ...p, inStock: !p.inStock } : p));
     setProducts(updated);
     saveStoredProducts(updated);
   };
@@ -123,6 +160,21 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     const updated = [...categories, trimmed];
     setCategories(updated);
     saveStoredCategories(updated);
+  };
+
+  const editCategory = (oldName: string, newName: string) => {
+    const trimmedNew = newName.trim();
+    if (!trimmedNew || oldName === "All" || trimmedNew === oldName) return;
+    const updatedCategories = categories.map((c) => (c === oldName ? trimmedNew : c));
+    setCategories(updatedCategories);
+    saveStoredCategories(updatedCategories);
+
+    // Also update any products categorized under the previous name
+    const updatedProducts = products.map((p) =>
+      p.category === oldName ? { ...p, category: trimmedNew } : p,
+    );
+    setProducts(updatedProducts);
+    saveStoredProducts(updatedProducts);
   };
 
   const deleteCategory = (categoryName: string) => {
@@ -192,6 +244,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         deleteProduct,
         toggleStock,
         addCategory,
+        editCategory,
         deleteCategory,
         updateSettings,
         addOrder,
@@ -207,8 +260,5 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
 
 export function useStore() {
   const context = useContext(StoreContext);
-  if (!context) {
-    throw new Error("useStore must be used within a StoreProvider");
-  }
-  return context;
+  return context || DEFAULT_STORE_CONTEXT;
 }
