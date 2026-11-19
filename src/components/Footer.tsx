@@ -162,7 +162,7 @@ export function Footer() {
             © 2026 {settings.brandName || "Threads of Eden"} — All rights reserved
           </p>
           <div className="flex items-center gap-4 text-xs text-[#3b2d29]/60">
-            <span>7-Day Return Policy</span>
+            <span>7-Day Return & Replacement Policy</span>
             <span>·</span>
             <span>Worldwide Express Delivery</span>
           </div>

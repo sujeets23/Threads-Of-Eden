@@ -254,10 +254,14 @@ function ProductDetailPage() {
                 <Truck className="h-4 w-4 text-[#47352F]" />
                 <span className="text-[11px] text-muted-foreground">Free Express Shipping</span>
               </div>
-              <div className="flex flex-col items-center gap-1">
+              <Link
+                to="/returns"
+                className="flex flex-col items-center gap-1 hover:text-[#47352F] transition"
+                title="View Return & Replacement Policy"
+              >
                 <RefreshCw className="h-4 w-4 text-[#47352F]" />
-                <span className="text-[11px] text-muted-foreground">7-Day Return Policy</span>
-              </div>
+                <span className="text-[11px] text-muted-foreground">7-Day Replacement</span>
+              </Link>
               <div className="flex flex-col items-center gap-1">
                 <ShieldCheck className="h-4 w-4 text-[#47352F]" />
                 <span className="text-[11px] text-muted-foreground">Original Guarantee</span>

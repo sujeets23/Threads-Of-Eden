@@ -32,7 +32,7 @@ export function Nav() {
   const navLinks = [
     { label: "Shop", href: "/shop" },
     { label: "Size & Fit Guide", href: "/size-guide" },
-    { label: "Atelier Story", href: "/about" },
+    { label: "About Us", href: "/about" },
   ];
 
   return (

@@ -58,11 +58,15 @@ const FAQS = [
     items: [
       {
         q: "What is your return & exchange policy?",
-        a: "We offer a hassle-free 7-day return and size exchange policy on all unworn garments with original tags intact.",
+        a: "Every piece is custom-made to order, so returns or exchanges for wrong size or change of mind are not possible. However, if your order arrives damaged, misprinted, or defective, claims can be raised within 7 days of delivery with an unboxing video, clear photos of the defect, and packaging photos.",
       },
       {
-        q: "How do I initiate a return or exchange?",
-        a: "Email returns@threadandroots.com with your Order ID and return/exchange request within 7 days of delivery. Our team will arrange a prompt reverse pickup.",
+        q: "What do I need to provide for a claim on damaged or defective items?",
+        a: "Please provide an unboxing video of your package, clear pictures of the defect, and photos of the original packaging within 7 days of delivery. Once verified, a replacement order is placed within 2 business days or a refund is processed within 6–10 working days.",
+      },
+      {
+        q: "Can I exchange for a different size if it doesn't fit?",
+        a: "Since all garments are custom-made to order, we cannot process exchanges for wrong size or preference. Please be sure to review our detailed Size Guide before placing your order.",
       },
     ],
   },
