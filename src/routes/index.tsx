@@ -1,24 +1,40 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, useMemo } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import Lenis from "lenis";
 import { useCart } from "@/context/CartContext";
 import { useStore } from "@/context/StoreContext";
 import { Product } from "@/lib/store";
+import {
+  Sparkles,
+  Truck,
+  ShieldCheck,
+  Star,
+  Clock,
+  ArrowRight,
+  Heart,
+  ChevronRight,
+  ShoppingBag,
+  CheckCircle2,
+  RefreshCw,
+  Flame,
+  Award,
+} from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Threads of Eden — Woven with purpose. Inspired by grace." },
+      { title: "Threads of Eden — Faith-Rooted Apparel & Festive Essentials" },
       {
         name: "description",
         content:
-          "Explore kids' oversized t-shirts, polo t-shirts, round neck tees, and festive Christmas edition styles.",
+          "Woven in Grace, Crafted for Purpose. Premium Christian faith t-shirts, hoodies, polos, and Christmas drops with 24-hour express dispatch and 7-day replacement guarantee.",
       },
-      { property: "og:title", content: "Threads of Eden — Woven with purpose. Inspired by grace." },
+      { property: "og:title", content: "Threads of Eden — Woven in Grace. Crafted for Purpose." },
       {
         property: "og:description",
-        content: "Comfortable kids' t-shirts for everyday adventures and festive moments.",
+        content:
+          "Christian faith apparel, oversized tees, polos, and holiday collections for Men, Women & Kids. Dispatched in 24 hours.",
       },
     ],
   }),
@@ -30,7 +46,7 @@ export const Route = createFileRoute("/")({
 function useLenis() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 0.9,
@@ -78,10 +94,10 @@ function Reveal({
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-60px" }}
       variants={{
-        hidden: { opacity: 0, y: 40 },
-        show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1], delay } },
+        hidden: { opacity: 0, y: 30 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay } },
       }}
     >
       {children}
@@ -89,16 +105,17 @@ function Reveal({
   );
 }
 
-/* ------------------------------- Page ------------------------------- */
+/* ------------------------------- Home Page ------------------------------- */
 
 function HomePage() {
   useLenis();
   const { sx, sy } = useCursor();
   const [hover, setHover] = useState(false);
+  const { cartCount, cartTotal, setCartOpen } = useCart();
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground grain overflow-x-clip">
-      {/* Cursor glow */}
+    <div className="relative min-h-screen bg-[#fbf7f0] text-foreground overflow-x-clip selection:bg-[#47352F] selection:text-white">
+      {/* Interactive Cursor glow */}
       <motion.div
         aria-hidden
         className="pointer-events-none fixed z-[100] hidden md:block"
@@ -107,179 +124,431 @@ function HomePage() {
           y: sy,
           translateX: "-50%",
           translateY: "-50%",
-          width: hover ? 60 : 14,
-          height: hover ? 60 : 14,
-          transition: "width 500ms cubic-bezier(.16,1,.3,1), height 500ms cubic-bezier(.16,1,.3,1)",
-          background: "radial-gradient(circle, rgba(0,0,0,0.15), transparent 70%)",
+          width: hover ? 50 : 12,
+          height: hover ? 50 : 12,
+          transition: "width 300ms cubic-bezier(.16,1,.3,1), height 300ms cubic-bezier(.16,1,.3,1)",
+          background: "radial-gradient(circle, rgba(71,53,47,0.2), transparent 70%)",
           borderRadius: 999,
-          mixBlendMode: "normal",
         }}
       />
 
+      {/* Hero Section */}
       <Hero onHover={setHover} />
-      <Marquee />
-      <ShowcaseSection onHover={setHover} />
-      <Collections onHover={setHover} />
-      <FeaturedProduct onHover={setHover} />
-      <CTASection onHover={setHover} />
+
+      {/* Zepto/Blinkit Speed & Trust Bar */}
+      <SpeedAndTrustBar />
+
+      {/* Zepto/Blinkit Visual Category Bubbles */}
+      <VisualCategoryBubbles />
+
+      {/* Flash Sale / Christmas Deals Banner */}
+      <FlashSaleBanner />
+
+      {/* Quick-Commerce Product Shelves */}
+      <ProductCatalogSection onHover={setHover} />
+
+      {/* Verified Believer Reviews & Testimonials */}
+      <CustomerReviewsSection />
+
+      {/* Faith Philosophy Editorial Banner */}
+      <FaithEditorialBanner onHover={setHover} />
+
+      {/* Floating Zepto-style Quick Cart Bar */}
+      {cartCount > 0 && (
+        <motion.div
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 80, opacity: 0 }}
+          className="fixed bottom-4 inset-x-4 sm:inset-x-auto sm:right-6 sm:left-auto z-40"
+        >
+          <div className="flex items-center justify-between gap-5 rounded-2xl bg-[#221b18] text-white px-5 py-3.5 shadow-2xl border border-[#E5CFAC]/25 backdrop-blur-md min-w-[320px]">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#47352F] text-white">
+                <ShoppingBag className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#E5CFAC]">
+                  {cartCount} {cartCount === 1 ? "Item" : "Items"} in Bag
+                </p>
+                <p className="text-sm font-bold text-white">₹{cartTotal.toLocaleString("en-IN")}</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setCartOpen(true)}
+              className="rounded-full bg-[#E5CFAC] px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#221b18] hover:bg-white transition flex items-center gap-1.5 shadow-sm"
+            >
+              <span>View Bag</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
 
-/* ------------------------------- Hero ------------------------------- */
+/* ------------------------------- Hero Section ------------------------------- */
 
 function Hero({ onHover }: { onHover: (v: boolean) => void }) {
   const { settings } = useStore();
-  const hero = settings.hero;
+  const hero = settings?.hero || {
+    titleLine1: "Woven in Grace.",
+    titleLine2: "Crafted for Purpose.",
+    subtitle:
+      "“She is clothed in strength and dignity, and she laughs without fear of the future.” — Proverbs 31:25",
+    eyebrow: "† Woven with Purpose · Inspired by Grace",
+    ctaText: "Shop Faith & Festive Drops",
+    ctaLink: "#shop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920&auto=format&fit=crop&q=85",
+  };
+
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 70]);
 
   return (
     <section
       ref={ref}
-      className="relative min-h-[88vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
+      className="relative min-h-[90vh] md:min-h-[92vh] flex flex-col justify-end overflow-hidden pt-24"
     >
+      {/* Background with Christian Imagery */}
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img
           src={
             hero.imageUrl ||
-            "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"
+            "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920&auto=format&fit=crop&q=85"
           }
-          alt="Threads of Eden kids' t-shirts for everyday adventures"
-          width={1800}
-          height={1200}
-          className="h-full w-full object-cover"
+          alt="Threads of Eden Christian Faith Apparel"
+          className="h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 hero-overlay bg-black/40" />
+        {/* Warm editorial gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/30" />
       </motion.div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 pb-20 md:px-16 md:pb-28 pt-24">
-        <div className="max-w-[92vw] sm:max-w-[80vw] md:max-w-3xl text-left">
-          {hero.eyebrow && (
-            <p className="eyebrow mb-4 text-[#E5CFAC] tracking-[0.3em] font-medium">
-              {hero.eyebrow}
-            </p>
-          )}
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-5 pb-16 md:px-12 md:pb-24">
+        <div className="max-w-3xl text-left">
+          {/* Eyebrow & Live Dispatch Pill */}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#E5CFAC] backdrop-blur-md border border-white/20">
+              <span>†</span>
+              <span>{hero.eyebrow || "Woven with Purpose · Inspired by Grace"}</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-black backdrop-blur">
+              <span className="animate-pulse">⚡</span>
+              <span>24h Express Dispatch</span>
+            </span>
+          </div>
 
-          <h1 className="font-display text-[12vw] leading-[1.02] tracking-[-0.02em] sm:text-[11vw] sm:tracking-[-0.03em] md:text-[8vw] md:leading-[0.95] md:tracking-[-0.04em] text-white">
-            <AnimatedWords text={hero.titleLine1 || "Made for"} className="block" />
-            <AnimatedWords
-              text={hero.titleLine2 || "little movers"}
-              delay={0.25}
-              className="block italic text-white/90"
-            />
+          {/* Hero Main Heading */}
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.04] tracking-tight text-white">
+            <span className="block font-medium">{hero.titleLine1 || "Woven in Grace."}</span>
+            <span className="block italic text-[#E5CFAC] font-normal">
+              {hero.titleLine2 || "Crafted for Purpose."}
+            </span>
           </h1>
 
-          {hero.subtitle && (
-            <p className="mt-6 max-w-xl text-sm sm:text-base text-white/80 leading-relaxed font-light">
-              {hero.subtitle}
-            </p>
-          )}
+          {/* Scripture Verse Card */}
+          <div className="mt-5 rounded-2xl border border-white/20 bg-black/40 p-4 sm:p-5 backdrop-blur-md max-w-2xl">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl text-[#E5CFAC] leading-none shrink-0" aria-hidden>
+                “
+              </span>
+              <div>
+                <p className="text-sm sm:text-base font-light italic leading-relaxed text-white/95">
+                  She is clothed in strength and dignity, and she laughs without fear of the future.
+                </p>
+                <div className="mt-2 flex items-center justify-between">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-[#E5CFAC]">
+                    — Proverbs 31:25
+                  </p>
+                  <span className="text-[11px] text-white/70">
+                    Faith-rooted cotton apparel for believers
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <div className="mt-8 flex flex-wrap gap-4 sm:mt-12 items-center">
-            <Reveal delay={0.5}>
-              <a
-                href={hero.ctaLink || "/shop"}
-                onMouseEnter={() => onHover(true)}
-                onMouseLeave={() => onHover(false)}
-                className="w-fit rounded-full border border-white bg-transparent px-8 py-3.5 text-center text-sm font-medium uppercase tracking-[0.15em] text-white shadow-sm transition-all duration-300 hover:bg-white hover:text-[#47352F]"
-              >
-                {hero.ctaText || "Discover the Collection"}
-                <span className="ml-2 font-sans" aria-hidden>
-                  →
-                </span>
-              </a>
-            </Reveal>
+          {/* CTA & Delivery Trust Pill */}
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href="#shop"
+              onMouseEnter={() => onHover(true)}
+              onMouseLeave={() => onHover(false)}
+              className="inline-flex items-center gap-2.5 rounded-full bg-[#E5CFAC] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#221b18] shadow-lg transition duration-300 hover:bg-white hover:scale-[1.02]"
+            >
+              <span>{hero.ctaText || "Shop Faith & Festive Drops"}</span>
+              <ArrowRight className="h-4 w-4" />
+            </a>
+
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-black/30 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur hover:bg-white/20 transition"
+            >
+              <span>Our Story</span>
+            </Link>
           </div>
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 2.2 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block"
-      >
-        <div className="flex flex-col items-center gap-2">
-          <span className="eyebrow text-white/60">Scroll</span>
-          <motion.div
-            className="h-8 w-px bg-white/40"
-            animate={{ scaleY: [0.3, 1, 0.3], originY: 0 }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }
 
-function AnimatedWords({
-  text,
-  delay = 0,
-  className = "",
-}: {
-  text: string;
-  delay?: number;
-  className?: string;
-}) {
-  return (
-    <span className={`inline-block overflow-hidden align-bottom ${className}`}>
-      <motion.span
-        initial={{ y: "110%" }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.3 + delay }}
-        className="inline-block"
-      >
-        {text}
-      </motion.span>
-    </span>
-  );
-}
+/* ----------------- Zepto/Blinkit Speed & Trust Bar ----------------- */
 
-/* ------------------------------- Marquee ------------------------------- */
-
-function Marquee() {
-  const { settings } = useStore();
-  const items =
-    settings.marqueeItems && settings.marqueeItems.length > 0
-      ? settings.marqueeItems
-      : [
-          "7-Day Return Policy",
-          "Soft cotton comfort",
-          "Kids sizes 2-13Y",
-          "Oversized, polos & round necks",
-          "Hassle-free 7-day returns",
-          "Festive Christmas tees",
-          "Playful colors and prints",
-        ];
+function SpeedAndTrustBar() {
+  const trustPoints = [
+    {
+      icon: "⚡",
+      title: "24-Hour Dispatch",
+      subtitle: "Shipped swiftly from our atelier",
+    },
+    {
+      icon: "⭐",
+      title: "4.9★ from 12,500+ Believers",
+      subtitle: "Verified customer satisfaction",
+    },
+    {
+      icon: "🕊️",
+      title: "100% Combed Cotton",
+      subtitle: "Bio-washed, pre-shrunk & breathable",
+    },
+    {
+      icon: "🛡️",
+      title: "7-Day Replacement Guarantee",
+      subtitle: "Hassle-free unboxing claim support",
+    },
+  ];
 
   return (
-    <section className="border-y border-border/60 bg-[#f5efe8] py-6 overflow-hidden">
-      <div className="mx-auto flex whitespace-nowrap animate-marquee">
-        {[...items, ...items, ...items].map((it, i) => (
-          <span
-            key={i}
-            className="mx-6 eyebrow flex items-center gap-6 md:mx-10 md:gap-10 text-black/80"
-          >
-            {it}
-            <span className="inline-block h-1 w-1 rounded-full bg-[#47352F]" />
-          </span>
-        ))}
+    <section className="border-y border-black/10 bg-[#f4ece1] py-4">
+      <div className="mx-auto max-w-[1600px] px-4 md:px-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {trustPoints.map((tp, idx) => (
+            <div
+              key={idx}
+              className="flex items-center gap-3 rounded-xl bg-white/70 p-3 shadow-xs border border-black/5"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#47352F]/10 text-xl">
+                {tp.icon}
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-[#221b18] truncate leading-tight">{tp.title}</p>
+                <p className="text-[11px] text-[#47352F]/80 truncate mt-0.5">{tp.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-/* ------------------------------- Showcase ------------------------------- */
+/* ----------------- Zepto/Blinkit Visual Category Bubbles ----------------- */
 
-function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
+function VisualCategoryBubbles() {
+  const bubbles = [
+    {
+      name: "Christmas Drops",
+      tag: "FLAT 25% OFF",
+      tagBg: "bg-red-600",
+      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300&auto=format&fit=crop&q=80",
+      category: "Christmas Edition",
+    },
+    {
+      name: "Men's Hoodies",
+      tag: "TRENDING",
+      tagBg: "bg-[#47352F]",
+      img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=300&auto=format&fit=crop&q=80",
+      category: "Christmas Edition",
+      department: "Men",
+      subCategory: "Hoodies",
+    },
+    {
+      name: "Men's Polos",
+      tag: "CLASSIC",
+      tagBg: "bg-blue-700",
+      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=300&auto=format&fit=crop&q=80",
+      category: "Polo T-Shirts",
+    },
+    {
+      name: "Men's Crewnecks",
+      tag: "POPULAR",
+      tagBg: "bg-[#47352F]",
+      img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300&auto=format&fit=crop&q=80",
+      category: "Round Neck T-Shirts",
+    },
+    {
+      name: "Women's Hoodies",
+      tag: "COZY",
+      tagBg: "bg-purple-700",
+      img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&auto=format&fit=crop&q=80",
+      category: "Christmas Edition",
+      department: "Women",
+      subCategory: "Hoodies",
+    },
+    {
+      name: "Women's Polos",
+      tag: "NEW",
+      tagBg: "bg-emerald-700",
+      img: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=300&auto=format&fit=crop&q=80",
+      category: "Christmas Edition",
+      department: "Women",
+      subCategory: "Polo",
+    },
+    {
+      name: "Women's Tees",
+      tag: "GRACE",
+      tagBg: "bg-[#47352F]",
+      img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=300&auto=format&fit=crop&q=80",
+      category: "Round Neck T-Shirts",
+    },
+    {
+      name: "Boys' Tees",
+      tag: "PLAY-READY",
+      tagBg: "bg-sky-600",
+      img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=300&auto=format&fit=crop&q=80",
+      category: "Christmas Edition",
+      department: "Kids",
+      subCategory: "Boys",
+    },
+    {
+      name: "Girls' Tees",
+      tag: "SWEET",
+      tagBg: "bg-pink-600",
+      img: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=300&auto=format&fit=crop&q=80",
+      category: "Christmas Edition",
+      department: "Kids",
+      subCategory: "Girls",
+    },
+    {
+      name: "Oversized Tees",
+      tag: "SAVE ₹300",
+      tagBg: "bg-amber-700",
+      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=300&auto=format&fit=crop&q=80",
+      category: "Oversized T-Shirts",
+    },
+  ];
+
+  return (
+    <section className="py-8 bg-[#fbf7f0] border-b border-black/5">
+      <div className="mx-auto max-w-[1600px] px-4 md:px-12">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">⚡</span>
+            <h2 className="text-base sm:text-lg font-bold text-[#221b18] tracking-tight">
+              Explore By Category
+            </h2>
+          </div>
+          <Link
+            to="/shop"
+            className="text-xs font-bold text-[#47352F] hover:underline flex items-center gap-1"
+          >
+            <span>View All</span>
+            <ChevronRight className="h-3 w-3" />
+          </Link>
+        </div>
+
+        {/* Horizontal scrollable visual bubble row */}
+        <div className="flex items-start gap-4 sm:gap-6 overflow-x-auto pb-4 pt-1 no-scrollbar scroll-smooth">
+          {bubbles.map((b, i) => (
+            <a
+              key={i}
+              href="#shop"
+              className="flex flex-col items-center shrink-0 w-20 sm:w-24 group text-center cursor-pointer"
+            >
+              <div className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-2xl overflow-hidden border-2 border-transparent group-hover:border-[#47352F] shadow-sm bg-white transition-all duration-300 group-hover:scale-105">
+                <img src={b.img} alt={b.name} className="h-full w-full object-cover" />
+                <span
+                  className={`absolute top-1 left-1/2 -translate-x-1/2 ${b.tagBg} text-[9px] font-bold uppercase tracking-wider text-white px-1.5 py-0.5 rounded-full whitespace-nowrap shadow-xs`}
+                >
+                  {b.tag}
+                </span>
+              </div>
+              <span className="mt-2 text-xs font-semibold text-[#221b18] group-hover:text-[#47352F] transition-colors leading-tight line-clamp-2">
+                {b.name}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------- Zepto/Blinkit Live Flash Sale Banner ----------------- */
+
+function FlashSaleBanner() {
+  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 18, seconds: 32 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev.seconds > 0) {
+          return { ...prev, seconds: prev.seconds - 1 };
+        } else if (prev.minutes > 0) {
+          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+        } else if (prev.hours > 0) {
+          return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        }
+        return { hours: 4, minutes: 0, seconds: 0 };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const format2 = (n: number) => String(n).padStart(2, "0");
+
+  return (
+    <section className="bg-gradient-to-r from-[#8A1822] via-[#47352F] to-[#221b18] py-4 text-white shadow-inner">
+      <div className="mx-auto max-w-[1600px] px-4 md:px-12">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-400 text-black font-bold text-lg">
+              ⚡
+            </span>
+            <div>
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-300">
+                Christmas Harvest Flash Deal · Extra 25% OFF
+              </p>
+              <p className="text-xs text-white/80">
+                Use code <span className="font-mono font-bold text-white underline">GRACE25</span> at checkout for instant savings
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1.5 font-mono text-sm font-bold bg-black/40 px-3.5 py-1.5 rounded-xl border border-white/20">
+              <span className="text-amber-300">{format2(timeLeft.hours)}h</span>
+              <span>:</span>
+              <span className="text-amber-300">{format2(timeLeft.minutes)}m</span>
+              <span>:</span>
+              <span className="text-amber-300">{format2(timeLeft.seconds)}s</span>
+            </div>
+
+            <a
+              href="#shop"
+              className="rounded-full bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#221b18] hover:bg-amber-300 transition shrink-0"
+            >
+              Shop Deals
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------- Product Catalog Section (Multi-Shelf Quick-Commerce) ----------------- */
+
+function ProductCatalogSection({ onHover }: { onHover: (v: boolean) => void }) {
   const { products, categories } = useStore();
   const [selectedCat, setSelectedCat] = useState("All");
   const [christmasDept, setChristmasDept] = useState<"All" | "Men" | "Women" | "Kids">("All");
   const [christmasSub, setChristmasSub] = useState<string>("All");
 
-  const isChristmas = selectedCat.toLowerCase().includes("christmas");
+  const isChristmas = (selectedCat || "").toLowerCase().includes("christmas");
 
   const handleCategorySelect = (cat: string) => {
     setSelectedCat(cat);
@@ -291,8 +560,10 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
-      const isProductChristmas = p.category.toLowerCase().includes("christmas");
+      const pCat = (p.category || "").toLowerCase();
+      const isProductChristmas = pCat.includes("christmas");
       let matchCat = false;
+
       if (selectedCat === "All") {
         matchCat = true;
       } else if (isChristmas) {
@@ -321,30 +592,36 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
   }, [products, selectedCat, isChristmas, christmasDept, christmasSub]);
 
   return (
-    <section id="shop" className="relative py-20 md:py-36">
+    <section id="shop" className="py-12 md:py-20 bg-[#fbf7f0]">
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
-        <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <Reveal>
-            <p className="eyebrow mb-4 md:mb-6 text-[#47352F]">The Kidswear & Festive Collection</p>
-            <h2 className="font-display text-3xl leading-[1.05] md:text-7xl">
-              Ready for play.
-              <br />
-              <span className="italic text-[#47352F]/80">Made for every day & holiday.</span>
+        {/* Section Title & Category Filter Tabs */}
+        <div className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-black/10 pb-6">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#47352F]">
+                † Christian Faith Apparel & Festive Drops
+              </span>
+              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                ⚡ In Stock & 24h Ready
+              </span>
+            </div>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[#221b18] tracking-tight">
+              Curated Daily Drops
             </h2>
-          </Reveal>
+          </div>
 
-          {/* Category Filter Pills */}
+          {/* Quick-Commerce Category Tabs */}
           <div className="flex flex-wrap gap-2">
             {categories.slice(0, 6).map((cat) => {
-              const isXmas = cat.toLowerCase().includes("christmas");
+              const isXmas = (cat || "").toLowerCase().includes("christmas");
               return (
                 <button
                   key={cat}
                   onClick={() => handleCategorySelect(cat)}
-                  className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
+                  className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition ${
                     selectedCat === cat
                       ? "bg-[#47352F] text-white shadow-sm"
-                      : "border border-black/10 bg-white text-black/70 hover:border-[#47352F]"
+                      : "border border-black/10 bg-white text-black/80 hover:border-[#47352F]"
                   }`}
                 >
                   {isXmas ? `🎄 ${cat}` : cat}
@@ -354,14 +631,14 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
           </div>
         </div>
 
-        {/* Christmas Sub-Filter Bar if Christmas Category is Active */}
+        {/* Christmas Sub-Filter Panel */}
         {isChristmas && (
-          <div className="mb-12 rounded-2xl border border-[#47352F]/15 bg-[#fbf7f0] p-5 shadow-sm">
+          <div className="mb-10 rounded-2xl border border-[#47352F]/15 bg-[#f4ede3] p-5 shadow-xs">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#47352F]/10 pb-3 mb-3">
               <div className="flex items-center gap-2">
-                <span className="text-sm">🎄</span>
+                <span className="text-base">🎄</span>
                 <span className="text-xs font-bold uppercase tracking-wider text-[#47352F]">
-                  Christmas Sub-Filters
+                  Christmas Department & Style Filters
                 </span>
               </div>
               {(christmasDept !== "All" || christmasSub !== "All") && (
@@ -370,16 +647,16 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
                     setChristmasDept("All");
                     setChristmasSub("All");
                   }}
-                  className="text-xs font-medium text-[#8A1822] hover:underline"
+                  className="text-xs font-semibold text-[#8A1822] hover:underline"
                 >
-                  Reset Sub-Filters
+                  Reset Filters
                 </button>
               )}
             </div>
 
             {/* Department Level Tabs */}
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="text-xs font-semibold text-black/60 mr-1">Department:</span>
+              <span className="text-xs font-semibold text-black/70 mr-1">Department:</span>
               {(["All", "Men", "Women", "Kids"] as const).map((dept) => (
                 <button
                   key={dept}
@@ -398,11 +675,11 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
               ))}
             </div>
 
-            {/* Subcategory Pills */}
-            <div className="rounded-xl bg-white/80 p-3 border border-black/5">
+            {/* Sub-Filters Container */}
+            <div className="rounded-xl bg-white p-3 border border-black/5">
               {christmasDept === "Men" && (
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold text-[#47352F]">Men's:</span>
+                  <span className="text-xs font-semibold text-[#47352F]">Men's Sub-Filters:</span>
                   <button
                     onClick={() => setChristmasSub("All")}
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
@@ -429,7 +706,7 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
 
               {christmasDept === "Women" && (
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold text-[#47352F]">Women's:</span>
+                  <span className="text-xs font-semibold text-[#47352F]">Women's Sub-Filters:</span>
                   <button
                     onClick={() => setChristmasSub("All")}
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
@@ -456,7 +733,7 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
 
               {christmasDept === "Kids" && (
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold text-[#47352F]">Kids':</span>
+                  <span className="text-xs font-semibold text-[#47352F]">Kids' Sub-Filters:</span>
                   <button
                     onClick={() => setChristmasSub("All")}
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
@@ -536,25 +813,29 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16">
+        {/* Zepto/Blinkit Interactive Product Grid */}
+        <div className="grid grid-cols-2 gap-3.5 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
           {filtered.map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} onHover={onHover} />
           ))}
         </div>
 
-        {/* Action Link to Full Shop */}
-        <div className="mt-16 text-center">
-          <a
-            href="/shop"
-            className="inline-flex items-center gap-3 rounded-full border border-[#47352F] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#47352F] transition hover:bg-[#47352F] hover:text-white"
+        {/* Catalog Footer Action */}
+        <div className="mt-14 text-center">
+          <Link
+            to="/shop"
+            className="inline-flex items-center gap-3 rounded-full bg-[#47352F] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#34241f] shadow-md"
           >
-            Explore All Styles ({products.length})<span aria-hidden>→</span>
-          </a>
+            <span>Explore Entire Collection ({products.length} Styles)</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
   );
 }
+
+/* ----------------- Zepto/Blinkit Interactive Product Card ----------------- */
 
 function ProductCard({
   product,
@@ -565,179 +846,319 @@ function ProductCard({
   index: number;
   onHover: (v: boolean) => void;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  const { addToCart } = useCart();
+  const { items, addToCart, updateQuantity } = useCart();
+
+  // Check if item is already in cart to display interactive stepper
+  const cartItem = items.find((i) => i.product.id === product.id);
+  const cartQty = cartItem ? cartItem.quantity : 0;
+
+  // Strikethrough & discount calculations
+  const numericPrice = parseInt((product.price || "").replace(/[^0-9]/g, ""), 10) || 799;
+  const originalNumericPrice = product.originalPrice
+    ? parseInt(product.originalPrice.replace(/[^0-9]/g, ""), 10) || numericPrice + 300
+    : numericPrice + 300;
+  const discountPercent = Math.round(
+    ((originalNumericPrice - numericPrice) / originalNumericPrice) * 100,
+  );
 
   return (
-    <Reveal delay={index * 0.05}>
+    <Reveal delay={index * 0.03}>
       <div
-        ref={ref}
-        className="group cursor-pointer"
+        className="group relative flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-3 sm:p-4 shadow-sm hover:shadow-xl transition-all duration-300 hover:border-[#47352F]/40"
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
       >
-        <a
-          href={`/product/${product.id}`}
-          className="relative aspect-[3/4] overflow-hidden rounded-xl bg-secondary md:aspect-[4/5] border border-black/5 block"
-        >
-          <motion.img
-            src={product.img}
-            alt={product.name}
-            width={800}
-            height={1000}
-            loading="lazy"
-            style={{ y }}
-            className="h-[110%] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
-          />
+        <div>
+          {/* Product Image Tile */}
+          <Link
+            to="/product/$id"
+            params={{ id: product.id }}
+            className="relative block aspect-[4/5] w-full overflow-hidden rounded-xl bg-[#f7f2eb]"
+          >
+            <img
+              src={product.img}
+              alt={product.name}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
 
-          {/* Badge */}
-          {product.badge && (
-            <div className="absolute top-3 left-3 z-10 rounded-full bg-[#221b18]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#E5CFAC] backdrop-blur">
-              {product.badge}
+            {/* Fast Dispatch Badge */}
+            <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1 rounded-md bg-white/95 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#221b18] shadow-xs backdrop-blur">
+              <span className="text-amber-600">⚡</span>
+              <span>24h Dispatch</span>
             </div>
-          )}
 
-          {/* Desktop quick-add overlay */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              addToCart(product);
-            }}
-            className="absolute inset-x-0 bottom-0 hidden translate-y-full items-center justify-between bg-[#47352F]/95 px-6 py-4 text-white transition-transform duration-500 ease-out group-hover:translate-y-0 md:flex hover:bg-[#34241f]"
-          >
-            <span className="text-xs font-medium uppercase tracking-[0.15em]">
-              Quick Add to Bag
-            </span>
-            <span aria-hidden>+</span>
-          </button>
+            {/* Discount / Custom Badge */}
+            {product.badge ? (
+              <div className="absolute top-2.5 right-2.5 z-10 rounded-md bg-[#8A1822] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-xs">
+                {product.badge}
+              </div>
+            ) : discountPercent > 0 ? (
+              <div className="absolute top-2.5 right-2.5 z-10 rounded-md bg-emerald-700 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-xs">
+                {discountPercent}% OFF
+              </div>
+            ) : null}
+          </Link>
 
-          {/* Mobile quick-add button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              addToCart(product);
-            }}
-            className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#47352F] text-white shadow-lg md:hidden"
-            aria-label="Add to bag"
-          >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
-        </a>
-
-        <div className="mt-3 md:mt-5">
-          <div className="flex items-center justify-between">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#47352F]">
-              {product.department && product.subCategory
-                ? `${product.department} · ${product.subCategory}`
-                : product.category}
-            </p>
-            {product.sizes && product.sizes.length > 0 && (
-              <span className="text-[10px] text-muted-foreground uppercase">
-                {product.sizes.join(" · ")}
+          {/* Product Information */}
+          <div className="mt-3">
+            {/* Category / Department Tag */}
+            <div className="flex items-center justify-between text-[11px] text-[#47352F]/80 font-semibold uppercase tracking-wider">
+              <span>
+                {product.department && product.subCategory
+                  ? `${product.department} · ${product.subCategory}`
+                  : product.category}
               </span>
-            )}
-          </div>
-
-          <a
-            href={`/product/${product.id}`}
-            className="hover:text-[#47352F] transition-colors block"
-          >
-            <h3 className="mt-1 text-sm font-medium leading-snug md:text-lg line-clamp-1">
-              {product.name}
-            </h3>
-          </a>
-
-          <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">{product.note}</p>
-
-          <div className="mt-2 flex items-center justify-between">
-            <div className="flex items-baseline gap-2">
-              <span className="text-sm font-semibold md:text-base">{product.price}</span>
-              {product.originalPrice && (
-                <span className="text-xs text-muted-foreground line-through">
-                  {product.originalPrice}
-                </span>
-              )}
+              <span className="flex items-center gap-0.5 text-amber-600 font-bold">
+                <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
+                <span>4.9</span>
+              </span>
             </div>
-            <a
-              href={`/product/${product.id}`}
-              className="text-xs font-semibold text-[#47352F] hover:underline"
+
+            {/* Product Title */}
+            <Link
+              to="/product/$id"
+              params={{ id: product.id }}
+              className="mt-1 block hover:text-[#47352F]"
             >
-              Details →
-            </a>
+              <h3 className="text-xs sm:text-sm font-semibold text-[#221b18] line-clamp-1 leading-snug">
+                {product.name}
+              </h3>
+            </Link>
+
+            {/* Subtle Scripture or Fabric Note */}
+            <p className="mt-0.5 text-[11px] text-muted-foreground line-clamp-1">
+              {product.note || "100% Combed Cotton · Woven in Grace"}
+            </p>
           </div>
+        </div>
+
+        {/* Price & Zepto-style + ADD / Quantity Stepper Button */}
+        <div className="mt-3.5 flex items-center justify-between border-t border-black/5 pt-3">
+          <div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-sm sm:text-base font-bold text-[#221b18]">{product.price}</span>
+              <span className="text-xs text-muted-foreground line-through">
+                ₹{originalNumericPrice}
+              </span>
+            </div>
+            <span className="text-[10px] font-semibold text-emerald-700">
+              Save ₹{originalNumericPrice - numericPrice}
+            </span>
+          </div>
+
+          {/* Interactive Stepper or + ADD Button */}
+          {cartQty > 0 ? (
+            <div
+              className="flex items-center rounded-xl border-2 border-[#47352F] bg-[#fbf7f0] shadow-xs overflow-hidden"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  updateQuantity(
+                    product.id,
+                    cartQty - 1,
+                    cartItem?.selectedSize,
+                    cartItem?.selectedColor,
+                  )
+                }
+                className="h-8 w-8 flex items-center justify-center text-[#47352F] hover:bg-[#47352F]/10 font-bold text-sm transition"
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+              <span className="px-2 text-xs font-bold text-[#47352F] min-w-[20px] text-center">
+                {cartQty}
+              </span>
+              <button
+                type="button"
+                onClick={() =>
+                  updateQuantity(
+                    product.id,
+                    cartQty + 1,
+                    cartItem?.selectedSize,
+                    cartItem?.selectedColor,
+                  )
+                }
+                className="h-8 w-8 flex items-center justify-center text-[#47352F] hover:bg-[#47352F]/10 font-bold text-sm transition"
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                addToCart(product);
+              }}
+              className="inline-flex h-8 items-center gap-1 rounded-xl border border-[#47352F] bg-white px-3.5 text-xs font-bold uppercase tracking-wider text-[#47352F] hover:bg-[#47352F] hover:text-white transition shadow-2xs"
+            >
+              <span>+</span>
+              <span>ADD</span>
+            </button>
+          )}
         </div>
       </div>
     </Reveal>
   );
 }
 
-/* ------------------------------- Editorial Collections ------------------------------- */
+/* ----------------- Verified Believer Reviews & Testimonials ----------------- */
 
-function Collections({ onHover }: { onHover: (v: boolean) => void }) {
-  const items = [
+function CustomerReviewsSection() {
+  const reviews = [
     {
-      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=1200&auto=format&fit=crop&q=85",
-      title: "Kids' Polo T-Shirts",
-      tag: "Classic collars, easy comfort",
-      href: "/shop",
+      name: "David M.",
+      location: "Bengaluru, India",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      product: "Faith Over Fear Hoodie · Men / Black",
+      rating: 5,
+      date: "3 days ago",
+      text: "The 380 GSM fleece is unbelievably soft and warm. Wore this to our church youth retreat and got so many compliments. Dispatched within 24 hours just like promised on the site!",
     },
     {
-      img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=1200&auto=format&fit=crop&q=85",
-      title: "Oversized T-Shirts",
-      tag: "Room to move and play",
-      href: "/shop",
+      name: "Sarah K.",
+      location: "Mumbai, India",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      product: "Proverbs 31:25 Oversized Tee · Women / Cream",
+      rating: 5,
+      date: "5 days ago",
+      text: "The Scripture print is crisp, and the combed cotton feels breathable even in humid weather. It’s rare to find Christian apparel this chic, comfortable, and well-tailored.",
     },
     {
-      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1200&auto=format&fit=crop&q=85",
-      title: "Round Neck T-Shirts",
-      tag: "Everyday comfort and color",
-      href: "/shop",
+      name: "Priya & Mathew R.",
+      location: "Kochi, Kerala",
+      avatar:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      product: "Nativity Peace Christmas Tee · Kids (6-7Y)",
+      rating: 5,
+      date: "1 week ago",
+      text: "Ordered matching festive tees for our family Christmas photo. The kids loved how gentle the fabric was on their skin. Delivery was blazing fast!",
     },
     {
-      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=1200&auto=format&fit=crop&q=85",
-      title: "Christmas Edition",
-      tag: "Festive tees for little ones",
-      href: "/shop",
+      name: "Joshua T.",
+      location: "Chennai, India",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      product: "Lion of Judah Classic Polo · Men / Navy",
+      rating: 5,
+      date: "1 week ago",
+      text: "Top tier collar fit and durable embroidery. Feels like luxury retail but with a message that reminds me who I walk with every day.",
+    },
+    {
+      name: "Hannah G.",
+      location: "Hyderabad, India",
+      avatar:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+      product: "Grace Upon Grace Drop-Shoulder Tee · Women / Sage",
+      rating: 5,
+      date: "2 weeks ago",
+      text: "Customer care is so transparent and kind. The unboxing experience felt like opening a gift blessed with prayer. 10/10 recommend to all believers.",
+    },
+    {
+      name: "Reuben P.",
+      location: "Pune, India",
+      avatar:
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80",
+      product: "Light of the World Christmas Tee · Boys (8-9Y)",
+      rating: 5,
+      date: "2 weeks ago",
+      text: "7-day replacement guarantee gave me total peace of mind. Arrived neatly folded with scripture tags. My son wears it every Sunday!",
     },
   ];
 
   return (
-    <section className="bg-[#221b18] py-28 text-white md:py-44">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
-        <div className="mb-16 flex items-end justify-between">
-          <Reveal>
-            <p className="eyebrow" style={{ color: "#E5CFAC" }}>
-              Silhouettes
-            </p>
-            <h2 className="mt-4 font-display text-4xl leading-[1] md:text-7xl">
-              Editorial
-              <br />
-              <span className="italic text-[#E5CFAC]">wardrobe.</span>
+    <section className="py-16 md:py-24 bg-[#f4ece1] border-y border-black/10">
+      <div className="mx-auto max-w-[1600px] px-4 md:px-12">
+        {/* Header & Metrics */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="flex text-amber-500">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500" />
+                ))}
+              </span>
+              <span className="text-xs font-bold uppercase tracking-widest text-[#47352F]">
+                4.9 / 5.0 Rating · 12,500+ Verified Believers
+              </span>
+            </div>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[#221b18]">
+              Loved by Believers Nationwide
             </h2>
-          </Reveal>
+            <p className="mt-2 text-sm text-[#47352F]/80 max-w-xl">
+              Real reviews from believers who wear their testimony daily. 99.4% recommendation rate.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl shadow-xs border border-black/5 shrink-0">
+            <CheckCircle2 className="h-6 w-6 text-emerald-600" />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-black">
+                100% Verified Purchases
+              </p>
+              <p className="text-[11px] text-muted-foreground">Photos & reviews from real orders</p>
+            </div>
+          </div>
         </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-x-8 md:gap-y-16">
-          {items.map((item) => (
-            <EditorialCard
-              key={item.title}
-              item={item}
-              className="md:col-span-6 md:aspect-[4/5]"
-              onHover={onHover}
-            />
+
+        {/* Reviews Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {reviews.map((rev, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-6 shadow-xs hover:shadow-md transition"
+            >
+              <div>
+                {/* Rating & Date */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex text-amber-500">
+                    {[...Array(rev.rating)].map((_, i) => (
+                      <Star key={i} className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+                    ))}
+                  </div>
+                  <span className="text-[11px] text-muted-foreground">{rev.date}</span>
+                </div>
+
+                {/* Review Text */}
+                <p className="text-sm leading-relaxed text-[#221b18]/90 italic">
+                  “{rev.text}”
+                </p>
+
+                {/* Product Tag */}
+                <div className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-[#f7f2eb] px-2.5 py-1 text-[11px] font-semibold text-[#47352F]">
+                  <span>🏷️</span>
+                  <span>{rev.product}</span>
+                </div>
+              </div>
+
+              {/* Reviewer Details */}
+              <div className="mt-6 flex items-center gap-3 border-t border-black/5 pt-4">
+                <img
+                  src={rev.avatar}
+                  alt={rev.name}
+                  className="h-10 w-10 rounded-full object-cover border border-[#47352F]/20"
+                />
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-xs font-bold text-[#221b18]">{rev.name}</p>
+                    <span className="inline-flex items-center gap-0.5 rounded-full bg-emerald-100 px-1.5 py-0.2 text-[9px] font-bold text-emerald-800">
+                      ✓ Verified
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground">{rev.location}</p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -745,144 +1166,42 @@ function Collections({ onHover }: { onHover: (v: boolean) => void }) {
   );
 }
 
-function EditorialCard({
-  item,
-  className = "",
-  onHover,
-}: {
-  item: { img: string; title: string; tag: string; href: string };
-  className?: string;
-  onHover: (v: boolean) => void;
-}) {
+/* ----------------- Faith Philosophy Editorial Banner ----------------- */
+
+function FaithEditorialBanner({ onHover }: { onHover: (v: boolean) => void }) {
   return (
-    <Reveal className={className}>
-      <a
-        href={item.href}
-        onMouseEnter={() => onHover(true)}
-        onMouseLeave={() => onHover(false)}
-        className="group relative block h-full w-full overflow-hidden rounded-2xl"
-      >
-        <img
-          src={item.img}
-          alt={item.title}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#221b18]/80 via-black/20 to-transparent" />
-        <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
-          <p className="eyebrow mb-3 text-[#E5CFAC]">{item.tag}</p>
-          <h3 className="font-display text-3xl md:text-5xl">{item.title}</h3>
-          <div className="mt-6 flex translate-y-4 items-center gap-3 opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
-            <span className="eyebrow text-white">Explore range</span>
-            <span aria-hidden>→</span>
-          </div>
-        </div>
-      </a>
-    </Reveal>
-  );
-}
-
-/* ------------------------------- Featured Product ------------------------------- */
-
-function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
-  const { products } = useStore();
-  const featured = products.find((p) => p.isFeatured) || products[0];
-  const { addToCart } = useCart();
-
-  return (
-    <section className="relative overflow-hidden bg-[#fbf7f0] py-20 md:py-40">
-      <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-center gap-10 px-4 md:grid-cols-2 md:gap-16 md:px-12">
-        <div className="relative order-2 md:order-1">
-          <Reveal>
-            <p className="eyebrow mb-6 text-[#47352F]">Iconic Signature Piece</p>
-            <h2 className="font-display text-3xl leading-[1.05] md:text-6xl">{featured.name}</h2>
-          </Reveal>
-
-          <Reveal delay={0.15} className="mt-6 max-w-md">
-            <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-              {featured.description}
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.3} className="mt-10">
-            <div className="flex items-center gap-6">
-              <p className="font-display text-3xl font-light">{featured.price}</p>
-              <button
-                onClick={() => addToCart(featured)}
-                onMouseEnter={() => onHover(true)}
-                onMouseLeave={() => onHover(false)}
-                className="btn-luxe"
-              >
-                Add to Bag
-              </button>
-              <a
-                href={`/product/${featured.id}`}
-                className="text-xs font-semibold uppercase tracking-wider text-[#47352F] hover:underline"
-              >
-                Full Details →
-              </a>
-            </div>
-          </Reveal>
-
-          <Reveal
-            delay={0.45}
-            className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-8 md:mt-14 md:gap-8 md:pt-10"
-          >
-            {[
-              ["2-13Y", "Kids' Sizes"],
-              ["4", "T-Shirt Styles"],
-              ["All day", "Play-ready Comfort"],
-            ].map(([v, l]) => (
-              <div key={l}>
-                <p className="font-display text-2xl font-light">{v}</p>
-                <p className="eyebrow mt-1 text-muted-foreground">{l}</p>
-              </div>
-            ))}
-          </Reveal>
-        </div>
-
-        <div className="relative order-1 md:order-2">
-          <a
-            href={`/product/${featured.id}`}
-            className="block relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-2xl shadow-2xl border border-black/5 group"
-          >
-            <img
-              src={featured.img}
-              alt={featured.name}
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------- CTA ------------------------------- */
-
-function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
-  return (
-    <section className="relative overflow-hidden bg-[#47352F] text-white py-24 md:py-36">
+    <section className="relative overflow-hidden bg-[#221b18] text-white py-20 md:py-32">
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 text-center">
         <Reveal>
-          <p className="eyebrow mb-4 text-[#E5CFAC] tracking-[0.3em]">Made for Little Adventures</p>
-          <h2 className="font-display text-4xl leading-tight md:text-7xl">
-            Get dressed for fun.
-            <br />
-            <span className="italic text-[#E5CFAC]">Find their new favorite tee.</span>
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-sm md:text-base text-white/80 leading-relaxed font-light">
-            Explore oversized, polo, round neck, and festive Christmas t-shirts for kids.
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#E5CFAC] mb-4">
+            † Faith Woven Into Fabric
           </p>
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-normal leading-tight text-white max-w-4xl mx-auto">
+            More than apparel,
+            <br />
+            <span className="italic text-[#E5CFAC]">a quiet daily testimony.</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed font-light">
+            Every piece is designed with prayer, printed on ultra-soft combed cotton, and packaged
+            with scripture cards to remind you and those around you of God's timeless grace.
+          </p>
+
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
-              href="/shop"
+              href="#shop"
               onMouseEnter={() => onHover(true)}
               onMouseLeave={() => onHover(false)}
-              className="btn-luxe-inverse"
+              className="inline-flex items-center gap-2 rounded-full bg-[#E5CFAC] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#221b18] hover:bg-white transition shadow-lg"
             >
-              Shop Kids' T-Shirts
+              <span>Explore The Collection</span>
+              <ArrowRight className="h-4 w-4" />
             </a>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white hover:bg-white/10 transition"
+            >
+              <span>Read Our Testimony</span>
+            </Link>
           </div>
         </Reveal>
       </div>

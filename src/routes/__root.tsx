@@ -44,37 +44,68 @@ function NotFoundComponent() {
 }
 
 function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
-  console.error(error);
+  console.error("Root error boundary caught:", error);
   const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
+  const handleClearCacheAndReset = () => {
+    try {
+      if (typeof window !== "undefined") {
+        const keysToRemove = [
+          "thread_roots_settings_v4",
+          "thread_roots_settings_v3",
+          "thread_roots_products_v4",
+          "thread_roots_products_v3",
+          "thread_roots_categories_v3",
+          "thread_and_roots_cart",
+          "arovia_cart_v2",
+        ];
+        keysToRemove.forEach((k) => localStorage.removeItem(k));
+        window.location.href = "/";
+      }
+    } catch {
+      window.location.reload();
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="font-display text-3xl text-foreground">Something went astray</h1>
-        <p className="mt-3 text-sm text-muted-foreground">
-          A quiet error interrupted the page. You may try again.
+    <div className="flex min-h-screen items-center justify-center bg-[#fbf7f0] px-4 py-16">
+      <div className="max-w-md w-full text-center rounded-3xl border border-black/10 bg-white p-8 shadow-xl">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#47352F]/10 text-2xl">
+          ✝️
+        </div>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold text-[#221b18]">
+          Something went astray
+        </h1>
+        <p className="mt-3 text-sm text-[#47352F]/80 leading-relaxed">
+          A temporary view error interrupted the page. You can try refreshing or resetting to clean
+          defaults below.
         </p>
-        {import.meta.env.DEV && Boolean(error) && (
-          <div className="mt-4 max-h-48 overflow-auto rounded-lg border border-red-200 bg-red-50 p-3 text-left text-xs font-mono text-red-700">
+
+        {Boolean(error) && (
+          <div className="mt-4 max-h-32 overflow-auto rounded-lg border border-black/10 bg-[#f7f2eb] p-3 text-left text-xs font-mono text-[#47352F]">
             {error instanceof Error ? error.message : String(error)}
           </div>
         )}
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+
+        <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
           <button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="btn-luxe"
+            className="rounded-full bg-[#47352F] px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white hover:bg-[#34241f] transition"
           >
-            Try again
+            Try Again
           </button>
-          <a href="/" className="btn-luxe">
-            Go home
-          </a>
+          <button
+            onClick={handleClearCacheAndReset}
+            className="rounded-full border border-[#47352F] bg-transparent px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#47352F] hover:bg-[#47352F] hover:text-white transition"
+          >
+            Clear Cache & Go Home
+          </button>
         </div>
       </div>
     </div>

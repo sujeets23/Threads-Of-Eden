@@ -28,12 +28,13 @@ function ShopPage() {
   const [christmasDept, setChristmasDept] = useState<"All" | "Men" | "Women" | "Kids">("All");
   const [christmasSub, setChristmasSub] = useState<string>("All");
 
-  const isChristmasActive = selectedCategory.toLowerCase().includes("christmas");
+  const isChristmasActive = (selectedCategory || "").toLowerCase().includes("christmas");
 
   const filteredProducts = useMemo(() => {
     let result = products.filter((p) => {
-      const isProductChristmas = p.category.toLowerCase().includes("christmas");
-      const isFilterChristmas = selectedCategory.toLowerCase().includes("christmas");
+      const pCat = (p.category || "").toLowerCase();
+      const isProductChristmas = pCat.includes("christmas");
+      const isFilterChristmas = (selectedCategory || "").toLowerCase().includes("christmas");
 
       let matchCat = false;
       if (selectedCategory === "All") {
@@ -60,12 +61,15 @@ function ShopPage() {
         }
       }
 
+      const query = (searchQuery || "").toLowerCase();
+      if (!query) return true;
+
       const matchSearch =
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (p.department && p.department.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (p.subCategory && p.subCategory.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        p.note.toLowerCase().includes(searchQuery.toLowerCase());
+        Boolean(p.name && p.name.toLowerCase().includes(query)) ||
+        Boolean(p.category && p.category.toLowerCase().includes(query)) ||
+        Boolean(p.department && p.department.toLowerCase().includes(query)) ||
+        Boolean(p.subCategory && p.subCategory.toLowerCase().includes(query)) ||
+        Boolean(p.note && p.note.toLowerCase().includes(query));
 
       return matchSearch;
     });
@@ -232,7 +236,7 @@ function ShopPage() {
                     }`}
                   >
                     All Christmas (
-                    {products.filter((p) => p.category.toLowerCase().includes("christmas")).length})
+                    {products.filter((p) => (p.category || "").toLowerCase().includes("christmas")).length})
                   </button>
 
                   <button
@@ -252,7 +256,7 @@ function ShopPage() {
                       {
                         products.filter(
                           (p) =>
-                            p.category.toLowerCase().includes("christmas") &&
+                            (p.category || "").toLowerCase().includes("christmas") &&
                             p.department === "Men",
                         ).length
                       }
@@ -277,7 +281,7 @@ function ShopPage() {
                       {
                         products.filter(
                           (p) =>
-                            p.category.toLowerCase().includes("christmas") &&
+                            (p.category || "").toLowerCase().includes("christmas") &&
                             p.department === "Women",
                         ).length
                       }
@@ -302,7 +306,7 @@ function ShopPage() {
                       {
                         products.filter(
                           (p) =>
-                            p.category.toLowerCase().includes("christmas") &&
+                            (p.category || "").toLowerCase().includes("christmas") &&
                             p.department === "Kids",
                         ).length
                       }

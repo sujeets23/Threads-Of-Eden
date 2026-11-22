@@ -731,11 +731,15 @@ export function getStoredProducts(): Product[] {
         const initialById = new Map(INITIAL_PRODUCTS.map((product) => [product.id, product]));
         const updated = parsed.map((product) => {
           const initial = initialById.get(product.id);
-          if (!initial) return product;
           return {
             ...product,
-            department: product.department || initial.department,
-            subCategory: product.subCategory || initial.subCategory,
+            category: product.category || initial?.category || "T-Shirts",
+            name: product.name || initial?.name || "Faith Apparel Item",
+            price: product.price || initial?.price || "₹799",
+            note: product.note || initial?.note || "",
+            img: product.img || initial?.img || "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
+            department: product.department || initial?.department,
+            subCategory: product.subCategory || initial?.subCategory,
           };
         });
 
@@ -805,32 +809,33 @@ export function getStoredSettings(): StoreSettings {
     const raw = localStorage.getItem(SETTINGS_KEY) || localStorage.getItem("arovia_apparel_settings_v2");
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (parsed && parsed.brandName) {
-        if (parsed.brandName.includes("Arovia")) {
+      if (parsed && typeof parsed === "object") {
+        if (typeof parsed.brandName === "string" && parsed.brandName.includes("Arovia")) {
           parsed.brandName = "Threads of Eden";
           if (parsed.contact?.email?.includes("arovia")) {
             parsed.contact.email = "concierge@threadandroots.com";
           }
-          saveStoredSettings(parsed);
         }
-        if (
-          parsed.hero?.titleLine1 === "Cotton," ||
-          parsed.hero?.subtitle?.includes("Peruvian") ||
-          parsed.marqueeItems?.some((item: string) => item.includes("Supima"))
-        ) {
-          const migrated = {
-            ...INITIAL_SETTINGS,
-            brandName: parsed.brandName,
-            contact: parsed.contact || INITIAL_SETTINGS.contact,
-            announcement: {
-              ...INITIAL_SETTINGS.announcement,
-              enabled: parsed.announcement?.enabled ?? INITIAL_SETTINGS.announcement.enabled,
-            },
-          };
-          saveStoredSettings(migrated);
-          return migrated;
-        }
-        return parsed;
+        return {
+          ...INITIAL_SETTINGS,
+          ...parsed,
+          hero: {
+            ...INITIAL_SETTINGS.hero,
+            ...(parsed.hero || {}),
+          },
+          announcement: {
+            ...INITIAL_SETTINGS.announcement,
+            ...(parsed.announcement || {}),
+          },
+          contact: {
+            ...INITIAL_SETTINGS.contact,
+            ...(parsed.contact || {}),
+          },
+          marqueeItems:
+            Array.isArray(parsed.marqueeItems) && parsed.marqueeItems.length > 0
+              ? parsed.marqueeItems
+              : INITIAL_SETTINGS.marqueeItems,
+        };
       }
     }
   } catch (e) {

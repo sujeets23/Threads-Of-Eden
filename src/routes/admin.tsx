@@ -526,10 +526,12 @@ function ProductsTab({
   const filtered = useMemo(() => {
     return products.filter((p) => {
       const matchCat = selectedCategory === "All" || p.category === selectedCategory;
+      const term = (searchTerm || "").toLowerCase();
       const matchSearch =
-        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.note.toLowerCase().includes(searchTerm.toLowerCase());
+        !term ||
+        Boolean(p.name && p.name.toLowerCase().includes(term)) ||
+        Boolean(p.category && p.category.toLowerCase().includes(term)) ||
+        Boolean(p.note && p.note.toLowerCase().includes(term));
       return matchCat && matchSearch;
     });
   }, [products, selectedCategory, searchTerm]);
