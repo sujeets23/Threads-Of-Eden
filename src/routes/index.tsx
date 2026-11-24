@@ -143,8 +143,17 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
       "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85",
   };
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
 
   return (
     <section
@@ -153,28 +162,18 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
     >
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          poster={
-            hero.imageUrl ||
-            "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"
-          }
           className="h-full w-full object-cover"
         >
-          <source src={hero.videoUrl || heroVideo || "/hero-video.mp4"} type="video/mp4" />
-          <img
-            src={
-              hero.imageUrl ||
-              "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"
-            }
-            alt="Threads of Eden kids' t-shirts for everyday adventures"
-            width={1800}
-            height={1200}
-            className="h-full w-full object-cover"
-          />
+          <source src={heroVideo} type="video/mp4" />
+          {hero.videoUrl && hero.videoUrl !== heroVideo && (
+            <source src={hero.videoUrl} type="video/mp4" />
+          )}
         </video>
         <div className="absolute inset-0 hero-overlay bg-black/45" />
       </motion.div>
