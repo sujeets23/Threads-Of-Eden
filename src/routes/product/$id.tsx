@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
 import { useStore } from "@/context/StoreContext";
 import { useCart } from "@/context/CartContext";
-import { Check, ShieldCheck, RefreshCw, Truck, ArrowLeft } from "lucide-react";
+import { Check, ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/product/$id")({
   head: ({ params }) => ({
@@ -255,26 +255,6 @@ function ProductDetailPage() {
                     ? `Add to Bag (${quantity} · ${selectedSize} · ${selectedColor})`
                     : "Currently Sold Out"}
               </button>
-            </div>
-
-            {/* Trust Assurances */}
-            <div className="grid grid-cols-3 gap-3 border-y border-black/5 py-4 text-center">
-              <div className="flex flex-col items-center gap-1">
-                <Truck className="h-4 w-4 text-[#47352F]" />
-                <span className="text-[11px] text-muted-foreground">Free Express Shipping</span>
-              </div>
-              <Link
-                to="/returns"
-                className="flex flex-col items-center gap-1 hover:text-[#47352F] transition"
-                title="View Return & Replacement Policy"
-              >
-                <RefreshCw className="h-4 w-4 text-[#47352F]" />
-                <span className="text-[11px] text-muted-foreground">7-Day Replacement</span>
-              </Link>
-              <div className="flex flex-col items-center gap-1">
-                <ShieldCheck className="h-4 w-4 text-[#47352F]" />
-                <span className="text-[11px] text-muted-foreground">Original Guarantee</span>
-              </div>
             </div>
 
             {/* Washing & Care Guide */}
