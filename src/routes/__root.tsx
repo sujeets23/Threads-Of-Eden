@@ -10,11 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import favicon96 from "../assets/favicon/favicon-96x96.png?url";
-import faviconSvg from "../assets/favicon/favicon.svg?url";
-import faviconIco from "../assets/favicon/favicon.ico?url";
-import appleTouchIcon from "../assets/favicon/apple-touch-icon.png?url";
-import siteManifest from "../assets/favicon/site.webmanifest?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
@@ -54,13 +49,21 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
     try {
       if (typeof window !== "undefined") {
         const keysToRemove = [
+          "thread_roots_settings_v5",
           "thread_roots_settings_v4",
           "thread_roots_settings_v3",
           "thread_roots_products_v4",
           "thread_roots_products_v3",
           "thread_roots_categories_v3",
+          "thread_roots_orders_v3",
+          "threads_eden_user_session",
+          "threads_eden_registered_users",
           "thread_and_roots_cart",
           "arovia_cart_v2",
+          "arovia_apparel_products_v2",
+          "arovia_apparel_categories_v2",
+          "arovia_apparel_settings_v2",
+          "arovia_apparel_orders_v2",
         ];
         keysToRemove.forEach((k) => localStorage.removeItem(k));
         window.location.href = "/";
@@ -134,11 +137,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: favicon96, sizes: "96x96" },
-      { rel: "icon", type: "image/svg+xml", href: faviconSvg },
-      { rel: "shortcut icon", href: faviconIco },
-      { rel: "apple-touch-icon", sizes: "180x180", href: appleTouchIcon },
-      { rel: "manifest", href: siteManifest },
+      { rel: "icon", href: "data:," },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://api.fontshare.com" },
