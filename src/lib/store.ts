@@ -43,6 +43,7 @@ export interface StoreHeroSettings {
   ctaText: string;
   ctaLink: string;
   imageUrl: string;
+  videoUrl?: string;
 }
 
 export interface StoreAnnouncementSettings {
@@ -588,6 +589,7 @@ export const INITIAL_SETTINGS: StoreSettings = {
     ctaLink: "/shop",
     imageUrl:
       "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85",
+    videoUrl: "/hero-video.mp4",
   },
   announcement: {
     enabled: true,

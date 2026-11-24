@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import { useCart } from "@/context/CartContext";
 import { useStore } from "@/context/StoreContext";
 import { Product } from "@/lib/store";
+import heroVideo from "@/assets/hero-video.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -151,17 +152,31 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
       className="relative min-h-[88vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
     >
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
-        <img
-          src={
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster={
             hero.imageUrl ||
             "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"
           }
-          alt="Threads of Eden kids' t-shirts for everyday adventures"
-          width={1800}
-          height={1200}
           className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 hero-overlay bg-black/40" />
+        >
+          <source src={hero.videoUrl || heroVideo || "/hero-video.mp4"} type="video/mp4" />
+          <img
+            src={
+              hero.imageUrl ||
+              "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85"
+            }
+            alt="Threads of Eden kids' t-shirts for everyday adventures"
+            width={1800}
+            height={1200}
+            className="h-full w-full object-cover"
+          />
+        </video>
+        <div className="absolute inset-0 hero-overlay bg-black/45" />
       </motion.div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 pb-20 md:px-16 md:pb-28 pt-24">
