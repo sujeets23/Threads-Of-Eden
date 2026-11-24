@@ -577,30 +577,30 @@ export const INITIAL_PRODUCTS: Product[] = [
 
 export const INITIAL_SETTINGS: StoreSettings = {
   brandName: "Threads of Eden",
-  brandTagline: "Woven with purpose. Inspired by grace.",
+  brandTagline: "Little styles. Big adventures.",
   hero: {
-    titleLine1: "Woven in Grace.",
-    titleLine2: "Crafted for Purpose.",
+    titleLine1: "Made for",
+    titleLine2: "little movers",
     subtitle:
-      "“She is clothed in strength and dignity, and she laughs without fear of the future.” — Proverbs 31:25 · Premium Christian faith apparel & everyday festive tees for Men, Women, and Kids. Dispatched with prayer and care in 24 hours.",
-    eyebrow: "† Woven with Purpose · Inspired by Grace",
-    ctaText: "Shop Faith & Festive Drops",
-    ctaLink: "#shop",
+      "Soft, playful t-shirts for everyday adventures. Find oversized, polo, round neck, and festive Christmas styles made for kids.",
+    eyebrow: "Comfort made for kids",
+    ctaText: "Shop Kids' T-Shirts",
+    ctaLink: "/shop",
     imageUrl:
-      "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920&auto=format&fit=crop&q=85",
+      "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85",
   },
   announcement: {
     enabled: true,
-    text: "⚡ 24-Hour Dispatch · Free Express Delivery on ₹1,499+ · Christmas Specials Live!",
+    text: "Kids' T-Shirts for Everyday Adventures · Shop oversized, polo, round neck & holiday styles",
   },
   marqueeItems: [
-    "⚡ 24-Hour Superfast Dispatch",
-    "⭐ 4.9/5 from 12,500+ Believers",
-    "🕊️ Woven with Purpose · Inspired by Grace",
-    "🎄 Christmas Family Specials: Men, Women & Kids",
-    "🛡️ 7-Day Easy Replacement Guarantee",
-    "✝️ Faith-Rooted Premium Cotton Apparel",
-    "🚚 Free Express Shipping Above ₹1,499",
+    "Soft cotton comfort",
+    "Made for little movers",
+    "Easy everyday styles",
+    "Kids sizes 2-13Y",
+    "Oversized, polos & round necks",
+    "Festive Christmas tees",
+    "Playful colors and prints",
   ],
   contact: {
     email: "concierge@threadandroots.com",
@@ -715,7 +715,7 @@ export const INITIAL_ORDERS: Order[] = [
 
 const PRODUCTS_KEY = "thread_roots_products_v4";
 const CATEGORIES_KEY = "thread_roots_categories_v3";
-const SETTINGS_KEY = "thread_roots_settings_v4";
+const SETTINGS_KEY = "thread_roots_settings_v5";
 const ORDERS_KEY = "thread_roots_orders_v3";
 
 export function getStoredProducts(): Product[] {
