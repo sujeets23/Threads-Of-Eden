@@ -6,19 +6,14 @@ import { useCart } from "@/context/CartContext";
 import { useStore } from "@/context/StoreContext";
 import { Product } from "@/lib/store";
 import {
-  Sparkles,
-  Truck,
-  ShieldCheck,
-  Star,
-  Clock,
   ArrowRight,
-  Heart,
   ChevronRight,
   ShoppingBag,
-  CheckCircle2,
-  RefreshCw,
-  Flame,
-  Award,
+  Star,
+  Sparkles,
+  Filter,
+  Check,
+  RotateCcw,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -113,6 +108,25 @@ function HomePage() {
   const [hover, setHover] = useState(false);
   const { cartCount, cartTotal, setCartOpen } = useCart();
 
+  // Shared Category & Sub-Filter state for connected navigation
+  const [selectedCat, setSelectedCat] = useState("All");
+  const [christmasDept, setChristmasDept] = useState<"All" | "Men" | "Women" | "Kids">("All");
+  const [christmasSub, setChristmasSub] = useState<string>("All");
+
+  const handleSelectCategory = (
+    cat: string,
+    dept: "All" | "Men" | "Women" | "Kids" = "All",
+    sub: string = "All",
+  ) => {
+    setSelectedCat(cat);
+    setChristmasDept(dept);
+    setChristmasSub(sub);
+    const shopEl = document.getElementById("shop");
+    if (shopEl) {
+      shopEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-[#fbf7f0] text-foreground overflow-x-clip selection:bg-[#47352F] selection:text-white">
       {/* Interactive Cursor glow */}
@@ -138,19 +152,30 @@ function HomePage() {
       {/* Zepto/Blinkit Speed & Trust Bar */}
       <SpeedAndTrustBar />
 
-      {/* Zepto/Blinkit Visual Category Bubbles */}
-      <VisualCategoryBubbles />
+      {/* Enhanced Categories Section */}
+      <EnhancedCategoriesSection
+        activeCategory={selectedCat}
+        activeDept={christmasDept}
+        activeSub={christmasSub}
+        onSelectCategory={handleSelectCategory}
+        onHover={setHover}
+      />
 
       {/* Flash Sale / Christmas Deals Banner */}
       <FlashSaleBanner />
 
       {/* Quick-Commerce Product Shelves */}
-      <ProductCatalogSection onHover={setHover} />
+      <ProductCatalogSection
+        selectedCat={selectedCat}
+        setSelectedCat={setSelectedCat}
+        christmasDept={christmasDept}
+        setChristmasDept={setChristmasDept}
+        christmasSub={christmasSub}
+        setChristmasSub={setChristmasSub}
+        onHover={setHover}
+      />
 
-      {/* Verified Believer Reviews & Testimonials */}
-      <CustomerReviewsSection />
-
-      {/* Faith Philosophy Editorial Banner */}
+      {/* Faith Philosophy Editorial Banner (testimonials section removed) */}
       <FaithEditorialBanner onHover={setHover} />
 
       {/* Floating Zepto-style Quick Cart Bar */}
@@ -345,132 +370,503 @@ function SpeedAndTrustBar() {
   );
 }
 
-/* ----------------- Zepto/Blinkit Visual Category Bubbles ----------------- */
+/* ----------------- Enhanced Categories Section ----------------- */
 
-function VisualCategoryBubbles() {
-  const bubbles = [
+interface CategoryCardItem {
+  id: string;
+  name: string;
+  departmentLabel?: string;
+  tag: string;
+  tagBg: string;
+  subtitle: string;
+  img: string;
+  targetCategory: string;
+  targetDept?: "All" | "Men" | "Women" | "Kids";
+  targetSub?: string;
+  badge?: string;
+}
+
+function EnhancedCategoriesSection({
+  activeCategory,
+  activeDept,
+  activeSub,
+  onSelectCategory,
+  onHover,
+}: {
+  activeCategory: string;
+  activeDept: "All" | "Men" | "Women" | "Kids";
+  activeSub: string;
+  onSelectCategory: (
+    cat: string,
+    dept?: "All" | "Men" | "Women" | "Kids",
+    sub?: string,
+  ) => void;
+  onHover: (v: boolean) => void;
+}) {
+  const { products } = useStore();
+  const [selectedDeptFilter, setSelectedDeptFilter] = useState<
+    "All" | "Christmas" | "Men" | "Women" | "Kids"
+  >("All");
+
+  const categoriesList: CategoryCardItem[] = [
     {
-      name: "Christmas Drops",
+      id: "cat-christmas",
+      name: "Christmas Special Drops",
+      departmentLabel: "Festive Collection",
       tag: "FLAT 25% OFF",
       tagBg: "bg-red-600",
-      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300&auto=format&fit=crop&q=80",
-      category: "Christmas Edition",
+      subtitle: "Men, Women & Kids Holiday Tees & Hoodies",
+      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Christmas Edition T-Shirts",
+      targetDept: "All",
+      badge: "CODE: GRACE25",
+    },
+    {
+      id: "cat-men-hoodies",
+      name: "Men's Faith Hoodies",
+      departmentLabel: "Men's Department",
+      tag: "380 GSM FLEECE",
+      tagBg: "bg-[#47352F]",
+      subtitle: "Warm, heavyweight fleece with scripture",
+      img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Christmas Edition T-Shirts",
+      targetDept: "Men",
+      targetSub: "Hoodies",
+    },
+    {
+      id: "cat-polos",
+      name: "Classic Polo T-Shirts",
+      departmentLabel: "Men & Kids",
+      tag: "PIQUÉ COTTON",
+      tagBg: "bg-blue-700",
+      subtitle: "Tailored ribbed collars & structured silhouette",
+      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Polo T-Shirts",
+      targetDept: "All",
+    },
+    {
+      id: "cat-oversized",
+      name: "Heavyweight Oversized Tees",
+      departmentLabel: "Streetwear Fit",
+      tag: "240 GSM DROP",
+      tagBg: "bg-amber-800",
+      subtitle: "Relaxed drop-shoulder streetwear comfort",
+      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Oversized T-Shirts",
+      targetDept: "All",
+    },
+    {
+      id: "cat-women-hoodies",
+      name: "Women's Grace Hoodies",
+      departmentLabel: "Women's Department",
+      tag: "COZY LUXE",
+      tagBg: "bg-purple-800",
+      subtitle: "Flattering drape with uplifting faith quotes",
+      img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Christmas Edition T-Shirts",
+      targetDept: "Women",
+      targetSub: "Hoodies",
+    },
+    {
+      id: "cat-women-polos",
+      name: "Women's Festive Polos",
+      departmentLabel: "Women's Department",
+      tag: "NEW DROP",
+      tagBg: "bg-emerald-700",
+      subtitle: "Pre-shrunk cotton piqué for casual Sundays",
+      img: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Christmas Edition T-Shirts",
+      targetDept: "Women",
+      targetSub: "Polo",
+    },
+    {
+      id: "cat-round-neck",
+      name: "Everyday Round Neck Tees",
+      departmentLabel: "Daily Wear",
+      tag: "100% COTTON",
+      tagBg: "bg-[#47352F]",
+      subtitle: "Breathable bio-washed cotton for daily rituals",
+      img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Round Neck T-Shirts",
+      targetDept: "All",
+    },
+    {
+      id: "cat-boys",
+      name: "Boys' Adventure Tees",
+      departmentLabel: "Kids (2-13Y)",
+      tag: "PLAY-READY",
+      tagBg: "bg-sky-700",
+      subtitle: "Reinforced seams for play and Sunday school",
+      img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Christmas Edition T-Shirts",
+      targetDept: "Kids",
+      targetSub: "Boys",
+    },
+    {
+      id: "cat-girls",
+      name: "Girls' Cheerful Tees",
+      departmentLabel: "Kids (2-13Y)",
+      tag: "SOFT PASTELS",
+      tagBg: "bg-pink-700",
+      subtitle: "Gentle on skin with joyful holiday designs",
+      img: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=600&auto=format&fit=crop&q=80",
+      targetCategory: "Christmas Edition T-Shirts",
+      targetDept: "Kids",
+      targetSub: "Girls",
+    },
+  ];
+
+  // Helper to count available items per category card
+  const getCategoryCount = (item: CategoryCardItem) => {
+    return products.filter((p) => {
+      const pCat = (p.category || "").toLowerCase();
+      const targetCat = item.targetCategory.toLowerCase();
+      const isXmasTarget = targetCat.includes("christmas");
+
+      if (isXmasTarget) {
+        if (!pCat.includes("christmas")) return false;
+        if (item.targetDept && item.targetDept !== "All") {
+          if (!p.department || p.department.toLowerCase() !== item.targetDept.toLowerCase()) {
+            return false;
+          }
+        }
+        if (item.targetSub && item.targetSub !== "All") {
+          if (!p.subCategory || p.subCategory.toLowerCase() !== item.targetSub.toLowerCase()) {
+            return false;
+          }
+        }
+        return true;
+      }
+      return pCat === targetCat;
+    }).length;
+  };
+
+  // Filter category cards based on selected department pill
+  const filteredCategories = useMemo(() => {
+    if (selectedDeptFilter === "All") return categoriesList;
+    if (selectedDeptFilter === "Christmas") {
+      return categoriesList.filter((c) => c.targetCategory.toLowerCase().includes("christmas"));
+    }
+    if (selectedDeptFilter === "Men") {
+      return categoriesList.filter(
+        (c) =>
+          c.targetDept === "Men" ||
+          c.name.toLowerCase().includes("men") ||
+          c.targetCategory.toLowerCase().includes("polo") ||
+          c.targetCategory.toLowerCase().includes("oversized"),
+      );
+    }
+    if (selectedDeptFilter === "Women") {
+      return categoriesList.filter(
+        (c) =>
+          c.targetDept === "Women" ||
+          c.name.toLowerCase().includes("women") ||
+          c.targetCategory.toLowerCase().includes("round neck"),
+      );
+    }
+    if (selectedDeptFilter === "Kids") {
+      return categoriesList.filter(
+        (c) =>
+          c.targetDept === "Kids" ||
+          c.name.toLowerCase().includes("boys") ||
+          c.name.toLowerCase().includes("girls") ||
+          c.targetCategory.toLowerCase().includes("polo"),
+      );
+    }
+    return categoriesList;
+  }, [selectedDeptFilter]);
+
+  // Quick 1-tap horizontal bubble list
+  const quickBubbles = [
+    {
+      name: "Christmas Special",
+      tag: "25% OFF",
+      bg: "bg-red-600",
+      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=200&auto=format&fit=crop&q=80",
+      cat: "Christmas Edition T-Shirts",
+      dept: "All" as const,
+      sub: "All",
     },
     {
       name: "Men's Hoodies",
-      tag: "TRENDING",
-      tagBg: "bg-[#47352F]",
-      img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=300&auto=format&fit=crop&q=80",
-      category: "Christmas Edition",
-      department: "Men",
-      subCategory: "Hoodies",
+      tag: "HOT",
+      bg: "bg-[#47352F]",
+      img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=200&auto=format&fit=crop&q=80",
+      cat: "Christmas Edition T-Shirts",
+      dept: "Men" as const,
+      sub: "Hoodies",
     },
     {
       name: "Men's Polos",
       tag: "CLASSIC",
-      tagBg: "bg-blue-700",
-      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=300&auto=format&fit=crop&q=80",
-      category: "Polo T-Shirts",
+      bg: "bg-blue-700",
+      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=200&auto=format&fit=crop&q=80",
+      cat: "Polo T-Shirts",
+      dept: "All" as const,
+      sub: "All",
     },
     {
-      name: "Men's Crewnecks",
-      tag: "POPULAR",
-      tagBg: "bg-[#47352F]",
-      img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300&auto=format&fit=crop&q=80",
-      category: "Round Neck T-Shirts",
+      name: "Oversized Fits",
+      tag: "240 GSM",
+      bg: "bg-amber-800",
+      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=200&auto=format&fit=crop&q=80",
+      cat: "Oversized T-Shirts",
+      dept: "All" as const,
+      sub: "All",
     },
     {
       name: "Women's Hoodies",
       tag: "COZY",
-      tagBg: "bg-purple-700",
-      img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&auto=format&fit=crop&q=80",
-      category: "Christmas Edition",
-      department: "Women",
-      subCategory: "Hoodies",
+      bg: "bg-purple-700",
+      img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200&auto=format&fit=crop&q=80",
+      cat: "Christmas Edition T-Shirts",
+      dept: "Women" as const,
+      sub: "Hoodies",
     },
     {
       name: "Women's Polos",
-      tag: "NEW",
-      tagBg: "bg-emerald-700",
-      img: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=300&auto=format&fit=crop&q=80",
-      category: "Christmas Edition",
-      department: "Women",
-      subCategory: "Polo",
-    },
-    {
-      name: "Women's Tees",
-      tag: "GRACE",
-      tagBg: "bg-[#47352F]",
-      img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=300&auto=format&fit=crop&q=80",
-      category: "Round Neck T-Shirts",
+      tag: "ELEGANT",
+      bg: "bg-emerald-700",
+      img: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=200&auto=format&fit=crop&q=80",
+      cat: "Christmas Edition T-Shirts",
+      dept: "Women" as const,
+      sub: "Polo",
     },
     {
       name: "Boys' Tees",
-      tag: "PLAY-READY",
-      tagBg: "bg-sky-600",
-      img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=300&auto=format&fit=crop&q=80",
-      category: "Christmas Edition",
-      department: "Kids",
-      subCategory: "Boys",
+      tag: "PLAY",
+      bg: "bg-sky-600",
+      img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=200&auto=format&fit=crop&q=80",
+      cat: "Christmas Edition T-Shirts",
+      dept: "Kids" as const,
+      sub: "Boys",
     },
     {
       name: "Girls' Tees",
-      tag: "SWEET",
-      tagBg: "bg-pink-600",
-      img: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=300&auto=format&fit=crop&q=80",
-      category: "Christmas Edition",
-      department: "Kids",
-      subCategory: "Girls",
+      tag: "CUTE",
+      bg: "bg-pink-600",
+      img: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=200&auto=format&fit=crop&q=80",
+      cat: "Christmas Edition T-Shirts",
+      dept: "Kids" as const,
+      sub: "Girls",
     },
     {
-      name: "Oversized Tees",
-      tag: "SAVE ₹300",
-      tagBg: "bg-amber-700",
-      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=300&auto=format&fit=crop&q=80",
-      category: "Oversized T-Shirts",
+      name: "Round Necks",
+      tag: "DAILY",
+      bg: "bg-[#47352F]",
+      img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=200&auto=format&fit=crop&q=80",
+      cat: "Round Neck T-Shirts",
+      dept: "All" as const,
+      sub: "All",
     },
   ];
 
   return (
-    <section className="py-8 bg-[#fbf7f0] border-b border-black/5">
+    <section className="py-12 md:py-16 bg-[#fbf7f0] border-b border-black/10">
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <span className="text-lg">⚡</span>
-            <h2 className="text-base sm:text-lg font-bold text-[#221b18] tracking-tight">
-              Explore By Category
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8 border-b border-black/10 pb-6">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-amber-600">⚡</span>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#47352F]">
+                24-Hour Express Dispatch · Instant Categorized Browse
+              </span>
+            </div>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[#221b18] tracking-tight">
+              Explore Collections & Categories
             </h2>
+            <p className="mt-2 text-xs sm:text-sm text-[#47352F]/80 max-w-2xl leading-relaxed">
+              Tap any category to filter our catalog instantly. Woven from 100% combed cotton,
+              pre-shrunk fleece, and premium piqué knit.
+            </p>
           </div>
+
           <Link
             to="/shop"
-            className="text-xs font-bold text-[#47352F] hover:underline flex items-center gap-1"
+            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#47352F] hover:underline shrink-0"
           >
-            <span>View All</span>
-            <ChevronRight className="h-3 w-3" />
+            <span>View Full Shop ({products.length} Items)</span>
+            <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* Horizontal scrollable visual bubble row */}
-        <div className="flex items-start gap-4 sm:gap-6 overflow-x-auto pb-4 pt-1 no-scrollbar scroll-smooth">
-          {bubbles.map((b, i) => (
-            <a
-              key={i}
-              href="#shop"
-              className="flex flex-col items-center shrink-0 w-20 sm:w-24 group text-center cursor-pointer"
-            >
-              <div className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-2xl overflow-hidden border-2 border-transparent group-hover:border-[#47352F] shadow-sm bg-white transition-all duration-300 group-hover:scale-105">
-                <img src={b.img} alt={b.name} className="h-full w-full object-cover" />
-                <span
-                  className={`absolute top-1 left-1/2 -translate-x-1/2 ${b.tagBg} text-[9px] font-bold uppercase tracking-wider text-white px-1.5 py-0.5 rounded-full whitespace-nowrap shadow-xs`}
+        {/* Quick-Commerce Horizontal 1-Tap Pill Bar */}
+        <div className="mb-10">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#47352F]/70">
+              Quick 1-Tap Browse:
+            </span>
+            <span className="text-[11px] text-[#47352F]/60">Swipe horizontally ➔</span>
+          </div>
+
+          <div className="flex items-start gap-3.5 sm:gap-5 overflow-x-auto pb-3 pt-1 no-scrollbar scroll-smooth">
+            {quickBubbles.map((bubble, idx) => {
+              const isXmasTarget = bubble.cat.toLowerCase().includes("christmas");
+              const isCurrentActive =
+                isXmasTarget && activeCategory.toLowerCase().includes("christmas")
+                  ? (bubble.dept === "All" || activeDept === bubble.dept) &&
+                    (bubble.sub === "All" || activeSub === bubble.sub)
+                  : activeCategory.toLowerCase() === bubble.cat.toLowerCase();
+
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => onSelectCategory(bubble.cat, bubble.dept, bubble.sub)}
+                  className={`flex flex-col items-center shrink-0 w-20 sm:w-24 group text-center cursor-pointer transition-all ${
+                    isCurrentActive ? "scale-105" : "hover:scale-105"
+                  }`}
                 >
-                  {b.tag}
-                </span>
-              </div>
-              <span className="mt-2 text-xs font-semibold text-[#221b18] group-hover:text-[#47352F] transition-colors leading-tight line-clamp-2">
-                {b.name}
-              </span>
-            </a>
+                  <div
+                    className={`relative h-20 w-20 sm:h-24 sm:w-24 rounded-2xl overflow-hidden border-2 shadow-xs bg-white transition-all duration-300 ${
+                      isCurrentActive
+                        ? "border-[#47352F] ring-2 ring-[#47352F]/30 shadow-md"
+                        : "border-black/10 group-hover:border-[#47352F]"
+                    }`}
+                  >
+                    <img src={bubble.img} alt={bubble.name} className="h-full w-full object-cover" />
+                    <span
+                      className={`absolute top-1 left-1/2 -translate-x-1/2 ${bubble.bg} text-[9px] font-bold uppercase tracking-wider text-white px-1.5 py-0.5 rounded-full whitespace-nowrap shadow-xs`}
+                    >
+                      {bubble.tag}
+                    </span>
+                  </div>
+                  <span
+                    className={`mt-2 text-xs font-bold transition-colors leading-tight line-clamp-2 ${
+                      isCurrentActive
+                        ? "text-[#47352F] underline"
+                        : "text-[#221b18] group-hover:text-[#47352F]"
+                    }`}
+                  >
+                    {bubble.name}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Department Filter Tabs */}
+        <div className="mb-8 flex flex-wrap items-center gap-2 border-b border-black/10 pb-4">
+          <span className="text-xs font-bold text-[#47352F] uppercase tracking-wider mr-2">
+            Filter View:
+          </span>
+          {(
+            [
+              { id: "All", label: "🌟 All Categories" },
+              { id: "Christmas", label: "🎄 Christmas Special (25% OFF)" },
+              { id: "Men", label: "👔 Men's Collection" },
+              { id: "Women", label: "👗 Women's Grace" },
+              { id: "Kids", label: "👶 Kids' Playwear" },
+            ] as const
+          ).map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setSelectedDeptFilter(tab.id)}
+              className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition ${
+                selectedDeptFilter === tab.id
+                  ? "bg-[#47352F] text-white shadow-xs"
+                  : "border border-black/10 bg-white text-black/75 hover:border-[#47352F]"
+              }`}
+            >
+              {tab.label}
+            </button>
           ))}
+        </div>
+
+        {/* Enhanced Visual Category Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+          {filteredCategories.map((card, idx) => {
+            const count = getCategoryCount(card);
+            const isXmasTarget = card.targetCategory.toLowerCase().includes("christmas");
+            const isCardActive =
+              isXmasTarget && activeCategory.toLowerCase().includes("christmas")
+                ? (card.targetDept === "All" || activeDept === card.targetDept) &&
+                  (!card.targetSub || card.targetSub === "All" || activeSub === card.targetSub)
+                : activeCategory.toLowerCase() === card.targetCategory.toLowerCase();
+
+            return (
+              <Reveal key={card.id} delay={idx * 0.04}>
+                <div
+                  onClick={() =>
+                    onSelectCategory(card.targetCategory, card.targetDept || "All", card.targetSub || "All")
+                  }
+                  onMouseEnter={() => onHover(true)}
+                  onMouseLeave={() => onHover(false)}
+                  className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer ${
+                    isCardActive
+                      ? "border-[#47352F] ring-2 ring-[#47352F]/40 shadow-md bg-[#fcf9f4]"
+                      : "border-black/10 hover:border-[#47352F]/60"
+                  }`}
+                >
+                  {/* Top Image Showcase */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#f7f2eb]">
+                    <img
+                      src={card.img}
+                      alt={card.name}
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
+
+                    {/* Tag Badges */}
+                    <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
+                      <span
+                        className={`rounded-md ${card.tagBg} px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-xs`}
+                      >
+                        {card.tag}
+                      </span>
+                      {card.badge && (
+                        <span className="rounded-md bg-amber-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#221b18] shadow-xs">
+                          {card.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Live Count Pill */}
+                    <div className="absolute bottom-3 left-3 z-10 rounded-full bg-white/95 px-3 py-1 text-[11px] font-bold text-[#221b18] shadow-xs backdrop-blur flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                      <span>{count > 0 ? `${count} Styles Available` : "Curated Drops"}</span>
+                    </div>
+
+                    {isCardActive && (
+                      <div className="absolute top-3 right-3 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-[#47352F] text-white shadow-sm">
+                        <Check className="h-3.5 w-3.5" />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Card Body Information */}
+                  <div className="p-4 sm:p-5 flex flex-col justify-between flex-1">
+                    <div>
+                      {card.departmentLabel && (
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#47352F]">
+                          {card.departmentLabel}
+                        </p>
+                      )}
+                      <h3 className="mt-1 text-base sm:text-lg font-bold text-[#221b18] group-hover:text-[#47352F] transition-colors leading-snug">
+                        {card.name}
+                      </h3>
+                      <p className="mt-1.5 text-xs text-[#47352F]/75 leading-relaxed line-clamp-2">
+                        {card.subtitle}
+                      </p>
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="mt-4 pt-3 border-t border-black/5 flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#47352F] flex items-center gap-1 group-hover:underline">
+                        <span>{isCardActive ? "Selected" : "Filter Catalog"}</span>
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                      </span>
+                      <span className="text-[11px] font-medium text-muted-foreground">
+                        24h Dispatch
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -542,11 +938,24 @@ function FlashSaleBanner() {
 
 /* ----------------- Product Catalog Section (Multi-Shelf Quick-Commerce) ----------------- */
 
-function ProductCatalogSection({ onHover }: { onHover: (v: boolean) => void }) {
+function ProductCatalogSection({
+  selectedCat,
+  setSelectedCat,
+  christmasDept,
+  setChristmasDept,
+  christmasSub,
+  setChristmasSub,
+  onHover,
+}: {
+  selectedCat: string;
+  setSelectedCat: (cat: string) => void;
+  christmasDept: "All" | "Men" | "Women" | "Kids";
+  setChristmasDept: (dept: "All" | "Men" | "Women" | "Kids") => void;
+  christmasSub: string;
+  setChristmasSub: (sub: string) => void;
+  onHover: (v: boolean) => void;
+}) {
   const { products, categories } = useStore();
-  const [selectedCat, setSelectedCat] = useState("All");
-  const [christmasDept, setChristmasDept] = useState<"All" | "Men" | "Women" | "Kids">("All");
-  const [christmasSub, setChristmasSub] = useState<string>("All");
 
   const isChristmas = (selectedCat || "").toLowerCase().includes("christmas");
 
@@ -556,6 +965,12 @@ function ProductCatalogSection({ onHover }: { onHover: (v: boolean) => void }) {
       setChristmasDept("All");
       setChristmasSub("All");
     }
+  };
+
+  const handleResetFilters = () => {
+    setSelectedCat("All");
+    setChristmasDept("All");
+    setChristmasSub("All");
   };
 
   const filtered = useMemo(() => {
@@ -591,6 +1006,9 @@ function ProductCatalogSection({ onHover }: { onHover: (v: boolean) => void }) {
     });
   }, [products, selectedCat, isChristmas, christmasDept, christmasSub]);
 
+  const hasActiveFilters =
+    selectedCat !== "All" || christmasDept !== "All" || christmasSub !== "All";
+
   return (
     <section id="shop" className="py-12 md:py-20 bg-[#fbf7f0]">
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
@@ -611,15 +1029,16 @@ function ProductCatalogSection({ onHover }: { onHover: (v: boolean) => void }) {
           </div>
 
           {/* Quick-Commerce Category Tabs */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {categories.slice(0, 6).map((cat) => {
               const isXmas = (cat || "").toLowerCase().includes("christmas");
+              const isCurrent = selectedCat === cat;
               return (
                 <button
                   key={cat}
                   onClick={() => handleCategorySelect(cat)}
                   className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition ${
-                    selectedCat === cat
+                    isCurrent
                       ? "bg-[#47352F] text-white shadow-sm"
                       : "border border-black/10 bg-white text-black/80 hover:border-[#47352F]"
                   }`}
@@ -630,6 +1049,38 @@ function ProductCatalogSection({ onHover }: { onHover: (v: boolean) => void }) {
             })}
           </div>
         </div>
+
+        {/* Active Filter Indicator Banner if any filter is set */}
+        {hasActiveFilters && (
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#47352F]/20 bg-white px-4 py-3 shadow-xs">
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#221b18]">
+              <Filter className="h-4 w-4 text-[#47352F]" />
+              <span>Active Filter:</span>
+              <span className="rounded-md bg-[#47352F]/10 px-2 py-0.5 font-bold text-[#47352F]">
+                {selectedCat}
+              </span>
+              {christmasDept !== "All" && (
+                <span className="rounded-md bg-[#8A1822]/10 px-2 py-0.5 font-bold text-[#8A1822]">
+                  {christmasDept}
+                </span>
+              )}
+              {christmasSub !== "All" && (
+                <span className="rounded-md bg-[#8A1822]/10 px-2 py-0.5 font-bold text-[#8A1822]">
+                  {christmasSub}
+                </span>
+              )}
+              <span className="text-muted-foreground">({filtered.length} Styles found)</span>
+            </div>
+
+            <button
+              onClick={handleResetFilters}
+              className="inline-flex items-center gap-1 text-xs font-bold text-[#8A1822] hover:underline"
+            >
+              <RotateCcw className="h-3 w-3" />
+              <span>Reset to All Styles</span>
+            </button>
+          </div>
+        )}
 
         {/* Christmas Sub-Filter Panel */}
         {isChristmas && (
@@ -649,7 +1100,7 @@ function ProductCatalogSection({ onHover }: { onHover: (v: boolean) => void }) {
                   }}
                   className="text-xs font-semibold text-[#8A1822] hover:underline"
                 >
-                  Reset Filters
+                  Reset Sub-Filters
                 </button>
               )}
             </div>
@@ -1007,162 +1458,6 @@ function ProductCard({
         </div>
       </div>
     </Reveal>
-  );
-}
-
-/* ----------------- Verified Believer Reviews & Testimonials ----------------- */
-
-function CustomerReviewsSection() {
-  const reviews = [
-    {
-      name: "David M.",
-      location: "Bengaluru, India",
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-      product: "Faith Over Fear Hoodie · Men / Black",
-      rating: 5,
-      date: "3 days ago",
-      text: "The 380 GSM fleece is unbelievably soft and warm. Wore this to our church youth retreat and got so many compliments. Dispatched within 24 hours just like promised on the site!",
-    },
-    {
-      name: "Sarah K.",
-      location: "Mumbai, India",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
-      product: "Proverbs 31:25 Oversized Tee · Women / Cream",
-      rating: 5,
-      date: "5 days ago",
-      text: "The Scripture print is crisp, and the combed cotton feels breathable even in humid weather. It’s rare to find Christian apparel this chic, comfortable, and well-tailored.",
-    },
-    {
-      name: "Priya & Mathew R.",
-      location: "Kochi, Kerala",
-      avatar:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      product: "Nativity Peace Christmas Tee · Kids (6-7Y)",
-      rating: 5,
-      date: "1 week ago",
-      text: "Ordered matching festive tees for our family Christmas photo. The kids loved how gentle the fabric was on their skin. Delivery was blazing fast!",
-    },
-    {
-      name: "Joshua T.",
-      location: "Chennai, India",
-      avatar:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
-      product: "Lion of Judah Classic Polo · Men / Navy",
-      rating: 5,
-      date: "1 week ago",
-      text: "Top tier collar fit and durable embroidery. Feels like luxury retail but with a message that reminds me who I walk with every day.",
-    },
-    {
-      name: "Hannah G.",
-      location: "Hyderabad, India",
-      avatar:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
-      product: "Grace Upon Grace Drop-Shoulder Tee · Women / Sage",
-      rating: 5,
-      date: "2 weeks ago",
-      text: "Customer care is so transparent and kind. The unboxing experience felt like opening a gift blessed with prayer. 10/10 recommend to all believers.",
-    },
-    {
-      name: "Reuben P.",
-      location: "Pune, India",
-      avatar:
-        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80",
-      product: "Light of the World Christmas Tee · Boys (8-9Y)",
-      rating: 5,
-      date: "2 weeks ago",
-      text: "7-day replacement guarantee gave me total peace of mind. Arrived neatly folded with scripture tags. My son wears it every Sunday!",
-    },
-  ];
-
-  return (
-    <section className="py-16 md:py-24 bg-[#f4ece1] border-y border-black/10">
-      <div className="mx-auto max-w-[1600px] px-4 md:px-12">
-        {/* Header & Metrics */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="flex text-amber-500">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500" />
-                ))}
-              </span>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#47352F]">
-                4.9 / 5.0 Rating · 12,500+ Verified Believers
-              </span>
-            </div>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[#221b18]">
-              Loved by Believers Nationwide
-            </h2>
-            <p className="mt-2 text-sm text-[#47352F]/80 max-w-xl">
-              Real reviews from believers who wear their testimony daily. 99.4% recommendation rate.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl shadow-xs border border-black/5 shrink-0">
-            <CheckCircle2 className="h-6 w-6 text-emerald-600" />
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-black">
-                100% Verified Purchases
-              </p>
-              <p className="text-[11px] text-muted-foreground">Photos & reviews from real orders</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((rev, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col justify-between rounded-2xl border border-black/10 bg-white p-6 shadow-xs hover:shadow-md transition"
-            >
-              <div>
-                {/* Rating & Date */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex text-amber-500">
-                    {[...Array(rev.rating)].map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
-                    ))}
-                  </div>
-                  <span className="text-[11px] text-muted-foreground">{rev.date}</span>
-                </div>
-
-                {/* Review Text */}
-                <p className="text-sm leading-relaxed text-[#221b18]/90 italic">
-                  “{rev.text}”
-                </p>
-
-                {/* Product Tag */}
-                <div className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-[#f7f2eb] px-2.5 py-1 text-[11px] font-semibold text-[#47352F]">
-                  <span>🏷️</span>
-                  <span>{rev.product}</span>
-                </div>
-              </div>
-
-              {/* Reviewer Details */}
-              <div className="mt-6 flex items-center gap-3 border-t border-black/5 pt-4">
-                <img
-                  src={rev.avatar}
-                  alt={rev.name}
-                  className="h-10 w-10 rounded-full object-cover border border-[#47352F]/20"
-                />
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <p className="text-xs font-bold text-[#221b18]">{rev.name}</p>
-                    <span className="inline-flex items-center gap-0.5 rounded-full bg-emerald-100 px-1.5 py-0.2 text-[9px] font-bold text-emerald-800">
-                      ✓ Verified
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-muted-foreground">{rev.location}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 
