@@ -54,15 +54,25 @@ function useCursor() {
   const y = useMotionValue(-100);
   const sx = useSpring(x, { stiffness: 220, damping: 30, mass: 0.6 });
   const sy = useSpring(y, { stiffness: 220, damping: 30, mass: 0.6 });
+  const [inWindow, setInWindow] = useState(false);
+
   useEffect(() => {
     const move = (e: MouseEvent) => {
       x.set(e.clientX);
       y.set(e.clientY);
+      setInWindow(true);
     };
+    const leave = () => setInWindow(false);
+
     window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
+    document.addEventListener("mouseleave", leave);
+    return () => {
+      window.removeEventListener("mousemove", move);
+      document.removeEventListener("mouseleave", leave);
+    };
   }, [x, y]);
-  return { sx, sy };
+
+  return { sx, sy, inWindow };
 }
 
 function Reveal({
@@ -79,10 +89,10 @@ function Reveal({
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-20px" }}
       variants={{
-        hidden: { opacity: 0, y: 40 },
-        show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1], delay } },
+        hidden: { opacity: 0, y: 30 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay } },
       }}
     >
       {children}
@@ -94,7 +104,7 @@ function Reveal({
 
 function HomePage() {
   useLenis();
-  const { sx, sy } = useCursor();
+  const { sx, sy, inWindow } = useCursor();
   const [hover, setHover] = useState(false);
 
   return (
@@ -102,15 +112,14 @@ function HomePage() {
       {/* Cursor glow */}
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed z-[100] hidden md:block"
+        className="pointer-events-none fixed z-[100] hidden md:block -translate-x-1/2 -translate-y-1/2"
         style={{
           x: sx,
           y: sy,
-          translateX: "-50%",
-          translateY: "-50%",
+          opacity: inWindow ? 1 : 0,
           width: hover ? 60 : 14,
           height: hover ? 60 : 14,
-          transition: "width 500ms cubic-bezier(.16,1,.3,1), height 500ms cubic-bezier(.16,1,.3,1)",
+          transition: "width 400ms cubic-bezier(.16,1,.3,1), height 400ms cubic-bezier(.16,1,.3,1), opacity 300ms ease",
           background: "radial-gradient(circle, rgba(0,0,0,0.15), transparent 70%)",
           borderRadius: 999,
           mixBlendMode: "normal",
@@ -161,7 +170,7 @@ function Hero({ onHover }: { onHover: (v: boolean) => void }) {
       ref={ref}
       className="relative min-h-[88vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
     >
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+      <motion.div className="absolute -top-12 inset-x-0 h-[115%]" style={{ y: bgY }}>
         <video
           ref={videoRef}
           autoPlay
@@ -251,9 +260,9 @@ function AnimatedWords({
   return (
     <span className={`inline-block overflow-hidden align-bottom ${className}`}>
       <motion.span
-        initial={{ y: "110%" }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.3 + delay }}
+        initial={{ y: "100%", opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 + delay }}
         className="inline-block"
       >
         {text}
@@ -283,67 +292,67 @@ function ShopByCategorySection({ onHover }: { onHover: (v: boolean) => void }) {
       title: "Casual Wear",
       discount: "40-80% OFF",
       img: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Round+Neck+T-Shirts",
     },
     {
       title: "Men's Activewear",
       discount: "30-70% OFF",
       img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Christmas+Edition+T-Shirts&dept=Men",
     },
     {
       title: "Women's Activewear",
       discount: "30-70% OFF",
       img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Christmas+Edition+T-Shirts&dept=Women",
     },
     {
       title: "Western Wear",
       discount: "40-80% OFF",
       img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Oversized+T-Shirts",
     },
     {
       title: "Sportswear",
       discount: "30-80% OFF",
       img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Christmas+Edition+T-Shirts&sub=Hoodies",
     },
     {
       title: "Oversized Tees",
       discount: "40-70% OFF",
       img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Oversized+T-Shirts",
     },
     {
       title: "Polo T-Shirts",
       discount: "30-60% OFF",
       img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Polo+T-Shirts",
     },
     {
       title: "Christmas Edition",
       discount: "50-80% OFF",
       img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Christmas+Edition+T-Shirts",
     },
     {
       title: "Round Neck Tees",
       discount: "40-80% OFF",
       img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Round+Neck+T-Shirts",
     },
     {
       title: "Kids' Wear",
       discount: "40-80% OFF",
       img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Christmas+Edition+T-Shirts&dept=Kids",
     },
     {
       title: "Hoodies & Fleeces",
       discount: "30-70% OFF",
       img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
+      link: "/shop?category=Christmas+Edition+T-Shirts&sub=Hoodies",
     },
   ];
 
@@ -417,8 +426,8 @@ function Marquee() {
 
   return (
     <section className="border-y border-border/60 bg-[#f5efe8] py-6 overflow-hidden">
-      <div className="mx-auto flex whitespace-nowrap animate-marquee">
-        {[...items, ...items, ...items].map((it, i) => (
+      <div className="mx-auto flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] w-max select-none">
+        {[...items, ...items].map((it, i) => (
           <span
             key={i}
             className="mx-6 eyebrow flex items-center gap-6 md:mx-10 md:gap-10 text-black/80"
@@ -744,15 +753,16 @@ function ProductCard({
           href={`/product/${product.id}`}
           className="relative aspect-[3/4] overflow-hidden rounded-xl bg-secondary md:aspect-[4/5] border border-black/5 block"
         >
-          <motion.img
-            src={product.img}
-            alt={product.name}
-            width={800}
-            height={1000}
-            loading="lazy"
-            style={{ y }}
-            className="h-[110%] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
-          />
+          <motion.div style={{ y }} className="h-[115%] w-full -mt-[7%]">
+            <img
+              src={product.img}
+              alt={product.name}
+              width={800}
+              height={1000}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          </motion.div>
 
           {/* Badge */}
           {product.badge && (

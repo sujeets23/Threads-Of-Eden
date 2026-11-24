@@ -52,7 +52,7 @@ export function CartDrawer() {
             </div>
 
             {/* Items List */}
-            <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+            <div data-lenis-prevent className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f7f7f5] text-black/30">

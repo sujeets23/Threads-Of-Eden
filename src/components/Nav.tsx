@@ -246,7 +246,7 @@ export function Nav() {
       {/* Live Interactive Search Modal */}
       <AnimatePresence>
         {searchOpen && (
-          <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 px-4 sm:px-6">
+          <div className="fixed inset-0 z-[120] flex items-start justify-center pt-20 sm:pt-28 px-4 sm:px-6">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -293,7 +293,7 @@ export function Nav() {
               </div>
 
               {/* Suggestions / Results Body */}
-              <div className="max-h-[60vh] overflow-y-auto p-5">
+              <div data-lenis-prevent className="max-h-[60vh] overflow-y-auto p-5">
                 {!searchQuery.trim() ? (
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-[#47352F]/70 mb-3">
@@ -387,7 +387,7 @@ export function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-[90] bg-black/40 backdrop-blur-sm lg:hidden"
             onClick={() => setMobileOpen(false)}
           />
         )}
@@ -401,9 +401,9 @@ export function Nav() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-y-0 right-0 z-40 flex w-[85%] max-w-sm flex-col bg-[#fbf7f0] shadow-2xl lg:hidden"
+            className="fixed inset-y-0 right-0 z-[95] flex w-[85%] max-w-sm flex-col bg-[#fbf7f0] shadow-2xl lg:hidden"
           >
-            <div className="flex-1 overflow-y-auto px-8 pt-20 pb-8">
+            <div data-lenis-prevent className="flex-1 overflow-y-auto px-8 pt-20 pb-8">
               {/* Mobile Drawer Top Brand */}
               <div className="mb-6 flex items-center justify-between border-b border-black/5 pb-4">
                 <img src={logo} alt="Threads of Eden" className="h-10 w-auto object-contain" />

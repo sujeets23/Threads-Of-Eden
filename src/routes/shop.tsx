@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useStore } from "@/context/StoreContext";
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/lib/store";
@@ -27,6 +27,24 @@ function ShopPage() {
   const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc">("featured");
   const [christmasDept, setChristmasDept] = useState<"All" | "Men" | "Women" | "Kids">("All");
   const [christmasSub, setChristmasSub] = useState<string>("All");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get("category");
+      if (cat) {
+        setSelectedCategory(cat);
+      }
+      const dept = params.get("dept");
+      if (dept && ["All", "Men", "Women", "Kids"].includes(dept)) {
+        setChristmasDept(dept as "All" | "Men" | "Women" | "Kids");
+      }
+      const sub = params.get("sub");
+      if (sub) {
+        setChristmasSub(sub);
+      }
+    }
+  }, []);
 
   const isChristmasActive = (selectedCategory || "").toLowerCase().includes("christmas");
 

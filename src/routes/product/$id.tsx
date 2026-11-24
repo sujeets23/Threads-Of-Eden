@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useStore } from "@/context/StoreContext";
 import { useCart } from "@/context/CartContext";
 import { Check, ShieldCheck, RefreshCw, Truck, ArrowLeft } from "lucide-react";
@@ -37,6 +37,15 @@ function ProductDetailPage() {
   const [selectedColor, setSelectedColor] = useState<string>(standardColors[0]?.name || "Standard");
   const [quantity, setQuantity] = useState<number>(1);
   const [addedAnimation, setAddedAnimation] = useState(false);
+
+  useEffect(() => {
+    if (product) {
+      if (standardSizes[0]) setSelectedSize(standardSizes[0]);
+      if (standardColors[0]?.name) setSelectedColor(standardColors[0].name);
+      setQuantity(1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [product?.id]);
 
   const relatedProducts = useMemo(() => {
     if (!product) return [];
