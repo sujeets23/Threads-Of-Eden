@@ -118,6 +118,7 @@ function HomePage() {
       />
 
       <Hero onHover={setHover} />
+      <ShopByCategorySection onHover={setHover} />
       <Marquee />
       <ShowcaseSection onHover={setHover} />
       <Collections onHover={setHover} />
@@ -258,6 +259,142 @@ function AnimatedWords({
         {text}
       </motion.span>
     </span>
+  );
+}
+
+/* ------------------------ Shop By Category ------------------------ */
+
+interface CategoryTile {
+  title: string;
+  discount: string;
+  img: string;
+  link: string;
+}
+
+function ShopByCategorySection({ onHover }: { onHover: (v: boolean) => void }) {
+  const categoryTiles: CategoryTile[] = [
+    {
+      title: "Ethnic Wear",
+      discount: "50-80% OFF",
+      img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Casual Wear",
+      discount: "40-80% OFF",
+      img: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Men's Activewear",
+      discount: "30-70% OFF",
+      img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Women's Activewear",
+      discount: "30-70% OFF",
+      img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Western Wear",
+      discount: "40-80% OFF",
+      img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Sportswear",
+      discount: "30-80% OFF",
+      img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Oversized Tees",
+      discount: "40-70% OFF",
+      img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Polo T-Shirts",
+      discount: "30-60% OFF",
+      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Christmas Edition",
+      discount: "50-80% OFF",
+      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Round Neck Tees",
+      discount: "40-80% OFF",
+      img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Kids' Wear",
+      discount: "40-80% OFF",
+      img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+    {
+      title: "Hoodies & Fleeces",
+      discount: "30-70% OFF",
+      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&auto=format&fit=crop&q=80",
+      link: "/shop",
+    },
+  ];
+
+  return (
+    <section className="bg-white py-12 md:py-16 border-b border-black/5">
+      <div className="mx-auto max-w-[1600px] px-4 md:px-12">
+        {/* Section Heading */}
+        <div className="mb-6 md:mb-8">
+          <h2 className="font-sans text-lg sm:text-2xl md:text-[24px] font-bold tracking-[0.2em] text-[#221b18] uppercase">
+            SHOP BY CATEGORY
+          </h2>
+        </div>
+
+        {/* 6-column Grid matching reference */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-5">
+          {categoryTiles.map((cat, idx) => (
+            <Reveal key={cat.title} delay={idx * 0.03}>
+              <a
+                href={cat.link}
+                onMouseEnter={() => onHover(true)}
+                onMouseLeave={() => onHover(false)}
+                className="group block border-[1.5px] border-[#eedac5] bg-[#fffaf5] p-2 sm:p-2.5 transition-all duration-300 hover:border-[#47352F] hover:shadow-md"
+              >
+                {/* Product/Model Image */}
+                <div className="aspect-[4/5] w-full overflow-hidden bg-[#f4ece3]">
+                  <img
+                    src={cat.img}
+                    alt={cat.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Content Panel */}
+                <div className="pt-3 pb-1.5 text-center">
+                  <h3 className="text-xs sm:text-[13px] font-semibold text-[#221b18] leading-tight truncate">
+                    {cat.title}
+                  </h3>
+                  <p className="mt-1 text-sm sm:text-base font-extrabold text-black tracking-tight">
+                    {cat.discount}
+                  </p>
+                  <span className="mt-0.5 inline-block text-[11px] font-semibold text-black/75 transition-colors group-hover:text-[#47352F] group-hover:underline">
+                    Shop Now
+                  </span>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
