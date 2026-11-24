@@ -85,12 +85,12 @@ export function Nav() {
   }, [products, searchQuery]);
 
   const popularSearches = [
-    "Polo T-Shirts",
-    "Oversized",
-    "Christmas",
-    "Round Neck",
-    "Hoodies",
-    "Kids",
+    "Men T-Shirts",
+    "Kids T-Shirts",
+    "Women T-Shirts",
+    "Unisex Hoodie",
+    "LED Photo Frame",
+    "Regular Photo Frame",
   ];
 
   const handleSelectProduct = (productId: string) => {

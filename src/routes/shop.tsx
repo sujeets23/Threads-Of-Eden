@@ -9,11 +9,11 @@ import { motion } from "framer-motion";
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Kids' & Festive T-Shirts — Threads of Eden" },
+      { title: "Apparel & Photo Frames — Threads of Eden" },
       {
         name: "description",
         content:
-          "Shop kids' oversized t-shirts, polo t-shirts, round neck tees, and Christmas edition styles for Men, Women, and Kids.",
+          "Shop Men's, Women's, and Kids' T-Shirts, Unisex Hoodies, LED Photo Frames, and Regular Photo Frames.",
       },
     ],
   }),
@@ -122,17 +122,16 @@ function ShopPage() {
       {/* Header Banner */}
       <section className="bg-secondary border-b border-black/5 pt-28 pb-16 md:pt-36 md:pb-24">
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-          <p className="eyebrow mb-4 text-[#47352F]">The Kidswear & Festive Collection</p>
+          <p className="eyebrow mb-4 text-[#47352F]">The Curated Collection</p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <h1 className="font-display text-4xl leading-[1.02] md:text-6xl">
-                T-Shirts for Little Ones & Families,
+                Apparel & Devotional Keepsakes,
                 <br />
-                <span className="italic text-[#47352F]">made for everyday fun & celebrations.</span>
+                <span className="italic text-[#47352F]">crafted with purpose, inspired by grace.</span>
               </h1>
               <p className="mt-4 max-w-xl text-sm md:text-base text-muted-foreground">
-                Shop playful kids' oversized, polo, round neck, and Christmas edition styles. Explore
-                dedicated festive selections for Men, Women, and Kids.
+                Explore Men's, Women's, and Kids' t-shirts, cozy unisex hoodies, illuminated LED acrylic frames, and timeless solid wood photo frames.
               </p>
             </div>
           </div>

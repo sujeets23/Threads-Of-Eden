@@ -283,76 +283,40 @@ interface CategoryTile {
 function ShopByCategorySection({ onHover }: { onHover: (v: boolean) => void }) {
   const categoryTiles: CategoryTile[] = [
     {
-      title: "Ethnic Wear",
-      discount: "50-80% OFF",
-      img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&auto=format&fit=crop&q=80",
-      link: "/shop",
-    },
-    {
-      title: "Casual Wear",
-      discount: "40-80% OFF",
-      img: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Round+Neck+T-Shirts",
-    },
-    {
-      title: "Men's Activewear",
-      discount: "30-70% OFF",
-      img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Christmas+Edition+T-Shirts&dept=Men",
-    },
-    {
-      title: "Women's Activewear",
-      discount: "30-70% OFF",
-      img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Christmas+Edition+T-Shirts&dept=Women",
-    },
-    {
-      title: "Western Wear",
-      discount: "40-80% OFF",
-      img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Oversized+T-Shirts",
-    },
-    {
-      title: "Sportswear",
-      discount: "30-80% OFF",
-      img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Christmas+Edition+T-Shirts&sub=Hoodies",
-    },
-    {
-      title: "Oversized Tees",
+      title: "Men T-Shirts",
       discount: "40-70% OFF",
       img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Oversized+T-Shirts",
+      link: "/shop?category=Men+T-Shirts",
     },
     {
-      title: "Polo T-Shirts",
-      discount: "30-60% OFF",
-      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Polo+T-Shirts",
-    },
-    {
-      title: "Christmas Edition",
-      discount: "50-80% OFF",
-      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Christmas+Edition+T-Shirts",
-    },
-    {
-      title: "Round Neck Tees",
-      discount: "40-80% OFF",
-      img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Round+Neck+T-Shirts",
-    },
-    {
-      title: "Kids' Wear",
+      title: "Kids T-Shirts",
       discount: "40-80% OFF",
       img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Christmas+Edition+T-Shirts&dept=Kids",
+      link: "/shop?category=Kids+T-Shirts",
     },
     {
-      title: "Hoodies & Fleeces",
-      discount: "30-70% OFF",
-      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&auto=format&fit=crop&q=80",
-      link: "/shop?category=Christmas+Edition+T-Shirts&sub=Hoodies",
+      title: "Women T-Shirts",
+      discount: "40-70% OFF",
+      img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80",
+      link: "/shop?category=Women+T-Shirts",
+    },
+    {
+      title: "Unisex Hoodie",
+      discount: "30-60% OFF",
+      img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80",
+      link: "/shop?category=Unisex+Hoodie",
+    },
+    {
+      title: "LED Photo Frame",
+      discount: "30-50% OFF",
+      img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80",
+      link: "/shop?category=LED+Photo+Frame",
+    },
+    {
+      title: "Regular Photo Frame",
+      discount: "30-50% OFF",
+      img: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?w=600&auto=format&fit=crop&q=80",
+      link: "/shop?category=Regular+Photo+Frame",
     },
   ];
 
@@ -496,17 +460,17 @@ function ShowcaseSection({ onHover }: { onHover: (v: boolean) => void }) {
       <div className="mx-auto max-w-[1600px] px-4 md:px-12">
         <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <Reveal>
-            <p className="eyebrow mb-4 md:mb-6 text-[#47352F]">The Kidswear & Festive Collection</p>
+            <p className="eyebrow mb-4 md:mb-6 text-[#47352F]">The Curated Collection</p>
             <h2 className="font-display text-3xl leading-[1.05] md:text-7xl">
-              Ready for play.
+              Woven with purpose.
               <br />
-              <span className="italic text-[#47352F]/80">Made for every day & holiday.</span>
+              <span className="italic text-[#47352F]/80">Inspired by grace & memory.</span>
             </h2>
           </Reveal>
 
           {/* Category Filter Pills */}
           <div className="flex flex-wrap gap-2">
-            {categories.slice(0, 6).map((cat) => {
+            {categories.map((cat) => {
               const isXmas = (cat || "").toLowerCase().includes("christmas");
               return (
                 <button

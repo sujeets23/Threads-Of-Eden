@@ -61,11 +61,13 @@ export function Footer() {
             </p>
             <ul className="space-y-3 text-sm">
               {[
-                { label: "All Kids' T-Shirts", href: "/shop" },
-                { label: "Oversized T-Shirts", href: "/shop" },
-                { label: "Polo T-Shirts", href: "/shop" },
-                { label: "Round Neck T-Shirts", href: "/shop" },
-                { label: "Christmas Edition", href: "/shop" },
+                { label: "All Products", href: "/shop" },
+                { label: "Men T-Shirts", href: "/shop?category=Men+T-Shirts" },
+                { label: "Kids T-Shirts", href: "/shop?category=Kids+T-Shirts" },
+                { label: "Women T-Shirts", href: "/shop?category=Women+T-Shirts" },
+                { label: "Unisex Hoodie", href: "/shop?category=Unisex+Hoodie" },
+                { label: "LED Photo Frame", href: "/shop?category=LED+Photo+Frame" },
+                { label: "Regular Photo Frame", href: "/shop?category=Regular+Photo+Frame" },
               ].map((li) => (
                 <li key={li.label}>
                   <a

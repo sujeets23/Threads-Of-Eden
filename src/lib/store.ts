@@ -96,17 +96,21 @@ export interface Order {
 
 export const INITIAL_CATEGORIES = [
   "All",
-  "Oversized T-Shirts",
-  "Polo T-Shirts",
-  "Round Neck T-Shirts",
-  "Christmas Edition T-Shirts",
+  "Men T-Shirts",
+  "Kids T-Shirts",
+  "Women T-Shirts",
+  "Unisex Hoodie",
+  "LED Photo Frame",
+  "Regular Photo Frame",
 ];
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
     id: "signature-mercerized-polo",
     name: "Everyday Kids Polo T-Shirt",
-    category: "Polo T-Shirts",
+    category: "Kids T-Shirts",
+    department: "Kids",
+    subCategory: "Polo",
     price: "₹899",
     originalPrice: "₹1,199",
     note: "Soft cotton piqué · Easy everyday fit",
@@ -133,8 +137,10 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "heavyweight-oversized-tee",
-    name: "Play-All-Day Oversized T-Shirt",
-    category: "Oversized T-Shirts",
+    name: "Play-All-Day Kids Oversized T-Shirt",
+    category: "Kids T-Shirts",
+    department: "Kids",
+    subCategory: "Oversized",
     price: "₹799",
     originalPrice: "₹1,099",
     note: "Roomy relaxed fit · Soft cotton jersey",
@@ -161,8 +167,10 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "supima-luxury-crewneck",
-    name: "Classic Round Neck T-Shirt",
-    category: "Round Neck T-Shirts",
+    name: "Classic Kids Round Neck T-Shirt",
+    category: "Kids T-Shirts",
+    department: "Kids",
+    subCategory: "Round Neck",
     price: "₹699",
     originalPrice: "₹899",
     note: "Everyday cotton tee · Classic regular fit",
@@ -189,8 +197,8 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "minimalist-waffle-henley",
-    name: "Merry & Bright Christmas T-Shirt",
-    category: "Christmas Edition T-Shirts",
+    name: "Merry & Bright Kids Christmas T-Shirt",
+    category: "Kids T-Shirts",
     department: "Kids",
     subCategory: "Girls",
     price: "₹899",
@@ -219,8 +227,8 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "knit-fine-gauge-polo",
-    name: "Little Explorer Striped Polo",
-    category: "Polo T-Shirts",
+    name: "Little Explorer Striped Kids Polo",
+    category: "Kids T-Shirts",
     department: "Kids",
     subCategory: "Boys",
     price: "₹999",
@@ -249,8 +257,8 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "raw-cut-boxy-tee",
-    name: "Weekend Adventure Oversized Tee",
-    category: "Oversized T-Shirts",
+    name: "Weekend Adventure Kids Oversized Tee",
+    category: "Kids T-Shirts",
     department: "Kids",
     subCategory: "Boys",
     price: "₹849",
@@ -278,8 +286,8 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "riviera-striped-polo",
-    name: "Santa's Favorite Christmas Tee",
-    category: "Christmas Edition T-Shirts",
+    name: "Santa's Favorite Kids Christmas Tee",
+    category: "Kids T-Shirts",
     department: "Kids",
     subCategory: "Boys",
     price: "₹899",
@@ -305,11 +313,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: false,
     badge: "Holiday Boys",
   },
-  // Men's Christmas Collection
+  // Men T-Shirts Collection
   {
     id: "xmas-men-round-neck",
     name: "Men's Festive Fir Round Neck T-Shirt",
-    category: "Christmas Edition T-Shirts",
+    category: "Men T-Shirts",
     department: "Men",
     subCategory: "Round Neck",
     price: "₹999",
@@ -339,7 +347,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     id: "xmas-men-polo",
     name: "Men's Yuletide Piqué Polo T-Shirt",
-    category: "Christmas Edition T-Shirts",
+    category: "Men T-Shirts",
     department: "Men",
     subCategory: "Polo",
     price: "₹1,299",
@@ -366,11 +374,12 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     badge: "Men's Polo",
   },
+  // Unisex Hoodie Collection
   {
     id: "xmas-men-hoodie",
-    name: "Men's Alpine Winter Fleece Hoodie",
-    category: "Christmas Edition T-Shirts",
-    department: "Men",
+    name: "Alpine Winter Fleece Unisex Hoodie",
+    category: "Unisex Hoodie",
+    department: "Unisex",
     subCategory: "Hoodies",
     price: "₹1,999",
     originalPrice: "₹2,699",
@@ -396,11 +405,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     badge: "Winter Heavyweight",
   },
-  // Women's Christmas Collection
+  // Women T-Shirts Collection
   {
     id: "xmas-women-round-neck",
     name: "Women's Starlight Holiday Round Neck Tee",
-    category: "Christmas Edition T-Shirts",
+    category: "Women T-Shirts",
     department: "Women",
     subCategory: "Round Neck",
     price: "₹949",
@@ -430,7 +439,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     id: "xmas-women-polo",
     name: "Women's Heritage Festive Piqué Polo",
-    category: "Christmas Edition T-Shirts",
+    category: "Women T-Shirts",
     department: "Women",
     subCategory: "Polo",
     price: "₹1,249",
@@ -459,15 +468,15 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: "xmas-women-hoodie",
-    name: "Women's Fireside Cozy Plush Christmas Hoodie",
-    category: "Christmas Edition T-Shirts",
-    department: "Women",
+    name: "Fireside Cozy Plush Unisex Hoodie",
+    category: "Unisex Hoodie",
+    department: "Unisex",
     subCategory: "Hoodies",
     price: "₹1,899",
     originalPrice: "₹2,599",
     note: "Plush brushed fleece · Relaxed drop-shoulder",
     description:
-      "Ultra-soft and delightfully cozy for Christmas morning and holiday travel. Crafted with a plush fleece interior and relaxed drop shoulders.",
+      "Ultra-soft and delightfully cozy for cool mornings and travel. Crafted with a plush fleece interior and relaxed drop shoulders.",
     img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000&auto=format&fit=crop&q=85",
     details: [
       "Cloud-soft brushed fleece interior",
@@ -485,13 +494,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 28,
     isFeatured: true,
-    badge: "Cozy Holiday",
+    badge: "Cozy Fleece",
   },
-  // Kids Christmas Collection (Boys & Girls)
+  // Kids T-Shirts Collection
   {
     id: "xmas-kids-boys-tee",
-    name: "Boys' Polar Express Holiday Graphic Tee",
-    category: "Christmas Edition T-Shirts",
+    name: "Boys' Polar Express Graphic Kids Tee",
+    category: "Kids T-Shirts",
     department: "Kids",
     subCategory: "Boys",
     price: "₹849",
@@ -515,19 +524,19 @@ export const INITIAL_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 40,
     isFeatured: true,
-    badge: "Boys Holiday",
+    badge: "Boys Favorite",
   },
   {
     id: "xmas-kids-girls-tee",
-    name: "Girls' Snowflake Magic Flutter Holiday Tee",
-    category: "Christmas Edition T-Shirts",
+    name: "Girls' Snowflake Magic Flutter Kids Tee",
+    category: "Kids T-Shirts",
     department: "Kids",
     subCategory: "Girls",
     price: "₹849",
     originalPrice: "₹1,149",
     note: "Glitter snowflake motif · Gentle flutter sleeves",
     description:
-      "Bring cheerful sparkle to her holiday wardrobe. Made with gentle flutter sleeves and safe, non-scratch glitter snowflakes that catch the holiday lights.",
+      "Bring cheerful sparkle to her wardrobe. Made with gentle flutter sleeves and safe, non-scratch glitter snowflakes that catch the light.",
     img: "https://images.unsplash.com/photo-1607453998774-d533f65dac99?w=1000&auto=format&fit=crop&q=85",
     details: [
       "Super-soft cotton jersey",
@@ -544,12 +553,14 @@ export const INITIAL_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 38,
     isFeatured: true,
-    badge: "Girls Holiday",
+    badge: "Girls Favorite",
   },
   {
     id: "french-linen-cotton-tee",
-    name: "Color Pop Round Neck T-Shirt",
-    category: "Round Neck T-Shirts",
+    name: "Color Pop Kids Round Neck T-Shirt",
+    category: "Kids T-Shirts",
+    department: "Kids",
+    subCategory: "Round Neck",
     price: "₹749",
     originalPrice: "₹999",
     note: "Bright everyday color · Soft cotton feel",
@@ -573,6 +584,126 @@ export const INITIAL_PRODUCTS: Product[] = [
     stockCount: 15,
     isFeatured: false,
     badge: "Color Pop",
+  },
+  // LED Photo Frame Collection
+  {
+    id: "led-acrylic-glow-frame",
+    name: "Custom Illuminated LED Acrylic Photo Frame",
+    category: "LED Photo Frame",
+    department: "Unisex",
+    subCategory: "Acrylic LED",
+    price: "₹1,299",
+    originalPrice: "₹1,799",
+    note: "Warm LED backlight · Edge-lit crystal acrylic",
+    description:
+      "Turn your cherished memories and faith verses into glowing art. Features premium crystal-clear acrylic with warm white LED edge illumination, custom wooden base, and USB power switch.",
+    img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=1000&auto=format&fit=crop&q=85",
+    details: [
+      "Edge-lit optical acrylic sheet for crystal-clear clarity",
+      "Warm ambient LED base with low power consumption",
+      "USB plug & play with convenient in-line power switch",
+      "Custom engraved or printed devotional quotes and photos",
+      "Scratch-resistant polished finish",
+    ],
+    sizes: ["6x8 inch", "8x10 inch", "10x12 inch"],
+    colors: [
+      { name: "Warm Glow", hex: "#FFE6AA" },
+      { name: "Cool White", hex: "#F0F4F8" },
+      { name: "Golden Amber", hex: "#FFBF69" },
+    ],
+    inStock: true,
+    stockCount: 25,
+    isFeatured: true,
+    badge: "Trending",
+  },
+  {
+    id: "led-wooden-floating-frame",
+    name: "Ambient Glow Wooden LED Tabletop Frame",
+    category: "LED Photo Frame",
+    department: "Unisex",
+    subCategory: "Wooden LED",
+    price: "₹1,499",
+    originalPrice: "₹2,199",
+    note: "Integrated LED halo · Handcrafted pine wood",
+    description:
+      "A warm ambient wooden tabletop photo frame with hidden halo lighting. Highlights your photos with a soft, reverent glow ideal for bedside tables and living room altars.",
+    img: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=1000&auto=format&fit=crop&q=85",
+    details: [
+      "Natural seasoned pine wood frame with soft matte lacquer",
+      "Concealed 3000K warm LED halo backlighting",
+      "Dual display: sturdy tabletop easel and wall hanging bracket",
+      "Low voltage USB powered (adapter included)",
+      "Easy-swap magnetic photo mount backing",
+    ],
+    sizes: ["7x9 inch", "9x12 inch"],
+    colors: [
+      { name: "Natural Pine", hex: "#D4A373" },
+      { name: "Walnut Dark", hex: "#582F0E" },
+    ],
+    inStock: true,
+    stockCount: 18,
+    isFeatured: true,
+    badge: "New Arrival",
+  },
+  // Regular Photo Frame Collection
+  {
+    id: "classic-oak-gallery-frame",
+    name: "Classic Solid Oak Gallery Photo Frame",
+    category: "Regular Photo Frame",
+    department: "Unisex",
+    subCategory: "Oak Wood",
+    price: "₹799",
+    originalPrice: "₹1,199",
+    note: "100% solid oak wood · Museum glass cover",
+    description:
+      "Timeless handcrafted solid oak frame with archival-grade mat board and anti-reflective glass. Perfect for showcasing family portraits, scripture quotes, and milestones.",
+    img: "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?w=1000&auto=format&fit=crop&q=85",
+    details: [
+      "Sustainably harvested 100% solid oak hardwood",
+      "Ultra-clear 2mm polished glass face",
+      "Acid-free bevel cut gallery white mat board",
+      "Flexible swivel tabs for easy photo loading",
+      "Includes both horizontal and vertical wall hangers",
+    ],
+    sizes: ["5x7 inch", "8x10 inch", "A4 (8.3x11.7)", "11x14 inch"],
+    colors: [
+      { name: "Natural Oak", hex: "#C29B38" },
+      { name: "Espresso Black", hex: "#2B2625" },
+      { name: "Rustic White", hex: "#F3EDE2" },
+    ],
+    inStock: true,
+    stockCount: 34,
+    isFeatured: true,
+    badge: "Classic",
+  },
+  {
+    id: "vintage-walnut-wall-frame",
+    name: "Handcrafted Vintage Walnut Wood Frame",
+    category: "Regular Photo Frame",
+    department: "Unisex",
+    subCategory: "Walnut Wood",
+    price: "₹949",
+    originalPrice: "₹1,399",
+    note: "Deep profile bevel · Distressed vintage walnut",
+    description:
+      "An elegant vintage-inspired wall and tabletop frame made with sustainable seasoned walnut. Accented with brass hanging hardware and easy-open swivel tabs.",
+    img: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1000&auto=format&fit=crop&q=85",
+    details: [
+      "Handcrafted seasoned walnut wood with rich natural grain",
+      "Deep dimensional bevel profile (25mm depth)",
+      "Heavyweight moisture-resistant backboard",
+      "Scratch-proof float glass front",
+      "Hand-buffed antique wax finish",
+    ],
+    sizes: ["6x8 inch", "8x10 inch", "12x16 inch"],
+    colors: [
+      { name: "Dark Walnut", hex: "#432818" },
+      { name: "Honey Teak", hex: "#99582A" },
+    ],
+    inStock: true,
+    stockCount: 22,
+    isFeatured: false,
+    badge: "Handmade",
   },
 ];
 
@@ -715,8 +846,8 @@ export const INITIAL_ORDERS: Order[] = [
 
 /* ----------------- Storage Helper Functions ----------------- */
 
-const PRODUCTS_KEY = "thread_roots_products_v4";
-const CATEGORIES_KEY = "thread_roots_categories_v3";
+const PRODUCTS_KEY = "thread_roots_products_v5";
+const CATEGORIES_KEY = "thread_roots_categories_v4";
 const SETTINGS_KEY = "thread_roots_settings_v5";
 const ORDERS_KEY = "thread_roots_orders_v3";
 
@@ -725,6 +856,7 @@ export function getStoredProducts(): Product[] {
   try {
     const raw =
       localStorage.getItem(PRODUCTS_KEY) ||
+      localStorage.getItem("thread_roots_products_v4") ||
       localStorage.getItem("thread_roots_products_v3") ||
       localStorage.getItem("arovia_apparel_products_v2");
     if (raw) {
@@ -735,17 +867,17 @@ export function getStoredProducts(): Product[] {
           const initial = initialById.get(product.id);
           return {
             ...product,
-            category: product.category || initial?.category || "T-Shirts",
-            name: product.name || initial?.name || "Faith Apparel Item",
-            price: product.price || initial?.price || "₹799",
-            note: product.note || initial?.note || "",
-            img: product.img || initial?.img || "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
-            department: product.department || initial?.department,
-            subCategory: product.subCategory || initial?.subCategory,
+            category: initial?.category || product.category || "Men T-Shirts",
+            name: initial?.name || product.name || "Apparel Item",
+            price: initial?.price || product.price || "₹799",
+            note: initial?.note || product.note || "",
+            img: initial?.img || product.img || "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
+            department: initial?.department || product.department,
+            subCategory: initial?.subCategory || product.subCategory,
           };
         });
 
-        // Ensure newly added initial products (like Christmas Men, Women, Kids sub-categories) are included
+        // Ensure newly added initial products (like Photo Frames) are included
         const storedIds = new Set(parsed.map((p) => p.id));
         const missingInitial = INITIAL_PRODUCTS.filter((p) => !storedIds.has(p.id));
         const merged = [...updated, ...missingInitial];
@@ -772,23 +904,23 @@ export function saveStoredProducts(products: Product[]): void {
 export function getStoredCategories(): string[] {
   if (typeof window === "undefined") return INITIAL_CATEGORIES;
   try {
-    const raw = localStorage.getItem(CATEGORIES_KEY) || localStorage.getItem("arovia_apparel_categories_v2");
+    const raw = localStorage.getItem(CATEGORIES_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        const legacyCategories = new Set(["Polo", "Oversized", "Crewneck", "Henley", "Textured & Knit"]);
-        if (!parsed.some((category) => legacyCategories.has(category))) return parsed;
-        const customCategories = parsed.filter(
-          (category) =>
-            category !== "All" &&
-            !legacyCategories.has(category) &&
-            !INITIAL_CATEGORIES.includes(category)
-        );
-        const migrated = [...INITIAL_CATEGORIES, ...customCategories];
-        saveStoredCategories(migrated);
-        return migrated;
+        const requiredCategories = [
+          "Men T-Shirts",
+          "Kids T-Shirts",
+          "Women T-Shirts",
+          "Unisex Hoodie",
+          "LED Photo Frame",
+          "Regular Photo Frame",
+        ];
+        const hasAllRequired = requiredCategories.every((cat) => parsed.includes(cat));
+        if (hasAllRequired) return parsed;
       }
     }
+    saveStoredCategories(INITIAL_CATEGORIES);
   } catch (e) {
     console.error("Error reading stored categories:", e);
   }
