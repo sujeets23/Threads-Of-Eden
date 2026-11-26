@@ -49,6 +49,7 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
     try {
       if (typeof window !== "undefined") {
         const keysToRemove = [
+          "thread_roots_products_v6",
           "thread_roots_products_v5",
           "thread_roots_categories_v4",
           "thread_roots_settings_v5",

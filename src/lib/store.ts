@@ -1,3 +1,12 @@
+import design21 from "@/assets/Christmas designs/21.png";
+import design22 from "@/assets/Christmas designs/22.png";
+import design23 from "@/assets/Christmas designs/23.png";
+import design24 from "@/assets/Christmas designs/24.png";
+import design25 from "@/assets/Christmas designs/25.png";
+import designHolyNight from "@/assets/Christmas designs/holy night.png";
+import designKidsHoHo from "@/assets/Christmas designs/kids ho ho.png";
+import designUnisex from "@/assets/Christmas designs/unisex.png";
+
 export interface ProductColor {
   name: string;
   hex: string;
@@ -105,6 +114,255 @@ export const INITIAL_CATEGORIES = [
 ];
 
 export const INITIAL_PRODUCTS: Product[] = [
+  // --- Official Christmas Collection Designs ---
+  {
+    id: "xmas-holy-night-tee",
+    name: "Holy Night Nativity Christmas T-Shirt",
+    category: "Women T-Shirts",
+    department: "Women",
+    subCategory: "Christmas",
+    price: "₹899",
+    originalPrice: "₹1,299",
+    note: "100% combed cotton · Nativity silhouette print",
+    description:
+      "Celebrate the peace and wonder of Christmas with this serene Holy Night t-shirt. Features a starlit Bethlehem nativity scene silhouette with watercolor backdrop and flowing script.",
+    img: designHolyNight,
+    details: [
+      "100% premium combed organic cotton",
+      "High-definition soft-touch nativity artwork",
+      "Flattering relaxed crewneck fit",
+      "Pre-shrunk fabric to maintain size and shape",
+      "Machine wash cold, air dry in shade",
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Chalk White", hex: "#FFFFFF" },
+      { name: "Festive Red", hex: "#9E2A2B" },
+      { name: "Midnight Navy", hex: "#1C2A39" },
+    ],
+    inStock: true,
+    stockCount: 45,
+    isFeatured: true,
+    isNewArrival: true,
+    badge: "Christmas Edition",
+  },
+  {
+    id: "xmas-kids-ho-ho-tee",
+    name: "Kids' Ho Ho Ho 3D Festive T-Shirt",
+    category: "Kids T-Shirts",
+    department: "Kids",
+    subCategory: "Christmas",
+    price: "₹799",
+    originalPrice: "₹1,099",
+    note: "3D plush print · Santa hat & reindeer antlers",
+    description:
+      "An ultra-cheerful Christmas tee for kids featuring tactile 3D-effect 'HO HO HO' lettering with a Santa hat, reindeer antlers, and winter snowflakes. Made with soft cotton for all-day festive comfort.",
+    img: designKidsHoHo,
+    details: [
+      "Ultra-soft 100% ring-spun cotton jersey",
+      "Vibrant 3D-effect plush holiday lettering",
+      "Ribbed neckline with double-stitched durability",
+      "Gentle on sensitive skin and itch-free tagless neck",
+      "Machine washable",
+    ],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
+    colors: [
+      { name: "Snow White", hex: "#FFFFFF" },
+      { name: "Holiday Red", hex: "#A94442" },
+      { name: "Pine Green", hex: "#1F4229" },
+    ],
+    inStock: true,
+    stockCount: 50,
+    isFeatured: true,
+    isNewArrival: true,
+    badge: "Kids Favorite",
+  },
+  {
+    id: "xmas-joy-to-the-world-tee",
+    name: "Joy to the World Nativity Christmas T-Shirt",
+    category: "Men T-Shirts",
+    department: "Men",
+    subCategory: "Christmas",
+    price: "₹899",
+    originalPrice: "₹1,299",
+    note: "Devotional scripture tee · Nativity ornament design",
+    description:
+      "Proclaim the glad tidings with this bold 'Joy to the World' Christian Christmas tee. Features a Christmas ornament framing the holy nativity scene, accented with stars and evergreen boughs.",
+    img: designUnisex,
+    details: [
+      "100% combed cotton jersey",
+      "Vibrant festive lettering with detailed nativity ornament",
+      "Reinforced shoulder-to-shoulder taping for durability",
+      "Breathable, lightweight, and pre-washed for softness",
+      "Machine washable cold",
+    ],
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Pure White", hex: "#FFFFFF" },
+      { name: "Holiday Green", hex: "#1C3B2B" },
+      { name: "Deep Cranberry", hex: "#8A1822" },
+    ],
+    inStock: true,
+    stockCount: 40,
+    isFeatured: true,
+    isNewArrival: true,
+    badge: "Christmas Edition",
+  },
+  {
+    id: "xmas-jesus-reason-season-tee",
+    name: "Jesus The Reason For The Season Christmas T-Shirt",
+    category: "Women T-Shirts",
+    department: "Women",
+    subCategory: "Christmas",
+    price: "₹849",
+    originalPrice: "₹1,199",
+    note: "Festive typography · Candy canes & holiday ornament",
+    description:
+      "Keep Christ at the center of Christmas celebrations with this cheerful, pattern-filled 'Jesus The Reason For The Season' tee. Styled with festive plaid, candy cane stripes, and holly accents.",
+    img: design21,
+    details: [
+      "Super-soft combed cotton jersey",
+      "Rich, colorful holiday typography print",
+      "Tailored feminine drape with comfortable neckline",
+      "Colorfast and durable through multiple washes",
+      "Machine washable",
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Pure White", hex: "#FFFFFF" },
+      { name: "Berry Scarlet", hex: "#9E2A2B" },
+      { name: "Warm Cream", hex: "#F5EFE6" },
+    ],
+    inStock: true,
+    stockCount: 35,
+    isFeatured: true,
+    isNewArrival: true,
+    badge: "Faith Bestseller",
+  },
+  {
+    id: "xmas-santa-voyage-red-tee",
+    name: "Santa's Voyage Festive Red Kids T-Shirt",
+    category: "Kids T-Shirts",
+    department: "Kids",
+    subCategory: "Christmas",
+    price: "₹799",
+    originalPrice: "₹1,099",
+    note: "Vibrant festive red · Santa in boat holiday graphic",
+    description:
+      "A whimsical holiday tee in rich Christmas red showing Santa Claus on a cheerful winter boat voyage. Designed for holiday play, family dinners, and Christmas morning joy.",
+    img: design22,
+    details: [
+      "100% soft breathable cotton jersey in vibrant Christmas Red",
+      "Durable screen print that stays bright wash after wash",
+      "Flexible round neck with shape-retaining ribbing",
+      "Comfortable regular fit for kids on the move",
+      "Machine wash cold",
+    ],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
+    colors: [
+      { name: "Christmas Red", hex: "#D62828" },
+      { name: "Pine Green", hex: "#1C3F24" },
+      { name: "Snow White", hex: "#FFFFFF" }
+    ],
+    inStock: true,
+    stockCount: 42,
+    isFeatured: true,
+    isNewArrival: true,
+    badge: "Holiday Red",
+  },
+  {
+    id: "xmas-winter-panda-snowman-tee",
+    name: "Winter Panda & Snowman Kids Holiday T-Shirt",
+    category: "Kids T-Shirts",
+    department: "Kids",
+    subCategory: "Christmas",
+    price: "₹799",
+    originalPrice: "₹1,099",
+    note: "Playful winter pals · Knitted sweater panda & snowman",
+    description:
+      "Double the holiday smiles with this charming tee featuring a friendly winter panda wearing a beanie and knit sweater waving next to a smiling snowman under a 'Merry Christmas' banner.",
+    img: design23,
+    details: [
+      "100% premium breathable cotton",
+      "Cute high-resolution illustrated graphic",
+      "Comfortable everyday fit designed for active playtime",
+      "Resistant to fading and cracking",
+      "Machine washable",
+    ],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "12-13Y"],
+    colors: [
+      { name: "Pure White", hex: "#FFFFFF" },
+      { name: "Ice Blue", hex: "#A8DADC" },
+      { name: "Holiday Red", hex: "#E63946" }
+    ],
+    inStock: true,
+    stockCount: 38,
+    isFeatured: true,
+    isNewArrival: true,
+    badge: "Cute Holiday",
+  },
+  {
+    id: "xmas-glory-to-god-luke-tee",
+    name: "Glory to God Scripture Christmas T-Shirt",
+    category: "Men T-Shirts",
+    department: "Men",
+    subCategory: "Christmas",
+    price: "₹899",
+    originalPrice: "₹1,299",
+    note: "Luke 2:14 scripture · Gold Bethlehem star & pine trees",
+    description:
+      "Inspired by the angelic hymn in Luke 2:14: 'Glory to God in the highest, and on earth peace, good will toward men.' Clean evergreen pine silhouettes topped with a radiant Bethlehem star.",
+    img: design24,
+    details: [
+      "100% combed ringspun cotton for superior hand-feel",
+      "Devotional Luke 2:14 scripture and Bethlehem star print",
+      "Tailored crewneck with seamless collar",
+      "Pre-shrunk fabric to prevent post-wash shrinkage",
+      "Machine washable",
+    ],
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Crisp White", hex: "#FFFFFF" },
+      { name: "Pine Green", hex: "#1C3F24" },
+      { name: "Oatmeal Heather", hex: "#E9ECEF" }
+    ],
+    inStock: true,
+    stockCount: 36,
+    isFeatured: true,
+    isNewArrival: true,
+    badge: "Luke 2:14",
+  },
+  {
+    id: "xmas-good-news-great-joy-tee",
+    name: "Good News Great Joy Christian Christmas T-Shirt",
+    category: "Men T-Shirts",
+    department: "Men",
+    subCategory: "Christmas",
+    price: "₹899",
+    originalPrice: "₹1,299",
+    note: "Luke 2:10 scripture · Evergreen trees & Santa cap",
+    description:
+      "'Good news. Great joy. — Luke 2:10.' A spirited festive design blending timeless Scripture with joyful evergreen holiday aesthetics and gold lettering.",
+    img: design25,
+    details: [
+      "100% fine cotton jersey with vintage-soft wash",
+      "High-definition holiday typography and evergreen trees",
+      "Classic regular fit suitable for layering or standalone wear",
+      "Colorfast eco-friendly inks",
+      "Machine washable",
+    ],
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Bright White", hex: "#FFFFFF" },
+      { name: "Forest Emerald", hex: "#1B3B2B" },
+      { name: "Mulled Wine", hex: "#4E121D" }
+    ],
+    inStock: true,
+    stockCount: 32,
+    isFeatured: true,
+    isNewArrival: true,
+    badge: "Luke 2:10",
+  },
   {
     id: "signature-mercerized-polo",
     name: "Everyday Kids Polo T-Shirt",
@@ -846,7 +1104,7 @@ export const INITIAL_ORDERS: Order[] = [
 
 /* ----------------- Storage Helper Functions ----------------- */
 
-const PRODUCTS_KEY = "thread_roots_products_v5";
+const PRODUCTS_KEY = "thread_roots_products_v6";
 const CATEGORIES_KEY = "thread_roots_categories_v4";
 const SETTINGS_KEY = "thread_roots_settings_v5";
 const ORDERS_KEY = "thread_roots_orders_v3";
@@ -856,6 +1114,7 @@ export function getStoredProducts(): Product[] {
   try {
     const raw =
       localStorage.getItem(PRODUCTS_KEY) ||
+      localStorage.getItem("thread_roots_products_v5") ||
       localStorage.getItem("thread_roots_products_v4") ||
       localStorage.getItem("thread_roots_products_v3") ||
       localStorage.getItem("arovia_apparel_products_v2");
@@ -877,10 +1136,10 @@ export function getStoredProducts(): Product[] {
           };
         });
 
-        // Ensure newly added initial products (like Photo Frames) are included
+        // Ensure newly added initial products (like Christmas Collection) are included
         const storedIds = new Set(parsed.map((p) => p.id));
         const missingInitial = INITIAL_PRODUCTS.filter((p) => !storedIds.has(p.id));
-        const merged = [...updated, ...missingInitial];
+        const merged = [...missingInitial, ...updated];
         saveStoredProducts(merged);
         return merged;
       }
