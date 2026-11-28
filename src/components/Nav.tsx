@@ -273,7 +273,7 @@ export function Nav() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search kids' tees, polos, Christmas hoodies..."
+                  placeholder="Search faith apparel, tees, hoodies, photo frames..."
                   className="w-full bg-transparent px-3 text-sm sm:text-base font-normal text-black placeholder:text-black/40 focus:outline-none"
                 />
                 {searchQuery && (

@@ -967,14 +967,14 @@ export const INITIAL_PRODUCTS: Product[] = [
 
 export const INITIAL_SETTINGS: StoreSettings = {
   brandName: "Threads of Eden",
-  brandTagline: "Little styles. Big adventures.",
+  brandTagline: "Woven with Purpose. Inspired by Grace.",
   hero: {
-    titleLine1: "Made for",
-    titleLine2: "little movers",
+    titleLine1: "Woven with",
+    titleLine2: "Purpose & Grace",
     subtitle:
-      "Soft, playful t-shirts for everyday adventures. Find oversized, polo, round neck, and festive Christmas styles made for kids.",
-    eyebrow: "Comfort made for kids",
-    ctaText: "Shop Kids' T-Shirts",
+      "More than clothing, we believe every thread can carry meaning. Bringing together modern clothing and accessories with timeless values, creating pieces inspired by faith, purpose, and the beauty of God’s creation.",
+    eyebrow: "THREADS OF EDEN",
+    ctaText: "Explore The Collection",
     ctaLink: "/shop",
     imageUrl:
       "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85",
@@ -982,16 +982,16 @@ export const INITIAL_SETTINGS: StoreSettings = {
   },
   announcement: {
     enabled: true,
-    text: "Kids' T-Shirts for Everyday Adventures · Shop oversized, polo, round neck & holiday styles",
+    text: "Woven with Purpose. Inspired by Grace. · Wear your story. Walk in grace.",
   },
   marqueeItems: [
-    "Soft cotton comfort",
-    "Made for little movers",
-    "Easy everyday styles",
-    "Kids sizes 2-13Y",
-    "Oversized, polos & round necks",
-    "Festive Christmas tees",
-    "Playful colors and prints",
+    "Woven with Purpose · Inspired by Grace",
+    "Every thread tells a story",
+    "Wear your story · Walk in grace",
+    "Made with Purpose & Heart",
+    "Reflect His Goodness",
+    "Timeless Faith & Modern Style",
+    "Ephesians 2:10 · Colossians 3:23",
   ],
   contact: {
     email: "concierge@threadandroots.com",
@@ -1106,7 +1106,7 @@ export const INITIAL_ORDERS: Order[] = [
 
 const PRODUCTS_KEY = "thread_roots_products_v6";
 const CATEGORIES_KEY = "thread_roots_categories_v4";
-const SETTINGS_KEY = "thread_roots_settings_v5";
+const SETTINGS_KEY = "thread_roots_settings_v6";
 const ORDERS_KEY = "thread_roots_orders_v3";
 
 export function getStoredProducts(): Product[] {
@@ -1199,15 +1199,16 @@ export function saveStoredCategories(categories: string[]): void {
 export function getStoredSettings(): StoreSettings {
   if (typeof window === "undefined") return INITIAL_SETTINGS;
   try {
-    const raw = localStorage.getItem(SETTINGS_KEY) || localStorage.getItem("arovia_apparel_settings_v2");
+    const raw = localStorage.getItem(SETTINGS_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
       if (parsed && typeof parsed === "object") {
-        if (typeof parsed.brandName === "string" && parsed.brandName.includes("Arovia")) {
-          parsed.brandName = "Threads of Eden";
-          if (parsed.contact?.email?.includes("arovia")) {
-            parsed.contact.email = "concierge@threadandroots.com";
-          }
+        if (
+          parsed.brandTagline?.includes("Little styles") ||
+          parsed.hero?.titleLine2?.includes("little movers")
+        ) {
+          saveStoredSettings(INITIAL_SETTINGS);
+          return INITIAL_SETTINGS;
         }
         return {
           ...INITIAL_SETTINGS,
@@ -1231,6 +1232,7 @@ export function getStoredSettings(): StoreSettings {
         };
       }
     }
+    saveStoredSettings(INITIAL_SETTINGS);
   } catch (e) {
     console.error("Error reading stored settings:", e);
   }

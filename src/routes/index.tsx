@@ -14,12 +14,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Explore kids' oversized t-shirts, polo t-shirts, round neck tees, and festive Christmas edition styles.",
+          "Threads of Eden — Woven with Purpose. Inspired by Grace. Meaningful clothing and accessories designed for everyday life and faith.",
       },
-      { property: "og:title", content: "Threads of Eden — Woven with purpose. Inspired by grace." },
+      { property: "og:title", content: "Threads of Eden — Woven with Purpose. Inspired by Grace." },
       {
         property: "og:description",
-        content: "Comfortable kids' t-shirts for everyday adventures and festive moments.",
+        content:
+          "More than clothing, we believe every thread can carry meaning. Wear your story. Walk in grace.",
       },
     ],
   }),
@@ -129,6 +130,7 @@ function HomePage() {
       <Hero onHover={setHover} />
       <ShopByCategorySection onHover={setHover} />
       <Marquee />
+      <HomepageAboutUs onHover={setHover} />
       <ShowcaseSection onHover={setHover} />
       <Collections onHover={setHover} />
       <FeaturedProduct onHover={setHover} />
@@ -142,12 +144,12 @@ function HomePage() {
 function Hero({ onHover }: { onHover: (v: boolean) => void }) {
   const { settings } = useStore();
   const hero = settings?.hero || {
-    titleLine1: "Made for",
-    titleLine2: "little movers",
+    titleLine1: "Woven with",
+    titleLine2: "Purpose & Grace",
     subtitle:
-      "Soft, playful t-shirts for everyday adventures. Find oversized, polo, round neck, and festive Christmas styles made for kids.",
-    eyebrow: "Comfort made for kids",
-    ctaText: "Shop Kids' T-Shirts",
+      "More than clothing, we believe every thread can carry meaning. Bringing together modern clothing and accessories with timeless values, creating pieces inspired by faith, purpose, and the beauty of God’s creation.",
+    eyebrow: "THREADS OF EDEN",
+    ctaText: "Explore The Collection",
     ctaLink: "/shop",
     imageUrl:
       "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1800&auto=format&fit=crop&q=85",
@@ -400,6 +402,85 @@ function Marquee() {
             <span className="inline-block h-1 w-1 rounded-full bg-[#47352F]" />
           </span>
         ))}
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------ Homepage Short About Us ------------------------ */
+
+function HomepageAboutUs({ onHover }: { onHover: (v: boolean) => void }) {
+  return (
+    <section className="bg-[#fbf7f0] py-20 md:py-28 border-b border-black/5 overflow-hidden">
+      <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+          {/* Left Column: Brand Statement */}
+          <div className="md:col-span-5 text-center md:text-left">
+            <Reveal>
+              <p className="eyebrow mb-3 text-[#47352F] tracking-[0.3em]">
+                HOMEPAGE — SHORT ABOUT US
+              </p>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#221b18] leading-[1.05]">
+                THREADS OF EDEN
+              </h2>
+              <p className="mt-3 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-[#47352F]">
+                Woven with Purpose. Inspired by Grace.
+              </p>
+
+              <div className="mt-8 pt-8 border-t border-[#47352F]/15 flex flex-wrap gap-2 justify-center md:justify-start">
+                <span className="rounded-full bg-white px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#47352F] border border-[#47352F]/15 shadow-2xs">
+                  Genesis 1:27
+                </span>
+                <span className="rounded-full bg-white px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#47352F] border border-[#47352F]/15 shadow-2xs">
+                  Ephesians 2:10
+                </span>
+                <span className="rounded-full bg-white px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#47352F] border border-[#47352F]/15 shadow-2xs">
+                  Colossians 3:23
+                </span>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right Column: Narrative Copy */}
+          <div className="md:col-span-7">
+            <Reveal delay={0.15}>
+              <div className="space-y-5 text-base sm:text-lg leading-[1.8] text-black/85 font-light">
+                <p>
+                  More than clothing, we believe every thread can carry meaning. At Threads of Eden,
+                  we bring together modern clothing and accessories with timeless values, creating
+                  pieces inspired by faith, purpose, and the beauty of God’s creation.
+                </p>
+                <p className="text-[#221b18] font-medium">
+                  Designed for everyday life, made to reflect what matters most.
+                </p>
+                <div className="pt-2">
+                  <p className="font-display text-2xl text-[#47352F] font-semibold italic">
+                    Wear your story. Walk in grace.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <a
+                  href="/about"
+                  onMouseEnter={() => onHover(true)}
+                  onMouseLeave={() => onHover(false)}
+                  className="rounded-full bg-[#47352F] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-all hover:bg-[#34241e] shadow-sm"
+                >
+                  Read Our Story →
+                </a>
+                <a
+                  href="/shop"
+                  onMouseEnter={() => onHover(true)}
+                  onMouseLeave={() => onHover(false)}
+                  className="rounded-full border border-[#47352F] bg-transparent px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#47352F] transition-all hover:bg-[#47352F]/10"
+                >
+                  Explore Collection
+                </a>
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -826,28 +907,28 @@ function ProductCard({
 function Collections({ onHover }: { onHover: (v: boolean) => void }) {
   const items = [
     {
-      img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=1200&auto=format&fit=crop&q=85",
-      title: "Kids' Polo T-Shirts",
-      tag: "Classic collars, easy comfort",
-      href: "/shop",
-    },
-    {
       img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=1200&auto=format&fit=crop&q=85",
-      title: "Oversized T-Shirts",
-      tag: "Room to move and play",
-      href: "/shop",
+      title: "Men's Collection",
+      tag: "Timeless tees rooted in faith",
+      href: "/shop?category=Men+T-Shirts",
     },
     {
-      img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1200&auto=format&fit=crop&q=85",
-      title: "Round Neck T-Shirts",
-      tag: "Everyday comfort and color",
-      href: "/shop",
+      img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1200&auto=format&fit=crop&q=85",
+      title: "Women's Collection",
+      tag: "Graceful silhouettes & comfort",
+      href: "/shop?category=Women+T-Shirts",
     },
     {
-      img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=1200&auto=format&fit=crop&q=85",
-      title: "Christmas Edition",
-      tag: "Festive tees for little ones",
-      href: "/shop",
+      img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=1200&auto=format&fit=crop&q=85",
+      title: "Kids' Collection",
+      tag: "Playful designs made with purpose",
+      href: "/shop?category=Kids+T-Shirts",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=1200&auto=format&fit=crop&q=85",
+      title: "Devotional Keepsakes",
+      tag: "Illuminated LED & solid wood frames",
+      href: "/shop?category=LED+Photo+Frame",
     },
   ];
 
@@ -967,9 +1048,9 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
             className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-8 md:mt-14 md:gap-8 md:pt-10"
           >
             {[
-              ["2-13Y", "Kids' Sizes"],
-              ["4", "T-Shirt Styles"],
-              ["All day", "Play-ready Comfort"],
+              ["Premium", "Organic Cotton"],
+              ["6", "Curated Categories"],
+              ["Faith-Rooted", "Inspired by Grace"],
             ].map(([v, l]) => (
               <div key={l}>
                 <p className="font-display text-2xl font-light">{v}</p>
@@ -1001,16 +1082,22 @@ function FeaturedProduct({ onHover }: { onHover: (v: boolean) => void }) {
 function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
   return (
     <section className="relative overflow-hidden bg-[#47352F] text-white py-24 md:py-36">
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center">
         <Reveal>
-          <p className="eyebrow mb-4 text-[#E5CFAC] tracking-[0.3em]">Made for Little Adventures</p>
-          <h2 className="font-display text-4xl leading-tight md:text-7xl">
-            Get dressed for fun.
+          <p className="eyebrow mb-4 text-[#E5CFAC] tracking-[0.3em]">
+            WEAR YOUR STORY · WALK IN GRACE
+          </p>
+          <h2 className="font-display text-3xl sm:text-5xl md:text-7xl leading-tight">
+            Every thread tells a story.
             <br />
-            <span className="italic text-[#E5CFAC]">Find their new favorite tee.</span>
+            <span className="italic text-[#E5CFAC]">Every design carries a purpose.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-sm md:text-base text-white/80 leading-relaxed font-light">
-            Explore oversized, polo, round neck, and festive Christmas t-shirts for kids.
+          <p className="mx-auto mt-6 max-w-2xl text-sm md:text-base text-white/85 leading-relaxed font-light">
+            And every day is an opportunity to reflect His goodness in the way we live. We are here to
+            remind you that you were beautifully created, deeply loved, and made with purpose.
+          </p>
+          <p className="mt-4 text-xs font-medium uppercase tracking-[0.2em] text-[#E5CFAC]/90">
+            “For we are God’s handiwork, created in Christ Jesus to do good works.” — Ephesians 2:10
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
@@ -1019,7 +1106,15 @@ function CTASection({ onHover }: { onHover: (v: boolean) => void }) {
               onMouseLeave={() => onHover(false)}
               className="btn-luxe-inverse"
             >
-              Shop Kids' T-Shirts
+              Explore The Collection
+            </a>
+            <a
+              href="/about"
+              onMouseEnter={() => onHover(true)}
+              onMouseLeave={() => onHover(false)}
+              className="rounded-full border border-white/60 bg-transparent px-8 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-[#47352F]"
+            >
+              Our Story & Inspiration
             </a>
           </div>
         </Reveal>

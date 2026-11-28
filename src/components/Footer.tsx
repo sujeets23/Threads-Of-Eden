@@ -12,10 +12,10 @@ export function Footer() {
         <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-8 px-6 py-14 md:flex-row md:justify-between md:px-12">
           <div className="text-center md:text-left">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d9c08c]">
-              Join the Adventure
+              Walk in Grace
             </p>
             <p className="mt-2 text-2xl font-light tracking-[-0.02em] text-[#f5efe8]">
-              Be the first to hear about new styles and festive drops
+              Stay connected with new faith-inspired drops, scriptures, and stories
             </p>
           </div>
 
@@ -46,11 +46,11 @@ export function Footer() {
               />
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#3b2d29]/70 font-light">
-              Playful, comfortable t-shirts made for little ones and all their everyday adventures.
+              Woven with purpose, inspired by grace. Bringing together modern clothing and accessories with timeless values, created to reflect His goodness.
             </p>
             <div className="mt-6 flex items-center gap-3">
               <span className="text-xs text-[#3b2d29]/60">
-                Made for everyday adventures · Threads of Eden
+                Wear your story. Walk in grace. · Threads of Eden
               </span>
             </div>
           </div>
